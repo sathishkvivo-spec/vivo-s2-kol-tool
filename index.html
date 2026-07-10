@@ -219,7 +219,7 @@ body {
 .hero-copy {
   position: relative;
   z-index: 2;
-  max-width: 54%;
+  max-width: 52%;
 }
 .hero-copy .eyebrow {
   margin-bottom: 8px;
@@ -258,42 +258,45 @@ body {
   min-width: auto;
 }
 
-/* ── 3D Phone mockup ── */
+/* ── Full-device phone hero ── */
 .phone-stage {
   position: absolute;
-  right: 2%;
+  right: 4%;
   top: 50%;
   transform: translateY(-50%);
-  width: 240px;
-  height: 320px;
+  width: min(200px, 18vw);
+  height: min(420px, 40vh);
   z-index: 10;
-  perspective: 1400px;
-  perspective-origin: 50% 45%;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
   pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .phone-aura {
   position: absolute;
   left: 50%;
-  top: 48%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  width: 120%;
-  height: 90%;
+  width: 160%;
+  height: 110%;
   background:
-    radial-gradient(ellipse 55% 45% at 50% 42%, rgba(74,158,255,0.28) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 50% 55%, rgba(124,58,237,0.22) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 50% 70%, rgba(16,185,129,0.08) 0%, transparent 70%);
+    radial-gradient(ellipse 50% 42% at 50% 45%, rgba(74,158,255,0.32) 0%, transparent 58%),
+    radial-gradient(ellipse 45% 38% at 50% 58%, rgba(124,58,237,0.2) 0%, transparent 62%);
   z-index: 0;
   pointer-events: none;
-  filter: blur(8px);
+  filter: blur(18px);
   animation: auraPulse 5s ease-in-out infinite;
 }
 @keyframes auraPulse {
-  0%, 100% { opacity: 0.75; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+  0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
 }
 .phone-orbit {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -303,96 +306,102 @@ body {
 .phone-3d-container {
   position: relative;
   width: 100%;
-  max-width: 240px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transform-style: preserve-3d;
   will-change: transform, filter;
   filter:
-    drop-shadow(0 30px 36px rgba(0,0,0,0.55))
-    drop-shadow(0 0 30px rgba(74,158,255,0.45))
-    drop-shadow(-14px 6px 24px rgba(124,58,237,0.35))
-    drop-shadow(14px 12px 30px rgba(74,158,255,0.25));
+    drop-shadow(0 28px 40px rgba(0,0,0,0.65))
+    drop-shadow(0 0 28px rgba(74,158,255,0.35))
+    drop-shadow(0 12px 36px rgba(124,58,237,0.22));
 }
 .phone-3d-img {
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   display: block;
   position: relative;
   z-index: 2;
   -webkit-user-drag: none;
   user-select: none;
-  border-radius: 8px;
+  border-radius: 0;
+  background: transparent;
 }
 .phone-shine {
   position: absolute;
-  inset: 0;
+  inset: 4% 12%;
   z-index: 3;
   pointer-events: none;
-  border-radius: 36px;
+  border-radius: 28px;
   overflow: hidden;
   mix-blend-mode: screen;
-  opacity: 0.55;
+  opacity: 0.4;
 }
 .phone-shine::before {
   content: '';
   position: absolute;
   top: -20%;
   left: -60%;
-  width: 45%;
+  width: 40%;
   height: 140%;
   background: linear-gradient(
     105deg,
     transparent 0%,
-    rgba(255,255,255,0.0) 35%,
-    rgba(255,255,255,0.35) 48%,
-    rgba(122,190,255,0.25) 52%,
-    transparent 70%
+    rgba(255,255,255,0) 38%,
+    rgba(255,255,255,0.28) 48%,
+    rgba(122,190,255,0.18) 52%,
+    transparent 68%
   );
   transform: skewX(-18deg);
-  animation: phoneShine 5.5s ease-in-out infinite;
+  animation: phoneShine 6s ease-in-out infinite;
 }
 @keyframes phoneShine {
   0%, 100% { left: -70%; opacity: 0; }
-  10% { opacity: 1; }
-  45% { left: 120%; opacity: 0.8; }
-  46%, 100% { opacity: 0; }
+  12% { opacity: 1; }
+  48% { left: 120%; opacity: 0.7; }
+  49%, 100% { opacity: 0; }
 }
 .phone-floor {
   position: absolute;
   left: 50%;
-  bottom: 6%;
+  bottom: 2%;
   transform: translateX(-50%);
-  width: 55%;
-  height: 28px;
-  background: radial-gradient(ellipse at center, rgba(74,158,255,0.35) 0%, transparent 70%);
-  filter: blur(10px);
+  width: 70%;
+  height: 22px;
+  background: radial-gradient(ellipse at center, rgba(74,158,255,0.4) 0%, transparent 72%);
+  filter: blur(12px);
   z-index: 1;
   pointer-events: none;
   animation: floorPulse 4s ease-in-out infinite;
 }
 @keyframes floorPulse {
-  0%, 100% { opacity: 0.45; transform: translateX(-50%) scaleX(1); }
-  50% { opacity: 0.85; transform: translateX(-50%) scaleX(1.12); }
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) scaleX(1); }
+  50% { opacity: 0.8; transform: translateX(-50%) scaleX(1.1); }
 }
 .phone-ring {
   position: absolute;
   left: 50%;
-  top: 46%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  width: 88%;
-  height: 72%;
+  width: 118%;
+  height: 78%;
   border-radius: 50%;
-  border: 1px solid rgba(74,158,255,0.18);
+  border: 1px solid rgba(74,158,255,0.14);
   box-shadow:
-    0 0 40px rgba(74,158,255,0.12),
-    inset 0 0 40px rgba(124,58,237,0.08);
+    0 0 36px rgba(74,158,255,0.1),
+    inset 0 0 36px rgba(124,58,237,0.06);
   z-index: 1;
   pointer-events: none;
-  animation: ringSpin 14s linear infinite;
+  animation: ringSpin 16s linear infinite;
 }
 @keyframes ringSpin {
-  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); opacity: 0.5; }
-  50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.04); opacity: 0.85; }
-  100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); opacity: 0.5; }
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); opacity: 0.4; }
+  50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.03); opacity: 0.75; }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); opacity: 0.4; }
 }
 .stat-pill.border-blue { border-left: 2px solid #4a9eff; }
 .stat-pill.border-purple { border-left: 2px solid #7c3aed; }
@@ -1301,7 +1310,7 @@ body {
 
 @media (max-width: 1000px) {
   .hero-copy { max-width: 62%; }
-  .phone-stage { width: 160px; height: 220px; }
+  .phone-stage { width: 140px; height: 300px; right: 2%; }
   .hero-headline { font-size: 30px; }
   .param-grid-2 { grid-template-columns: 1fr; grid-template-rows: repeat(10, 1fr); }
   .param-cell-reason { display: none; }
@@ -1358,7 +1367,7 @@ body {
           <div class="phone-floor"></div>
           <div class="phone-orbit">
             <div class="phone-3d-container" id="phone-3d">
-              <img src="s2_phone_hero.png" class="phone-3d-img" alt="vivo S2">
+              <img src="s2_phone.png" class="phone-3d-img" alt="vivo S2">
               <div class="phone-shine"></div>
             </div>
           </div>
@@ -1674,10 +1683,10 @@ function animateBriefCards() {
   if (phone) {
     gsap.killTweensOf([phone, orbit].filter(Boolean));
     gsap.fromTo(phone,
-      { x: 80, y: 40, opacity: 0, rotateY: 28, rotateX: -8, scale: 0.86 },
+      { x: 48, y: 24, opacity: 0, rotateY: 14, rotateX: -4, scale: 0.92 },
       {
-        x: 0, y: 0, opacity: 1, rotateY: -12, rotateX: 6, scale: 1,
-        duration: 1.4, ease: 'power3.out', delay: 0.35,
+        x: 0, y: 0, opacity: 1, rotateY: -8, rotateX: 3, scale: 1,
+        duration: 1.25, ease: 'power3.out', delay: 0.35,
         onComplete: () => startPhoneFloat(phone)
       }
     );
@@ -1719,12 +1728,12 @@ function animateBriefCards() {
 
 function startPhoneFloat(phone) {
   gsap.killTweensOf(phone);
-  gsap.set(phone, { transformPerspective: 1400, transformOrigin: '50% 45%' });
+  gsap.set(phone, { transformPerspective: 1200, transformOrigin: '50% 50%' });
   const tl = gsap.timeline({ repeat: -1, defaults: { ease: 'sine.inOut' } });
-  tl.to(phone, { y: -26, rotateY: 14, rotateX: 5, rotateZ: -2, duration: 3.4 })
-    .to(phone, { y: -10, rotateY: -16, rotateX: 9, rotateZ: 1.5, duration: 3.6 })
-    .to(phone, { y: -20, rotateY: 8, rotateX: 3, rotateZ: -1, duration: 3.2 })
-    .to(phone, { y: 0, rotateY: -12, rotateX: 6, rotateZ: 0, duration: 3.4 });
+  tl.to(phone, { y: -12, rotateY: -4, rotateX: 2, rotateZ: -0.8, duration: 3.6 })
+    .to(phone, { y: -4, rotateY: -10, rotateX: 4, rotateZ: 0.6, duration: 3.8 })
+    .to(phone, { y: -10, rotateY: -6, rotateX: 2, rotateZ: -0.4, duration: 3.4 })
+    .to(phone, { y: 0, rotateY: -8, rotateX: 3, rotateZ: 0, duration: 3.6 });
 }
 
 /* ═══════════════════════════════════════════
