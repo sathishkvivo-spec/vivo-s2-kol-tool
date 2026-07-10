@@ -518,23 +518,36 @@ body {
 /* ════════════ TAB 2: PARAMETERS ════════════ */
 .param-section {
   height: 100%;
-  padding: 24px 12px 16px;
+  padding: 28px 48px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 }
 .param-top {
   flex: 0 0 18%;
+  min-height: 0;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
 }
-.param-top .eyebrow { margin-bottom: 6px; }
+.param-top .eyebrow {
+  margin-bottom: 8px;
+  font-size: 10px;
+  color: #4a9eff;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
 .param-deco-10 {
   position: absolute;
-  right: 20px;
+  right: 0;
   top: 0;
-  font-size: 120px;
+  font-size: 140px;
   font-weight: 900;
-  color: rgba(74,158,255,0.05);
+  color: rgba(74,158,255,0.04);
   pointer-events: none;
   z-index: 0;
   font-family: 'Inter', sans-serif;
@@ -545,12 +558,20 @@ body {
 .param-heading {
   position: relative;
   z-index: 1;
-  font-size: 48px;
+  font-size: 52px;
   font-weight: 900;
   color: #fff;
   letter-spacing: -0.03em;
-  line-height: 1.05;
-  margin-bottom: 0;
+  line-height: 1;
+  margin: 0;
+}
+.param-subline {
+  position: relative;
+  z-index: 1;
+  font-size: 12px;
+  color: #2a4060;
+  margin-top: 6px;
+  font-weight: 400;
 }
 
 .param-grid-2 {
@@ -559,105 +580,145 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(5, 1fr);
-  gap: 10px;
+  gap: 8px;
 }
 .param-cell {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 0 18px 0 22px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+  gap: 0;
   border-radius: 10px;
   overflow: hidden;
-  min-width: 0;
-  transition: background 0.3s ease, border-color 0.3s ease;
   cursor: default;
+  transition: all 0.25s ease;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.05);
+  min-width: 0;
+}
+.param-cell:hover {
+  background: rgba(74,158,255,0.07);
+  border-color: rgba(74,158,255,0.2);
+  transform: translateX(3px);
+}
+.param-cell.is-mandatory {
+  border-color: rgba(239,68,68,0.15);
+}
+.param-cell.is-mandatory:hover {
+  background: rgba(239,68,68,0.06);
+  border-color: rgba(239,68,68,0.3);
+  transform: translateX(3px);
 }
 .param-cell::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 2px;
-  height: 60%;
-  background: rgba(74,158,255,0.3);
-  transition: background 0.3s ease;
+  top: 15%;
+  bottom: 15%;
+  width: 3px;
+  border-radius: 0 2px 2px 0;
+  background: rgba(74,158,255,0.25);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 .param-cell.is-mandatory::before {
-  background: rgba(239,68,68,0.5);
+  background: rgba(239,68,68,0.35);
 }
 .param-cell:hover::before {
-  background: rgba(74,158,255,1);
+  background: #4a9eff;
+  box-shadow: 0 0 8px rgba(74,158,255,0.4);
 }
 .param-cell.is-mandatory:hover::before {
-  background: rgba(239,68,68,1);
-}
-.param-cell:hover {
-  background: rgba(74,158,255,0.05);
-  border-color: rgba(74,158,255,0.2);
-}
-.param-cell.is-mandatory:hover {
-  border-color: rgba(239,68,68,0.3);
+  background: #ef4444;
+  box-shadow: 0 0 8px rgba(239,68,68,0.4);
 }
 .param-cell-num {
-  font-size: 34px;
-  font-weight: 800;
-  color: rgba(255,255,255,0.07);
+  font-size: 40px;
+  font-weight: 900;
+  width: 72px;
   flex-shrink: 0;
+  text-align: center;
+  color: rgba(255,255,255,0.04);
   line-height: 1;
   letter-spacing: -0.03em;
-  width: 44px;
+  transition: color 0.25s;
+}
+.param-cell.is-mandatory .param-cell-num {
+  color: rgba(239,68,68,0.08);
+}
+.param-cell:hover .param-cell-num {
+  color: rgba(74,158,255,0.18);
+}
+.param-cell.is-mandatory:hover .param-cell-num {
+  color: rgba(239,68,68,0.3);
 }
 .param-cell-body {
   flex: 1;
   min-width: 0;
+  padding: 0 12px 0 8px;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 .param-cell-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: #c8d4e8;
+  font-size: 13px;
+  font-weight: 700;
+  color: #b0c8e0;
+  margin-bottom: 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .param-cell.is-mandatory .param-cell-name { color: #f87171; }
 .param-cell-reason {
-  font-size: 10.5px;
-  color: #3a5575;
+  font-size: 10px;
+  color: #2a3a55;
   font-style: italic;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: color 0.3s ease;
+  transition: color 0.25s;
+}
+.param-cell.is-mandatory .param-cell-reason {
+  color: rgba(239,68,68,0.4);
 }
 .param-cell:hover .param-cell-reason {
-  color: #5a7a9a;
+  color: #4a6a85;
+}
+.param-cell.is-mandatory:hover .param-cell-reason {
+  color: rgba(239,68,68,0.55);
 }
 .scored-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--accent);
+  background: #4a9eff;
   flex-shrink: 0;
-  box-shadow: 0 0 8px rgba(74,158,255,0.5);
+  margin-right: 16px;
+  opacity: 0.35;
+  box-shadow: 0 0 0 3px rgba(74,158,255,0.08);
+  transition: all 0.25s;
+}
+.param-cell:hover .scored-dot {
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(74,158,255,0.5), 0 0 0 4px rgba(74,158,255,0.12);
 }
 .mandatory-badge {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--danger);
-  border: 1px solid rgba(239,68,68,0.5);
-  padding: 3px 7px;
+  color: #f87171;
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.2);
+  padding: 3px 8px;
   border-radius: 4px;
   flex-shrink: 0;
+  margin-right: 16px;
   white-space: nowrap;
+  transition: all 0.25s;
+}
+.param-cell.is-mandatory:hover .mandatory-badge {
+  background: rgba(239,68,68,0.15);
+  border-color: rgba(239,68,68,0.4);
 }
 
 /* ════════════ TAB 3: KOL MATCH ════════════ */
@@ -1161,105 +1222,134 @@ body {
 }
 .pass-badge::before { content: '✓'; font-weight: 700; }
 
-/* Pie chart + legend */
-.pie-layout {
+/* Score summary ring + parameter bars */
+.scores-visual {
   flex: 1;
   min-height: 0;
   display: flex;
-  align-items: center;
-  gap: 28px;
+  flex-direction: column;
+  gap: 12px;
 }
-.pie-chart-wrap {
+.score-ring-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 4px 0 2px;
+}
+.score-ring {
   position: relative;
-  width: min(240px, 28vh);
-  height: min(240px, 28vh);
+  width: 120px;
+  height: 120px;
   flex-shrink: 0;
 }
-.pie-chart-wrap svg {
-  width: 100%;
-  height: 100%;
+.score-ring svg {
+  width: 120px;
+  height: 120px;
   display: block;
-  overflow: visible;
+  transform: rotate(-90deg);
 }
-.pie-slice {
-  transform-origin: 100px 100px;
-  transition: opacity 0.2s, filter 0.2s;
-  cursor: default;
+.score-ring-track {
+  fill: none;
+  stroke: rgba(255,255,255,0.06);
+  stroke-width: 6;
 }
-.pie-slice:hover {
-  filter: brightness(1.25);
-  opacity: 1;
+.score-ring-fill {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke 0.3s;
 }
-.pie-center {
+.score-ring-fill.fit-green { stroke: #10b981; }
+.score-ring-fill.fit-blue { stroke: #4a9eff; }
+.score-ring-fill.fit-amber { stroke: #f59e0b; }
+.score-ring-center {
   position: absolute;
-  inset: 28%;
-  border-radius: 50%;
-  background: #080d1a;
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
 }
-.pie-center-val {
-  font-size: 28px;
+.score-ring-num {
+  font-size: 32px;
   font-weight: 900;
-  color: #fff;
   line-height: 1;
   letter-spacing: -1px;
 }
-.pie-center-label {
-  font-size: 9px;
+.score-ring-num.fit-green { color: #10b981; }
+.score-ring-num.fit-blue { color: #4a9eff; }
+.score-ring-num.fit-amber { color: #f59e0b; }
+.score-ring-label {
+  font-size: 8px;
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: #6a8ab0;
-  margin-top: 4px;
+  margin-top: 3px;
 }
-.pie-legend {
+
+.score-rows {
   flex: 1;
-  min-width: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px 16px;
-  align-content: center;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+  overflow: hidden;
 }
-.pie-legend-item {
+.score-row {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  transition: background 0.2s, border-color 0.2s;
+  min-height: 0;
 }
-.pie-legend-item:hover {
-  background: rgba(74,158,255,0.08);
-  border-color: rgba(74,158,255,0.2);
-}
-.pie-swatch {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
+.score-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
   flex-shrink: 0;
 }
-.pie-legend-text { flex: 1; min-width: 0; }
-.pie-legend-name {
+.score-dot.tier-high { background: #10b981; }
+.score-dot.tier-mid { background: #4a9eff; }
+.score-dot.tier-low { background: #f59e0b; }
+.score-name {
   font-size: 12px;
-  font-weight: 600;
-  color: #c8d4e8;
+  font-weight: 500;
+  color: #8aa4c0;
+  min-width: 140px;
+  flex-shrink: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.pie-legend-score {
-  font-size: 14px;
+.score-val {
+  font-size: 16px;
   font-weight: 800;
-  color: #fff;
+  min-width: 42px;
+  text-align: right;
   flex-shrink: 0;
 }
+.score-val.tier-high { color: #10b981; }
+.score-val.tier-mid { color: #4a9eff; }
+.score-val.tier-low { color: #f59e0b; }
+.score-track {
+  flex: 1;
+  height: 3px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  overflow: hidden;
+  min-width: 40px;
+}
+.score-fill {
+  height: 3px;
+  width: 0;
+  border-radius: 2px;
+}
+.score-fill.tier-high { background: linear-gradient(90deg, #10b981, #34d399); }
+.score-fill.tier-mid { background: linear-gradient(90deg, #4a9eff, #7ac0ff); }
+.score-fill.tier-low { background: linear-gradient(90deg, #f59e0b, #fcd34d); }
 
 .modal-bottom {
   display: grid;
@@ -1312,10 +1402,12 @@ body {
   .hero-copy { max-width: 62%; }
   .phone-stage { width: 140px; height: 300px; right: 2%; }
   .hero-headline { font-size: 30px; }
-  .param-grid-2 { grid-template-columns: 1fr; grid-template-rows: repeat(10, 1fr); }
+  .param-section { padding: 16px 20px; }
+  .param-grid-2 { grid-template-columns: 1fr; grid-template-rows: repeat(10, 1fr); height: auto; max-height: none; flex: 1; }
   .param-cell-reason { display: none; }
-  .param-deco-10 { font-size: 80px; right: 16px; }
+  .param-deco-10 { font-size: 90px; }
   .param-heading { font-size: 32px; }
+  .param-top { flex: 0 0 auto; max-height: none; }
   .nav { gap: 8px; padding: 10px 16px; }
   .nav-muted { display: none; }
   .main { padding: 0 16px; }
@@ -1323,10 +1415,7 @@ body {
   .modal-left { width: 100%; height: 32vh; flex-shrink: 0; }
   .modal-right { height: 68vh; flex: 1; padding: 16px 20px; gap: 10px; overflow: hidden; }
   .fit-score-big { font-size: 40px; letter-spacing: -1px; }
-  .pie-layout { gap: 14px; }
-  .pie-chart-wrap { width: min(160px, 22vh); height: min(160px, 22vh); }
-  .pie-legend { gap: 6px 10px; }
-  .pie-legend-name { font-size: 11px; }
+  .score-name { min-width: 100px; font-size: 11px; }
   .modal-bottom { grid-template-columns: 1fr; gap: 10px; }
   .modal-close { top: 16px; right: 16px; }
 }
@@ -1444,6 +1533,7 @@ body {
           <div class="param-deco-10">10</div>
           <div class="eyebrow">S2 · SELECTION LOGIC</div>
           <h2 class="param-heading">10 Parameters.</h2>
+          <p class="param-subline">Built for Tamil Nadu's Gen Z market.</p>
         </div>
         <div class="param-grid-2" id="param-grid"></div>
       </div>
@@ -1454,7 +1544,7 @@ body {
       <div class="tab-3-wrap">
         <div class="stat-bar">
           <div class="stat-card">
-            <div class="stat-value" data-count="11" data-suffix="">0</div>
+            <div class="stat-value" id="kol-count">0</div>
             <div class="stat-label">Confirmed KOLs</div>
           </div>
           <div class="stat-card">
@@ -1462,7 +1552,7 @@ body {
             <div class="stat-label">Budget</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value" data-count="85" data-suffix="%">0</div>
+            <div class="stat-value" id="top-fit">0%</div>
             <div class="stat-label">Top Fit Score</div>
           </div>
           <div class="stat-card">
@@ -1756,10 +1846,13 @@ function buildParams() {
 }
 
 function animateParams() {
-  const rows = document.querySelectorAll('.enter-param');
-  gsap.fromTo(rows,
-    { opacity: 0, x: -16 },
-    { opacity: 1, x: 0, duration: 0.4, stagger: 0.04, ease: 'power2.out' }
+  gsap.fromTo('.param-top .eyebrow, .param-heading, .param-subline',
+    { opacity: 0, y: -20 },
+    { opacity: 1, y: 0, duration: 0.5, stagger: 0.06, ease: 'power2.out' }
+  );
+  gsap.fromTo('.enter-param',
+    { opacity: 0, x: -20 },
+    { opacity: 1, x: 0, duration: 0.5, stagger: 0.035, delay: 0.5, ease: 'power2.out' }
   );
 }
 
@@ -1869,7 +1962,43 @@ function animateKolBars() {
   });
 }
 
+function syncDynamicStats() {
+  const countEl = document.getElementById('kol-count');
+  const fitEl = document.getElementById('top-fit');
+  if (countEl) countEl.textContent = kols.length;
+  if (fitEl) {
+    const topFit = kols.length ? Math.max(...kols.map(k => k.fit)) : 0;
+    fitEl.textContent = topFit + '%';
+  }
+}
+
 function animateStats() {
+  syncDynamicStats();
+
+  const countEl = document.getElementById('kol-count');
+  if (countEl) {
+    const target = kols.length;
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: target,
+      duration: 1.4,
+      ease: 'power2.out',
+      onUpdate: () => { countEl.textContent = Math.round(obj.val); }
+    });
+  }
+
+  const fitEl = document.getElementById('top-fit');
+  if (fitEl) {
+    const target = kols.length ? Math.max(...kols.map(k => k.fit)) : 0;
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: target,
+      duration: 1.4,
+      ease: 'power2.out',
+      onUpdate: () => { fitEl.textContent = Math.round(obj.val) + '%'; }
+    });
+  }
+
   document.querySelectorAll('.stat-value[data-count]').forEach(el => {
     const target = parseInt(el.dataset.count, 10);
     const prefix = el.dataset.prefix || '';
@@ -1904,69 +2033,10 @@ document.getElementById('filter-bar').addEventListener('click', e => {
 const overlay = document.getElementById('modal-overlay');
 const modal = document.getElementById('modal');
 
-const pieColors = [
-  '#4a9eff', '#10b981', '#a78bfa', '#f59e0b',
-  '#38bdf8', '#34d399', '#818cf8', '#fb923c'
-];
-
-function polarToXY(cx, cy, r, angleDeg) {
-  const a = (angleDeg - 90) * Math.PI / 180;
-  return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
-}
-
-function donutSlicePath(cx, cy, rOuter, rInner, startAngle, endAngle) {
-  if (endAngle - startAngle < 0.2) endAngle = startAngle + 0.2;
-  const large = endAngle - startAngle > 180 ? 1 : 0;
-  const so = polarToXY(cx, cy, rOuter, startAngle);
-  const eo = polarToXY(cx, cy, rOuter, endAngle);
-  const si = polarToXY(cx, cy, rInner, endAngle);
-  const ei = polarToXY(cx, cy, rInner, startAngle);
-  return [
-    `M ${so.x} ${so.y}`,
-    `A ${rOuter} ${rOuter} 0 ${large} 1 ${eo.x} ${eo.y}`,
-    `L ${si.x} ${si.y}`,
-    `A ${rInner} ${rInner} 0 ${large} 0 ${ei.x} ${ei.y}`,
-    'Z'
-  ].join(' ');
-}
-
-function buildPieChart(scores) {
-  const keys = Object.keys(paramLabels);
-  const values = keys.map(key => scores[key]);
-  const total = values.reduce((a, b) => a + b, 0) || 1;
-  const avg = (total / keys.length).toFixed(1);
-  const cx = 100, cy = 100, rOuter = 88, rInner = 52;
-  let angle = 0;
-  const gap = 1.2;
-
-  const slices = keys.map((key, i) => {
-    const portion = (values[i] / total) * 360;
-    const start = angle + gap / 2;
-    const end = angle + portion - gap / 2;
-    angle += portion;
-    const path = donutSlicePath(cx, cy, rOuter, rInner, start, Math.max(end, start + 0.5));
-    return { key, score: values[i], color: pieColors[i % pieColors.length], path };
-  });
-
-  const svg = `
-    <svg viewBox="0 0 200 200" aria-hidden="true">
-      ${slices.map((s, i) => `
-        <path class="pie-slice" data-idx="${i}" d="${s.path}" fill="${s.color}" opacity="0.92"></path>
-      `).join('')}
-    </svg>
-  `;
-
-  const legend = slices.map((s, i) => `
-    <div class="pie-legend-item" data-idx="${i}">
-      <span class="pie-swatch" style="background:${s.color}"></span>
-      <div class="pie-legend-text">
-        <div class="pie-legend-name">${paramLabels[s.key]}</div>
-      </div>
-      <span class="pie-legend-score">${s.score}/10</span>
-    </div>
-  `).join('');
-
-  return { svg, legend, avg };
+function scoreTier(val) {
+  if (val >= 8) return 'tier-high';
+  if (val >= 6) return 'tier-mid';
+  return 'tier-low';
 }
 
 function openModal(id) {
@@ -1977,7 +2047,9 @@ function openModal(id) {
   const left = document.getElementById('modal-left');
   const right = document.getElementById('modal-right');
   const fitTone = fitClass(k.fit);
-  const pie = buildPieChart(k.scores);
+  const scoreKeys = Object.keys(paramLabels);
+  const ringR = 57;
+  const circumference = 2 * Math.PI * ringR;
 
   left.innerHTML = `
     <div class="modal-phase-bar phase-${k.phase}"></div>
@@ -1999,8 +2071,7 @@ function openModal(id) {
     <div class="modal-fit-hero">
       <div class="modal-fit-left">
         <div class="fit-score-label">S2 Fit Score</div>
-        <div class="fit-score-big ${fitTone}" id="fit-count">0</div>
-        <div class="fit-score-context">/ 100 · 8 params scored</div>
+        <div class="fit-score-context">out of 100 · 8 parameters scored</div>
       </div>
       <div class="modal-badges">
         <span class="modal-phase-badge phase-${k.phase}">${k.phase}</span>
@@ -2018,15 +2089,38 @@ function openModal(id) {
 
     <div class="modal-section modal-scores-section">
       <h4>Parameter Scores</h4>
-      <div class="pie-layout">
-        <div class="pie-chart-wrap">
-          ${pie.svg}
-          <div class="pie-center">
-            <div class="pie-center-val">${pie.avg}</div>
-            <div class="pie-center-label">Avg / 10</div>
+      <div class="scores-visual">
+        <div class="score-ring-wrap">
+          <div class="score-ring">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="score-ring-track" cx="60" cy="60" r="${ringR}"></circle>
+              <circle class="score-ring-fill ${fitTone}" id="score-ring-fill"
+                cx="60" cy="60" r="${ringR}"
+                stroke-dasharray="${circumference}"
+                stroke-dashoffset="${circumference}"></circle>
+            </svg>
+            <div class="score-ring-center">
+              <div class="score-ring-num ${fitTone}" id="fit-count">0</div>
+              <div class="score-ring-label">Fit / 100</div>
+            </div>
           </div>
         </div>
-        <div class="pie-legend">${pie.legend}</div>
+        <div class="score-rows">
+          ${scoreKeys.map(key => {
+            const val = k.scores[key];
+            const tier = scoreTier(val);
+            return `
+              <div class="score-row">
+                <span class="score-dot ${tier}"></span>
+                <span class="score-name">${paramLabels[key]}</span>
+                <div class="score-track">
+                  <div class="score-fill ${tier}" data-score="${val}"></div>
+                </div>
+                <span class="score-val ${tier}">${val}/10</span>
+              </div>
+            `;
+          }).join('')}
+        </div>
       </div>
     </div>
 
@@ -2073,6 +2167,8 @@ function openModal(id) {
   );
 
   const fitEl = document.getElementById('fit-count');
+  const ringFill = document.getElementById('score-ring-fill');
+  const targetOffset = (1 - k.fit / 100) * circumference;
   const obj = { val: 0 };
   gsap.to(obj, {
     val: k.fit,
@@ -2080,24 +2176,18 @@ function openModal(id) {
     ease: 'power2.out',
     onUpdate: () => { fitEl.textContent = Math.round(obj.val); }
   });
-
-  const slices = right.querySelectorAll('.pie-slice');
-  gsap.fromTo(slices,
-    { scale: 0.6, opacity: 0, transformOrigin: '100px 100px' },
-    { scale: 1, opacity: 0.92, duration: 0.55, stagger: 0.04, ease: 'back.out(1.4)', delay: 0.2 }
-  );
-  gsap.fromTo(right.querySelectorAll('.pie-legend-item'),
-    { opacity: 0, x: 12 },
-    { opacity: 1, x: 0, duration: 0.35, stagger: 0.03, delay: 0.35, ease: 'power2.out' }
+  gsap.fromTo(ringFill,
+    { attr: { 'stroke-dashoffset': circumference } },
+    { attr: { 'stroke-dashoffset': targetOffset }, duration: 1.2, ease: 'power2.out', delay: 0.15 }
   );
 
-  right.querySelectorAll('.pie-legend-item').forEach(item => {
-    const idx = item.dataset.idx;
-    item.addEventListener('mouseenter', () => {
-      slices.forEach((s, i) => { s.style.opacity = String(i) === idx ? '1' : '0.35'; });
-    });
-    item.addEventListener('mouseleave', () => {
-      slices.forEach(s => { s.style.opacity = '0.92'; });
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.score-fill').forEach((bar, i) => {
+      const score = parseInt(bar.dataset.score, 10);
+      gsap.fromTo(bar,
+        { width: '0%' },
+        { width: (score * 10) + '%', duration: 1.1, ease: 'power2.out', delay: 0.25 + i * 0.04 }
+      );
     });
   });
 }
@@ -2130,6 +2220,7 @@ document.addEventListener('keydown', e => {
 ═══════════════════════════════════════════ */
 buildParams();
 buildKolCards('all');
+syncDynamicStats();
 
 gsap.set('#tab-1', { opacity: 1, x: 0 });
 animateBriefCards();
