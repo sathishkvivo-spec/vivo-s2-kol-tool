@@ -1,0 +1,16 @@
+# Dependencies (not needed for GitHub Pages)
+node_modules/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.log
+.vscode/
+.idea/
+
+# Scraped Instagram page dumps / archives (not used by the live tool)
+KOL IMAGES/
+*.zip
+Old Claude built file/
+vivo_gallery/
