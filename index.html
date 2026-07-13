@@ -123,6 +123,66 @@
     border-color: rgba(241,145,109,0.30);
   }
 
+  /* ═══════════════════════════════════
+     SLIDE NAV (prev / next section)
+     Fixed bottom-right — clear of Export
+  ═══════════════════════════════════ */
+  #slide-nav {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+  }
+  #slide-nav button {
+    pointer-events: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(240,235,248,0.10);
+    background: rgba(10,10,15,0.78);
+    backdrop-filter: blur(12px);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s,
+                background 0.2s, opacity 0.2s;
+  }
+  #slide-nav button svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  #slide-nav button:hover:not(:disabled) {
+    color: var(--peach);
+    border-color: rgba(241,145,109,0.35);
+    background: rgba(241,145,109,0.08);
+  }
+  #slide-nav button:disabled {
+    opacity: 0.28;
+    cursor: default;
+  }
+  #slide-nav.hidden { display: none; }
+  @media (max-width: 768px) {
+    #slide-nav {
+      right: 16px;
+      bottom: 16px;
+    }
+    #slide-nav button {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
   /* Export dropdown */
   #export-dropdown {
     position: fixed;
@@ -391,6 +451,7 @@
     #section-label,
     #export-btn,
     #export-dropdown,
+    #slide-nav,
     #progress-bar,
     #kol-nav { display: none !important; }
     .scene {
@@ -2336,6 +2397,21 @@
   <div class="export-note">PPTX = text content. PDF = full visuals.</div>
 </div>
 
+<nav id="slide-nav" aria-label="Section navigation">
+  <button type="button" id="slide-prev"
+          aria-label="Previous section" title="Previous section (↑)">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <polyline points="6 15 12 9 18 15"></polyline>
+    </svg>
+  </button>
+  <button type="button" id="slide-next"
+          aria-label="Next section" title="Next section (↓)">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+</nav>
+
 <!-- ═══════════════════════════════════
      MAIN PRESENTATION SCROLL EXPERIENCE
      10 scenes, each exactly 100vh
@@ -4010,6 +4086,7 @@ function enterKolMode(tab = 'kol-brief') {
   document.getElementById('kol-nav').classList.add('active');
   document.getElementById('section-label').classList.remove('visible');
   document.getElementById('export-btn').style.display = 'none';
+  document.getElementById('slide-nav').classList.add('hidden');
   document.body.style.overflow = 'hidden';
   window.scrollTo(0, 0);
   currentKolTab = tab;
@@ -4024,8 +4101,10 @@ function exitKolMode() {
   });
   document.getElementById('kol-nav').classList.remove('active');
   document.getElementById('export-btn').style.display = '';
+  document.getElementById('slide-nav').classList.remove('hidden');
   document.body.style.overflow = '';
   window.scrollTo(0, document.getElementById('s8').offsetTop);
+  updateSlideNav();
 }
 
 function switchKolTab(tab) {
@@ -4051,6 +4130,62 @@ document.querySelectorAll('.kol-tab').forEach(btn => {
 
 // Back to strategy
 document.getElementById('kol-back').addEventListener('click', exitKolMode);
+
+// ─── SLIDE NAV (↑ / ↓ sections) ───────
+const slideSections = Array.from(
+  document.querySelectorAll('#main-experience .scene')
+);
+const slidePrevBtn = document.getElementById('slide-prev');
+const slideNextBtn = document.getElementById('slide-next');
+let slideNavLock = false;
+
+function getCurrentSlideIndex() {
+  const probe = window.scrollY + window.innerHeight * 0.28;
+  let idx = 0;
+  for (let i = 0; i < slideSections.length; i++) {
+    if (slideSections[i].offsetTop <= probe) idx = i;
+  }
+  return idx;
+}
+
+function updateSlideNav() {
+  if (!slidePrevBtn || !slideNextBtn) return;
+  const idx = getCurrentSlideIndex();
+  slidePrevBtn.disabled = idx <= 0;
+  slideNextBtn.disabled = idx >= slideSections.length - 1;
+}
+
+function goToSlide(dir) {
+  if (currentMode !== 'strategy' || slideNavLock) return;
+  const idx = getCurrentSlideIndex();
+  const target = slideSections[idx + dir];
+  if (!target) return;
+  slideNavLock = true;
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(() => {
+    slideNavLock = false;
+    updateSlideNav();
+  }, 700);
+}
+
+slidePrevBtn.addEventListener('click', () => goToSlide(-1));
+slideNextBtn.addEventListener('click', () => goToSlide(1));
+
+window.addEventListener('keydown', (e) => {
+  if (currentMode !== 'strategy') return;
+  const tag = (e.target && e.target.tagName) || '';
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+  if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+    e.preventDefault();
+    goToSlide(1);
+  } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+    e.preventDefault();
+    goToSlide(-1);
+  }
+});
+
+window.addEventListener('scroll', updateSlideNav, { passive: true });
+updateSlideNav();
 
 // ─── SCROLL PROGRESS BAR ──────────────
 const progressBar = document.getElementById('progress-bar');
