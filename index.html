@@ -914,6 +914,57 @@
     padding-left: 8%;
     width: 54%;
   }
+  .s4-music-btn {
+    position: absolute;
+    left: 8%;
+    bottom: 6%;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(241,145,109,0.28);
+    background: rgba(10,10,15,0.78);
+    backdrop-filter: blur(12px);
+    color: var(--text);
+    cursor: pointer;
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: border-color 0.2s, background 0.2s,
+                color 0.2s, transform 0.2s;
+    pointer-events: auto;
+  }
+  .s4-music-btn:hover {
+    border-color: rgba(241,145,109,0.55);
+    background: rgba(241,145,109,0.12);
+    color: var(--peach);
+    transform: translateY(-1px);
+  }
+  .s4-music-btn.is-playing {
+    border-color: rgba(174,125,172,0.45);
+    color: var(--lavender);
+  }
+  .s4-music-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+  .s4-music-btn .icon-pause { display: none; }
+  .s4-music-btn.is-playing .icon-play { display: none; }
+  .s4-music-btn.is-playing .icon-pause { display: block; }
+  @media (max-width: 768px) {
+    .s4-music-btn {
+      left: 6%;
+      bottom: 4%;
+      padding: 8px 12px;
+      font-size: 10px;
+    }
+  }
   .s4-friends-collage {
     position: absolute;
     right: 0;
@@ -2743,6 +2794,21 @@
       </div>
 
       <div class="s4-overlay"></div>
+
+      <button type="button" id="s4-music-btn"
+              class="s4-music-btn"
+              aria-pressed="false"
+              aria-label="Play Friends theme">
+        <svg class="icon-play" viewBox="0 0 24 24"
+             aria-hidden="true">
+          <path d="M8 5v14l11-7z"></path>
+        </svg>
+        <svg class="icon-pause" viewBox="0 0 24 24"
+             aria-hidden="true">
+          <path d="M6 5h4v14H6zm8 0h4v14h-4z"></path>
+        </svg>
+        <span class="s4-music-label">Play theme</span>
+      </button>
 
       <!-- Main content -->
       <div class="s4-content">
@@ -5493,70 +5559,115 @@ document.querySelectorAll('.s9-partner')
     });
   });
 
-let friendsThemePlayed = false;
 let friendsThemeArmed = false;
-let friendsThemePending = false;
+let friendsThemeAutoTried = false;
+let friendsFadeInTimer = null;
+let friendsFadeOutTimer = null;
+let friendsFadeOutDelay = null;
 
 function getFriendsAudio() {
   return document.getElementById('friends-theme');
 }
 
-function fadeFriendsTheme(audio) {
-  let v = 0;
-  const fi = setInterval(() => {
-    v = Math.min(0.22, v + 0.01);
-    audio.volume = v;
-    if (v >= 0.22) clearInterval(fi);
-  }, 60);
-  setTimeout(() => {
-    let fv = audio.volume;
-    const fo = setInterval(() => {
-      fv = Math.max(0, fv - 0.02);
-      audio.volume = fv;
-      if (fv <= 0) {
-        audio.pause();
-        audio.currentTime = 0;
-        clearInterval(fo);
-      }
-    }, 50);
-  }, 10500);
+function getFriendsMusicBtn() {
+  return document.getElementById('s4-music-btn');
 }
 
-function playFriendsTheme() {
-  if (friendsThemePlayed) return;
+function clearFriendsFadeTimers() {
+  if (friendsFadeInTimer) clearInterval(friendsFadeInTimer);
+  if (friendsFadeOutTimer) clearInterval(friendsFadeOutTimer);
+  if (friendsFadeOutDelay) clearTimeout(friendsFadeOutDelay);
+  friendsFadeInTimer = null;
+  friendsFadeOutTimer = null;
+  friendsFadeOutDelay = null;
+}
+
+function setFriendsMusicUI(playing) {
+  const btn = getFriendsMusicBtn();
+  if (!btn) return;
+  btn.classList.toggle('is-playing', playing);
+  btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+  btn.setAttribute(
+    'aria-label',
+    playing ? 'Stop Friends theme' : 'Play Friends theme'
+  );
+  const label = btn.querySelector('.s4-music-label');
+  if (label) label.textContent = playing ? 'Stop theme' : 'Play theme';
+}
+
+function stopFriendsTheme() {
+  clearFriendsFadeTimers();
+  const audio = getFriendsAudio();
+  if (audio) {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.volume = 0;
+  }
+  setFriendsMusicUI(false);
+}
+
+function startFriendsTheme({ autoStop = true } = {}) {
   const audio = getFriendsAudio();
   if (!audio) return;
 
-  if (!friendsThemeArmed) {
-    friendsThemePending = true;
-    return;
-  }
-
+  friendsThemeArmed = true;
+  clearFriendsFadeTimers();
   audio.currentTime = 0;
   audio.volume = 0;
+
   const attempt = audio.play();
+  const onPlay = () => {
+    setFriendsMusicUI(true);
+    let v = 0;
+    friendsFadeInTimer = setInterval(() => {
+      v = Math.min(0.22, v + 0.01);
+      audio.volume = v;
+      if (v >= 0.22) {
+        clearInterval(friendsFadeInTimer);
+        friendsFadeInTimer = null;
+      }
+    }, 60);
+
+    if (autoStop) {
+      friendsFadeOutDelay = setTimeout(() => {
+        let fv = audio.volume;
+        friendsFadeOutTimer = setInterval(() => {
+          fv = Math.max(0, fv - 0.02);
+          audio.volume = fv;
+          if (fv <= 0) {
+            clearInterval(friendsFadeOutTimer);
+            friendsFadeOutTimer = null;
+            stopFriendsTheme();
+          }
+        }, 50);
+      }, 10500);
+    }
+  };
+
   if (attempt && typeof attempt.then === 'function') {
-    attempt.then(() => {
-      friendsThemePlayed = true;
-      friendsThemePending = false;
-      fadeFriendsTheme(audio);
-    }).catch(() => {
-      friendsThemePending = true;
+    attempt.then(onPlay).catch(() => {
+      setFriendsMusicUI(false);
     });
   } else {
-    friendsThemePlayed = true;
-    friendsThemePending = false;
-    fadeFriendsTheme(audio);
+    onPlay();
+  }
+}
+
+function toggleFriendsTheme() {
+  const audio = getFriendsAudio();
+  const playing = audio && !audio.paused && audio.currentTime > 0;
+  if (playing) {
+    stopFriendsTheme();
+  } else {
+    // Manual play: no forced auto-stop so user controls stop
+    startFriendsTheme({ autoStop: false });
   }
 }
 
 function unlockFriendsAudio() {
   friendsThemeArmed = true;
   const audio = getFriendsAudio();
-  if (!audio) {
-    if (friendsThemePending) playFriendsTheme();
-    return;
-  }
+  if (!audio) return;
   try { audio.load(); } catch (e) {}
   const prevVol = audio.volume;
   audio.volume = 0;
@@ -5566,12 +5677,7 @@ function unlockFriendsAudio() {
       audio.pause();
       audio.currentTime = 0;
       audio.volume = prevVol || 0;
-      if (friendsThemePending) playFriendsTheme();
-    }).catch(() => {
-      if (friendsThemePending) playFriendsTheme();
-    });
-  } else if (friendsThemePending) {
-    playFriendsTheme();
+    }).catch(() => {});
   }
 }
 
@@ -5583,12 +5689,23 @@ function unlockFriendsAudio() {
     });
   });
 
+const s4MusicBtn = getFriendsMusicBtn();
+if (s4MusicBtn) {
+  s4MusicBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    unlockFriendsAudio();
+    toggleFriendsTheme();
+  });
+}
+
 ScrollTrigger.create({
   trigger: '#s4',
   start: 'top 70%',
   onEnter: () => {
-    friendsThemePending = true;
-    playFriendsTheme();
+    if (friendsThemeAutoTried) return;
+    friendsThemeAutoTried = true;
+    // Soft auto-play once; user can stop/play via button
+    startFriendsTheme({ autoStop: true });
   }
 });
 
