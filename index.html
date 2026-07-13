@@ -801,77 +801,104 @@
     background: linear-gradient(
       90deg,
       rgba(10,10,15,1.00) 0%,
-      rgba(10,10,15,0.97) 35%,
-      rgba(10,10,15,0.25) 55%,
-      rgba(10,10,15,0.0) 100%
+      rgba(10,10,15,0.94) 42%,
+      rgba(10,10,15,0.35) 70%,
+      rgba(10,10,15,0.15) 100%
     );
     z-index: 2;
+    pointer-events: none;
   }
   .s4-content {
     position: relative;
     z-index: 3;
     padding-left: 8%;
-    width: 58%;
+    width: 54%;
   }
   .s4-friends-collage {
     position: absolute;
     right: 0;
     top: 0;
     bottom: 0;
-    width: 46%;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .s4-img-main {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-  }
-  .s4-img-main img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    filter: brightness(0.55) saturate(0.85);
-  }
-  .s4-img-left-fade {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      90deg,
-      rgba(10,10,15,0.92) 0%,
-      rgba(10,10,15,0.30) 45%,
-      rgba(10,10,15,0.0) 100%
-    );
+    width: 48%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    pointer-events: none;
   }
   .s4-img-door {
-    position: absolute;
-    bottom: 6%;
-    right: 5%;
-    width: 22%;
-    aspect-ratio: 1/3;
+    position: relative;
+    width: min(280px, 32vw);
+    height: min(78vh, 720px);
     overflow: hidden;
-    border: 1px solid rgba(241,145,109,0.25);
-    border-radius: 4px;
+    border: 1px solid rgba(241,145,109,0.35);
+    border-radius: 8px;
     z-index: 2;
+    box-shadow:
+      0 0 0 1px rgba(174,125,172,0.12),
+      0 24px 80px rgba(0,0,0,0.55),
+      0 0 60px rgba(241,145,109,0.12);
+    animation: s4-door-float 5.5s ease-in-out infinite;
+  }
+  .s4-img-door::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    box-shadow: inset 0 0 40px rgba(10,10,15,0.35);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .s4-img-door::after {
+    content: '';
+    position: absolute;
+    inset: -18%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(241,145,109,0.22) 0%,
+      rgba(174,125,172,0.08) 40%,
+      transparent 70%
+    );
+    z-index: -1;
+    animation: s4-door-glow 4s ease-in-out infinite alternate;
+    pointer-events: none;
   }
   .s4-img-door img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top;
-    filter: brightness(0.70) saturate(0.80);
+    object-position: center top;
+    filter: brightness(0.82) saturate(0.95) contrast(1.05);
+    transform: scale(1.04);
+    animation: s4-door-ken 12s ease-in-out infinite alternate;
+  }
+  @keyframes s4-door-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes s4-door-glow {
+    0% { opacity: 0.55; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1.05); }
+  }
+  @keyframes s4-door-ken {
+    0% { transform: scale(1.04) translateY(0); }
+    100% { transform: scale(1.10) translateY(-2%); }
   }
   .s4-friends-glow {
     position: absolute;
-    inset: 0;
+    right: 8%;
+    top: 20%;
+    width: 55%;
+    height: 60%;
     background: radial-gradient(
-      ellipse at 65% 75%,
-      rgba(200,120,40,0.15) 0%,
-      transparent 65%
+      ellipse at center,
+      rgba(200,120,40,0.14) 0%,
+      transparent 70%
     );
-    z-index: 1;
+    z-index: 0;
     pointer-events: none;
+    filter: blur(8px);
   }
   .s4-tagline {
     display: flex;
@@ -2575,18 +2602,12 @@
     <div class="s4-sticky">
 
       <div class="s4-friends-collage">
-        <div class="s4-img-main">
-          <img src="img/friends_centralperk.jpg"
-               alt="Central Perk"
-               loading="eager">
-          <div class="s4-img-left-fade"></div>
-        </div>
+        <div class="s4-friends-glow"></div>
         <div class="s4-img-door">
           <img src="img/friends_door.jpg"
-               alt="Friends"
+               alt="Friends — peeping through the door"
                loading="eager">
         </div>
-        <div class="s4-friends-glow"></div>
       </div>
 
       <div class="s4-overlay"></div>
@@ -4250,9 +4271,19 @@ gsap.fromTo('#s3-type1, #s3-type2, #s3-type3',
 );
 
 // ── S4: CAMPAIGN ──────────────────────
-gsap.from('.s4-friends-collage', {
-  x: 60, opacity: 0,
-  duration: 1.2, ease: 'power2.out',
+gsap.from('.s4-img-door', {
+  x: 80, opacity: 0, scale: 0.92,
+  duration: 1.15, ease: 'power3.out',
+  scrollTrigger: {
+    trigger: '#s4',
+    start: 'top 80%',
+    once: true
+  }
+});
+gsap.from('.s4-friends-glow', {
+  opacity: 0,
+  duration: 1.4,
+  ease: 'power1.out',
   scrollTrigger: {
     trigger: '#s4',
     start: 'top 80%',
@@ -5272,51 +5303,106 @@ document.querySelectorAll('.s9-partner')
   });
 
 let friendsThemePlayed = false;
-let friendsThemeReady = false;
+let friendsThemeArmed = false;
+let friendsThemePending = false;
 
-// Mark user has interacted
-window.addEventListener('scroll',
-  () => { friendsThemeReady = true; },
-  { once: true, passive: true }
-);
+function getFriendsAudio() {
+  return document.getElementById('friends-theme');
+}
+
+function fadeFriendsTheme(audio) {
+  let v = 0;
+  const fi = setInterval(() => {
+    v = Math.min(0.22, v + 0.01);
+    audio.volume = v;
+    if (v >= 0.22) clearInterval(fi);
+  }, 60);
+  setTimeout(() => {
+    let fv = audio.volume;
+    const fo = setInterval(() => {
+      fv = Math.max(0, fv - 0.02);
+      audio.volume = fv;
+      if (fv <= 0) {
+        audio.pause();
+        audio.currentTime = 0;
+        clearInterval(fo);
+      }
+    }, 50);
+  }, 10500);
+}
+
+function playFriendsTheme() {
+  if (friendsThemePlayed) return;
+  const audio = getFriendsAudio();
+  if (!audio) return;
+
+  if (!friendsThemeArmed) {
+    friendsThemePending = true;
+    return;
+  }
+
+  audio.currentTime = 0;
+  audio.volume = 0;
+  const attempt = audio.play();
+  if (attempt && typeof attempt.then === 'function') {
+    attempt.then(() => {
+      friendsThemePlayed = true;
+      friendsThemePending = false;
+      fadeFriendsTheme(audio);
+    }).catch(() => {
+      friendsThemePending = true;
+    });
+  } else {
+    friendsThemePlayed = true;
+    friendsThemePending = false;
+    fadeFriendsTheme(audio);
+  }
+}
+
+function unlockFriendsAudio() {
+  friendsThemeArmed = true;
+  const audio = getFriendsAudio();
+  if (!audio) {
+    if (friendsThemePending) playFriendsTheme();
+    return;
+  }
+  try { audio.load(); } catch (e) {}
+  const prevVol = audio.volume;
+  audio.volume = 0;
+  const unlock = audio.play();
+  if (unlock && typeof unlock.then === 'function') {
+    unlock.then(() => {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.volume = prevVol || 0;
+      if (friendsThemePending) playFriendsTheme();
+    }).catch(() => {
+      if (friendsThemePending) playFriendsTheme();
+    });
+  } else if (friendsThemePending) {
+    playFriendsTheme();
+  }
+}
+
+['scroll', 'wheel', 'touchstart', 'pointerdown', 'click', 'keydown']
+  .forEach((evt) => {
+    window.addEventListener(evt, unlockFriendsAudio, {
+      once: true,
+      passive: true
+    });
+  });
 
 ScrollTrigger.create({
   trigger: '#s4',
-  start: 'top 60%',
+  start: 'top 70%',
   onEnter: () => {
-    if (friendsThemePlayed) return;
-    if (!friendsThemeReady) return;
-    const audio = document.getElementById(
-      'friends-theme'
-    );
-    if (!audio) return;
-    audio.currentTime = 0;
-    audio.volume = 0;
-    audio.play().catch(() => {});
-    friendsThemePlayed = true;
-    let v = 0;
-    const fi = setInterval(() => {
-      v = Math.min(0.22, v + 0.01);
-      audio.volume = v;
-      if (v >= 0.22) clearInterval(fi);
-    }, 60);
-    setTimeout(() => {
-      let fv = audio.volume;
-      const fo = setInterval(() => {
-        fv = Math.max(0, fv - 0.02);
-        audio.volume = fv;
-        if (fv <= 0) {
-          audio.pause();
-          audio.currentTime = 0;
-          clearInterval(fo);
-        }
-      }, 50);
-    }, 10500);
+    friendsThemePending = true;
+    playFriendsTheme();
   }
 });
 
 </script>
 <audio id="friends-theme"
        src="img/friends_theme.mp3"
-       preload="none"></audio>
+       preload="auto"></audio>
 </body>
