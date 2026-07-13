@@ -510,7 +510,8 @@
     .s6-phase,
     .s6-activities,
     .s7-act,
-    .s9-partner,
+    .s9-phase,
+    .s9-activities,
     .s9-part1,
     .s9-part2 {
       opacity: 1 !important;
@@ -534,7 +535,8 @@
   body.print-mode .s6-phase,
   body.print-mode .s6-activities,
   body.print-mode .s7-act,
-  body.print-mode .s9-partner,
+  body.print-mode .s9-phase,
+  body.print-mode .s9-activities,
   body.print-mode .s9-part1,
   body.print-mode .s9-part2 {
     opacity: 1 !important;
@@ -1651,61 +1653,161 @@
     padding: 0 8%;
   }
   .s9-part1 {
-    display: flex;
-    gap: 6%;
     width: 100%;
-    align-items: flex-start;
+    position: relative;
+    z-index: 2;
   }
-  .s9-left { width: 35%; flex-shrink: 0; }
-  .s9-right { flex: 1; }
-  .s9-partners {
+  .s9-content { width: 100%; }
+  .s9-timeline { width: 100%; margin-bottom: 0; }
+  .s9-river {
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: visible;
+  }
+  .s9-river-fill {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(
+      90deg, var(--lavender), var(--peach)
+    );
+    border-radius: 2px;
+    transition: width 0.6s ease;
+  }
+  .s9-phases {
     display: flex;
-    flex-direction: column;
     gap: 0;
+    width: 100%;
   }
-  .s9-partner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .s9-partner:first-child {
-    border-top: 1px solid var(--border);
-  }
-  .s9-partner-info {
+  .s9-phase {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 6px;
+    padding-right: 16px;
   }
-  .s9-partner-name {
+  .s9-phase-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+  }
+  .s9-dot-lav   { background: var(--lavender); }
+  .s9-dot-peach { background: var(--peach); }
+  .s9-dot-super {
+    background: var(--peach);
+    width: 14px;
+    height: 14px;
+    box-shadow: 0 0 12px rgba(241,145,109,0.6),
+                0 0 24px rgba(241,145,109,0.3);
+  }
+  .s9-dot-dim { background: var(--muted); }
+  .s9-phase-name {
     font-family: var(--ff-display);
-    font-size: clamp(14px,1.4vw,18px);
-    font-weight: 600;
+    font-size: clamp(13px, 1.4vw, 18px);
+    font-weight: 700;
     color: var(--text);
   }
-  .s9-partner-type {
+  .s9-superday {
+    color: var(--peach) !important;
+    font-size: clamp(15px, 1.6vw, 20px) !important;
+  }
+  .s9-phase-dates {
+    font-family: var(--ff-body);
+    font-size: clamp(11px, 1vw, 13px);
+    color: var(--muted);
+  }
+  .s9-phase-desc {
+    font-family: var(--ff-body);
+    font-size: clamp(10px, 0.9vw, 12px);
+    color: var(--muted);
+    line-height: 1.5;
+    opacity: 0.7;
+  }
+  .s9-activities {
+    display: flex;
+    gap: 0;
+    width: 100%;
+    align-items: flex-start;
+    margin-top: 48px;
+  }
+  .s9-activity { flex: 1; padding-right: 28px; }
+  .s9-act-divider {
+    width: 1px;
+    height: 160px;
+    background: var(--border);
+    margin-right: 28px;
+    flex-shrink: 0;
+    align-self: center;
+  }
+  .s9-act-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .s9-act-title {
+    font-family: var(--ff-display);
+    font-size: clamp(12px, 1.2vw, 15px);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .s9-act-meta {
     font-family: var(--ff-body);
     font-size: 11px;
     color: var(--muted);
+    white-space: nowrap;
   }
-  .s9-partner-right {
+  .s9-act-bars {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
+    gap: 10px;
   }
-  .s9-partner-budget {
-    font-family: var(--ff-display);
-    font-size: clamp(16px,1.6vw,22px);
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
+  .s9-act-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
-  .s9-partner-phase {
+  .s9-bar-label {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    color: var(--muted);
+    min-width: 72px;
+  }
+  .s9-bar-track {
+    flex: 1;
+    height: 3px;
+    background: var(--dim);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .s9-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.8s ease;
+  }
+  .s9-bar-val {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    color: var(--text);
+    min-width: 40px;
+    text-align: right;
+  }
+  .s9-act-note {
     font-family: var(--ff-body);
     font-size: 10px;
     color: var(--muted);
-    letter-spacing: 0.06em;
+    line-height: 1.45;
+    margin-top: 14px;
+    opacity: 0.85;
   }
   .s9-part2 {
     position: absolute;
@@ -1759,19 +1861,16 @@
     max-width: 600px;
   }
   @media (max-width: 768px) {
-    .s9-part1 { flex-direction: column; }
-    .s9-left { width: 100%; }
+    .s9-sticky { padding: 0 6%; align-items: flex-start;
+                 padding-top: 100px; }
+    .s9-phases { flex-direction: column; gap: 20px; }
+    .s9-phase-desc { display: none; }
+    .s9-activities { flex-direction: column; gap: 24px; }
+    .s9-act-divider { width: 100%; height: 1px; margin: 0; }
     .s9-rationale { grid-template-columns: 1fr; }
   }
   @media (max-width: 480px) {
-    .s9-partner {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-    }
-    .s9-partner-right {
-      align-items: flex-start;
-    }
+    .s9-condition { flex-direction: column; gap: 8px; }
   }
 
   /* ═══════════════════════════════════
@@ -3579,224 +3678,224 @@
 
     <div class="s9-sticky">
 
-      <!-- PART 1: Partners -->
+      <!-- PART 1: Phase timeline + activation columns -->
       <div class="s9-part1" id="s9-part1">
+        <div class="s9-content">
 
-        <div class="s9-left">
           <p class="eyebrow reveal-line"
-             style="margin-bottom:20px">
-            JBP Trade Strategy
+             style="margin-bottom:16px">
+            FTPL Tamil Nadu · JBP Trade Strategy
           </p>
           <h2 class="display-large reveal-line"
-              style="margin-bottom:8px">
-            <span class="peach">9 Partners.</span>
-          </h2>
-          <h2 class="display-large reveal-line"
-              style="margin-bottom:8px">
-            <span class="lavender">₹32L.</span>
-          </h2>
-          <h2 class="display-large reveal-line"
-              style="margin-bottom:32px">
+              style="margin-bottom:48px">
+            <span class="peach">9 Partners</span>
+            <span style="color:var(--muted)"> · </span>
+            <span class="lavender">₹32L</span>
             Deployed.
           </h2>
-          <p class="body-large reveal-line"
-             style="max-width:320px">
-            Every partner activated at the right
-            phase. Store launches, influencer
-            activations, FM campaigns and app
-            promotions — all timed to the
-            S2 launch calendar.
-          </p>
-        </div>
 
-        <div class="s9-right">
-          <!-- Partner list: text only, no table -->
-          <div class="s9-partners">
+          <!-- Phase timeline -->
+          <div class="s9-timeline">
+            <div class="s9-river">
+              <div class="s9-river-fill" id="s9-river-fill"></div>
+            </div>
+            <div class="s9-phases">
 
-            <div class="s9-partner reveal-line"
-                 id="s9-pr1">
-              <div class="s9-partner-info">
-                <span class="s9-partner-name">
-                  Poorvika
-                </span>
-                <span class="s9-partner-type">
+              <div class="s9-phase reveal-line" id="s9-p1">
+                <div class="s9-phase-dot s9-dot-lav"></div>
+                <div class="s9-phase-name lavender">Pre-Buzz</div>
+                <div class="s9-phase-dates">25 Jul – 5 Aug</div>
+                <div class="s9-phase-desc">
+                  Poorvika influencer + FM opens the trade window
+                </div>
+              </div>
+
+              <div class="s9-phase reveal-line" id="s9-p2">
+                <div class="s9-phase-dot s9-dot-peach"></div>
+                <div class="s9-phase-name peach">Pre-Book</div>
+                <div class="s9-phase-dates">6 – 10 Aug</div>
+                <div class="s9-phase-desc">
+                  Poorvika continues.<br>Reliance app promotions live.
+                </div>
+              </div>
+
+              <div class="s9-phase reveal-line" id="s9-p3">
+                <div class="s9-phase-dot s9-dot-super"></div>
+                <div class="s9-phase-name s9-superday">Super Day</div>
+                <div class="s9-phase-dates peach">11 Aug</div>
+                <div class="s9-phase-desc">
+                  7 influencer store launches<br>across Tamil Nadu.
+                </div>
+              </div>
+
+              <div class="s9-phase reveal-line" id="s9-p4">
+                <div class="s9-phase-dot s9-dot-peach"></div>
+                <div class="s9-phase-name peach">Super Week</div>
+                <div class="s9-phase-dates">12 – 18 Aug</div>
+                <div class="s9-phase-desc">
+                  Store launch content sustains trade momentum.
+                </div>
+              </div>
+
+              <div class="s9-phase reveal-line" id="s9-p5">
+                <div class="s9-phase-dot s9-dot-dim"></div>
+                <div class="s9-phase-name"
+                     style="color:var(--muted)">Sustenance</div>
+                <div class="s9-phase-dates">19 – 31 Aug</div>
+                <div class="s9-phase-desc">
+                  Partner social proof continues the sell-through.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Activation columns: phase → bar → value -->
+          <div class="s9-activities reveal-line">
+
+            <div class="s9-activity">
+              <div class="s9-act-header">
+                <span class="s9-act-title peach">
                   Influencer Campaign + FM
                 </span>
+                <span class="s9-act-meta">₹10L</span>
               </div>
-              <div class="s9-partner-right">
-                <span class="s9-partner-budget peach">
-                  ₹10L
-                </span>
-                <span class="s9-partner-phase">
-                  Pre-Buzz · Pre-Book
-                </span>
+              <div class="s9-act-bars">
+                <div class="s9-act-bar-row">
+                  <span class="s9-bar-label">Pre-Buzz</span>
+                  <div class="s9-bar-track">
+                    <div class="s9-bar-fill"
+                         style="width:0%"
+                         data-width="50%"
+                         data-color="var(--lavender)"></div>
+                  </div>
+                  <span class="s9-bar-val">₹5L</span>
+                </div>
+                <div class="s9-act-bar-row">
+                  <span class="s9-bar-label">Pre-Book</span>
+                  <div class="s9-bar-track">
+                    <div class="s9-bar-fill"
+                         style="width:0%"
+                         data-width="50%"
+                         data-color="var(--peach)"></div>
+                  </div>
+                  <span class="s9-bar-val peach"><strong>₹5L</strong></span>
+                </div>
+                <div class="s9-act-bar-row">
+                  <span class="s9-bar-label">Super Day+</span>
+                  <div class="s9-bar-track">
+                    <div class="s9-bar-fill"
+                         style="width:0%"
+                         data-width="0%"
+                         data-color="var(--dim)"></div>
+                  </div>
+                  <span class="s9-bar-val"
+                        style="color:var(--muted)">—</span>
+                </div>
               </div>
+              <p class="s9-act-note">Poorvika · across Pre-Buzz &amp; Pre-Book</p>
             </div>
 
-            <div class="s9-partner reveal-line"
-                 id="s9-pr2">
-              <div class="s9-partner-info">
-                <span class="s9-partner-name">
-                  Sathya
-                </span>
-                <span class="s9-partner-type">
+            <div class="s9-act-divider"></div>
+
+            <div class="s9-activity">
+              <div class="s9-act-header">
+                <span class="s9-act-title lavender">
                   Influencer Store Launch
                 </span>
+                <span class="s9-act-meta">₹21L · 7 Partners</span>
               </div>
-              <div class="s9-partner-right">
-                <span class="s9-partner-budget lavender">
-                  ₹6L
-                </span>
-                <span class="s9-partner-phase">
-                  Super Day
-                </span>
+              <div class="s9-act-bars">
+                <div class="s9-act-bar-row">
+                  <span class="s9-bar-label">Pre-Buzz</span>
+                  <div class="s9-bar-track">
+                    <div class="s9-bar-fill"
+                         style="width:0%"
+                         data-width="0%"
+                         data-color="var(--dim)"></div>
+                  </div>
+                  <span class="s9-bar-val"
+                        style="color:var(--muted)">—</span>
+                </div>
+                <div class="s9-act-bar-row">
+                  <span class="s9-bar-label">Pre-Book</span>
+                  <div class="s9-bar-track">
+                    <div class="s9-bar-fill"
+                         style="width:0%"
+                         data-width="0%"
+                         data-color="var(--dim)"></div>
+                  </div>
+                  <span class="s9-bar-val"
+                        style="color:var(--muted)">—</span>
+                </div>
+                <div class="s9-act-bar-row">
+                  <span class="s9-bar-label">Super Day</span>
+                  <div class="s9-bar-track">
+                    <div class="s9-bar-fill"
+                         style="width:0%"
+                         data-width="100%"
+                         data-color="var(--lavender)"></div>
+                  </div>
+                  <span class="s9-bar-val lavender">
+                    <strong>₹21L</strong>
+                  </span>
+                </div>
               </div>
+              <p class="s9-act-note">
+                Sathya ₹6L · Darling ₹4L · TCM ₹4L ·
+                Vasanth &amp; Co ₹2L · Supreme ₹2L ·
+                Sangeetha ₹2L · Croma ₹1L
+              </p>
             </div>
 
-            <div class="s9-partner reveal-line"
-                 id="s9-pr3">
-              <div class="s9-partner-info">
-                <span class="s9-partner-name">
-                  Darling
-                </span>
-                <span class="s9-partner-type">
-                  Influencer Store Launch
-                </span>
+            <div class="s9-act-divider"></div>
+
+            <div class="s9-activity">
+              <div class="s9-act-header">
+                <span class="s9-act-title peach">App Promotions</span>
+                <span class="s9-act-meta">₹1L</span>
               </div>
-              <div class="s9-partner-right">
-                <span class="s9-partner-budget lavender">
-                  ₹4L
-                </span>
-                <span class="s9-partner-phase">
-                  Super Day
-                </span>
+              <div class="s9-act-bars">
+                <div class="s9-act-bar-row">
+                  <span class="s9-bar-label">Pre-Buzz</span>
+                  <div class="s9-bar-track">
+                    <div class="s9-bar-fill"
+                         style="width:0%"
+                         data-width="0%"
+                         data-color="var(--dim)"></div>
+                  </div>
+                  <span class="s9-bar-val"
+                        style="color:var(--muted)">—</span>
+                </div>
+                <div class="s9-act-bar-row">
+                  <span class="s9-bar-label">Pre-Book</span>
+                  <div class="s9-bar-track">
+                    <div class="s9-bar-fill"
+                         style="width:0%"
+                         data-width="100%"
+                         data-color="var(--peach)"></div>
+                  </div>
+                  <span class="s9-bar-val peach">
+                    <strong>₹1L</strong>
+                  </span>
+                </div>
+                <div class="s9-act-bar-row">
+                  <span class="s9-bar-label">Super Day+</span>
+                  <div class="s9-bar-track">
+                    <div class="s9-bar-fill"
+                         style="width:0%"
+                         data-width="0%"
+                         data-color="var(--dim)"></div>
+                  </div>
+                  <span class="s9-bar-val"
+                        style="color:var(--muted)">—</span>
+                </div>
               </div>
+              <p class="s9-act-note">Reliance · Pre-Book app push</p>
             </div>
 
-            <div class="s9-partner reveal-line"
-                 id="s9-pr4">
-              <div class="s9-partner-info">
-                <span class="s9-partner-name">TCM</span>
-                <span class="s9-partner-type">
-                  Influencer Store Launch
-                </span>
-              </div>
-              <div class="s9-partner-right">
-                <span class="s9-partner-budget lavender">
-                  ₹4L
-                </span>
-                <span class="s9-partner-phase">
-                  Super Day
-                </span>
-              </div>
-            </div>
-
-            <div class="s9-partner reveal-line"
-                 id="s9-pr5">
-              <div class="s9-partner-info">
-                <span class="s9-partner-name">
-                  Vasanth & Co
-                </span>
-                <span class="s9-partner-type">
-                  Influencer Store Launch
-                </span>
-              </div>
-              <div class="s9-partner-right">
-                <span class="s9-partner-budget"
-                      style="color:var(--muted)">
-                  ₹2L
-                </span>
-                <span class="s9-partner-phase">
-                  Super Day
-                </span>
-              </div>
-            </div>
-
-            <div class="s9-partner reveal-line"
-                 id="s9-pr6">
-              <div class="s9-partner-info">
-                <span class="s9-partner-name">
-                  Supreme
-                </span>
-                <span class="s9-partner-type">
-                  Influencer Store Launch
-                </span>
-              </div>
-              <div class="s9-partner-right">
-                <span class="s9-partner-budget"
-                      style="color:var(--muted)">
-                  ₹2L
-                </span>
-                <span class="s9-partner-phase">
-                  Super Day
-                </span>
-              </div>
-            </div>
-
-            <div class="s9-partner reveal-line"
-                 id="s9-pr7">
-              <div class="s9-partner-info">
-                <span class="s9-partner-name">
-                  Sangeetha
-                </span>
-                <span class="s9-partner-type">
-                  Influencer Store Launch
-                </span>
-              </div>
-              <div class="s9-partner-right">
-                <span class="s9-partner-budget"
-                      style="color:var(--muted)">
-                  ₹2L
-                </span>
-                <span class="s9-partner-phase">
-                  Super Day
-                </span>
-              </div>
-            </div>
-
-            <div class="s9-partner reveal-line"
-                 id="s9-pr8">
-              <div class="s9-partner-info">
-                <span class="s9-partner-name">
-                  Reliance
-                </span>
-                <span class="s9-partner-type">
-                  App Promotions
-                </span>
-              </div>
-              <div class="s9-partner-right">
-                <span class="s9-partner-budget"
-                      style="color:var(--muted)">
-                  ₹1L
-                </span>
-                <span class="s9-partner-phase">
-                  Pre-Book
-                </span>
-              </div>
-            </div>
-
-            <div class="s9-partner reveal-line"
-                 id="s9-pr9">
-              <div class="s9-partner-info">
-                <span class="s9-partner-name">Croma</span>
-                <span class="s9-partner-type">
-                  Influencer Store Launch
-                </span>
-              </div>
-              <div class="s9-partner-right">
-                <span class="s9-partner-budget"
-                      style="color:var(--muted)">
-                  ₹1L
-                </span>
-                <span class="s9-partner-phase">
-                  Super Day
-                </span>
-              </div>
-            </div>
-
-          </div><!-- end partners -->
-        </div>
-
+          </div><!-- end activities -->
+        </div><!-- end s9-content -->
       </div><!-- end part1 -->
 
       <!-- PART 2: Store launch rationale -->
@@ -4503,7 +4602,7 @@ document.getElementById('export-pdf').addEventListener('click', () => {
   // Force animated elements visible before print
   document.body.classList.add('print-mode');
   document.querySelectorAll(
-    '.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s3-type,.s5-engine,.s6-phase,.s7-act,.s9-partner'
+    '.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s3-type,.s5-engine,.s6-phase,.s7-act,.s9-phase'
   ).forEach(el => {
     el.style.opacity = '1';
     el.style.transform = 'none';
@@ -4515,6 +4614,14 @@ document.getElementById('export-pdf').addEventListener('click', () => {
   });
   const s5 = document.querySelector('.s5-amount-num');
   if (s5) s5.textContent = '44';
+  document.querySelectorAll('.s6-bar-fill, .s9-bar-fill').forEach((bar) => {
+    bar.style.background = bar.dataset.color || '';
+    bar.style.width = bar.dataset.width || '0%';
+  });
+  const r6 = document.getElementById('s6-river-fill');
+  const r9 = document.getElementById('s9-river-fill');
+  if (r6) r6.style.width = '100%';
+  if (r9) r9.style.width = '100%';
   setTimeout(() => {
     window.print();
     setTimeout(() => document.body.classList.remove('print-mode'), 800);
@@ -4561,7 +4668,7 @@ function pptxForceVisible(root) {
   const sel = [
     '.reveal-line', '.reveal-fade', '.reveal-left', '.reveal-right',
     '.reveal-scale', '.s2-step', '.s3-type', '.s5-engine', '.s5-engine-divider',
-    '.s6-phase', '.s7-act', '.s9-partner', '.s9-reason'
+    '.s6-phase', '.s7-act', '.s9-phase', '.s9-reason'
   ].join(',');
   root.querySelectorAll(sel).forEach((el) => {
     restores.push(pptxSetInlineStyles(el, {
@@ -4667,9 +4774,10 @@ function pptxApplyMode(scene, mode) {
   if (mode === 's9-part1') {
     const p1 = scene.querySelector('.s9-part1');
     const p2 = scene.querySelector('.s9-part2');
+    const river = scene.querySelector('#s9-river-fill');
     if (p1) {
       restores.push(pptxSetInlineStyles(p1, {
-        opacity: '1', visibility: 'visible', display: 'flex', transform: 'none'
+        opacity: '1', visibility: 'visible', display: '', transform: 'none'
       }));
     }
     if (p2) {
@@ -4678,6 +4786,15 @@ function pptxApplyMode(scene, mode) {
         opacity: '0', visibility: 'hidden', pointerEvents: 'none', display: 'none'
       }));
     }
+    if (river) {
+      restores.push(pptxSetInlineStyles(river, { width: '100%' }));
+    }
+    scene.querySelectorAll('.s9-bar-fill').forEach((bar) => {
+      restores.push(pptxSetInlineStyles(bar, {
+        width: bar.dataset.width || '0%',
+        background: bar.dataset.color || ''
+      }));
+    });
   }
   if (mode === 's9-part2') {
     const p1 = scene.querySelector('.s9-part1');
@@ -4701,6 +4818,12 @@ function pptxApplyMode(scene, mode) {
     if (fill) {
       restores.push(pptxSetInlineStyles(fill, { width: '100%' }));
     }
+    scene.querySelectorAll('.s6-bar-fill').forEach((bar) => {
+      restores.push(pptxSetInlineStyles(bar, {
+        width: bar.dataset.width || '0%',
+        background: bar.dataset.color || ''
+      }));
+    });
   }
   return () => restores.reverse().forEach((fn) => fn());
 }
@@ -4795,7 +4918,7 @@ async function exportPPTX() {
       const frame = pptxPrepSceneFrame(scene);
       // Kill GSAP inline transforms that can leave content mid-tween
       if (typeof gsap !== 'undefined') {
-        scene.querySelectorAll('.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s2-step,.s3-type,.s5-engine,.s6-phase,.s7-act,.s9-partner').forEach((el) => {
+        scene.querySelectorAll('.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s2-step,.s3-type,.s5-engine,.s6-phase,.s7-act,.s9-phase').forEach((el) => {
           gsap.set(el, { clearProps: 'opacity,transform,visibility' });
         });
       }
@@ -5265,7 +5388,8 @@ gsap.fromTo('#s9 .reveal-line',
   }
 );
 
-// Part 2 (rationale) appears at 50% scroll
+// Part 2 (rationale) appears at 50% scroll;
+// river + activity bars fill like S6
 ScrollTrigger.create({
   trigger: '#s9',
   start: 'top top',
@@ -5273,6 +5397,22 @@ ScrollTrigger.create({
   onUpdate: (self) => {
     const part1 = document.getElementById('s9-part1');
     const part2 = document.getElementById('s9-part2');
+    const river = document.getElementById('s9-river-fill');
+    if (river) {
+      const fill = Math.min(self.progress * 2, 1) * 100;
+      river.style.width = fill + '%';
+    }
+    if (self.progress > 0.35) {
+      document.querySelectorAll('.s9-bar-fill').forEach((bar) => {
+        if (!bar.dataset.filled) {
+          bar.dataset.filled = '1';
+          bar.style.background = bar.dataset.color;
+          setTimeout(() => {
+            bar.style.width = bar.dataset.width;
+          }, 50);
+        }
+      });
+    }
     if (self.progress > 0.50) {
       gsap.to(part1, {
         opacity: 0, y: -20,
@@ -6001,22 +6141,6 @@ gsap.to('.s8-cta', {
   yoyo: true,
   delay: 2
 });
-
-document.querySelectorAll('.s9-partner')
-  .forEach(row => {
-    row.addEventListener('mouseenter', () => {
-      gsap.to(row, {
-        paddingLeft: '8px',
-        duration: 0.2, ease: 'power1.out'
-      });
-    });
-    row.addEventListener('mouseleave', () => {
-      gsap.to(row, {
-        paddingLeft: '0px',
-        duration: 0.2, ease: 'power1.out'
-      });
-    });
-  });
 
 let friendsThemeArmed = false;
 let friendsThemeAutoTried = false;
