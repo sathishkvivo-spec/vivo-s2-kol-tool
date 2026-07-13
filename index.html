@@ -260,7 +260,9 @@
     overflow: hidden;
   }
   #kol-params.active {
-    padding: 68px 48px 24px;
+    padding: 64px 40px 18px;
+    height: 100vh;
+    max-height: 100dvh;
   }
   #kol-brief .kt-brief-wrap,
   #kol-params .kt-params-wrap {
@@ -273,12 +275,18 @@
     overflow: hidden;
   }
   #kol-params .kt-params-wrap {
-    max-width: 1200px;
+    max-width: 1240px;
     width: 100%;
     margin: 0 auto;
     padding: 0;
-    gap: 10px;
-    justify-content: flex-start;
+    gap: 0;
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    row-gap: 12px;
+  }
+  #kol-params .kt-params-header {
+    flex-shrink: 0;
   }
   #kol-brief .kt-brief-cards {
     flex: 1;
@@ -293,12 +301,12 @@
     flex-shrink: 0;
   }
   #kol-params .kt-params-grid {
-    flex: 1;
     min-height: 0;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, minmax(0, 1fr));
-    gap: 10px;
+    gap: 8px;
     align-content: stretch;
     overflow: hidden;
   }
@@ -1799,44 +1807,58 @@
     padding: 20px 22px;
   }
   #kol-params .display-large {
-    font-size: clamp(26px, 2.8vw, 40px);
-    margin-bottom: 4px !important;
+    font-size: clamp(24px, 2.6vw, 36px);
+    margin-bottom: 2px !important;
+    line-height: 1.1;
   }
   #kol-params .eyebrow {
-    margin-bottom: 6px !important;
+    margin-bottom: 4px !important;
   }
   #kol-params .body-large {
-    margin-bottom: 4px !important;
-    font-size: clamp(14px, 1.2vw, 16px);
-    line-height: 1.45;
+    margin-bottom: 0 !important;
+    font-size: clamp(13px, 1.1vw, 15px);
+    line-height: 1.4;
   }
   #kol-params .kt-param {
-    padding: 10px 14px;
-    gap: 12px;
+    padding: 8px 12px;
+    gap: 10px;
     min-height: 0;
     height: 100%;
     align-items: center;
     box-sizing: border-box;
+    overflow: hidden;
+  }
+  #kol-params .kt-param-body {
+    min-width: 0;
+    overflow: hidden;
   }
   #kol-params .kt-params-grid {
-    gap: 10px;
+    gap: 8px;
   }
   #kol-params .kt-param-num {
-    font-size: 14px;
-    min-width: 28px;
+    font-size: 13px;
+    min-width: 26px;
+    padding-top: 0;
   }
   #kol-params .kt-param-name {
-    font-size: clamp(13px, 1.25vw, 16px);
-    margin-bottom: 2px;
+    font-size: clamp(12px, 1.15vw, 15px);
+    margin-bottom: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   #kol-params .kt-param-desc {
-    font-size: 12px;
-    line-height: 1.35;
+    font-size: 11px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   #kol-params .kt-mandatory-badge {
     font-size: 8px;
-    padding: 2px 7px;
-    margin-bottom: 4px;
+    padding: 1px 6px;
+    margin-bottom: 2px;
   }
   .kt-pills {
     display: flex;
@@ -2087,7 +2109,7 @@
     transform: translateY(-3px);
   }
   .kt-card-photo {
-    height: 210px;
+    height: 168px;
     overflow: hidden;
     position: relative;
     background: var(--dim);
@@ -2126,20 +2148,57 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 0;
+    min-height: 0;
   }
   .kt-card-name {
     font-family: var(--ff-display);
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 17px;
+    font-weight: 800;
     color: var(--text);
     margin-bottom: 2px;
     letter-spacing: -0.01em;
+    line-height: 1.2;
   }
   .kt-card-handle {
     font-family: var(--ff-body);
     font-size: 12px;
+    font-weight: 500;
     color: var(--muted);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+  }
+  .kt-card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0 0 12px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(240,235,248,0.08);
+    border-bottom: 1px solid rgba(240,235,248,0.08);
+    flex: 1;
+    justify-content: center;
+  }
+  .kt-card-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .kt-card-meta-label {
+    font-family: var(--ff-body);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .kt-card-meta-val {
+    font-family: var(--ff-display);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    text-align: right;
+    letter-spacing: -0.01em;
   }
   .kt-card-score-bar {
     height: 3px;
@@ -2147,6 +2206,7 @@
     border-radius: 2px;
     margin-bottom: 10px;
     overflow: hidden;
+    flex-shrink: 0;
   }
   .kt-card-score-fill {
     height: 100%;
@@ -2157,6 +2217,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: auto;
+    flex-shrink: 0;
   }
   .kt-card-pct {
     font-family: var(--ff-display);
@@ -3964,20 +4025,20 @@
 <section class="kol-section" id="kol-params">
   <div class="kt-params-wrap">
 
-    <p class="eyebrow" style="margin-bottom:16px">
-      S2 · Selection Logic
-    </p>
-    <h1 class="display-large"
-        style="margin-bottom:8px">
-      10 Parameters.
-    </h1>
-    <p class="body-large"
-       style="margin-bottom:12px;
-              max-width:520px">
-      Built for Tamil Nadu's Gen Z market.
-      2 mandatory hard blocks.
-      No exceptions.
-    </p>
+    <div class="kt-params-header">
+      <p class="eyebrow">
+        S2 · Selection Logic
+      </p>
+      <h1 class="display-large">
+        10 Parameters.
+      </h1>
+      <p class="body-large"
+         style="max-width:520px">
+        Built for Tamil Nadu's Gen Z market.
+        2 mandatory hard blocks.
+        No exceptions.
+      </p>
+    </div>
 
     <div class="kt-params-grid">
 
@@ -5235,6 +5296,20 @@ function renderCards(filter = 'all') {
         <div class="kt-card-body">
           <div class="kt-card-name">${k.name}</div>
           <div class="kt-card-handle">${k.handle}</div>
+          <div class="kt-card-meta">
+            <div class="kt-card-meta-row">
+              <span class="kt-card-meta-label">Followers</span>
+              <span class="kt-card-meta-val">${k.followers || '—'}</span>
+            </div>
+            <div class="kt-card-meta-row">
+              <span class="kt-card-meta-label">Cost / Reel</span>
+              <span class="kt-card-meta-val">${k.cost || '—'}</span>
+            </div>
+            <div class="kt-card-meta-row">
+              <span class="kt-card-meta-label">City</span>
+              <span class="kt-card-meta-val">${k.city || '—'}</span>
+            </div>
+          </div>
           ${scoreBar}
           <div class="kt-card-footer">
             ${scoreDisplay}
