@@ -189,8 +189,9 @@
   }
   .kol-section.active { display: block; }
   #kol-match.active {
-    overflow-y: auto;
-    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
   #kol-brief.active,
   #kol-params.active {
@@ -1746,18 +1747,25 @@
      KOL TOOL — MATCH
   ═══════════════════════════════════ */
   .kt-match-wrap {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px 0 60px;
+    max-width: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 8px 0 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
   }
   .kt-stats {
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    gap: 16px;
-    margin-bottom: 32px;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-shrink: 0;
   }
   .kt-stat-card {
-    padding: 20px 24px;
+    padding: 14px 18px;
     border: 1px solid var(--border);
     border-radius: 12px;
     background: rgba(15,15,24,0.60);
@@ -1766,7 +1774,7 @@
   .kt-stat-val {
     display: block;
     font-family: var(--ff-display);
-    font-size: clamp(28px,4vw,48px);
+    font-size: clamp(24px,3.2vw,40px);
     font-weight: 800;
     letter-spacing: -0.02em;
     color: var(--text);
@@ -1784,7 +1792,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
+    flex-shrink: 0;
   }
   .kt-filter {
     font-family: var(--ff-body);
@@ -1805,13 +1814,34 @@
     border-color: rgba(241,145,109,0.25);
   }
   .kt-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(
-      auto-fill, minmax(260px,1fr)
-    );
-    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 16px;
+    flex: 1;
+    min-height: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+    align-items: stretch;
+  }
+  .kt-cards-grid::-webkit-scrollbar {
+    height: 5px;
+  }
+  .kt-cards-grid::-webkit-scrollbar-track {
+    background: rgba(240,235,248,0.04);
+    border-radius: 4px;
+  }
+  .kt-cards-grid::-webkit-scrollbar-thumb {
+    background: rgba(241,145,109,0.40);
+    border-radius: 4px;
   }
   .kt-card {
+    flex: 0 0 250px;
+    width: 250px;
+    scroll-snap-align: start;
     border: 1px solid var(--border);
     border-radius: 16px;
     overflow: hidden;
@@ -1819,21 +1849,25 @@
     transition: transform 0.2s ease,
                 border-color 0.2s ease;
     background: rgba(15,15,24,0.60);
+    display: flex;
+    flex-direction: column;
   }
   .kt-card:hover {
     border-color: rgba(241,145,109,0.25);
+    transform: translateY(-3px);
   }
   .kt-card-photo {
-    height: 260px;
+    height: 210px;
     overflow: hidden;
     position: relative;
     background: var(--dim);
+    flex-shrink: 0;
   }
   .kt-card-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top;
+    object-position: top center;
     transition: transform 0.4s ease;
   }
   .kt-card:hover .kt-card-photo img {
@@ -1858,11 +1892,14 @@
     background: var(--surface);
   }
   .kt-card-body {
-    padding: 16px 20px 20px;
+    padding: 14px 16px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
   .kt-card-name {
     font-family: var(--ff-display);
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--text);
     margin-bottom: 2px;
@@ -1872,7 +1909,7 @@
     font-family: var(--ff-body);
     font-size: 12px;
     color: var(--muted);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .kt-card-score-bar {
     height: 3px;
@@ -1889,11 +1926,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: auto;
   }
   .kt-card-pct {
     font-family: var(--ff-display);
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: -0.02em;
   }
   .kt-phase-badge {
@@ -1920,13 +1958,13 @@
   .kt-modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(10,10,15,0.92);
-    backdrop-filter: blur(8px);
+    background: rgba(6,6,10,0.94);
+    backdrop-filter: blur(12px);
     z-index: 500;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 0;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -1938,127 +1976,165 @@
   .kt-modal {
     position: relative;
     background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    max-width: 860px;
+    border: none;
+    border-radius: 0;
+    max-width: none;
     width: 100%;
-    max-height: 88vh;
+    height: 100%;
+    max-height: none;
     overflow: hidden;
     display: grid;
-    grid-template-columns: 320px 1fr;
-    transform: scale(0.94) translateY(20px);
+    grid-template-columns: minmax(340px, 44%) 1fr;
+    transform: scale(0.98);
     transition: transform 0.35s ease;
   }
   .kt-modal-overlay.open .kt-modal {
-    transform: scale(1) translateY(0);
+    transform: scale(1);
   }
   .kt-modal-close {
     position: absolute;
-    top: 16px; right: 16px;
-    font-size: 18px;
-    color: var(--muted);
+    top: 20px; right: 20px;
+    font-size: 16px;
+    color: var(--text);
     z-index: 10;
-    width: 32px; height: 32px;
+    width: 40px; height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: rgba(10,10,15,0.60);
-    transition: color 0.2s;
+    background: rgba(10,10,15,0.72);
+    border: 1px solid rgba(240,235,248,0.12);
+    transition: color 0.2s, border-color 0.2s;
   }
-  .kt-modal-close:hover { color: var(--text); }
+  .kt-modal-close:hover {
+    color: var(--peach);
+    border-color: rgba(241,145,109,0.35);
+  }
   .kt-modal-photo {
     height: 100%;
-    min-height: 480px;
+    min-height: 0;
     overflow: hidden;
-    background: var(--dim);
+    background: #0a0a0f;
+    position: relative;
   }
   .kt-modal-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top;
+    object-position: center top;
+    display: block;
+  }
+  .kt-modal-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 55%,
+      rgba(15,15,24,0.55) 100%
+    );
+    pointer-events: none;
   }
   .kt-modal-details {
-    padding: 32px;
-    overflow-y: auto;
-    max-height: 88vh;
+    padding: clamp(24px, 3.5vh, 40px)
+             clamp(28px, 4vw, 48px);
+    overflow: hidden;
+    max-height: none;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(15,15,24,1) 0%,
+        rgba(12,12,18,1) 100%
+      );
   }
   .kt-modal-badges {
     display: flex;
     gap: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
     flex-wrap: wrap;
+    flex-shrink: 0;
   }
   .kt-modal-badge {
     font-family: var(--ff-body);
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.08em;
-    padding: 4px 12px;
+    padding: 5px 12px;
     border-radius: 20px;
     text-transform: uppercase;
   }
   .kt-modal-section-label {
     font-family: var(--ff-body);
     font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--lavender);
     margin-bottom: 8px;
-    margin-top: 20px;
+    margin-top: 14px;
+    flex-shrink: 0;
   }
   .kt-modal-name {
     font-family: var(--ff-display);
-    font-size: 28px;
+    font-size: clamp(28px, 3.2vw, 42px);
     font-weight: 800;
     color: var(--text);
-    margin-bottom: 2px;
+    margin-bottom: 4px;
     letter-spacing: -0.02em;
+    line-height: 1.1;
+    flex-shrink: 0;
   }
   .kt-modal-handle {
     font-family: var(--ff-body);
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--peach);
+    margin-bottom: 2px;
   }
   .kt-modal-followers {
     font-family: var(--ff-body);
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 14px;
   }
   .kt-modal-checkpoints {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
+    flex-shrink: 0;
   }
   .kt-checkpoint {
     font-family: var(--ff-body);
     font-size: 11px;
+    font-weight: 600;
     color: var(--peach);
     background: var(--peach-dim);
     border: 1px solid rgba(241,145,109,0.20);
-    padding: 4px 12px;
+    padding: 5px 12px;
     border-radius: 6px;
   }
   .kt-score-ring-wrap {
     display: flex;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
+    gap: 16px;
+    margin-bottom: 4px;
+    flex-shrink: 0;
   }
   .kt-score-ring {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
     flex-shrink: 0;
   }
   .kt-score-ring svg {
     transform: rotate(-90deg);
-    width: 80px; height: 80px;
+    width: 72px; height: 72px;
   }
   .kt-score-ring-text {
     position: absolute;
@@ -2070,7 +2146,7 @@
   }
   .kt-score-ring-val {
     font-family: var(--ff-display);
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 800;
     color: var(--text);
     line-height: 1;
@@ -2078,33 +2154,44 @@
   .kt-score-ring-sub {
     font-family: var(--ff-body);
     font-size: 9px;
+    font-weight: 600;
     color: var(--muted);
     line-height: 1;
     margin-top: 2px;
   }
   .kt-modal-params {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 18px;
+    margin-bottom: 4px;
+    flex: 1;
+    min-height: 0;
+    align-content: start;
+    overflow: hidden;
   }
   .kt-modal-param-row {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
   .kt-modal-param-label {
     font-family: var(--ff-body);
-    font-size: 12px;
-    color: var(--muted);
-    min-width: 120px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    min-width: 0;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .kt-modal-param-track {
-    flex: 1;
+    flex: 1.2;
     height: 4px;
     background: var(--dim);
     border-radius: 2px;
     overflow: hidden;
+    min-width: 48px;
   }
   .kt-modal-param-fill {
     height: 100%;
@@ -2113,30 +2200,36 @@
     transition: width 0.8s ease;
   }
   .kt-modal-param-score {
-    font-family: var(--ff-body);
+    font-family: var(--ff-display);
     font-size: 12px;
+    font-weight: 800;
     color: var(--text);
-    min-width: 32px;
+    min-width: 28px;
     text-align: right;
   }
   .kt-modal-angle {
     background: var(--peach-dim);
-    border-left: 2px solid var(--peach);
+    border-left: 3px solid var(--peach);
     border-radius: 0 8px 8px 0;
-    padding: 12px 16px;
+    padding: 10px 14px;
     font-family: var(--ff-body);
     font-size: 13px;
-    color: var(--muted);
-    font-style: italic;
-    margin-bottom: 20px;
+    font-weight: 600;
+    color: var(--text);
+    font-style: normal;
+    margin-bottom: 8px;
+    line-height: 1.45;
+    flex-shrink: 0;
   }
   .kt-modal-commercial {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-top: auto;
   }
   .kt-modal-comm-item {
-    padding: 12px 16px;
+    padding: 10px 14px;
     border: 1px solid var(--border);
     border-radius: 8px;
     background: rgba(10,10,15,0.40);
@@ -2144,25 +2237,34 @@
   .kt-modal-comm-label {
     font-family: var(--ff-body);
     font-size: 10px;
+    font-weight: 600;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.10em;
     margin-bottom: 4px;
   }
   .kt-modal-comm-val {
-    font-family: var(--ff-body);
-    font-size: 14px;
-    font-weight: 500;
+    font-family: var(--ff-display);
+    font-size: 15px;
+    font-weight: 800;
     color: var(--text);
+    letter-spacing: -0.01em;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .kt-modal {
       grid-template-columns: 1fr;
-      max-height: 90vh;
     }
-    .kt-modal-photo { min-height: 220px; height: 220px; }
+    .kt-modal-photo {
+      height: 32vh;
+      min-height: 180px;
+    }
+    .kt-modal-photo::after { display: none; }
+    .kt-modal-params { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
     .kt-stats { grid-template-columns: repeat(2,1fr); }
-    .kt-cards-grid { grid-template-columns: 1fr 1fr; }
+    .kt-card { flex-basis: 220px; width: 220px; }
+    .kt-card-photo { height: 180px; }
   }
 
   </style>
@@ -4789,12 +4891,17 @@ function phaseLabel(phase) {
 
 function renderCards(filter = 'all') {
   const grid = document.getElementById('kt-cards-grid');
-  const filtered = filter === 'all'
-    ? KOL_DATA
+  const filtered = (filter === 'all'
+    ? [...KOL_DATA]
     : KOL_DATA.filter(k =>
         k.phase === filter ||
         k.tier.toLowerCase() === filter
-      );
+      ))
+    .sort((a, b) => {
+      if (a.pending && !b.pending) return 1;
+      if (!a.pending && b.pending) return -1;
+      return (b.score || 0) - (a.score || 0);
+    });
 
   grid.innerHTML = filtered.map(k => {
     const photoHtml = k.img
@@ -4842,6 +4949,7 @@ function renderCards(filter = 'all') {
       </div>`;
   }).join('');
   bindKtCardHovers();
+  grid.scrollLeft = 0;
 }
 
 document.querySelectorAll('.kt-filter')
@@ -4915,14 +5023,15 @@ function openModal(id) {
       </span>
       <span class="kt-modal-badge"
             style="background:rgba(240,235,248,0.06);
-                   color:var(--muted)">
+                   color:var(--text);
+                   font-weight:700">
         ${k.tier}
       </span>
     </div>
     <div class="kt-modal-name">${k.name}</div>
     <div class="kt-modal-handle">${k.handle}</div>
     <div class="kt-modal-followers">
-      ${k.followers} followers
+      <strong>${k.followers}</strong> followers
     </div>
     <div class="kt-modal-checkpoints">
       <span class="kt-checkpoint">
@@ -4961,6 +5070,19 @@ function openModal(id) {
           </span>
         </div>
       </div>
+      <div>
+        <div style="font-family:var(--ff-display);
+                    font-size:28px;font-weight:800;
+                    color:${scoreColor(k.score)};
+                    letter-spacing:-0.02em;line-height:1">
+          ${k.pending ? 'Pending' : k.score + '%'}
+        </div>
+        <div style="font-size:12px;font-weight:600;
+                    color:var(--muted);margin-top:4px;
+                    letter-spacing:0.06em;text-transform:uppercase">
+          Match strength
+        </div>
+      </div>
     </div>
     <div class="kt-modal-section-label">
       Parameter Scores
@@ -4970,7 +5092,7 @@ function openModal(id) {
       S2 Content Angle
     </div>
     <div class="kt-modal-angle">
-      "${k.angle}"
+      “${k.angle}”
     </div>
     <div class="kt-modal-section-label">
       Commercial Details
