@@ -19,6 +19,8 @@
 
   <!-- PptxGenJS for export -->
   <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+  <!-- html2canvas — pixel-perfect PPT slides from live scenes -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
   /* ═══════════════════════════════════
@@ -544,6 +546,21 @@
   body.print-mode #slide-nav,
   body.print-mode #export-btn,
   body.print-mode #section-label { display: none !important; }
+
+  /* Screenshot PPTX capture — freeze sticky frames */
+  body.export-capturing {
+    overflow: hidden !important;
+  }
+  body.export-capturing #section-label,
+  body.export-capturing #export-btn,
+  body.export-capturing #export-dropdown,
+  body.export-capturing #slide-nav,
+  body.export-capturing #progress-bar,
+  body.export-capturing #s4-music-btn,
+  body.export-capturing #kol-nav,
+  body.export-capturing .s1-scroll-cue {
+    display: none !important;
+  }
 
   /* ═══════════════════════════════════
      MOBILE BASE
@@ -4525,654 +4542,314 @@ async function loadPptxImage(src) {
   }
 }
 
-async function exportPPTX() {
-  const pptx = new PptxGenJS();
-  pptx.defineLayout({ name: 'WIDE_HD', width: 13.333, height: 7.5 });
-  pptx.layout = 'WIDE_HD';
-  pptx.author = 'FTPL Marcom';
-  pptx.title = 'vivo S2 · Tamil Nadu Launch Strategy 2026';
-
-  const C = {
-    bg: '0A0A0F',
-    surface: '0F0F18',
-    text: 'F0EBF8',
-    muted: '6B6480',
-    peach: 'F1916D',
-    lav: 'AE7DAC',
-    dim: '1E1E2E',
-    border: '2A2A3A'
-  };
-  const FF = 'Arial';
-
-  const imgs = {
-    phone: await loadPptxImage('img/phone_hero.png'),
-    phoneBack: await loadPptxImage('img/phone_back.png'),
-    door: await loadPptxImage('img/friends_door.jpg'),
-    undergrad: await loadPptxImage('img/consumer_undergrad.jpg'),
-    whitecollar: await loadPptxImage('img/consumer_whitecollar.jpg'),
-    shopowner: await loadPptxImage('img/consumer_shopowner.jpg'),
-    apt: await loadPptxImage('img/friends_apt1.jpg')
-  };
-
-  let slideNo = 0;
-  const totalSlides = 14;
-
-  function addChrome(slide, label) {
-    slideNo += 1;
-    slide.addText(label.toUpperCase(), {
-      x: 0.55, y: 0.28, w: 6, h: 0.28,
-      fontFace: FF, fontSize: 10, fontWeight: 500,
-      color: C.lav, charSpacing: 3
-    });
-    slide.addText(`${slideNo} / ${totalSlides}`, {
-      x: 11.2, y: 7.05, w: 1.5, h: 0.25,
-      fontFace: FF, fontSize: 10, color: C.muted, align: 'right'
-    });
-    slide.addShape(pptx.shapes.RECTANGLE, {
-      x: 0, y: 0, w: 13.333, h: 0.04,
-      fill: { color: C.peach }
-    });
-  }
-
-  function card(slide, x, y, w, h) {
-    slide.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
-      x, y, w, h,
-      fill: { color: C.surface },
-      rectRadius: 0.08,
-      line: { color: C.border, width: 1 }
-    });
-  }
-
-  // ── S1 Title ─────────────────────────
-  {
-    const s = pptx.addSlide();
-    s.background = { color: C.bg };
-    addChrome(s, 'vivo S2 · Tamil Nadu 2026');
-    s.addText('FTPL · Tamil Nadu · 2026', {
-      x: 0.7, y: 1.8, w: 7, h: 0.3,
-      fontFace: FF, fontSize: 11, color: C.lav, charSpacing: 2
-    });
-    s.addText([
-      { text: 'Tamil Nadu.\n', options: { color: C.text, bold: true } },
-      { text: 'vivo S2.\n', options: { color: C.peach, bold: true } },
-      { text: '2026.', options: { color: C.muted, bold: true } }
-    ], {
-      x: 0.7, y: 2.2, w: 7.2, h: 2.6,
-      fontFace: FF, fontSize: 48, margin: 0
-    });
-    s.addText('A lifestyle identity they resonate with.\nThe new medium segment. Owned.', {
-      x: 0.7, y: 5.1, w: 6.5, h: 0.8,
-      fontFace: FF, fontSize: 16, color: C.muted
-    });
-    if (imgs.phone) {
-      s.addImage({
-        data: imgs.phone,
-        x: 9.0, y: 1.1, w: 3.5, h: 5.4,
-        shadow: { type: 'outer', color: '000000', blur: 20, opacity: 0.4 }
-      });
-    }
-  }
-
-  // ── S2 Product ───────────────────────
-  {
-    const s = pptx.addSlide();
-    s.background = { color: C.bg };
-    addChrome(s, 'The Product');
-    s.addText([
-      { text: 'Built for who\n', options: { color: C.text } },
-      { text: "you're becoming.", options: { color: C.peach } }
-    ], {
-      x: 0.7, y: 1.0, w: 7, h: 1.5,
-      fontFace: FF, fontSize: 36, bold: true
-    });
-    s.addText('A space for non-tech mainstream youth.\nThe new ₹35K–₹45K medium segment.', {
-      x: 0.7, y: 2.6, w: 6.5, h: 0.7,
-      fontFace: FF, fontSize: 15, color: C.muted
-    });
-    s.addText('THREE EXPRESSIONS', {
-      x: 0.7, y: 3.5, w: 4, h: 0.25,
-      fontFace: FF, fontSize: 10, color: C.muted, charSpacing: 2
-    });
-    const colours = [
-      { name: 'Silk White', c: 'E8E4DC' },
-      { name: 'Regal Bronze', c: 'C4962A' },
-      { name: 'Sapphire Blue', c: '2E5BA8' }
-    ];
-    colours.forEach((col, i) => {
-      const x = 0.7 + i * 2.2;
-      s.addShape(pptx.shapes.OVAL, {
-        x, y: 3.9, w: 0.35, h: 0.35,
-        fill: { color: col.c }
-      });
-      s.addText(col.name, {
-        x: x + 0.45, y: 3.92, w: 1.6, h: 0.3,
-        fontFace: FF, fontSize: 12, color: C.muted
-      });
-    });
-    const specs = [
-      { v: '4K', l: 'Front & Rear Video', c: C.peach },
-      { v: '8GB', l: 'RAM · 128/256', c: C.lav },
-      { v: 'Gen Z', l: 'Tamil Nadu TG', c: C.text }
-    ];
-    specs.forEach((sp, i) => {
-      const x = 0.7 + i * 2.5;
-      s.addText(sp.v, {
-        x, y: 4.7, w: 2.2, h: 0.45,
-        fontFace: FF, fontSize: 28, bold: true, color: sp.c
-      });
-      s.addText(sp.l, {
-        x, y: 5.2, w: 2.2, h: 0.3,
-        fontFace: FF, fontSize: 11, color: C.muted
-      });
-    });
-    if (imgs.phoneBack) {
-      s.addImage({
-        data: imgs.phoneBack,
-        x: 9.1, y: 1.4, w: 3.4, h: 4.8
-      });
-    }
-  }
-
-  // ── S3 Consumer ──────────────────────
-  {
-    const s = pptx.addSlide();
-    s.background = { color: C.bg };
-    addChrome(s, 'The Consumer');
-    s.addText([
-      { text: 'First to Discover.\n', options: { color: C.text } },
-      { text: 'First to Share.', options: { color: C.peach } }
-    ], {
-      x: 0.55, y: 0.7, w: 10, h: 1.1,
-      fontFace: FF, fontSize: 32, bold: true
-    });
-    s.addText('Three Tamil Nadu Gen Z mindsets. One phone that fits the moment.', {
-      x: 0.55, y: 1.85, w: 10, h: 0.35,
-      fontFace: FF, fontSize: 14, color: C.muted
-    });
-    const consumers = [
-      {
-        num: '01', nc: C.peach, title: 'The Undergrad',
-        body: '17–22 · Campus · Café · City.\nOutgrew Y-series. Not ready for V-series.\nS2 was made for this exact moment.',
-        tags: 'Social Sharing · Content Creation · Identity Builder',
-        img: imgs.undergrad
-      },
-      {
-        num: '02', nc: C.lav, title: 'Young White Collar',
-        body: '23–28 · First job. First real upgrade.\nFashion meets function.\nThe phone their life reflects.',
-        tags: 'Weekend Explorer · Aspiration',
-        img: imgs.whitecollar
-      },
-      {
-        num: '03', nc: C.text, title: 'Young Shop Owner',
-        body: '25–30 · Trade · Local · Aspirational.\nA device that matches their hustle,\ntheir style, their story.',
-        tags: 'Self-Made · Style-Forward',
-        img: imgs.shopowner
-      }
-    ];
-    consumers.forEach((c, i) => {
-      const x = 0.45 + i * 4.2;
-      card(s, x, 2.4, 4.0, 4.3);
-      if (c.img) {
-        s.addImage({ data: c.img, x: x + 0.12, y: 2.52, w: 3.76, h: 1.7 });
-      }
-      s.addText(c.num, {
-        x: x + 0.2, y: 3.95, w: 1, h: 0.35,
-        fontFace: FF, fontSize: 20, bold: true, color: c.nc
-      });
-      s.addText(c.title, {
-        x: x + 0.2, y: 4.35, w: 3.6, h: 0.35,
-        fontFace: FF, fontSize: 16, bold: true, color: C.text
-      });
-      s.addText(c.body, {
-        x: x + 0.2, y: 4.75, w: 3.6, h: 1.0,
-        fontFace: FF, fontSize: 11, color: C.muted
-      });
-      s.addText(c.tags, {
-        x: x + 0.2, y: 5.9, w: 3.6, h: 0.45,
-        fontFace: FF, fontSize: 10, color: C.muted
-      });
-    });
-  }
-
-  // ── S4 Campaign ──────────────────────
-  {
-    const s = pptx.addSlide();
-    s.background = { color: C.bg };
-    addChrome(s, 'The Campaign');
-    s.addText([
-      { text: 'Caught\n', options: { color: C.text } },
-      { text: 'in 4K.', options: { color: C.peach } }
-    ], {
-      x: 0.7, y: 1.1, w: 7, h: 1.6,
-      fontFace: FF, fontSize: 44, bold: true
-    });
-    s.addText('F · R · I · E · N · D · S', {
-      x: 0.7, y: 2.85, w: 6, h: 0.35,
-      fontFace: FF, fontSize: 18, bold: true, color: C.peach, charSpacing: 2
-    });
-    s.addText('Weekends. Never Ends.', {
-      x: 0.7, y: 3.25, w: 6, h: 0.3,
-      fontFace: FF, fontSize: 14, color: C.muted
-    });
-    s.addText("Gen Z don't just create content anymore.\nThey create themselves.\nThe vivo S2 captures who they're becoming.", {
-      x: 0.7, y: 3.75, w: 6.5, h: 1.0,
-      fontFace: FF, fontSize: 15, color: C.muted
-    });
-    const pillars = [
-      { l: 'CAMPAIGN', v: '#MyNewStory', c: C.peach },
-      { l: 'TAGLINE', v: 'Friends. Weekends. Never Ends.', c: C.lav },
-      { l: 'FEATURE', v: '4K Front & Rear Video', c: C.text },
-      { l: 'GO-LIVE', v: '23 Jul 2026', c: C.text }
-    ];
-    pillars.forEach((p, i) => {
-      const x = 0.7 + (i % 2) * 3.5;
-      const y = 5.0 + Math.floor(i / 2) * 0.75;
-      s.addText(p.l, {
-        x, y, w: 3.2, h: 0.22,
-        fontFace: FF, fontSize: 9, color: C.muted, charSpacing: 1
-      });
-      s.addText(p.v, {
-        x, y: y + 0.22, w: 3.2, h: 0.35,
-        fontFace: FF, fontSize: 13, bold: true, color: p.c
-      });
-    });
-    if (imgs.door) {
-      s.addImage({
-        data: imgs.door,
-        x: 9.4, y: 1.0, w: 2.7, h: 5.5,
-        shadow: { type: 'outer', color: '000000', blur: 18, opacity: 0.45 }
-      });
-    }
-  }
-
-  // ── S5 Strategy A ────────────────────
-  {
-    const s = pptx.addSlide();
-    s.background = { color: C.bg };
-    addChrome(s, 'The Strategy');
-    s.addText('FTPL · S2 LAUNCH INVESTMENT', {
-      x: 0.7, y: 2.0, w: 12, h: 0.35,
-      fontFace: FF, fontSize: 12, color: C.lav, align: 'center', charSpacing: 2
-    });
-    s.addText('₹44L', {
-      x: 0.7, y: 2.6, w: 12, h: 1.6,
-      fontFace: FF, fontSize: 96, bold: true, color: C.text, align: 'center'
-    });
-    s.addText('One launch. Two engines. Tamil Nadu.', {
-      x: 0.7, y: 4.5, w: 12, h: 0.45,
-      fontFace: FF, fontSize: 18, color: C.muted, align: 'center'
-    });
-  }
-
-  // ── S5 Strategy B ────────────────────
-  {
-    const s = pptx.addSlide();
-    s.background = { color: C.bg };
-    addChrome(s, 'The Strategy · Two Engines');
-    // Engine 1
-    card(s, 0.55, 1.0, 5.9, 5.5);
-    s.addText('01 · STATE COMPANY', {
-      x: 0.85, y: 1.25, w: 5, h: 0.3,
-      fontFace: FF, fontSize: 11, color: C.peach, charSpacing: 2
-    });
-    s.addText('Create Demand.', {
-      x: 0.85, y: 1.65, w: 5, h: 0.45,
-      fontFace: FF, fontSize: 26, bold: true, color: C.text
-    });
-    s.addText('KOL content · Retailer unboxing\nSocial media promotions', {
-      x: 0.85, y: 2.2, w: 5, h: 0.55,
-      fontFace: FF, fontSize: 13, color: C.muted
-    });
-    [
-      ['KOL Campaign', '₹10L'],
-      ['Retailer Unboxing', '₹1L'],
-      ['Social Media', '₹1L'],
-      ['Total', '₹12L']
-    ].forEach((row, i) => {
-      const y = 3.1 + i * 0.55;
-      const bold = i === 3;
-      s.addText(row[0], {
-        x: 0.85, y, w: 3.2, h: 0.4,
-        fontFace: FF, fontSize: bold ? 16 : 14,
-        bold, color: bold ? C.peach : C.text
-      });
-      s.addText(row[1], {
-        x: 4.2, y, w: 1.8, h: 0.4,
-        fontFace: FF, fontSize: bold ? 16 : 14,
-        bold, color: bold ? C.peach : C.muted, align: 'right'
-      });
-    });
-    // Engine 2
-    card(s, 6.85, 1.0, 5.9, 5.5);
-    s.addText('02 · JBP PARTNERS', {
-      x: 7.15, y: 1.25, w: 5, h: 0.3,
-      fontFace: FF, fontSize: 11, color: C.lav, charSpacing: 2
-    });
-    s.addText('Convert Demand.', {
-      x: 7.15, y: 1.65, w: 5, h: 0.45,
-      fontFace: FF, fontSize: 26, bold: true, color: C.text
-    });
-    s.addText('9 trade partners · Store activations\nInfluencer launches · FM campaigns', {
-      x: 7.15, y: 2.2, w: 5, h: 0.55,
-      fontFace: FF, fontSize: 13, color: C.muted
-    });
-    [
-      ['9 JBP Partners', 'Across Tamil Nadu'],
-      ['Coverage', 'Poorvika · Sathya · TCM + 6'],
-      ['Total', '₹32L']
-    ].forEach((row, i) => {
-      const y = 3.3 + i * 0.65;
-      const bold = i === 2;
-      s.addText(row[0], {
-        x: 7.15, y, w: 3.0, h: 0.4,
-        fontFace: FF, fontSize: bold ? 16 : 14,
-        bold, color: bold ? C.lav : C.text
-      });
-      s.addText(row[1], {
-        x: 10.0, y, w: 2.3, h: 0.4,
-        fontFace: FF, fontSize: bold ? 16 : 13,
-        bold, color: bold ? C.lav : C.muted, align: 'right'
-      });
-    });
-  }
-
-  // ── S6 Timeline ──────────────────────
-  {
-    const s = pptx.addSlide();
-    s.background = { color: C.bg };
-    addChrome(s, 'Campaign Execution');
-    s.addText([
-      { text: '25 Jul', options: { color: C.peach, bold: true } },
-      { text: ' — ', options: { color: C.muted } },
-      { text: '31 Aug 2026.', options: { color: C.text, bold: true } }
-    ], {
-      x: 0.55, y: 0.75, w: 12, h: 0.55,
-      fontFace: FF, fontSize: 28
-    });
-    const phases = [
-      { n: 'Pre-Buzz', d: '25 Jul – 5 Aug', desc: 'HO reveals core product information nationally', c: C.lav },
-      { n: 'Pre-Book', d: '6 – 10 Aug', desc: 'State customers informed. Pre-bookings collected.', c: C.peach },
-      { n: 'Super Day', d: '11 Aug', desc: 'Sales begin. The moment everything was built for.', c: C.peach },
-      { n: 'Super Week', d: '12 – 18 Aug', desc: 'Week-long focus. Momentum maintained.', c: C.peach },
-      { n: 'Sustenance', d: '19 – 31 Aug', desc: 'Social proof sustains demand.', c: C.muted }
-    ];
-    phases.forEach((p, i) => {
-      const y = 1.55 + i * 1.0;
-      card(s, 0.55, y, 12.2, 0.9);
-      s.addShape(pptx.shapes.RECTANGLE, {
-        x: 0.55, y, w: 0.08, h: 0.9,
-        fill: { color: p.c }
-      });
-      s.addText(p.n, {
-        x: 0.9, y: y + 0.12, w: 2.5, h: 0.3,
-        fontFace: FF, fontSize: 14, bold: true, color: p.c
-      });
-      s.addText(p.d, {
-        x: 3.5, y: y + 0.12, w: 3, h: 0.3,
-        fontFace: FF, fontSize: 13, color: C.text
-      });
-      s.addText(p.desc, {
-        x: 0.9, y: y + 0.45, w: 11.4, h: 0.3,
-        fontFace: FF, fontSize: 12, color: C.muted
-      });
-    });
-  }
-
-  // ── S6 Activities ────────────────────
-  {
-    const s = pptx.addSlide();
-    s.background = { color: C.bg };
-    addChrome(s, 'Campaign Execution · Activity Mix');
-    const acts = [
-      {
-        title: 'KOL', meta: '10–12 Creators',
-        rows: [['Pre-Buzz', '20%'], ['Pre-Book', '40%'], ['Super Day', '20%'], ['Super Week', '20%']]
-      },
-      {
-        title: 'Retailer Unboxing', meta: '₹1L Budget',
-        rows: [['Pre-Buzz', '1 Video'], ['Pre-Book', '2 Videos'], ['Super Day+', '—']]
-      },
-      {
-        title: 'Social Media', meta: '₹1L Budget',
-        rows: [['Pre-Buzz', '₹30K'], ['Pre-Book', '₹30K'], ['Super+', '₹20K'], ['Sustenance', '₹20K']]
-      }
-    ];
-    acts.forEach((a, i) => {
-      const x = 0.45 + i * 4.25;
-      card(s, x, 1.0, 4.05, 5.5);
-      s.addText(a.title, {
-        x: x + 0.25, y: 1.25, w: 3.5, h: 0.4,
-        fontFace: FF, fontSize: 18, bold: true, color: C.text
-      });
-      s.addText(a.meta, {
-        x: x + 0.25, y: 1.7, w: 3.5, h: 0.3,
-        fontFace: FF, fontSize: 12, color: C.peach
-      });
-      a.rows.forEach((r, ri) => {
-        const y = 2.4 + ri * 0.7;
-        s.addText(r[0], {
-          x: x + 0.25, y, w: 2.0, h: 0.35,
-          fontFace: FF, fontSize: 13, color: C.muted
-        });
-        s.addText(r[1], {
-          x: x + 2.1, y, w: 1.6, h: 0.35,
-          fontFace: FF, fontSize: 14, bold: true, color: C.text, align: 'right'
-        });
-      });
-    });
-  }
-
-  // ── S7 KOL Intelligence ──────────────
-  {
-    const s = pptx.addSlide();
-    s.background = { color: C.bg };
-    addChrome(s, 'KOL Intelligence');
-    s.addText([
-      { text: 'Not a shortlist.\n', options: { color: C.text } },
-      { text: 'A system.', options: { color: C.peach } }
-    ], {
-      x: 0.55, y: 0.7, w: 12, h: 1.1,
-      fontFace: FF, fontSize: 34, bold: true
-    });
-    const acts = [
-      {
-        n: '01', c: C.peach, t: 'Database Built',
-        b: 'A 49-column intelligence framework across 11 evaluation sheets. Content quality · Audience demographics · Engagement authenticity · Competitor exposure.'
-      },
-      {
-        n: '02', c: C.lav, t: '10 Parameters Scored',
-        b: 'Market-specific parameters for the S2 Gen Z Tamil Nadu brief. Two mandatory hard blocks — Reel Dominance and No Competitor Conflict — with no exceptions.'
-      },
-      {
-        n: '03', c: C.text, t: 'Portfolio Assembled',
-        b: '11 confirmed KOLs across Celebrity · Influencer · Model tiers. Deployed across 4 campaign phases. Top fit score: 85%. Every selection is defensible.'
-      }
-    ];
-    acts.forEach((a, i) => {
-      const x = 0.45 + i * 4.2;
-      card(s, x, 2.1, 4.05, 3.5);
-      s.addText(a.n, {
-        x: x + 0.25, y: 2.3, w: 1.5, h: 0.4,
-        fontFace: FF, fontSize: 22, bold: true, color: a.c
-      });
-      s.addText(a.t, {
-        x: x + 0.25, y: 2.8, w: 3.5, h: 0.4,
-        fontFace: FF, fontSize: 16, bold: true, color: C.text
-      });
-      s.addText(a.b, {
-        x: x + 0.25, y: 3.35, w: 3.5, h: 1.9,
-        fontFace: FF, fontSize: 12, color: C.muted
-      });
-    });
-    s.addText('This is not influencer marketing. This is precision KOL intelligence — built for FTPL, scored for Tamil Nadu, deployed for S2.', {
-      x: 0.55, y: 5.9, w: 12.2, h: 0.55,
-      fontFace: FF, fontSize: 13, color: C.peach
-    });
-  }
-
-  // ── S8 Tool CTA ──────────────────────
-  {
-    const s = pptx.addSlide();
-    s.background = { color: C.bg };
-    addChrome(s, 'KOL Intelligence Tool');
-    s.addText('LIVE INTELLIGENCE TOOL', {
-      x: 0.7, y: 2.1, w: 12, h: 0.3,
-      fontFace: FF, fontSize: 12, color: C.lav, align: 'center', charSpacing: 2
-    });
-    s.addText([
-      { text: 'See every KOL.\n', options: { color: C.text } },
-      { text: 'Score by score.', options: { color: C.lav } }
-    ], {
-      x: 0.7, y: 2.6, w: 12, h: 1.5,
-      fontFace: FF, fontSize: 40, bold: true, align: 'center'
-    });
-    s.addText('11 confirmed creators. 10 parameters. Every selection scored and defensible.', {
-      x: 1.5, y: 4.3, w: 10.3, h: 0.45,
-      fontFace: FF, fontSize: 16, color: C.muted, align: 'center'
-    });
-    s.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
-      x: 4.4, y: 5.2, w: 4.5, h: 0.6,
-      fill: { color: C.peach },
-      rectRadius: 0.08
-    });
-    s.addText('Open KOL Intelligence Tool →', {
-      x: 4.4, y: 5.28, w: 4.5, h: 0.45,
-      fontFace: FF, fontSize: 14, bold: true, color: C.bg, align: 'center'
-    });
-  }
-
-  // ── S9 Partners ──────────────────────
-  {
-    const s = pptx.addSlide();
-    s.background = { color: C.bg };
-    addChrome(s, 'JBP Trade Strategy');
-    s.addText([
-      { text: '9 Partners. ', options: { color: C.peach } },
-      { text: '₹32L. ', options: { color: C.lav } },
-      { text: 'Deployed.', options: { color: C.text } }
-    ], {
-      x: 0.55, y: 0.7, w: 12, h: 0.55,
-      fontFace: FF, fontSize: 28, bold: true
-    });
-    const partners = [
-      ['Poorvika', 'Influencer + FM', '₹10L', 'Pre-Buzz · Pre-Book', C.peach],
-      ['Sathya', 'Store Launch', '₹6L', 'Super Day', C.lav],
-      ['Darling', 'Store Launch', '₹4L', 'Super Day', C.lav],
-      ['TCM', 'Store Launch', '₹4L', 'Super Day', C.lav],
-      ['Vasanth & Co', 'Store Launch', '₹2L', 'Super Day', C.muted],
-      ['Supreme', 'Store Launch', '₹2L', 'Super Day', C.muted],
-      ['Sangeetha', 'Store Launch', '₹2L', 'Super Day', C.muted],
-      ['Reliance', 'App Promotions', '₹1L', 'Pre-Book', C.muted],
-      ['Croma', 'Store Launch', '₹1L', 'Super Day', C.muted]
-    ];
-    // header
-    ['Partner', 'Type', 'Budget', 'Phase'].forEach((h, i) => {
-      const x = [0.55, 3.5, 7.2, 9.3][i];
-      s.addText(h, {
-        x, y: 1.45, w: 2.5, h: 0.3,
-        fontFace: FF, fontSize: 10, color: C.muted, charSpacing: 1
-      });
-    });
-    partners.forEach((p, i) => {
-      const y = 1.85 + i * 0.52;
-      s.addShape(pptx.shapes.RECTANGLE, {
-        x: 0.55, y, w: 12.2, h: 0.48,
-        fill: { color: i % 2 === 0 ? C.surface : C.bg }
-      });
-      s.addText(p[0], {
-        x: 0.7, y: y + 0.08, w: 2.6, h: 0.32,
-        fontFace: FF, fontSize: 13, bold: true, color: C.text
-      });
-      s.addText(p[1], {
-        x: 3.5, y: y + 0.08, w: 3.4, h: 0.32,
-        fontFace: FF, fontSize: 12, color: C.muted
-      });
-      s.addText(p[2], {
-        x: 7.2, y: y + 0.08, w: 1.8, h: 0.32,
-        fontFace: FF, fontSize: 13, bold: true, color: p[4]
-      });
-      s.addText(p[3], {
-        x: 9.3, y: y + 0.08, w: 3.2, h: 0.32,
-        fontFace: FF, fontSize: 12, color: C.muted
-      });
-    });
-  }
-
-  // ── S9 Store rationale ───────────────
-  {
-    const s = pptx.addSlide();
-    s.background = { color: C.bg };
-    addChrome(s, 'JBP Trade Strategy · Store Launches');
-    s.addText([
-      { text: 'Why store launches\n', options: { color: C.text } },
-      { text: 'earn their budget.', options: { color: C.peach } }
-    ], {
-      x: 0.55, y: 0.7, w: 12, h: 1.0,
-      fontFace: FF, fontSize: 28, bold: true
-    });
-    const reasons = [
-      ['01', 'Store Manager Confidence', 'Influencer presence elevates the store event — managers commit more energy and resources to the launch.'],
-      ['02', 'Promoter Pride', 'vivo promoters gain energy and pride working alongside known creators — raising every customer interaction.'],
-      ['03', 'Retailer Satisfaction', "Honouring the retailer's campaign request builds long-term trust and commitment to the vivo portfolio."],
-      ['04', 'Customer Delight', 'Receiving a new phone from a known influencer creates a memorable first-ownership experience.']
-    ];
-    reasons.forEach((r, i) => {
-      const x = 0.45 + (i % 2) * 6.4;
-      const y = 1.95 + Math.floor(i / 2) * 2.0;
-      card(s, x, y, 6.15, 1.8);
-      s.addText(r[0], {
-        x: x + 0.25, y: y + 0.2, w: 1, h: 0.3,
-        fontFace: FF, fontSize: 16, bold: true, color: i % 2 === 0 ? C.peach : C.lav
-      });
-      s.addText(r[1], {
-        x: x + 0.25, y: y + 0.55, w: 5.6, h: 0.3,
-        fontFace: FF, fontSize: 15, bold: true, color: C.text
-      });
-      s.addText(r[2], {
-        x: x + 0.25, y: y + 0.95, w: 5.6, h: 0.6,
-        fontFace: FF, fontSize: 12, color: C.muted
-      });
-    });
-  }
-
-  // ── S10 Close ────────────────────────
-  {
-    const s = pptx.addSlide();
-    s.background = { color: C.bg };
-    if (imgs.apt) {
-      s.addImage({
-        data: imgs.apt,
-        x: 0, y: 0, w: 13.333, h: 7.5,
-        transparency: 85
-      });
-    }
-    addChrome(s, 'Friends. Weekends. Never Ends.');
-    s.addText('F · R · I · E · N · D · S', {
-      x: 0.7, y: 1.8, w: 10, h: 0.4,
-      fontFace: FF, fontSize: 16, bold: true, color: C.peach, charSpacing: 3
-    });
-    s.addText([
-      { text: 'Friends.\n', options: { color: C.text } },
-      { text: 'Weekends.\n', options: { color: C.peach } },
-      { text: 'Never Ends.', options: { color: C.lav } }
-    ], {
-      x: 0.7, y: 2.4, w: 10, h: 2.4,
-      fontFace: FF, fontSize: 44, bold: true
-    });
-    s.addText('#MyNewStory', {
-      x: 0.7, y: 5.1, w: 6, h: 0.4,
-      fontFace: FF, fontSize: 18, color: C.muted
-    });
-    s.addText('vivo S2  ·  Tamil Nadu Launch 2026  ·  FTPL Marcom', {
-      x: 0.7, y: 5.7, w: 10, h: 0.35,
-      fontFace: FF, fontSize: 13, color: C.muted
-    });
-  }
-
-  await pptx.writeFile({
-    fileName: 'FTPL-vivo-S2-TamilNadu-2026.pptx'
+function pptxSetInlineStyles(el, styles) {
+  if (!el) return () => {};
+  const prev = {};
+  Object.keys(styles).forEach((k) => {
+    prev[k] = el.style[k];
+    el.style[k] = styles[k];
   });
+  return () => {
+    Object.keys(styles).forEach((k) => {
+      el.style[k] = prev[k] || '';
+    });
+  };
 }
+
+function pptxForceVisible(root) {
+  const restores = [];
+  const sel = [
+    '.reveal-line', '.reveal-fade', '.reveal-left', '.reveal-right',
+    '.reveal-scale', '.s2-step', '.s3-type', '.s5-engine', '.s5-engine-divider',
+    '.s6-phase', '.s7-act', '.s9-partner', '.s9-reason'
+  ].join(',');
+  root.querySelectorAll(sel).forEach((el) => {
+    restores.push(pptxSetInlineStyles(el, {
+      opacity: '1',
+      transform: 'none',
+      visibility: 'visible',
+      pointerEvents: 'auto'
+    }));
+  });
+  root.querySelectorAll('[data-countup][data-target]').forEach((el) => {
+    const old = el.textContent;
+    el.textContent = el.dataset.target;
+    restores.push(() => { el.textContent = old; });
+  });
+  const s5num = root.querySelector('.s5-amount-num');
+  if (s5num) {
+    const old = s5num.textContent;
+    s5num.textContent = '44';
+    restores.push(() => { s5num.textContent = old; });
+  }
+  return () => restores.reverse().forEach((fn) => fn());
+}
+
+function pptxPrepSceneFrame(scene) {
+  const restores = [];
+  const sticky = scene.querySelector('[class$="-sticky"]') || scene;
+  const vh = window.innerHeight + 'px';
+
+  restores.push(pptxSetInlineStyles(scene, {
+    height: vh,
+    minHeight: vh,
+    maxHeight: vh,
+    overflow: 'hidden',
+    position: 'relative'
+  }));
+  restores.push(pptxSetInlineStyles(sticky, {
+    position: 'relative',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: vh,
+    minHeight: vh,
+    maxHeight: vh,
+    overflow: 'hidden'
+  }));
+  restores.push(pptxForceVisible(scene));
+  return { sticky, restore: () => restores.reverse().forEach((fn) => fn()) };
+}
+
+function pptxApplyMode(scene, mode) {
+  const restores = [];
+  if (mode === 's2-step1' || mode === 's2-step2' || mode === 's2-step3') {
+    const max = mode === 's2-step1' ? 1 : mode === 's2-step2' ? 2 : 3;
+    scene.querySelectorAll('.s2-step').forEach((el) => {
+      const step = parseInt(el.dataset.step || '1', 10);
+      if (step <= max) {
+        restores.push(pptxSetInlineStyles(el, {
+          opacity: '1', transform: 'none', visibility: 'visible', display: ''
+        }));
+      } else {
+        restores.push(pptxSetInlineStyles(el, {
+          opacity: '0', visibility: 'hidden'
+        }));
+      }
+    });
+  }
+  if (mode === 's5-hero') {
+    const engines = scene.querySelector('.s5-engines');
+    const hero = scene.querySelector('.s5-hero-amount');
+    if (engines) {
+      engines.classList.remove('revealed');
+      restores.push(pptxSetInlineStyles(engines, {
+        opacity: '0', visibility: 'hidden', pointerEvents: 'none', display: 'none'
+      }));
+    }
+    if (hero) {
+      restores.push(pptxSetInlineStyles(hero, {
+        opacity: '1', visibility: 'visible', transform: 'none', display: ''
+      }));
+    }
+  }
+  if (mode === 's5-engines') {
+    const engines = scene.querySelector('.s5-engines');
+    const hero = scene.querySelector('.s5-hero-amount');
+    if (hero) {
+      restores.push(pptxSetInlineStyles(hero, {
+        opacity: '0', visibility: 'hidden', pointerEvents: 'none', display: 'none'
+      }));
+    }
+    if (engines) {
+      engines.classList.add('revealed');
+      restores.push(() => engines.classList.remove('revealed'));
+      restores.push(pptxSetInlineStyles(engines, {
+        opacity: '1', visibility: 'visible', pointerEvents: 'auto', display: 'flex'
+      }));
+      engines.querySelectorAll('.s5-engine, .s5-engine-divider').forEach((el) => {
+        restores.push(pptxSetInlineStyles(el, {
+          opacity: '1', transform: 'none', visibility: 'visible'
+        }));
+      });
+    }
+  }
+  if (mode === 's9-part1') {
+    const p1 = scene.querySelector('.s9-part1');
+    const p2 = scene.querySelector('.s9-part2');
+    if (p1) {
+      restores.push(pptxSetInlineStyles(p1, {
+        opacity: '1', visibility: 'visible', display: 'flex', transform: 'none'
+      }));
+    }
+    if (p2) {
+      p2.classList.remove('visible');
+      restores.push(pptxSetInlineStyles(p2, {
+        opacity: '0', visibility: 'hidden', pointerEvents: 'none', display: 'none'
+      }));
+    }
+  }
+  if (mode === 's9-part2') {
+    const p1 = scene.querySelector('.s9-part1');
+    const p2 = scene.querySelector('.s9-part2');
+    if (p1) {
+      restores.push(pptxSetInlineStyles(p1, {
+        opacity: '0', visibility: 'hidden', pointerEvents: 'none', display: 'none'
+      }));
+    }
+    if (p2) {
+      p2.classList.add('visible');
+      restores.push(() => p2.classList.remove('visible'));
+      restores.push(pptxSetInlineStyles(p2, {
+        opacity: '1', visibility: 'visible', pointerEvents: 'auto',
+        transform: 'none', display: 'flex'
+      }));
+    }
+  }
+  if (mode === 's6-full') {
+    const fill = scene.querySelector('#s6-river-fill');
+    if (fill) {
+      restores.push(pptxSetInlineStyles(fill, { width: '100%' }));
+    }
+  }
+  return () => restores.reverse().forEach((fn) => fn());
+}
+
+async function pptxCaptureNode(node) {
+  if (typeof html2canvas !== 'function') {
+    throw new Error('html2canvas failed to load');
+  }
+  const canvas = await html2canvas(node, {
+    backgroundColor: '#0A0A0F',
+    scale: Math.min(2, window.devicePixelRatio || 1.5),
+    useCORS: true,
+    allowTaint: true,
+    logging: false,
+    foreignObjectRendering: false,
+    width: node.offsetWidth || window.innerWidth,
+    height: node.offsetHeight || window.innerHeight,
+    windowWidth: window.innerWidth,
+    windowHeight: window.innerHeight,
+    scrollX: 0,
+    scrollY: -window.scrollY
+  });
+  return canvas.toDataURL('image/jpeg', 0.92);
+}
+
+async function exportPPTX() {
+  const btn = document.getElementById('export-btn');
+  const prevLabel = btn ? btn.textContent : '';
+  const setStatus = (t) => { if (btn) btn.textContent = t; };
+
+  if (typeof PptxGenJS === 'undefined') {
+    alert('PowerPoint library failed to load. Check your network and refresh.');
+    return;
+  }
+  if (typeof html2canvas !== 'function') {
+    alert('Screenshot library failed to load. Check your network and refresh.');
+    return;
+  }
+
+  const chrome = [
+    '#section-label', '#export-btn', '#export-dropdown',
+    '#slide-nav', '#progress-bar', '#s4-music-btn', '#kol-nav'
+  ];
+  const chromeRestores = chrome.map((sel) => {
+    const el = document.querySelector(sel);
+    return pptxSetInlineStyles(el, { display: 'none' });
+  });
+
+  const scrollY = window.scrollY;
+  document.body.classList.add('export-capturing');
+
+  // Pause scroll animations so captures stay clean
+  const stWasEnabled = [];
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.getAll().forEach((t) => {
+      stWasEnabled.push(t);
+      t.disable(false);
+    });
+  }
+  if (typeof gsap !== 'undefined') gsap.globalTimeline.pause();
+
+  const shots = [
+    { id: 's1', mode: null, title: 'Opening' },
+    { id: 's2', mode: 's2-step1', title: 'Product' },
+    { id: 's2', mode: 's2-step2', title: 'Colours' },
+    { id: 's2', mode: 's2-step3', title: 'Specs' },
+    { id: 's3', mode: null, title: 'Consumer' },
+    { id: 's4', mode: null, title: 'Friends Theme' },
+    { id: 's5', mode: 's5-hero', title: 'Investment' },
+    { id: 's5', mode: 's5-engines', title: 'Two Engines' },
+    { id: 's6', mode: 's6-full', title: 'Campaign Execution' },
+    { id: 's7', mode: null, title: 'KOL Strategy' },
+    { id: 's8', mode: null, title: 'Content Pillars' },
+    { id: 's9', mode: 's9-part1', title: 'JBP Partners' },
+    { id: 's9', mode: 's9-part2', title: 'JBP Rationale' },
+    { id: 's10', mode: null, title: 'Close' }
+  ];
+
+  try {
+    setStatus('Capturing…');
+    const images = [];
+
+    for (let i = 0; i < shots.length; i++) {
+      const shot = shots[i];
+      setStatus(`Slide ${i + 1}/${shots.length}…`);
+      const scene = document.getElementById(shot.id);
+      if (!scene) continue;
+
+      scene.scrollIntoView({ behavior: 'auto', block: 'start' });
+      await new Promise((r) => requestAnimationFrame(() => setTimeout(r, 120)));
+
+      const frame = pptxPrepSceneFrame(scene);
+      // Kill GSAP inline transforms that can leave content mid-tween
+      if (typeof gsap !== 'undefined') {
+        scene.querySelectorAll('.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s2-step,.s3-type,.s5-engine,.s6-phase,.s7-act,.s9-partner').forEach((el) => {
+          gsap.set(el, { clearProps: 'opacity,transform,visibility' });
+        });
+      }
+      // Re-apply visibility after clearing GSAP, then mode overrides
+      pptxForceVisible(scene);
+      const modeRestore = pptxApplyMode(scene, shot.mode);
+      await new Promise((r) => setTimeout(r, 100));
+
+      try {
+        const data = await pptxCaptureNode(frame.sticky);
+        images.push({ data, title: shot.title });
+      } finally {
+        modeRestore();
+        frame.restore();
+      }
+    }
+
+    if (!images.length) throw new Error('No slides captured');
+
+    setStatus('Building PPTX…');
+    const pptx = new PptxGenJS();
+    pptx.defineLayout({ name: 'WIDE_HD', width: 13.333, height: 7.5 });
+    pptx.layout = 'WIDE_HD';
+    pptx.author = 'FTPL Marcom';
+    pptx.title = 'vivo S2 · Tamil Nadu Launch Strategy 2026';
+
+    images.forEach((img) => {
+      const s = pptx.addSlide();
+      s.background = { color: '0A0A0F' };
+      s.addImage({
+        data: img.data,
+        x: 0, y: 0, w: 13.333, h: 7.5
+      });
+    });
+
+    await pptx.writeFile({
+      fileName: 'FTPL-vivo-S2-TamilNadu-2026.pptx'
+    });
+  } catch (err) {
+    console.error(err);
+    alert('PPTX export failed: ' + (err && err.message ? err.message : err));
+  } finally {
+    chromeRestores.forEach((fn) => fn());
+    document.body.classList.remove('export-capturing');
+    if (typeof gsap !== 'undefined') gsap.globalTimeline.resume();
+    if (typeof ScrollTrigger !== 'undefined') {
+      stWasEnabled.forEach((t) => t.enable(false));
+      ScrollTrigger.refresh();
+    }
+    window.scrollTo(0, scrollY);
+    setStatus(prevLabel || 'Export ↓');
+  }
+}
+
 
 // ─── S1–S5 GSAP ANIMATIONS ────────────
 
