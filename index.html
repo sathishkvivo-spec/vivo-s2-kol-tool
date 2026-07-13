@@ -377,19 +377,19 @@
   ═══════════════════════════════════ */
   .s1-phone {
     position: absolute;
-    right: -4%;
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 52%;
-    height: 110%;
+    width: 42%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
   }
   .s1-phone-img {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: 90%;
+    max-height: 90vh;
     object-fit: contain;
     object-position: center;
     will-change: transform;
@@ -462,18 +462,21 @@
   }
   .s2-bg-phone {
     position: absolute;
-    right: -2%;
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 48%;
+    width: 44%;
     height: 100%;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
   }
   .s2-bg-phone img {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: 88%;
+    max-height: 88vh;
     object-fit: contain;
+    object-position: right center;
   }
   .s2-bg-overlay {
     position: absolute;
@@ -665,7 +668,7 @@
     height: 60%;
     background: radial-gradient(
       ellipse,
-      rgba(241,145,109,0.12) 0%,
+      rgba(241,145,109,0.08) 0%,
       transparent 70%
     );
     filter: blur(20px);
@@ -685,8 +688,8 @@
     height: 55%;
     background: linear-gradient(
       180deg,
-      rgba(180,100,40,0.45) 0%,
-      rgba(140,70,20,0.55) 100%
+      rgba(180,100,40,0.25) 0%,
+      rgba(140,70,20,0.35) 100%
     );
     border-radius: 12px 12px 4px 4px;
   }
@@ -698,8 +701,8 @@
     height: 28%;
     background: linear-gradient(
       180deg,
-      rgba(160,85,25,0.50) 0%,
-      rgba(120,60,15,0.60) 100%
+      rgba(160,85,25,0.30) 0%,
+      rgba(120,60,15,0.40) 100%
     );
     border-radius: 4px 4px 8px 8px;
   }
@@ -708,7 +711,7 @@
     bottom: 24%;
     width: 10%;
     height: 42%;
-    background: rgba(150,80,25,0.55);
+    background: rgba(150,80,25,0.30);
     border-radius: 6px;
   }
   .s4-arm-left  { left: 0; }
@@ -858,12 +861,12 @@
     line-height: 1;
     margin-bottom: 0;
   }
-  .s5-currency {
+  .s5-currency, .s5-amount-suffix {
     font-family: var(--ff-display);
-    font-size: clamp(48px, 7vw, 96px);
+    font-size: clamp(32px, 4vw, 56px);
     font-weight: 700;
     color: var(--peach);
-    margin-right: 8px;
+    margin-right: 4px;
   }
   .s5-amount-num {
     font-family: var(--ff-display);
@@ -874,11 +877,8 @@
     line-height: 0.9;
   }
   .s5-amount-suffix {
-    font-family: var(--ff-display);
-    font-size: clamp(48px, 7vw, 96px);
-    font-weight: 700;
-    color: var(--peach);
-    margin-left: 8px;
+    margin-left: 4px;
+    margin-right: 0;
   }
   .s5-engines {
     position: absolute;
@@ -934,6 +934,7 @@
     font-size: 18px;
     font-weight: 700;
     color: var(--text);
+    font-variant-numeric: tabular-nums;
   }
   .s5-engine-total {
     margin-top: 8px;
@@ -1326,6 +1327,7 @@
     font-family: var(--ff-display);
     font-size: clamp(16px,1.6vw,22px);
     font-weight: 700;
+    font-variant-numeric: tabular-nums;
   }
   .s9-partner-phase {
     font-family: var(--ff-body);
@@ -1405,18 +1407,20 @@
   ═══════════════════════════════════ */
   .s10-phone {
     position: absolute;
-    right: -4%;
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 50%;
-    height: 110%;
+    width: 42%;
+    height: 100%;
     opacity: 0.35;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
   .s10-phone img {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: 90%;
+    max-height: 90vh;
     object-fit: contain;
     will-change: transform;
   }
@@ -1474,6 +1478,11 @@
     .s10-phone { width: 100%; opacity: 0.15; }
     .s10-content { width: 94%; padding-left: 6%; }
     .s10-friends-echo { display: none; }
+  }
+  @media (max-width: 1440px) {
+    #s10 .display-hero {
+      font-size: clamp(44px, 5.5vw, 72px);
+    }
   }
 
   /* ═══════════════════════════════════
@@ -1648,6 +1657,7 @@
     letter-spacing: -0.02em;
     color: var(--text);
     margin-bottom: 4px;
+    font-variant-numeric: tabular-nums;
   }
   .kt-stat-label {
     font-family: var(--ff-body);
@@ -3350,7 +3360,7 @@
         Weekends.
       </h2>
       <h2 class="display-hero reveal-line lavender"
-          style="margin-bottom:40px">
+          style="margin-bottom:40px; white-space:nowrap">
         Never Ends.
       </h2>
 
@@ -3655,9 +3665,9 @@
     <div class="kt-stats">
       <div class="kt-stat-card">
         <span class="kt-stat-val"
-              data-countup data-target="11">11</span>
+              data-countup data-target="14">14</span>
         <span class="kt-stat-label">
-          Confirmed KOLs
+          KOLs Selected
         </span>
       </div>
       <div class="kt-stat-card">
@@ -3796,20 +3806,27 @@ window.addEventListener('scroll', () => {
 const sectionLabel = document.getElementById('section-label');
 const scenes = document.querySelectorAll('.scene[data-label]');
 
-const labelObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && currentMode === 'strategy') {
-      sectionLabel.textContent = entry.target.dataset.label;
-      sectionLabel.classList.add('visible');
-    }
-  });
-  // If nothing intersecting, hide label
-  const anyVisible = [...entries].some(e => e.isIntersecting);
-  if (!anyVisible && currentMode === 'strategy') {
-    sectionLabel.classList.remove('visible');
-  }
-}, { threshold: 0.3 });
-
+let currentLabelScene = null;
+const labelObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting &&
+          currentMode === 'strategy') {
+        currentLabelScene = entry.target;
+        sectionLabel.textContent =
+          entry.target.dataset.label;
+        sectionLabel.classList.add('visible');
+      } else if (
+        entry.target === currentLabelScene &&
+        !entry.isIntersecting
+      ) {
+        sectionLabel.classList.remove('visible');
+        currentLabelScene = null;
+      }
+    });
+  },
+  { threshold: 0.5 }
+);
 scenes.forEach(scene => labelObserver.observe(scene));
 
 // ─── EXPORT FUNCTIONALITY ─────────────
@@ -4363,7 +4380,7 @@ const KOL_DATA = [
     id: 1,
     name: "Gayu Sri",
     handle: "@gayu_sri_offl",
-    followers: "Check profile",
+    followers: "149K",
     tier: "Celebrity",
     phase: "launch",
     score: 74,
@@ -4374,7 +4391,7 @@ const KOL_DATA = [
     },
     angle: "Mass-appeal celebrity presence " +
            "for launch day maximum visibility",
-    cost: "As per contract",
+    cost: "₹80K",
     deliverable: "Collab Reel",
     city: "Chennai"
   },
@@ -4382,8 +4399,8 @@ const KOL_DATA = [
     id: 2,
     name: "Aurora Sinclair",
     handle: "@the_aurora_sinclair_",
-    followers: "Check profile",
-    tier: "Influencer",
+    followers: "881K",
+    tier: "Celebrity",
     phase: "pre-buzz",
     score: 71,
     img: "img/aurora.jpg",
@@ -4393,7 +4410,7 @@ const KOL_DATA = [
     },
     angle: "Lifestyle storytelling — " +
            "early buzz for the S2 world",
-    cost: "As per contract",
+    cost: "₹1–1.5L",
     deliverable: "Story + Reel",
     city: "Chennai"
   },
@@ -4401,7 +4418,7 @@ const KOL_DATA = [
     id: 3,
     name: "Sangeetha Sai",
     handle: "@sangeethsai_offl",
-    followers: "Check profile",
+    followers: "304K",
     tier: "Influencer",
     phase: "launch",
     score: 70,
@@ -4412,7 +4429,7 @@ const KOL_DATA = [
     },
     angle: "Content-first creator — " +
            "authentic launch day voice",
-    cost: "As per contract",
+    cost: "₹80K",
     deliverable: "Collab Reel",
     city: "Chennai"
   },
@@ -4420,7 +4437,7 @@ const KOL_DATA = [
     id: 4,
     name: "Meenakshi Govindharajan",
     handle: "@meenakshigovindharajan_",
-    followers: "Check profile",
+    followers: "404K",
     tier: "Influencer",
     phase: "launch",
     score: 74,
@@ -4431,7 +4448,7 @@ const KOL_DATA = [
     },
     angle: "Weekend lifestyle — " +
            "Caught in 4K storytelling",
-    cost: "As per contract",
+    cost: "₹80K",
     deliverable: "Collab Reel",
     city: "Chennai"
   },
@@ -4439,7 +4456,7 @@ const KOL_DATA = [
     id: 5,
     name: "VJ Kalyani",
     handle: "@vj_kalyani",
-    followers: "Check profile",
+    followers: "242K",
     tier: "Celebrity",
     phase: "pre-buzz",
     score: 79,
@@ -4450,7 +4467,7 @@ const KOL_DATA = [
     },
     angle: "High-reach celebrity — " +
            "anchors pre-buzz awareness",
-    cost: "As per contract",
+    cost: "₹50K",
     deliverable: "Collab Reel",
     city: "Chennai"
   },
@@ -4458,7 +4475,7 @@ const KOL_DATA = [
     id: 6,
     name: "Chandni Ayani",
     handle: "@bloggerchandni",
-    followers: "Check profile",
+    followers: "111K",
     tier: "Influencer",
     phase: "sustenance",
     score: 74,
@@ -4469,7 +4486,7 @@ const KOL_DATA = [
     },
     angle: "Fashion-forward content — " +
            "style caught in 4K",
-    cost: "As per contract",
+    cost: "₹65K",
     deliverable: "Collab Reel",
     city: "Chennai"
   },
@@ -4477,7 +4494,7 @@ const KOL_DATA = [
     id: 7,
     name: "Nakshatra Murthy",
     handle: "@nakshatra.murthy",
-    followers: "Check profile",
+    followers: "368K",
     tier: "Influencer",
     phase: "launch",
     score: 73,
@@ -4488,7 +4505,7 @@ const KOL_DATA = [
     },
     angle: "Youthful campus energy — " +
            "Gen Z peer influence",
-    cost: "As per contract",
+    cost: "₹70K",
     deliverable: "Collab Reel",
     city: "Chennai"
   },
@@ -4496,7 +4513,7 @@ const KOL_DATA = [
     id: 8,
     name: "Dharshini S",
     handle: "@dharshurisha",
-    followers: "Check profile",
+    followers: "202K",
     tier: "Influencer",
     phase: "pre-buzz",
     score: 85,
@@ -4507,7 +4524,7 @@ const KOL_DATA = [
     },
     angle: "Highest fit — weekend lifestyle " +
            "creator with deep TN audience",
-    cost: "As per contract",
+    cost: "₹25–30K",
     deliverable: "Collab Reel",
     city: "Chennai"
   },
@@ -4515,7 +4532,7 @@ const KOL_DATA = [
     id: 9,
     name: "Priyadarshini",
     handle: "@highonstyl",
-    followers: "Check profile",
+    followers: "125K",
     tier: "Influencer",
     phase: "sustenance",
     score: 79,
@@ -4526,7 +4543,7 @@ const KOL_DATA = [
     },
     angle: "Style creator — " +
            "sustenance phase social proof",
-    cost: "As per contract",
+    cost: "Pending",
     deliverable: "Collab Reel",
     city: "Chennai"
   },
@@ -4553,7 +4570,7 @@ const KOL_DATA = [
     id: 11,
     name: "Sneha Haridas",
     handle: "@sneha_haridas__",
-    followers: "Check profile",
+    followers: "21.3K",
     tier: "Influencer",
     phase: "sustenance",
     score: 71,
@@ -4564,7 +4581,7 @@ const KOL_DATA = [
     },
     angle: "Lifestyle sustenance — " +
            "keeps S2 relevant post-launch",
-    cost: "As per contract",
+    cost: "₹12–18K",
     deliverable: "Collab Reel",
     city: "Chennai"
   },
