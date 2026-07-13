@@ -184,18 +184,47 @@
     width: 100%;
     background: var(--canvas);
     padding: 80px 64px 48px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .kol-section.active { display: block; }
+  #kol-match.active {
     overflow-y: auto;
     overflow-x: hidden;
   }
-  .kol-section.active { display: block; }
-  #kol-match {
-    height: 100vh;
-    overflow-y: auto;
+  #kol-brief.active,
+  #kol-params.active {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
-  #kol-brief, #kol-params {
-    height: 100vh;
-    overflow-y: auto;
-    scroll-behavior: smooth;
+  #kol-brief .kt-brief-wrap,
+  #kol-params .kt-params-wrap {
+    flex: 1;
+    min-height: 0;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0 0;
+    overflow: hidden;
+  }
+  #kol-brief .kt-brief-cards {
+    flex: 1;
+    min-height: 0;
+    margin-bottom: 16px;
+  }
+  #kol-brief .kt-pills {
+    margin-bottom: 24px;
+  }
+  #kol-brief .kt-hashtags {
+    margin-top: auto;
+    flex-shrink: 0;
+  }
+  #kol-params .kt-params-grid {
+    flex: 1;
+    min-height: 0;
+    align-content: start;
+    overflow: hidden;
   }
 
   /* ═══════════════════════════════════
@@ -1560,6 +1589,27 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 0;
+  }
+  #kol-brief .display-large {
+    font-size: clamp(28px, 3.2vw, 44px);
+  }
+  #kol-brief .body-large {
+    margin-bottom: 24px !important;
+  }
+  #kol-brief .kt-brief-card {
+    padding: 20px 22px;
+  }
+  #kol-params .display-large {
+    font-size: clamp(28px, 3.2vw, 44px);
+  }
+  #kol-params .body-large {
+    margin-bottom: 24px !important;
+  }
+  #kol-params .kt-param {
+    padding: 14px 18px;
+  }
+  #kol-params .kt-params-grid {
+    gap: 12px;
   }
   .kt-pills {
     display: flex;
@@ -3818,6 +3868,7 @@ function enterKolMode(tab = 'kol-brief') {
   document.getElementById('kol-nav').classList.add('active');
   document.getElementById('section-label').classList.remove('visible');
   document.getElementById('export-btn').style.display = 'none';
+  document.body.style.overflow = 'hidden';
   window.scrollTo(0, 0);
   currentKolTab = tab;
   updateKolTabs();
@@ -3831,6 +3882,7 @@ function exitKolMode() {
   });
   document.getElementById('kol-nav').classList.remove('active');
   document.getElementById('export-btn').style.display = '';
+  document.body.style.overflow = '';
   window.scrollTo(0, document.getElementById('s8').offsetTop);
 }
 
@@ -4991,7 +5043,8 @@ function closeModal() {
     'kt-modal-overlay'
   );
   overlay.classList.remove('open');
-  document.body.style.overflow = '';
+  document.body.style.overflow =
+    currentMode === 'kol' ? 'hidden' : '';
 }
 
 const origEnterKolMode = enterKolMode;
