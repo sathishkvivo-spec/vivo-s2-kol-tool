@@ -616,7 +616,10 @@
     height: 100vh;
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: clamp(56px, 9vh, 88px);
+    padding-bottom: 32px;
+    box-sizing: border-box;
     overflow: hidden;
     border: none;
     background: none;
@@ -639,13 +642,21 @@
     position: relative;
     z-index: 2;
     padding-left: 8%;
-    width: 65%;
+    padding-right: 4%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  #s3 .display-large {
+    line-height: 1.15;
+    padding-top: 0.12em;
+    overflow: visible;
   }
   .s3-type {
-    display: flex;
-    align-items: flex-start;
-    gap: 24px;
-    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) minmax(160px, 26%);
+    align-items: center;
+    gap: 20px 28px;
+    margin-bottom: 28px;
     background: none;
     border: none;
     padding: 0;
@@ -660,6 +671,41 @@
     line-height: 1;
     min-width: 64px;
     padding-top: 4px;
+  }
+  .s3-type-body {
+    min-width: 0;
+  }
+  .s3-type-visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid rgba(241,145,109,0.18) !important;
+    background: rgba(15,15,24,0.5) !important;
+    box-shadow: none !important;
+  }
+  .s3-type-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(10,10,15,0.55) 0%,
+      rgba(10,10,15,0.15) 45%,
+      transparent 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+  .s3-type-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.58) saturate(0.78);
+    transform: scale(1.08);
+    will-change: transform;
   }
   .s3-tags {
     display: flex;
@@ -679,7 +725,8 @@
   }
   #s3, #s3 > *, .s3-sticky,
   .s3-content, .s3-type,
-  .s3-type *, .reveal-line {
+  .s3-type-num, .s3-type-body,
+  .s3-type-body *, .reveal-line {
     border: none !important;
     outline: none !important;
     background: transparent !important;
@@ -690,76 +737,25 @@
       !important;
     background: transparent !important;
   }
-  .s3-visual-panel {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  .s3-type-visual {
+    border: 1px solid rgba(241,145,109,0.18) !important;
+    background: rgba(15,15,24,0.5) !important;
   }
-  .s3-vis {
-    flex: 1;
-    display: flex;
-    align-items: flex-end;
-    padding: 20px 24px;
-    position: relative;
-    border: none !important;
-  }
-  .s3-vis span {
-    font-family: var(--ff-body);
-    font-size: 11px;
-    letter-spacing: 0.10em;
-    text-transform: uppercase;
-    color: rgba(240,235,248,0.35);
-    position: relative;
-    z-index: 2;
-  }
-  .s3-vis1 {
-    background: linear-gradient(
-      135deg,
-      rgba(241,145,109,0.15) 0%,
-      rgba(241,145,109,0.04) 100%
-    );
-    border-bottom: 1px solid
-      rgba(241,145,109,0.10) !important;
-  }
-  .s3-vis2 {
-    background: linear-gradient(
-      135deg,
-      rgba(174,125,172,0.12) 0%,
-      rgba(174,125,172,0.03) 100%
-    );
-    border-bottom: 1px solid
-      rgba(174,125,172,0.08) !important;
-  }
-  .s3-vis3 {
-    background: linear-gradient(
-      135deg,
-      rgba(240,235,248,0.06) 0%,
-      rgba(240,235,248,0.01) 100%
-    );
-  }
-  .s3-visual-panel::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 60%; height: 100%;
-    background: linear-gradient(
-      90deg,
-      var(--canvas) 0%,
-      transparent 100%
-    );
-    z-index: 1;
-    pointer-events: none;
+  @media (max-width: 900px) {
+    .s3-type {
+      grid-template-columns: auto 1fr;
+    }
+    .s3-type-visual {
+      grid-column: 2;
+      max-width: 220px;
+      margin-top: 4px;
+    }
   }
   @media (max-width: 768px) {
-    .s3-content { width: 94%; padding-left: 6%; }
+    .s3-content { width: 94%; padding-left: 6%; padding-right: 6%; }
     .s3-ambient { display: none; }
-    .s3-type { gap: 16px; }
-    .s3-visual-panel { display: none; }
+    .s3-type { gap: 12px 16px; margin-bottom: 32px; }
+    .s3-type-visual { display: none; }
   }
 
   /* ═══════════════════════════════════
@@ -2344,18 +2340,6 @@
 
     <div class="s3-sticky">
 
-      <div class="s3-visual-panel">
-        <div class="s3-vis s3-vis1">
-          <span>Campus · Café · City</span>
-        </div>
-        <div class="s3-vis s3-vis2">
-          <span>City · Work · Weekends</span>
-        </div>
-        <div class="s3-vis s3-vis3">
-          <span>Trade · Local · Style</span>
-        </div>
-      </div>
-
       <!-- Large ambient number — decorative background -->
       <div class="s3-ambient">Who.</div>
 
@@ -2371,7 +2355,7 @@
           First to Discover.
         </h2>
         <h2 class="display-large reveal-line peach"
-            style="margin-bottom:48px">
+            style="margin-bottom:36px">
           First to Share.
         </h2>
 
@@ -2396,6 +2380,11 @@
               <span class="s3-tag">Identity Builder</span>
             </div>
           </div>
+          <div class="s3-type-visual">
+            <img src="img/consumer_undergrad.jpg"
+                 alt="Campus · Café · City"
+                 loading="lazy">
+          </div>
         </div>
 
         <!-- Type 2 -->
@@ -2416,6 +2405,11 @@
               <span class="s3-tag">Weekend Explorer</span>
               <span class="s3-tag">Aspiration</span>
             </div>
+          </div>
+          <div class="s3-type-visual">
+            <img src="img/consumer_whitecollar.jpg"
+                 alt="City · Work · Weekends"
+                 loading="lazy">
           </div>
         </div>
 
@@ -2439,6 +2433,11 @@
               <span class="s3-tag">Self-Made</span>
               <span class="s3-tag">Style-Forward</span>
             </div>
+          </div>
+          <div class="s3-type-visual">
+            <img src="img/consumer_shopowner.jpg"
+                 alt="Trade · Local · Style"
+                 loading="lazy">
           </div>
         </div>
 
@@ -4108,33 +4107,34 @@ gsap.fromTo('#s3 .reveal-line:not(.s3-type)',
 // Three types reveal staggered through scroll
 gsap.set('#s3-type1, #s3-type2, #s3-type3',
   { y: 28, opacity: 0 });
+gsap.set('#s3 .s3-type-visual img',
+  { scale: 1.12 });
+
+const s3TypeShown = { t1: false, t2: false, t3: false };
+function revealS3Type(id, key) {
+  if (s3TypeShown[key]) return;
+  s3TypeShown[key] = true;
+  gsap.to(id, {
+    y: 0, opacity: 1,
+    duration: 0.65, ease: 'power2.out',
+    overwrite: 'auto'
+  });
+  gsap.to(`${id} .s3-type-visual img`, {
+    scale: 1,
+    duration: 1.6,
+    ease: 'power1.out',
+    overwrite: 'auto'
+  });
+}
 
 ScrollTrigger.create({
   trigger: '#s3',
   start: 'top top',
   end: 'bottom bottom',
   onUpdate: (self) => {
-    if (self.progress > 0.20) {
-      gsap.to('#s3-type1', {
-        y: 0, opacity: 1,
-        duration: 0.65, ease: 'power2.out',
-        overwrite: 'auto'
-      });
-    }
-    if (self.progress > 0.50) {
-      gsap.to('#s3-type2', {
-        y: 0, opacity: 1,
-        duration: 0.65, ease: 'power2.out',
-        overwrite: 'auto'
-      });
-    }
-    if (self.progress > 0.75) {
-      gsap.to('#s3-type3', {
-        y: 0, opacity: 1,
-        duration: 0.65, ease: 'power2.out',
-        overwrite: 'auto'
-      });
-    }
+    if (self.progress > 0.20) revealS3Type('#s3-type1', 't1');
+    if (self.progress > 0.50) revealS3Type('#s3-type2', 't2');
+    if (self.progress > 0.75) revealS3Type('#s3-type3', 't3');
   }
 });
 
