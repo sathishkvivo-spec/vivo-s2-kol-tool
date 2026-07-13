@@ -259,6 +259,9 @@
     flex-direction: column;
     overflow: hidden;
   }
+  #kol-params.active {
+    padding: 68px 48px 24px;
+  }
   #kol-brief .kt-brief-wrap,
   #kol-params .kt-params-wrap {
     flex: 1;
@@ -268,6 +271,14 @@
     flex-direction: column;
     padding: 8px 0 0;
     overflow: hidden;
+  }
+  #kol-params .kt-params-wrap {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    gap: 10px;
+    justify-content: flex-start;
   }
   #kol-brief .kt-brief-cards {
     flex: 1;
@@ -284,7 +295,11 @@
   #kol-params .kt-params-grid {
     flex: 1;
     min-height: 0;
-    align-content: start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+    align-content: stretch;
     overflow: hidden;
   }
 
@@ -1733,16 +1748,44 @@
     padding: 20px 22px;
   }
   #kol-params .display-large {
-    font-size: clamp(28px, 3.2vw, 44px);
+    font-size: clamp(26px, 2.8vw, 40px);
+    margin-bottom: 4px !important;
+  }
+  #kol-params .eyebrow {
+    margin-bottom: 6px !important;
   }
   #kol-params .body-large {
-    margin-bottom: 24px !important;
+    margin-bottom: 4px !important;
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.45;
   }
   #kol-params .kt-param {
-    padding: 14px 18px;
+    padding: 10px 14px;
+    gap: 12px;
+    min-height: 0;
+    height: 100%;
+    align-items: center;
+    box-sizing: border-box;
   }
   #kol-params .kt-params-grid {
-    gap: 12px;
+    gap: 10px;
+  }
+  #kol-params .kt-param-num {
+    font-size: 14px;
+    min-width: 28px;
+  }
+  #kol-params .kt-param-name {
+    font-size: clamp(13px, 1.25vw, 16px);
+    margin-bottom: 2px;
+  }
+  #kol-params .kt-param-desc {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  #kol-params .kt-mandatory-badge {
+    font-size: 8px;
+    padding: 2px 7px;
+    margin-bottom: 4px;
   }
   .kt-pills {
     display: flex;
@@ -3863,8 +3906,8 @@
       10 Parameters.
     </h1>
     <p class="body-large"
-       style="margin-bottom:48px;
-              max-width:500px">
+       style="margin-bottom:12px;
+              max-width:520px">
       Built for Tamil Nadu's Gen Z market.
       2 mandatory hard blocks.
       No exceptions.
