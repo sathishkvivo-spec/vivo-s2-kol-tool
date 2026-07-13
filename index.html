@@ -282,9 +282,9 @@
   ═══════════════════════════════════ */
   .display-hero {
     font-family: var(--ff-display);
-    font-size: clamp(52px, 7vw, 96px);
+    font-size: clamp(48px, 6vw, 88px);
     font-weight: 800;
-    line-height: 1.02;
+    line-height: 1.08;
     letter-spacing: -0.03em;
     color: var(--text);
   }
@@ -380,18 +380,18 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 42%;
+    width: 38%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: none;
   }
   .s1-phone-img {
     width: auto;
-    height: 90%;
-    max-height: 90vh;
+    height: 85%;
+    max-height: 85vh;
     object-fit: contain;
-    object-position: center;
     will-change: transform;
   }
   .s1-overlay {
@@ -399,9 +399,9 @@
     inset: 0;
     background: linear-gradient(
       90deg,
-      rgba(10,10,15,0.97) 0%,
-      rgba(10,10,15,0.85) 35%,
-      rgba(10,10,15,0.30) 65%,
+      rgba(10,10,15,1.0) 0%,
+      rgba(10,10,15,0.98) 40%,
+      rgba(10,10,15,0.60) 65%,
       rgba(10,10,15,0.0) 100%
     );
     z-index: 1;
@@ -409,8 +409,12 @@
   .s1-content {
     position: relative;
     z-index: 2;
-    padding-left: 8%;
-    width: 55%;
+    padding: 0 0 0 6%;
+    width: 58%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
   }
   .s1-scroll-cue {
     display: flex;
@@ -590,7 +594,12 @@
     display: flex;
     align-items: flex-start;
     gap: 24px;
-    margin-bottom: 36px;
+    margin-bottom: 40px;
+    background: none;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    outline: none;
   }
   .s3-type-num {
     font-family: var(--ff-display);
@@ -639,130 +648,78 @@
     inset: 0;
     background: linear-gradient(
       90deg,
-      rgba(10,10,15,0.97) 0%,
-      rgba(10,10,15,0.80) 40%,
-      rgba(10,10,15,0.10) 100%
+      rgba(10,10,15,1.00) 0%,
+      rgba(10,10,15,0.97) 35%,
+      rgba(10,10,15,0.25) 55%,
+      rgba(10,10,15,0.0) 100%
     );
-    z-index: 1;
+    z-index: 2;
   }
   .s4-content {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     padding-left: 8%;
-    width: 60%;
+    width: 58%;
   }
-  .s4-friends-world {
+  .s4-friends-collage {
     position: absolute;
-    right: 4%;
-    bottom: 8%;
-    width: 42%;
-    height: 55%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 46%;
     z-index: 0;
+    overflow: hidden;
   }
-  .s4-warm-glow {
+  .s4-img-main {
     position: absolute;
-    bottom: -10%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 60%;
-    background: radial-gradient(
-      ellipse,
-      rgba(241,145,109,0.08) 0%,
-      transparent 70%
-    );
-    filter: blur(20px);
+    inset: 0;
+    overflow: hidden;
   }
-  .s4-couch {
-    position: absolute;
-    bottom: 15%;
-    left: 5%;
-    width: 88%;
-    height: 52%;
-  }
-  .s4-couch-back {
-    position: absolute;
-    bottom: 40%;
-    left: 8%;
-    right: 8%;
-    height: 55%;
-    background: linear-gradient(
-      180deg,
-      rgba(180,100,40,0.25) 0%,
-      rgba(140,70,20,0.35) 100%
-    );
-    border-radius: 12px 12px 4px 4px;
-  }
-  .s4-couch-seat {
-    position: absolute;
-    bottom: 24%;
-    left: 0%;
-    right: 0%;
-    height: 28%;
-    background: linear-gradient(
-      180deg,
-      rgba(160,85,25,0.30) 0%,
-      rgba(120,60,15,0.40) 100%
-    );
-    border-radius: 4px 4px 8px 8px;
-  }
-  .s4-couch-arm {
-    position: absolute;
-    bottom: 24%;
-    width: 10%;
-    height: 42%;
-    background: rgba(150,80,25,0.30);
-    border-radius: 6px;
-  }
-  .s4-arm-left  { left: 0; }
-  .s4-arm-right { right: 0; }
-  .s4-couch-leg {
-    position: absolute;
-    bottom: 10%;
-    width: 4%;
-    height: 14%;
-    background: rgba(100,55,15,0.50);
-    border-radius: 2px;
-  }
-  .s4-leg-l1 { left: 10%; }
-  .s4-leg-l2 { left: 25%; }
-  .s4-leg-r1 { right: 25%; }
-  .s4-leg-r2 { right: 10%; }
-  .s4-coffee {
-    position: absolute;
-    right: 12%;
-    bottom: 68%;
-    width: 10%;
-  }
-  .s4-cup {
+  .s4-img-main img {
     width: 100%;
-    padding-bottom: 110%;
-    background: rgba(180,120,60,0.40);
-    border-radius: 4px 4px 8px 8px;
-    border: 1px solid rgba(200,140,80,0.30);
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.55) saturate(0.85);
   }
-  .s4-saucer {
-    width: 130%;
-    height: 8px;
-    background: rgba(160,100,40,0.40);
-    border-radius: 50%;
-    margin: 2px auto 0;
-  }
-  .s4-steam {
+  .s4-img-left-fade {
     position: absolute;
-    top: -18px;
-    width: 2px;
-    height: 12px;
-    background: rgba(240,235,248,0.15);
-    border-radius: 2px;
-    animation: steam 2s ease-in-out infinite;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(10,10,15,0.92) 0%,
+      rgba(10,10,15,0.30) 45%,
+      rgba(10,10,15,0.0) 100%
+    );
   }
-  .s4-steam1 { left: 25%; animation-delay: 0s; }
-  .s4-steam2 { left: 60%; animation-delay: 0.7s; }
-  @keyframes steam {
-    0%   { opacity: 0; transform: translateY(0) scaleX(1); }
-    50%  { opacity: 0.6; transform: translateY(-8px) scaleX(1.5); }
-    100% { opacity: 0; transform: translateY(-16px) scaleX(0.5); }
+  .s4-img-door {
+    position: absolute;
+    bottom: 6%;
+    right: 5%;
+    width: 22%;
+    aspect-ratio: 1/3;
+    overflow: hidden;
+    border: 1px solid rgba(241,145,109,0.25);
+    border-radius: 4px;
+    z-index: 2;
+  }
+  .s4-img-door img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    filter: brightness(0.70) saturate(0.80);
+  }
+  .s4-friends-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 65% 75%,
+      rgba(200,120,40,0.15) 0%,
+      transparent 65%
+    );
+    z-index: 1;
+    pointer-events: none;
   }
   .s4-tagline {
     display: flex;
@@ -825,8 +782,11 @@
     flex-shrink: 0;
   }
   @media (max-width: 768px) {
-    .s4-friends-world { display: none; }
-    .s4-content { width: 94%; padding-left: 6%; }
+    .s4-friends-collage { display: none; }
+    .s4-content {
+      width: 94%;
+      padding-left: 6%;
+    }
     .s4-pillars { gap: 16px; }
     .s4-pillar-sep { display: none; }
   }
@@ -1405,6 +1365,19 @@
   /* ═══════════════════════════════════
      S10 — THE CLOSE
   ═══════════════════════════════════ */
+  .s10-friends-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .s10-friends-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: brightness(0.10) saturate(0.50);
+  }
   .s10-phone {
     position: absolute;
     right: 0;
@@ -1416,6 +1389,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
   }
   .s10-phone img {
     width: auto;
@@ -1435,18 +1409,10 @@
     );
     z-index: 1;
   }
-  .s10-friends-echo {
-    position: absolute;
-    right: 5%;
-    bottom: 4%;
-    width: 28%;
-    height: 25%;
-    opacity: 0.25;
-    z-index: 0;
-  }
+  .s10-friends-echo { display: none; }
   .s10-content {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     padding-left: 8%;
     width: 60%;
   }
@@ -1477,7 +1443,7 @@
   @media (max-width: 768px) {
     .s10-phone { width: 100%; opacity: 0.15; }
     .s10-content { width: 94%; padding-left: 6%; }
-    .s10-friends-echo { display: none; }
+    .s10-friends-bg { display: none; }
   }
   @media (max-width: 1440px) {
     #s10 .display-hero {
@@ -2323,27 +2289,19 @@
 
     <div class="s4-sticky">
 
-      <!-- FRIENDS couch: CSS-only, right side -->
-      <div class="s4-friends-world" aria-hidden="true">
-        <div class="s4-couch">
-          <div class="s4-couch-back"></div>
-          <div class="s4-couch-seat"></div>
-          <div class="s4-couch-arm s4-arm-left"></div>
-          <div class="s4-couch-arm s4-arm-right"></div>
-          <div class="s4-couch-leg s4-leg-l1"></div>
-          <div class="s4-couch-leg s4-leg-l2"></div>
-          <div class="s4-couch-leg s4-leg-r1"></div>
-          <div class="s4-couch-leg s4-leg-r2"></div>
+      <div class="s4-friends-collage">
+        <div class="s4-img-main">
+          <img src="img/friends_centralperk.jpg"
+               alt="Central Perk"
+               loading="eager">
+          <div class="s4-img-left-fade"></div>
         </div>
-        <!-- Warm ambient glow behind couch -->
-        <div class="s4-warm-glow"></div>
-        <!-- Coffee cup silhouette -->
-        <div class="s4-coffee">
-          <div class="s4-cup"></div>
-          <div class="s4-saucer"></div>
-          <div class="s4-steam s4-steam1"></div>
-          <div class="s4-steam s4-steam2"></div>
+        <div class="s4-img-door">
+          <img src="img/friends_door.jpg"
+               alt="Friends"
+               loading="eager">
         </div>
+        <div class="s4-friends-glow"></div>
       </div>
 
       <div class="s4-overlay"></div>
@@ -3306,6 +3264,12 @@
   <section class="scene" id="s10"
     data-label="Friends. Weekends. Never Ends.">
 
+    <div class="s10-friends-bg">
+      <img src="img/friends_apt1.jpg"
+           alt="" aria-hidden="true"
+           loading="lazy">
+    </div>
+
     <!-- Phone returns — mirrored, right side, faded -->
     <div class="s10-phone">
       <picture>
@@ -3809,25 +3773,30 @@ const scenes = document.querySelectorAll('.scene[data-label]');
 let currentLabelScene = null;
 const labelObserver = new IntersectionObserver(
   (entries) => {
+    let maxRatio = 0;
+    let mostVisible = null;
     entries.forEach(entry => {
-      if (entry.isIntersecting &&
-          currentMode === 'strategy') {
-        currentLabelScene = entry.target;
-        sectionLabel.textContent =
-          entry.target.dataset.label;
-        sectionLabel.classList.add('visible');
-      } else if (
-        entry.target === currentLabelScene &&
-        !entry.isIntersecting
-      ) {
-        sectionLabel.classList.remove('visible');
-        currentLabelScene = null;
+      if (entry.intersectionRatio > maxRatio) {
+        maxRatio = entry.intersectionRatio;
+        mostVisible = entry.target;
       }
     });
+    if (mostVisible && maxRatio > 0.4
+        && currentMode === 'strategy') {
+      sectionLabel.textContent =
+        mostVisible.dataset.label;
+      sectionLabel.classList.add('visible');
+    } else if (maxRatio === 0) {
+      sectionLabel.classList.remove('visible');
+    }
   },
-  { threshold: 0.5 }
+  {
+    threshold: [0, 0.1, 0.3, 0.4,
+                0.5, 0.6, 0.7, 0.8,
+                0.9, 1.0]
+  }
 );
-scenes.forEach(scene => labelObserver.observe(scene));
+scenes.forEach(s => labelObserver.observe(s));
 
 // ─── EXPORT FUNCTIONALITY ─────────────
 const exportBtn = document.getElementById('export-btn');
@@ -4017,8 +3986,7 @@ ScrollTrigger.create({
 });
 
 // ── S4: CAMPAIGN ──────────────────────
-// FRIENDS couch fades in from right
-gsap.from('.s4-friends-world', {
+gsap.from('.s4-friends-collage', {
   x: 60, opacity: 0,
   duration: 1.2, ease: 'power2.out',
   scrollTrigger: {
@@ -5018,5 +4986,54 @@ document.querySelectorAll('.s9-partner')
     });
   });
 
+// FRIENDS theme — plays 12s when S4 enters
+let friendsThemePlayed = false;
+
+ScrollTrigger.create({
+  trigger: '#s4',
+  start: 'top 60%',
+  onEnter: () => {
+    if (friendsThemePlayed) return;
+    const audio = document.getElementById(
+      'friends-theme'
+    );
+    if (!audio) return;
+
+    audio.currentTime = 0;
+    audio.volume = 0;
+    audio.play().catch(() => {});
+    friendsThemePlayed = true;
+
+    // Fade IN over 1.5s to volume 0.25
+    let fadeInVol = 0;
+    const fadeIn = setInterval(() => {
+      fadeInVol = Math.min(0.25,
+        fadeInVol + 0.01);
+      audio.volume = fadeInVol;
+      if (fadeInVol >= 0.25) {
+        clearInterval(fadeIn);
+      }
+    }, 60);
+
+    // After 10.5s start fade OUT over 1.5s
+    setTimeout(() => {
+      let fadeOutVol = audio.volume;
+      const fadeOut = setInterval(() => {
+        fadeOutVol = Math.max(0,
+          fadeOutVol - 0.02);
+        audio.volume = fadeOutVol;
+        if (fadeOutVol <= 0) {
+          audio.pause();
+          audio.currentTime = 0;
+          clearInterval(fadeOut);
+        }
+      }, 50);
+    }, 10500);
+  }
+});
+
 </script>
+<audio id="friends-theme"
+       src="img/friends_theme.mp3"
+       preload="none"></audio>
 </body>
