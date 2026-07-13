@@ -617,9 +617,8 @@
     height: 100vh;
     width: 100%;
     display: flex;
-    align-items: flex-start;
-    padding-top: clamp(56px, 9vh, 88px);
-    padding-bottom: 32px;
+    align-items: center;
+    padding: clamp(52px, 8vh, 72px) 0 clamp(20px, 3vh, 36px);
     box-sizing: border-box;
     overflow: hidden;
     border: none;
@@ -627,11 +626,11 @@
   }
   .s3-ambient {
     position: absolute;
-    right: 5%;
+    right: 4%;
     top: 50%;
     transform: translateY(-50%);
     font-family: var(--ff-display);
-    font-size: clamp(160px, 20vw, 280px);
+    font-size: clamp(120px, 16vw, 220px);
     font-weight: 800;
     color: rgba(240,235,248,0.018);
     letter-spacing: -0.05em;
@@ -643,21 +642,35 @@
     position: relative;
     z-index: 2;
     padding-left: 8%;
-    padding-right: 4%;
+    padding-right: 5%;
     width: 100%;
+    max-height: 100%;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   #s3 .display-large {
-    line-height: 1.15;
-    padding-top: 0.12em;
+    font-size: clamp(28px, 3.6vw, 48px);
+    line-height: 1.12;
+    padding-top: 0.08em;
     overflow: visible;
+  }
+  #s3 .s3-hero-share {
+    margin-bottom: clamp(16px, 2.8vh, 28px) !important;
+  }
+  .s3-types {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 1.8vh, 18px);
+    min-height: 0;
   }
   .s3-type {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) minmax(160px, 26%);
+    grid-template-columns: auto minmax(0, 1fr) minmax(110px, 20%);
     align-items: center;
-    gap: 20px 28px;
-    margin-bottom: 28px;
+    gap: 12px 20px;
+    margin-bottom: 0;
     background: none;
     border: none;
     padding: 0;
@@ -666,20 +679,30 @@
   }
   .s3-type-num {
     font-family: var(--ff-display);
-    font-size: clamp(36px, 4vw, 56px);
+    font-size: clamp(24px, 2.8vw, 40px);
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1;
-    min-width: 64px;
-    padding-top: 4px;
+    min-width: 48px;
+    padding-top: 0;
   }
   .s3-type-body {
     min-width: 0;
   }
+  #s3 .s3-type-body .display-medium {
+    font-size: clamp(18px, 2vw, 26px);
+    margin-bottom: 4px !important;
+  }
+  #s3 .s3-type-body .body-medium {
+    font-size: clamp(12px, 1.1vw, 14px);
+    line-height: 1.45;
+    max-width: 420px;
+  }
   .s3-type-visual {
     position: relative;
     width: 100%;
-    aspect-ratio: 5 / 4;
+    height: clamp(72px, 12vh, 110px);
+    aspect-ratio: auto;
     overflow: hidden;
     border-radius: 6px;
     border: 1px solid rgba(241,145,109,0.18) !important;
@@ -705,27 +728,28 @@
     object-fit: cover;
     object-position: center;
     filter: brightness(0.58) saturate(0.78);
-    transform: scale(1.08);
+    transform: scale(1.06);
     will-change: transform;
   }
   .s3-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
+    margin-top: 6px !important;
   }
   .s3-tag {
     font-family: var(--ff-body);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     color: var(--muted);
-    padding: 4px 12px;
+    padding: 3px 10px;
     border: 1px solid rgba(240,235,248,0.12) !important;
     background: transparent !important;
     border-radius: 20px;
     letter-spacing: 0.05em;
   }
   #s3, #s3 > *, .s3-sticky,
-  .s3-content, .s3-type,
+  .s3-content, .s3-types, .s3-type,
   .s3-type-num, .s3-type-body,
   .s3-type-body *, .reveal-line {
     border: none !important;
@@ -748,14 +772,14 @@
     }
     .s3-type-visual {
       grid-column: 2;
-      max-width: 220px;
-      margin-top: 4px;
+      max-width: 180px;
+      height: 70px;
     }
   }
   @media (max-width: 768px) {
     .s3-content { width: 94%; padding-left: 6%; padding-right: 6%; }
     .s3-ambient { display: none; }
-    .s3-type { gap: 12px 16px; margin-bottom: 32px; }
+    .s3-type { gap: 10px 14px; }
     .s3-type-visual { display: none; }
   }
 
@@ -2438,7 +2462,7 @@
   <!-- S3: THE CONSUMER -->
   <section class="scene" id="s3"
     data-label="The Consumer"
-    style="height:200vh; display:block; overflow:visible">
+    style="height:100vh; display:block; overflow:hidden">
 
     <div class="s3-sticky">
 
@@ -2447,21 +2471,16 @@
 
       <div class="s3-content">
 
-        <!-- Hero statement -->
-        <p class="eyebrow reveal-line"
-           style="margin-bottom:20px">
-          The Consumer
-        </p>
+        <!-- Hero statement (no eyebrow — section label already shows it) -->
         <h2 class="display-large reveal-line"
-            style="margin-bottom:16px">
+            style="margin-bottom:6px">
           First to Discover.
         </h2>
-        <h2 class="display-large reveal-line peach"
-            style="margin-bottom:36px">
+        <h2 class="display-large reveal-line peach s3-hero-share">
           First to Share.
         </h2>
 
-        <!-- Three consumer types: each reveals on scroll -->
+        <div class="s3-types">
         <!-- Type 1 -->
         <div class="s3-type reveal-line" id="s3-type1">
           <div class="s3-type-num peach">01</div>
@@ -2542,6 +2561,7 @@
                  loading="lazy">
           </div>
         </div>
+        </div><!-- end s3-types -->
 
       </div>
     </div>
@@ -4190,55 +4210,44 @@ ScrollTrigger.create({
   }
 });
 
-// ── S3: CONSUMER (scroll-driven) ──────
-// Hero statement reveals on entry
+// ── S3: CONSUMER (single viewport) ────
 gsap.fromTo('#s3 .reveal-line:not(.s3-type)',
-  { y: 32, opacity: 0 },
+  { y: 24, opacity: 0 },
   {
     y: 0, opacity: 1,
-    duration: 0.75, stagger: 0.12,
+    duration: 0.65, stagger: 0.08,
     ease: 'power2.out',
     scrollTrigger: {
       trigger: '#s3',
-      start: 'top 75%',
+      start: 'top 70%',
       once: true
     }
   }
 );
 
-// Three types reveal staggered through scroll
-gsap.set('#s3-type1, #s3-type2, #s3-type3',
-  { y: 28, opacity: 0 });
-gsap.set('#s3 .s3-type-visual img',
-  { scale: 1.12 });
-
-const s3TypeShown = { t1: false, t2: false, t3: false };
-function revealS3Type(id, key) {
-  if (s3TypeShown[key]) return;
-  s3TypeShown[key] = true;
-  gsap.to(id, {
+gsap.set('#s3 .s3-type-visual img', { scale: 1.08 });
+gsap.fromTo('#s3-type1, #s3-type2, #s3-type3',
+  { y: 20, opacity: 0 },
+  {
     y: 0, opacity: 1,
-    duration: 0.65, ease: 'power2.out',
-    overwrite: 'auto'
-  });
-  gsap.to(`${id} .s3-type-visual img`, {
-    scale: 1,
-    duration: 1.6,
-    ease: 'power1.out',
-    overwrite: 'auto'
-  });
-}
-
-ScrollTrigger.create({
-  trigger: '#s3',
-  start: 'top top',
-  end: 'bottom bottom',
-  onUpdate: (self) => {
-    if (self.progress > 0.20) revealS3Type('#s3-type1', 't1');
-    if (self.progress > 0.50) revealS3Type('#s3-type2', 't2');
-    if (self.progress > 0.75) revealS3Type('#s3-type3', 't3');
+    duration: 0.55,
+    stagger: 0.10,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '#s3',
+      start: 'top 65%',
+      once: true
+    },
+    onStart: () => {
+      gsap.to('#s3 .s3-type-visual img', {
+        scale: 1,
+        duration: 1.4,
+        stagger: 0.10,
+        ease: 'power1.out'
+      });
+    }
   }
-});
+);
 
 // ── S4: CAMPAIGN ──────────────────────
 gsap.from('.s4-friends-collage', {
