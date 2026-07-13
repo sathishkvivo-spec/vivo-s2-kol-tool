@@ -180,11 +180,23 @@
   .kol-section {
     display: none;
     min-height: 100vh;
+    height: 100vh;
     width: 100%;
     background: var(--canvas);
     padding: 80px 64px 48px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   .kol-section.active { display: block; }
+  #kol-match {
+    height: 100vh;
+    overflow-y: auto;
+  }
+  #kol-brief, #kol-params {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
 
   /* ═══════════════════════════════════
      KOL TOOL NAVIGATION
@@ -415,6 +427,14 @@
     flex-direction: column;
     justify-content: center;
     min-height: 100vh;
+    background: none !important;
+    border: none !important;
+  }
+  #s1, #s1 > *, .s1-sticky {
+    border: none !important;
+    outline: none !important;
+    background: transparent;
+    box-shadow: none !important;
   }
   .s1-scroll-cue {
     display: flex;
@@ -623,14 +643,94 @@
     font-weight: 500;
     color: var(--muted);
     padding: 4px 12px;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(240,235,248,0.12) !important;
+    background: transparent !important;
     border-radius: 20px;
     letter-spacing: 0.05em;
+  }
+  #s3, #s3 > *, .s3-sticky,
+  .s3-content, .s3-type,
+  .s3-type *, .reveal-line {
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .s3-tag {
+    border: 1px solid rgba(240,235,248,0.12)
+      !important;
+    background: transparent !important;
+  }
+  .s3-visual-panel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .s3-vis {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px 24px;
+    position: relative;
+    border: none !important;
+  }
+  .s3-vis span {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: rgba(240,235,248,0.35);
+    position: relative;
+    z-index: 2;
+  }
+  .s3-vis1 {
+    background: linear-gradient(
+      135deg,
+      rgba(241,145,109,0.15) 0%,
+      rgba(241,145,109,0.04) 100%
+    );
+    border-bottom: 1px solid
+      rgba(241,145,109,0.10) !important;
+  }
+  .s3-vis2 {
+    background: linear-gradient(
+      135deg,
+      rgba(174,125,172,0.12) 0%,
+      rgba(174,125,172,0.03) 100%
+    );
+    border-bottom: 1px solid
+      rgba(174,125,172,0.08) !important;
+  }
+  .s3-vis3 {
+    background: linear-gradient(
+      135deg,
+      rgba(240,235,248,0.06) 0%,
+      rgba(240,235,248,0.01) 100%
+    );
+  }
+  .s3-visual-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 60%; height: 100%;
+    background: linear-gradient(
+      90deg,
+      var(--canvas) 0%,
+      transparent 100%
+    );
+    z-index: 1;
+    pointer-events: none;
   }
   @media (max-width: 768px) {
     .s3-content { width: 94%; padding-left: 6%; }
     .s3-ambient { display: none; }
     .s3-type { gap: 16px; }
+    .s3-visual-panel { display: none; }
   }
 
   /* ═══════════════════════════════════
@@ -2193,6 +2293,18 @@
     style="height:200vh; display:block; overflow:visible">
 
     <div class="s3-sticky">
+
+      <div class="s3-visual-panel">
+        <div class="s3-vis s3-vis1">
+          <span>Campus · Café · City</span>
+        </div>
+        <div class="s3-vis s3-vis2">
+          <span>City · Work · Weekends</span>
+        </div>
+        <div class="s3-vis s3-vis3">
+          <span>Trade · Local · Style</span>
+        </div>
+      </div>
 
       <!-- Large ambient number — decorative background -->
       <div class="s3-ambient">Who.</div>
@@ -4975,46 +5087,44 @@ document.querySelectorAll('.s9-partner')
     });
   });
 
-// FRIENDS theme — plays 12s when S4 enters
 let friendsThemePlayed = false;
+let friendsThemeReady = false;
+
+// Mark user has interacted
+window.addEventListener('scroll',
+  () => { friendsThemeReady = true; },
+  { once: true, passive: true }
+);
 
 ScrollTrigger.create({
   trigger: '#s4',
   start: 'top 60%',
   onEnter: () => {
     if (friendsThemePlayed) return;
+    if (!friendsThemeReady) return;
     const audio = document.getElementById(
       'friends-theme'
     );
     if (!audio) return;
-
     audio.currentTime = 0;
     audio.volume = 0;
     audio.play().catch(() => {});
     friendsThemePlayed = true;
-
-    // Fade IN over 1.5s to volume 0.25
-    let fadeInVol = 0;
-    const fadeIn = setInterval(() => {
-      fadeInVol = Math.min(0.25,
-        fadeInVol + 0.01);
-      audio.volume = fadeInVol;
-      if (fadeInVol >= 0.25) {
-        clearInterval(fadeIn);
-      }
+    let v = 0;
+    const fi = setInterval(() => {
+      v = Math.min(0.22, v + 0.01);
+      audio.volume = v;
+      if (v >= 0.22) clearInterval(fi);
     }, 60);
-
-    // After 10.5s start fade OUT over 1.5s
     setTimeout(() => {
-      let fadeOutVol = audio.volume;
-      const fadeOut = setInterval(() => {
-        fadeOutVol = Math.max(0,
-          fadeOutVol - 0.02);
-        audio.volume = fadeOutVol;
-        if (fadeOutVol <= 0) {
+      let fv = audio.volume;
+      const fo = setInterval(() => {
+        fv = Math.max(0, fv - 0.02);
+        audio.volume = fv;
+        if (fv <= 0) {
           audio.pause();
           audio.currentTime = 0;
-          clearInterval(fadeOut);
+          clearInterval(fo);
         }
       }, 50);
     }, 10500);
