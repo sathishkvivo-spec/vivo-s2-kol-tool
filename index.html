@@ -679,7 +679,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    padding: clamp(52px, 8vh, 72px) 0 clamp(20px, 3vh, 36px);
+    padding: clamp(64px, 9vh, 88px) 0 clamp(28px, 4vh, 48px);
     box-sizing: border-box;
     overflow: hidden;
     border: none;
@@ -687,98 +687,91 @@
   }
   .s3-ambient {
     position: absolute;
-    right: 4%;
-    top: 50%;
+    right: 6%;
+    top: 42%;
     transform: translateY(-50%);
     font-family: var(--ff-display);
-    font-size: clamp(120px, 16vw, 220px);
+    font-size: clamp(140px, 18vw, 260px);
     font-weight: 800;
-    color: rgba(240,235,248,0.018);
+    color: rgba(240,235,248,0.016);
     letter-spacing: -0.05em;
     pointer-events: none;
     user-select: none;
     line-height: 1;
+    z-index: 0;
   }
   .s3-content {
     position: relative;
     z-index: 2;
-    padding-left: 8%;
-    padding-right: 5%;
     width: 100%;
-    max-height: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 5vw, 64px);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: clamp(20px, 3.5vh, 36px);
+  }
+  .s3-hero {
+    max-width: 720px;
   }
   #s3 .display-large {
-    font-size: clamp(28px, 3.6vw, 48px);
-    line-height: 1.12;
-    padding-top: 0.08em;
+    font-size: clamp(32px, 4.2vw, 56px);
+    line-height: 1.1;
+    padding-top: 0.06em;
     overflow: visible;
   }
   #s3 .s3-hero-share {
-    margin-bottom: clamp(16px, 2.8vh, 28px) !important;
+    margin-bottom: 0 !important;
+  }
+  .s3-hero-sub {
+    margin-top: 12px;
+    max-width: 480px;
+    font-size: clamp(14px, 1.3vw, 17px);
   }
   .s3-types {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(10px, 1.8vh, 18px);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(14px, 1.8vw, 24px);
     min-height: 0;
+    align-items: stretch;
   }
   .s3-type {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) minmax(110px, 20%);
-    align-items: center;
-    gap: 12px 20px;
-    margin-bottom: 0;
-    background: none;
-    border: none;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
     padding: 0;
-    box-shadow: none;
     outline: none;
+    border: 1px solid rgba(240,235,248,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(15,15,24,0.62);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.22);
+    transition: border-color 0.25s ease,
+                transform 0.25s ease;
   }
-  .s3-type-num {
-    font-family: var(--ff-display);
-    font-size: clamp(24px, 2.8vw, 40px);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    min-width: 48px;
-    padding-top: 0;
-  }
-  .s3-type-body {
-    min-width: 0;
-  }
-  #s3 .s3-type-body .display-medium {
-    font-size: clamp(18px, 2vw, 26px);
-    margin-bottom: 4px !important;
-  }
-  #s3 .s3-type-body .body-medium {
-    font-size: clamp(12px, 1.1vw, 14px);
-    line-height: 1.45;
-    max-width: 420px;
+  .s3-type:hover {
+    border-color: rgba(241,145,109,0.28);
+    transform: translateY(-3px);
   }
   .s3-type-visual {
     position: relative;
     width: 100%;
-    height: clamp(72px, 12vh, 110px);
-    aspect-ratio: auto;
+    height: clamp(150px, 26vh, 240px);
     overflow: hidden;
-    border-radius: 6px;
-    border: 1px solid rgba(241,145,109,0.18) !important;
-    background: rgba(15,15,24,0.5) !important;
-    box-shadow: none !important;
+    flex-shrink: 0;
+    background: var(--dim);
+    border: none;
   }
   .s3-type-visual::after {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      90deg,
-      rgba(10,10,15,0.55) 0%,
-      rgba(10,10,15,0.15) 45%,
-      transparent 100%
+      180deg,
+      transparent 30%,
+      rgba(10,10,15,0.88) 100%
     );
     z-index: 1;
     pointer-events: none;
@@ -788,60 +781,91 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    filter: brightness(0.58) saturate(0.78);
-    transform: scale(1.06);
+    filter: brightness(0.72) saturate(0.82);
+    transform: scale(1.04);
     will-change: transform;
+    transition: transform 0.6s ease;
+  }
+  .s3-type:hover .s3-type-visual img {
+    transform: scale(1.08);
+  }
+  .s3-type-num {
+    position: absolute;
+    left: 16px;
+    bottom: 10px;
+    z-index: 2;
+    font-family: var(--ff-display);
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    min-width: 0;
+    padding: 0;
+    text-shadow: 0 6px 28px rgba(0,0,0,0.65);
+  }
+  .s3-type-body {
+    padding: clamp(14px, 2vh, 22px)
+             clamp(14px, 1.6vw, 22px)
+             clamp(16px, 2.2vh, 24px);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+  #s3 .s3-type-body .display-medium {
+    font-size: clamp(18px, 1.8vw, 24px);
+    margin-bottom: 8px !important;
+    letter-spacing: -0.02em;
+  }
+  #s3 .s3-type-body .body-medium {
+    font-size: clamp(12px, 1.05vw, 14px);
+    line-height: 1.55;
+    max-width: none;
+    flex: 1;
   }
   .s3-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-top: 6px !important;
+    margin-top: 14px !important;
   }
   .s3-tag {
     font-family: var(--ff-body);
     font-size: 10px;
     font-weight: 500;
     color: var(--muted);
-    padding: 3px 10px;
-    border: 1px solid rgba(240,235,248,0.12) !important;
-    background: transparent !important;
+    padding: 4px 10px;
+    border: 1px solid rgba(240,235,248,0.12);
+    background: transparent;
     border-radius: 20px;
     letter-spacing: 0.05em;
   }
-  #s3, #s3 > *, .s3-sticky,
-  .s3-content, .s3-types, .s3-type,
-  .s3-type-num, .s3-type-body,
-  .s3-type-body *, .reveal-line {
-    border: none !important;
-    outline: none !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-  .s3-tag {
-    border: 1px solid rgba(240,235,248,0.12)
-      !important;
-    background: transparent !important;
-  }
-  .s3-type-visual {
-    border: 1px solid rgba(241,145,109,0.18) !important;
-    background: rgba(15,15,24,0.5) !important;
-  }
   @media (max-width: 900px) {
+    .s3-types {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      overflow-y: auto;
+      max-height: 58vh;
+    }
     .s3-type {
-      grid-template-columns: auto 1fr;
+      flex-direction: row;
+      align-items: stretch;
     }
     .s3-type-visual {
-      grid-column: 2;
-      max-width: 180px;
-      height: 70px;
+      width: 34%;
+      height: auto;
+      min-height: 120px;
     }
+    .s3-type-body { padding: 14px 16px; }
   }
   @media (max-width: 768px) {
-    .s3-content { width: 94%; padding-left: 6%; padding-right: 6%; }
     .s3-ambient { display: none; }
-    .s3-type { gap: 10px 14px; }
-    .s3-type-visual { display: none; }
+    .s3-content { padding: 0 6%; }
+    .s3-type { flex-direction: column; }
+    .s3-type-visual {
+      width: 100%;
+      height: 140px;
+    }
   }
 
   /* ═══════════════════════════════════
@@ -2569,102 +2593,91 @@
 
     <div class="s3-sticky">
 
-      <!-- Large ambient number — decorative background -->
       <div class="s3-ambient">Who.</div>
 
       <div class="s3-content">
 
-        <!-- Hero statement (no eyebrow — section label already shows it) -->
-        <h2 class="display-large reveal-line"
-            style="margin-bottom:6px">
-          First to Discover.
-        </h2>
-        <h2 class="display-large reveal-line peach s3-hero-share">
-          First to Share.
-        </h2>
+        <div class="s3-hero">
+          <h2 class="display-large reveal-line"
+              style="margin-bottom:4px">
+            First to Discover.
+          </h2>
+          <h2 class="display-large reveal-line peach s3-hero-share">
+            First to Share.
+          </h2>
+          <p class="body-large reveal-line s3-hero-sub">
+            Three Tamil Nadu Gen Z mindsets.
+            One phone that fits the moment.
+          </p>
+        </div>
 
         <div class="s3-types">
-        <!-- Type 1 -->
-        <div class="s3-type reveal-line" id="s3-type1">
-          <div class="s3-type-num peach">01</div>
-          <div class="s3-type-body">
-            <h3 class="display-medium"
-                style="margin-bottom:8px">
-              The Undergrad
-            </h3>
-            <p class="body-medium"
-               style="max-width:360px">
-              17–22 · Campus · Café · City.<br>
-              Outgrew Y-series. Not ready for V-series.<br>
-              S2 was made for this exact moment.
-            </p>
-            <div class="s3-tags" style="margin-top:12px">
-              <span class="s3-tag">Social Sharing</span>
-              <span class="s3-tag">Content Creation</span>
-              <span class="s3-tag">Identity Builder</span>
-            </div>
-          </div>
-          <div class="s3-type-visual">
-            <img src="img/consumer_undergrad.jpg"
-                 alt="Campus · Café · City"
-                 loading="lazy">
-          </div>
-        </div>
 
-        <!-- Type 2 -->
-        <div class="s3-type reveal-line" id="s3-type2">
-          <div class="s3-type-num lavender">02</div>
-          <div class="s3-type-body">
-            <h3 class="display-medium"
-                style="margin-bottom:8px">
-              Young White Collar
-            </h3>
-            <p class="body-medium"
-               style="max-width:360px">
-              23–28 · First job. First real upgrade.<br>
-              Fashion meets function.<br>
-              The phone their life reflects.
-            </p>
-            <div class="s3-tags" style="margin-top:12px">
-              <span class="s3-tag">Weekend Explorer</span>
-              <span class="s3-tag">Aspiration</span>
+          <article class="s3-type reveal-line" id="s3-type1">
+            <div class="s3-type-visual">
+              <img src="img/consumer_undergrad.jpg"
+                   alt="Campus · Café · City"
+                   loading="lazy">
+              <div class="s3-type-num peach">01</div>
             </div>
-          </div>
-          <div class="s3-type-visual">
-            <img src="img/consumer_whitecollar.jpg"
-                 alt="City · Work · Weekends"
-                 loading="lazy">
-          </div>
-        </div>
+            <div class="s3-type-body">
+              <h3 class="display-medium">The Undergrad</h3>
+              <p class="body-medium">
+                17–22 · Campus · Café · City.<br>
+                Outgrew Y-series. Not ready for V-series.<br>
+                S2 was made for this exact moment.
+              </p>
+              <div class="s3-tags">
+                <span class="s3-tag">Social Sharing</span>
+                <span class="s3-tag">Content Creation</span>
+                <span class="s3-tag">Identity Builder</span>
+              </div>
+            </div>
+          </article>
 
-        <!-- Type 3 -->
-        <div class="s3-type reveal-line" id="s3-type3">
-          <div class="s3-type-num" style="color:var(--muted)">
-            03
-          </div>
-          <div class="s3-type-body">
-            <h3 class="display-medium"
-                style="margin-bottom:8px">
-              Young Shop Owner
-            </h3>
-            <p class="body-medium"
-               style="max-width:360px">
-              25–30 · Trade · Local · Aspirational.<br>
-              A device that matches their hustle,<br>
-              their style, their story.
-            </p>
-            <div class="s3-tags" style="margin-top:12px">
-              <span class="s3-tag">Self-Made</span>
-              <span class="s3-tag">Style-Forward</span>
+          <article class="s3-type reveal-line" id="s3-type2">
+            <div class="s3-type-visual">
+              <img src="img/consumer_whitecollar.jpg"
+                   alt="City · Work · Weekends"
+                   loading="lazy">
+              <div class="s3-type-num lavender">02</div>
             </div>
-          </div>
-          <div class="s3-type-visual">
-            <img src="img/consumer_shopowner.jpg"
-                 alt="Trade · Local · Style"
-                 loading="lazy">
-          </div>
+            <div class="s3-type-body">
+              <h3 class="display-medium">Young White Collar</h3>
+              <p class="body-medium">
+                23–28 · First job. First real upgrade.<br>
+                Fashion meets function.<br>
+                The phone their life reflects.
+              </p>
+              <div class="s3-tags">
+                <span class="s3-tag">Weekend Explorer</span>
+                <span class="s3-tag">Aspiration</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="s3-type reveal-line" id="s3-type3">
+            <div class="s3-type-visual">
+              <img src="img/consumer_shopowner.jpg"
+                   alt="Trade · Local · Style"
+                   loading="lazy">
+              <div class="s3-type-num" style="color:var(--text)">03</div>
+            </div>
+            <div class="s3-type-body">
+              <h3 class="display-medium">Young Shop Owner</h3>
+              <p class="body-medium">
+                25–30 · Trade · Local · Aspirational.<br>
+                A device that matches their hustle,<br>
+                their style, their story.
+              </p>
+              <div class="s3-tags">
+                <span class="s3-tag">Self-Made</span>
+                <span class="s3-tag">Style-Forward</span>
+              </div>
+            </div>
+          </article>
+
         </div>
-        </div><!-- end s3-types -->
 
       </div>
     </div>
@@ -4367,7 +4380,7 @@ ScrollTrigger.create({
 });
 
 // ── S3: CONSUMER (single viewport) ────
-gsap.fromTo('#s3 .reveal-line:not(.s3-type)',
+gsap.fromTo('#s3 .s3-hero .reveal-line',
   { y: 24, opacity: 0 },
   {
     y: 0, opacity: 1,
@@ -4383,11 +4396,11 @@ gsap.fromTo('#s3 .reveal-line:not(.s3-type)',
 
 gsap.set('#s3 .s3-type-visual img', { scale: 1.08 });
 gsap.fromTo('#s3-type1, #s3-type2, #s3-type3',
-  { y: 20, opacity: 0 },
+  { y: 28, opacity: 0 },
   {
     y: 0, opacity: 1,
-    duration: 0.55,
-    stagger: 0.10,
+    duration: 0.6,
+    stagger: 0.12,
     ease: 'power2.out',
     scrollTrigger: {
       trigger: '#s3',
@@ -4396,9 +4409,9 @@ gsap.fromTo('#s3-type1, #s3-type2, #s3-type3',
     },
     onStart: () => {
       gsap.to('#s3 .s3-type-visual img', {
-        scale: 1,
-        duration: 1.4,
-        stagger: 0.10,
+        scale: 1.04,
+        duration: 1.3,
+        stagger: 0.12,
         ease: 'power1.out'
       });
     }
