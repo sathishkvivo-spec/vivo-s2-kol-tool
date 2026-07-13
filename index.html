@@ -4214,12 +4214,19 @@ ScrollTrigger.create({
         ease: 'power2.out', overwrite: 'auto'
       });
     }
+  }
+});
+
+ScrollTrigger.create({
+  trigger: '#s7',
+  start: 'top top',
+  end: 'bottom bottom',
+  onUpdate: (self) => {
     if (self.progress > 0.75) {
       gsap.to('#s7-act3', {
         y: 0, opacity: 1, duration: 0.6,
         ease: 'power2.out', overwrite: 'auto'
       });
-      // Count up stats
       document.querySelectorAll(
         '#s7-act3 [data-countup]'
       ).forEach(el => {
@@ -4565,50 +4572,61 @@ const KOL_DATA = [
     id: 12,
     name: "Birla Jo",
     handle: "@birla_jo",
-    followers: "Check profile",
+    followers: "511K",
     tier: "Influencer",
     phase: "pre-buzz",
-    score: 0,
-    img: null,
-    params: null,
-    angle: "FRIENDS × Caught in 4K — " +
-           "funny relatable Gen Z content",
-    cost: "Pending",
-    deliverable: "Sketch Reel",
-    city: "Chennai",
-    pending: true
+    score: 84,
+    img: "img/birla_jo.jpg",
+    params: {
+      P1:9, P2:8, P3:8, P4:9,
+      P6:9, P7:9, P9:7, P10:8
+    },
+    angle: "Caught in 4K — funny relatable " +
+           "Tamil comedy reels, viral reach",
+    cost: "₹75K (incl. production)",
+    deliverable: "Reel Collab",
+    city: "Coimbatore",
+    pending: false
   },
   {
     id: 13,
-    name: "Beingshe VJ",
+    name: "Varunya Jayaprakasham",
     handle: "@beingshe.vj",
-    followers: "Check profile",
+    followers: "181K",
     tier: "Influencer",
     phase: "pre-buzz",
-    score: 0,
-    img: null,
-    params: null,
-    angle: "Pre-Buzz lifestyle creator",
-    cost: "Pending",
-    deliverable: "Lifestyle Reel",
-    city: "Chennai",
-    pending: true
+    score: 84,
+    img: "img/beingshe_vj.jpg",
+    params: {
+      P1:8, P2:9, P3:9, P4:9,
+      P6:6, P7:9, P9:8, P10:9
+    },
+    angle: "Café culture lifestyle — " +
+           "affordable fashion Pre-Buzz",
+    cost: "₹45K",
+    deliverable: "Reel Collab",
+    city: "Coimbatore",
+    pending: false
   },
   {
     id: 14,
-    name: "Meera An",
+    name: "Meera",
     handle: "@_meera_an_",
-    followers: "Check profile",
-    tier: "Influencer",
+    followers: "19.1K",
+    tier: "Model",
     phase: "pre-buzz",
-    score: 0,
-    img: null,
-    params: null,
-    angle: "Pre-Buzz lifestyle creator",
-    cost: "Pending",
-    deliverable: "Lifestyle Reel",
-    city: "Chennai",
-    pending: true
+    score: 65,
+    img: "img/meera_an.jpg",
+    params: {
+      P1:8, P2:9, P3:6, P4:5,
+      P6:5, P7:7, P9:7, P10:7
+    },
+    angle: "Fashion model — lifestyle " +
+           "and costume design aesthetic",
+    cost: "₹35K",
+    deliverable: "Reel Collab",
+    city: "Coimbatore",
+    pending: false
   }
 ];
 
@@ -4642,7 +4660,8 @@ function renderCards(filter = 'all') {
 
   grid.innerHTML = filtered.map(k => {
     const photoHtml = k.img
-      ? `<img src="${k.img}" alt="${k.name}" loading="lazy">`
+      ? `<img src="${k.img}" alt="${k.name}" loading="lazy"
+           onerror="this.onerror=null;this.style.display='none';var p=this.parentElement;p.classList.add('kt-card-placeholder');if(!p.dataset.fb){p.dataset.fb='1';p.insertAdjacentText('afterbegin','?');}">`
       : '?';
     const placeholderClass = !k.img
       ? 'kt-card-placeholder' : '';
