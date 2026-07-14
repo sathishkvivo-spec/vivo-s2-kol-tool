@@ -1310,6 +1310,8 @@
     overflow: hidden;
     background: #0D0D16;
     box-shadow: 0 12px 40px rgba(0,0,0,0.22);
+    height: fit-content;
+    align-self: start;
     transition: border-color 0.25s ease,
                 transform 0.25s ease;
   }
@@ -1321,8 +1323,9 @@
   .s3-type-visual {
     position: relative;
     width: 100%;
-    flex: 0 0 40%;
-    min-height: 120px;
+    flex: 0 0 auto;
+    aspect-ratio: 16 / 10;
+    min-height: 0;
     height: auto;
     overflow: hidden;
     background: var(--dim);
@@ -1372,7 +1375,7 @@
     padding: 12px 14px 14px;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 0 0 auto;
     min-width: 0;
     gap: 8px;
     justify-content: flex-start;
@@ -1599,7 +1602,7 @@
   }
   .s5-eng-amt.peach { color: var(--peach); }
   .s5-eng-amt.lavender { color: var(--lavender); }
-  .s5-eng-items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; flex: 1; }
+  .s5-eng-items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 14px; flex: 0 0 auto; }
   .s5-eng-item {
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
     opacity: 0; transform: translateY(8px);
@@ -1608,7 +1611,7 @@
   .s5-eng-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--peach); flex-shrink: 0; }
   .s5-eng-item-name { font-family: var(--ff-body); font-size: 1rem; font-weight: 600; color: var(--text); }
   .s5-eng-item-val { font-family: var(--ff-display); font-size: 1rem; font-weight: 700; color: var(--peach); flex-shrink: 0; }
-  .s5-partners { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-bottom: 14px; flex: 1; }
+  .s5-partners { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-bottom: 14px; flex: 0 0 auto; }
   .s5-partner {
     font-family: var(--ff-body); font-size: 1rem; font-weight: 600; color: var(--text);
     background: rgba(10,10,15,0.55); border: 1px solid var(--border);
@@ -1616,17 +1619,14 @@
     opacity: 0; transform: translateY(8px);
   }
   .s5-eng-foot {
-    font-family: var(--ff-body); font-size: 13px; line-height: 1.4; color: var(--muted);
-    border-top: 1px solid var(--border); padding-top: 12px;
+    font-family: var(--ff-body); font-size: 0.9rem; line-height: 1.45; color: var(--muted);
+    border-top: 1px solid var(--border); padding-top: 12px; margin-top: auto;
   }
   @media (max-width: 900px) { .s5-engines-row { grid-template-columns: 1fr; min-height: 0; }
 
 
   /* ═══════════════════════════════════
-     S4 — V60 VS S2 BUDGET  /* ═══════════════════════════════════
-     S5 — V60 VS S2 BUDGET  /* ═══════════════════════════════════
-     S5 — V60 VS S2 BUDGET  /* ═══════════════════════════════════
-     S5 — V60 VS S2 BUDGET (was S6 comment)
+     S4 — V60 VS S2 BUDGET
   ═══════════════════════════════════ */
   #s4-v60-vs-s2 {
     height: 100vh !important;
@@ -1942,25 +1942,25 @@
     padding-right: 16px;
   }
   .s6-phase-dot {
-    width: 10px;
-    height: 10px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     flex-shrink: 0;
   }
   .s6-dot-lav   { background: var(--lavender); }
   .s6-dot-peach { background: var(--peach); }
   .s6-dot-super {
     background: var(--peach);
-    width: 14px;
-    height: 14px;
+    width: 20px;
+    height: 20px;
     box-shadow: 0 0 12px rgba(241,145,109,0.6),
                 0 0 24px rgba(241,145,109,0.3);
   }
   .s6-dot-dim { background: var(--muted); }
   .s6-phase-name {
     font-family: var(--ff-display);
-    font-size: clamp(13px, 1.4vw, 18px);
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--text);
   }
@@ -1975,10 +1975,10 @@
   }
   .s6-phase-desc {
     font-family: var(--ff-body);
-    font-size: clamp(10px, 0.9vw, 12px);
+    font-size: 0.95rem;
     color: var(--muted);
-    line-height: 1.5;
-    opacity: 0.7;
+    line-height: 1.45;
+    opacity: 0.85;
   }
   .s6-activities {
     display: flex;
@@ -1986,15 +1986,17 @@
     width: 100%;
     align-items: flex-start;
   }
-  .s6-activity { flex: 1; padding-right: 32px; }
-  .s6-act-divider {
-    width: 1px;
-    height: 160px;
-    background: var(--border);
-    margin-right: 32px;
-    flex-shrink: 0;
-    align-self: center;
+  .s6-activity {
+    flex: 1;
+    min-height: 140px;
+    padding: 16px 20px;
+    margin-right: 12px;
+    background: #0F0F18;
+    border: 1px solid rgba(241,145,109,0.18);
+    border-radius: 10px;
+    box-sizing: border-box;
   }
+  .s6-act-divider { display: none; }
   .s6-act-header {
     display: flex;
     justify-content: space-between;
@@ -2059,15 +2061,37 @@
 
   /* HO Investment breakdown cards */
   .s6-pin { height: 100%; display: block; position: relative; }
+  #s6-timeline {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+  }
   .s6-sticky {
     position: relative; top: 0; height: 100%; width: 100%;
-    display: flex; align-items: flex-start; overflow: hidden;
-    padding: clamp(36px, 4.5vh, 48px) 5% clamp(40px, 5vh, 52px);
+    display: flex; align-items: stretch; overflow: hidden;
+    padding: 60px 4% 36px;
     box-sizing: border-box;
   }
-  .s6-content { width: 100%; max-width: 1180px; margin: 0 auto; }
-  #s5-strategy .display-large { font-size: clamp(22px, 2.8vw, 36px) !important; margin-bottom: 14px !important; }
-  #s5-strategy .s6-activities { margin-top: 10px !important; }
+  .s6-content {
+    width: 100%; max-width: none; margin: 0;
+    height: 100%;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .s6-ho-wrap { margin-top: 8px; margin-bottom: 0; }
+  #s6-timeline .display-large {
+    font-size: 4.5rem !important;
+    line-height: 1.05 !important;
+    margin-bottom: 20px !important;
+    max-width: none !important;
+    width: 100%;
+  }
+  #s6-timeline .s6-activities {
+    margin-top: 18px !important;
+    flex: 1;
+    align-items: stretch;
+  }
   .s6-ho-wrap { margin-top: 14px; width: 100%; }
   .s6-ho-simple {
     display: grid;
@@ -2077,16 +2101,16 @@
   .s6-ho-stat {
     border: 1px solid rgba(241,145,109,0.3);
     border-radius: 8px;
-    padding: 12px 24px;
+    padding: 20px 32px;
     background: #0F0F18;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
   }
   .s6-ho-stat-label {
     font-family: var(--ff-body);
-    font-size: 10px;
+    font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -2094,7 +2118,7 @@
   }
   .s6-ho-stat-amt {
     font-family: var(--ff-display);
-    font-size: clamp(22px, 2.4vw, 28px);
+    font-size: 2.5rem;
     font-weight: 800;
     color: var(--peach);
     letter-spacing: -0.02em;
@@ -2196,6 +2220,51 @@
   @media (max-width: 768px) {
     .s7-acts { flex-direction: column; gap: 28px; }
     .s7-ambient { display: none; }
+  }
+
+
+  /* S7 KOL System — all acts visible */
+  #s7-kol {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .s7-kol-system {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 60px 4% 40px;
+    box-sizing: border-box;
+  }
+  #s7-kol .s7-act,
+  #s7-kol .s7-act-body,
+  #s7-kol .s7-act-num,
+  #s7-kol .eyebrow,
+  #s7-kol .display-large,
+  #s7-kol .display-medium,
+  #s7-kol .body-medium,
+  #s7-kol .s7-inline-stats,
+  #s7-kol .s7-stat,
+  #s7-kol .s7-kol-cta {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+  #s7-kol .s7-acts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    margin-top: 8px;
+  }
+  #s7-kol .s7-act { display: flex; gap: 14px; align-items: flex-start; }
+  .s7-kol-cta { margin-top: 28px; text-align: center; }
+  @media (max-width: 900px) {
+    #s7-kol .s7-acts { grid-template-columns: 1fr; gap: 18px; }
   }
 
   /* ═══════════════════════════════════
@@ -2548,6 +2617,118 @@
   }
   @media (max-width: 480px) {
     .s9-condition { flex-direction: column; gap: 8px; }
+  }
+
+
+  /* Store Influencer Event Flow roadmap */
+  .s9-event-wrap {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .s9-event-label {
+    font-family: var(--ff-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin: 0;
+  }
+  .s9-event-note {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    color: var(--muted);
+    margin: 0 0 4px;
+    line-height: 1.4;
+  }
+  .s9-event-roadmap {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    min-height: 220px;
+  }
+  .s9-event-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .s9-event-stops {
+    position: absolute;
+    inset: 0;
+  }
+  .s9-event-stop {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: min(280px, 42%);
+    z-index: 2;
+  }
+  .s9-event-stop.right { flex-direction: row; }
+  .s9-event-stop.left { flex-direction: row-reverse; text-align: right; }
+  .s9-event-stop.left .s9-event-card { text-align: left; }
+  .s9-event-pin {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #F1916D;
+    color: #fff;
+    font-family: var(--ff-display);
+    font-size: 1rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(241,145,109,0.25);
+  }
+  .s9-event-card {
+    background: #0F0F18;
+    border: 1px solid rgba(241,145,109,0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    max-width: 220px;
+    box-sizing: border-box;
+  }
+  .s9-event-time {
+    font-family: var(--ff-body);
+    font-size: 10px;
+    color: var(--muted);
+    margin: 0 0 2px;
+  }
+  .s9-event-title {
+    font-family: var(--ff-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #F0EBF8;
+    margin: 0 0 4px;
+    line-height: 1.2;
+  }
+  .s9-event-body {
+    font-family: var(--ff-body);
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.35;
+  }
+  /* Compact store wrap when roadmap present */
+  #s9-store .s10-store-wrap {
+    gap: 6px;
+    justify-content: flex-start;
+    padding-top: 40px;
+    padding-bottom: 36px;
+  }
+  #s9-store .s11-why-grid { gap: 8px; }
+  #s9-store .s11-why-card { padding: 8px 10px; }
+  #s9-store .s11-why-body { font-size: 10px; }
+  @media (max-width: 900px) {
+    .s9-event-roadmap { min-height: 480px; }
+    .s9-event-stop { width: 90%; left: 5% !important; right: auto !important; }
   }
 
   /* S11 enhanced blocks — below existing store launch */
@@ -4081,8 +4262,8 @@
           </div>
           <div class="s1-spec-divider"></div>
           <div class="s1-spec-item">
-            <span class="s1-spec-value">Y → S → X</span>
-            <span class="s1-spec-label">Growth<br>Ladder</span>
+            <span class="s1-spec-value">Y → S → V → X</span>
+            <span class="s1-spec-label">Y-series → S-series<br>→ V-series → X-series</span>
           </div>
         </div>
 
@@ -4568,7 +4749,7 @@
           FTPL Tamil Nadu · Campaign Execution
         </p>
         <h2 class="display-large reveal-line"
-            style="margin-bottom:48px">
+            style="margin-bottom:20px">
           <span class="peach">25 Jul</span>
           <span style="color:var(--muted)"> — </span>
           31 Aug 2026.
@@ -4839,47 +5020,70 @@
   </section>
 
   
-<!-- S8: KOL TOOL BRIDGE -->
-  <section class="scene" id="s7-kol"
-    data-label="KOL System">
+<!-- S7: KOL SYSTEM + TOOL BRIDGE -->
+  <section class="scene" id="s7-kol" data-label="KOL System">
     <span class="slide-num">07 / 10</span>
-
-    <!-- Ambient glow -->
     <div class="s8-glow"></div>
-
-    <div class="s8-content">
-      <p class="eyebrow reveal-line"
-         style="margin-bottom:20px;
-                text-align:center">
-        Live Intelligence Tool
-      </p>
-      <h2 class="display-hero reveal-line"
-          style="text-align:center; margin-bottom:8px">
-        See every KOL.
-      </h2>
-      <h2 class="display-hero reveal-line lavender"
-          style="text-align:center; margin-bottom:32px">
-        Score by score.
-      </h2>
-      <p class="body-large reveal-line"
-         style="text-align:center;
-                max-width:420px;
-                margin:0 auto 48px">
-        14 confirmed creators. 15 parameters. Top fit 100%.
-        Every selection scored and defensible.
-      </p>
-      <div style="text-align:center" class="reveal-line">
-        <button class="s8-cta"
-                onclick="enterKolMode('kol-params')">
+    <div class="s7-kol-system">
+      <p class="eyebrow" style="margin-bottom:10px">The Intelligence Behind the Selection</p>
+      <h2 class="display-large" style="margin-bottom:4px">Not a shortlist.</h2>
+      <h2 class="display-large peach" style="margin-bottom:22px">A system.</h2>
+      <div class="s7-acts">
+        <div class="s7-act" id="s7-act1">
+          <div class="s7-act-num peach">01</div>
+          <div class="s7-act-body">
+            <h3 class="display-medium" style="margin-bottom:8px">Database Built</h3>
+            <p class="body-medium" style="max-width:340px">
+              A 49-column intelligence framework across 11 evaluation sheets.
+              Content quality · Audience demographics · Engagement authenticity · Competitor exposure.
+            </p>
+          </div>
+        </div>
+        <div class="s7-act" id="s7-act2">
+          <div class="s7-act-num lavender">02</div>
+          <div class="s7-act-body">
+            <h3 class="display-medium" style="margin-bottom:8px">15 Parameters Scored</h3>
+            <p class="body-medium" style="max-width:340px">
+              Market-specific parameters for the S2 Gen Z Tamil Nadu brief.
+              Two hard blocks — Reel Dominance and No Competitor Conflict — were non-negotiable.
+            </p>
+          </div>
+        </div>
+        <div class="s7-act" id="s7-act3">
+          <div class="s7-act-num" style="color:var(--text)">03</div>
+          <div class="s7-act-body">
+            <h3 class="display-medium" style="margin-bottom:8px">Portfolio Assembled</h3>
+            <p class="body-medium" style="max-width:340px">
+              14 confirmed KOLs across Celebrity · Influencer · Model tiers.
+              Deployed across 4 campaign phases. Top fit score: 100%.
+            </p>
+            <div class="s7-inline-stats">
+              <div class="s7-stat">
+                <span class="s7-stat-val peach">14</span>
+                <span class="s7-stat-label">KOLs</span>
+              </div>
+              <div class="s7-stat">
+                <span class="s7-stat-val lavender">100</span>
+                <span class="s7-stat-label">% Top Score</span>
+              </div>
+              <div class="s7-stat">
+                <span class="s7-stat-val">15</span>
+                <span class="s7-stat-label">Parameters</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="s7-kol-cta">
+        <button class="s8-cta" onclick="enterKolMode('kol-params')">
           Open KOL Intelligence Tool
           <span class="s8-cta-arrow">→</span>
         </button>
       </div>
     </div>
-
   </section>
 
-  <!-- S9: JBP PARTNERS -->
+<!-- S9: JBP PARTNERS -->
   <section class="scene" id="s8-jbp"
     data-label="JBP Strategy">
     <span class="slide-num">08 / 10</span>
@@ -5139,11 +5343,6 @@
         <p class="s11-flow-close">The demand is created before the customer enters the store. The store launch closes it.</p>
       </div>
 
-      <div class="s11-callout">
-        <p class="s11-callout-title">⚑ Activation Condition</p>
-        <p class="s11-callout-body">All trade-side employees (excluding competitor brand staff) must promote their store's influencer launch on personal social media platforms.</p>
-      </div>
-
       <div class="s11-why-block">
         <p class="s11-block-label">Why It Works At Retail</p>
         <div class="s11-why-grid">
@@ -5152,6 +5351,72 @@
           <article class="s11-why-card"><div class="s11-why-num">03</div><h3 class="s11-why-title">Retailer Satisfaction</h3><p class="s11-why-body">Honouring a campaign request builds long-term trust — retailers become advocates, not just stockists.</p></article>
           <article class="s11-why-card"><div class="s11-why-num">04</div><h3 class="s11-why-title">Customer Delight</h3><p class="s11-why-body">A first-ownership experience customers remember creates word-of-mouth that no media spend can buy.</p></article>
         </div>
+      </div>
+
+      <div class="s9-event-wrap">
+        <p class="s9-event-note">24 hours before event — Influencer posts arrival announcement on Instagram Story tagging @vivoindiatamilnadu</p>
+        <p class="s9-event-label">Influencer Store Launch — Event Flow</p>
+        <div class="s9-event-roadmap" aria-label="Influencer store launch event flow">
+          <svg class="s9-event-svg" viewBox="0 0 1000 320" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M 60 40 C 220 40, 280 40, 360 100 S 520 220, 620 160 S 780 60, 940 260"
+                  fill="none" stroke="#F1916D" stroke-width="3" stroke-dasharray="10 8" stroke-linecap="round"/>
+          </svg>
+          <div class="s9-event-stops">
+            <div class="s9-event-stop right" style="top:2%; left:2%">
+              <div class="s9-event-pin">1</div>
+              <div class="s9-event-card">
+                <p class="s9-event-time">6:00 PM</p>
+                <h4 class="s9-event-title">Influencer Arrival &amp; Welcome</h4>
+                <p class="s9-event-body">Store Manager and Retailer Owner welcome the influencer. Trade Owner and vivo officials felicitate with a bouquet.</p>
+              </div>
+            </div>
+            <div class="s9-event-stop left" style="top:18%; right:28%">
+              <div class="s9-event-pin">2</div>
+              <div class="s9-event-card">
+                <p class="s9-event-time">6:15 PM</p>
+                <h4 class="s9-event-title">vivo S2 Unveiling</h4>
+                <p class="s9-event-body">Influencer officially unveils the all-new vivo S2. First reaction recorded. Retailer team and customers present.</p>
+              </div>
+            </div>
+            <div class="s9-event-stop right" style="top:38%; left:42%">
+              <div class="s9-event-pin">3</div>
+              <div class="s9-event-card">
+                <p class="s9-event-time">6:30 PM</p>
+                <h4 class="s9-event-title">Handover to Pre-Booked Customers</h4>
+                <p class="s9-event-body">Influencer personally hands over S2 smartphones to pre-booked customers. Testimonials captured.</p>
+              </div>
+            </div>
+            <div class="s9-event-stop left" style="top:52%; left:8%">
+              <div class="s9-event-pin">4</div>
+              <div class="s9-event-card">
+                <p class="s9-event-time">6:50 PM</p>
+                <h4 class="s9-event-title">Launch Celebration</h4>
+                <p class="s9-event-body">Cake-cutting with customers, Retailer Owner and Store Manager. Group photographs with vivo branding.</p>
+              </div>
+            </div>
+            <div class="s9-event-stop right" style="top:68%; left:48%">
+              <div class="s9-event-pin">5</div>
+              <div class="s9-event-card">
+                <p class="s9-event-time">7:10 PM</p>
+                <h4 class="s9-event-title">Product Experience &amp; Retailer Interaction</h4>
+                <p class="s9-event-body">Influencer showcases S2 highlights — camera, design, AI features, battery. Retailer explains launch offers.</p>
+              </div>
+            </div>
+            <div class="s9-event-stop left" style="top:78%; right:2%">
+              <div class="s9-event-pin">6</div>
+              <div class="s9-event-card">
+                <p class="s9-event-time">7:30 PM</p>
+                <h4 class="s9-event-title">Social Media Publishing &amp; Wrap-up</h4>
+                <p class="s9-event-body">Event footage edited into reels. Influencer publishes launch video tagging @vivoindiatamilnadu. Content shared across retailer channels.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s11-callout">
+        <p class="s11-callout-title">⚑ Activation Condition</p>
+        <p class="s11-callout-body">All trade-side employees (excluding competitor brand staff) must promote their store's influencer launch on personal social media platforms.</p>
       </div>
     </div>
   </section>
@@ -6280,10 +6545,10 @@ ScrollTrigger.create({
 
 ScrollTrigger.create({
   trigger: '#s7-kol',
-  start: 'top top',
-  end: 'bottom bottom',
-  onUpdate: (self) => {
-    if (self.progress > 0.75) {
+  start: 'top 80%',
+  once: true,
+  onEnter: () => {
+    if (document.getElementById('s7-act3')) {
       gsap.to('#s7-act3', {
         y: 0, opacity: 1, duration: 0.6,
         ease: 'power2.out', overwrite: 'auto'
