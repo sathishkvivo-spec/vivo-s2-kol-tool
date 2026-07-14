@@ -121,6 +121,27 @@
      EXPORT BUTTON
      Fixed top-right. Minimal.
   ═══════════════════════════════════ */
+  #present-btn {
+    position: fixed;
+    top: 20px;
+    right: 128px;
+    z-index: 100;
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    padding: 7px 14px;
+    border: 1px solid rgba(240,235,248,0.10);
+    border-radius: 6px;
+    background: rgba(10,10,15,0.80);
+    backdrop-filter: blur(12px);
+    transition: color 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  #present-btn:hover {
+    color: var(--peach);
+    border-color: rgba(241,145,109,0.30);
+  }
   #export-btn {
     position: fixed;
     top: 20px;
@@ -652,6 +673,7 @@
     transform: scaleX(1) !important;
   }
   body.print-mode #slide-nav,
+  body.print-mode #present-btn,
   body.print-mode #export-btn,
   body.print-mode #section-label { display: none !important; }
 
@@ -660,6 +682,7 @@
     overflow: hidden !important;
   }
   body.export-capturing #section-label,
+  body.export-capturing #present-btn,
   body.export-capturing #export-btn,
   body.export-capturing #export-dropdown,
   body.export-capturing #slide-nav,
@@ -683,38 +706,37 @@
      S1 — OPENING + PRODUCT (merged)
   ═══════════════════════════════════ */
   #s1-opening {
-    height: 100vh;
-    max-height: 100dvh;
-    overflow: hidden;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: stretch;
     background: var(--canvas);
-    padding: 0 clamp(40px, 5vw, 80px);
+    padding: 0;
     box-sizing: border-box;
     position: relative;
   }
   .s1-layout {
     width: 100%;
-    max-width: 1280px;
     height: 100%;
-    max-height: 100%;
+    max-width: none;
     display: flex;
-    align-items: center;
-    gap: clamp(16px, 2vw, 32px);
+    align-items: stretch;
+    gap: 0;
     box-sizing: border-box;
   }
   .s1-left {
     position: relative;
     z-index: 2;
-    width: 52%;
-    flex: 0 0 52%;
-    max-height: 100%;
-    padding: clamp(20px, 3vh, 36px) 0;
+    width: 50%;
+    flex: 0 0 50%;
+    height: 100%;
+    padding: clamp(28px, 4vh, 48px) clamp(28px, 3.5vw, 56px) clamp(24px, 3vh, 40px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 0;
+    gap: clamp(8px, 1.2vh, 14px);
     box-sizing: border-box;
     overflow: hidden;
   }
@@ -729,31 +751,31 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 0;
+    margin: 0;
   }
   .s1-open-line {
     font-family: var(--ff-display);
-    font-size: clamp(26px, 3.4vw, 46px);
+    font-size: clamp(3.2rem, 6.5vw, 7rem);
     font-weight: 800;
-    line-height: 1.02;
+    line-height: 0.98;
     letter-spacing: -0.03em;
-    margin: 0 0 2px;
+    margin: 0;
   }
   .s1-product-headline {
     font-family: var(--ff-display);
-    font-size: clamp(18px, 2vw, 26px);
+    font-size: clamp(1.6rem, 2.8vw, 3rem);
     font-weight: 700;
-    line-height: 1.12;
+    line-height: 1.1;
     letter-spacing: -0.025em;
     color: var(--text);
     margin: 0;
   }
   .s1-positioning {
     font-family: var(--ff-body);
-    font-size: clamp(13px, 1.1vw, 15px);
-    line-height: 1.4;
+    font-size: 1rem;
+    line-height: 1.45;
     color: var(--muted);
-    max-width: 420px;
+    max-width: 460px;
     margin: 0;
   }
   .s1-colours-label {
@@ -763,73 +785,62 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   .s1-colour-row {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     align-items: center;
     flex-wrap: wrap;
-    margin-bottom: 0;
   }
   .s1-colour-item {
     display: flex;
     align-items: center;
     gap: 10px;
     font-family: var(--ff-body);
-    font-size: 12px;
+    font-size: 13px;
     color: var(--muted);
   }
   .s1-swatch {
-    width: 22px;
-    height: 22px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     border: 1px solid rgba(240,235,248,0.18);
     flex-shrink: 0;
   }
   .s1-specs {
-    display: flex;
-    align-items: flex-start;
-    gap: 0;
-    margin-top: 0;
-    margin-bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    margin: 0;
   }
   .s1-spec-item {
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    padding-right: 18px;
-    max-width: 200px;
+    gap: 4px;
+    padding: 16px;
+    max-width: none;
+    border: 1px solid rgba(241,145,109,0.3);
+    border-radius: 8px;
+    box-sizing: border-box;
+    background: rgba(15,15,24,0.55);
   }
   .s1-spec-value {
     font-family: var(--ff-display);
-    font-size: clamp(18px, 2vw, 26px);
+    font-size: clamp(18px, 2vw, 24px);
     font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--peach);
   }
   .s1-spec-label {
     font-family: var(--ff-body);
-    font-size: 11px;
-    line-height: 1.3;
-    color: var(--muted);
-  }
-  .s1-spec-sub {
-    font-family: var(--ff-body);
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.35;
     color: var(--muted);
-    margin-top: 3px;
-    opacity: 0.85;
   }
-  .s1-spec-divider {
-    width: 1px;
-    height: 40px;
-    background: var(--border);
-    margin-right: 18px;
-    flex-shrink: 0;
-    margin-top: 4px;
-  }
+  .s1-spec-sub { display: none; }
+  .s1-spec-divider { display: none; }
   .s1-scroll-cue {
     display: flex;
     align-items: center;
@@ -863,42 +874,35 @@
   }
   .s1-right {
     position: relative;
-    width: 48%;
-    flex: 0 0 48%;
+    width: 50%;
+    flex: 0 0 50%;
     height: 100%;
-    max-height: 100%;
+    padding: 0;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     box-sizing: border-box;
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.98);
   }
   .s1-right picture {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
     width: 100%;
     height: 100%;
-    max-height: 100%;
-    position: relative;
-    top: -3%;
+    margin: 0;
+    padding: 0;
   }
   .s1-right img {
-    width: auto;
-    height: auto;
-    max-height: 90vh;
-    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    max-width: none;
     object-fit: contain;
     object-position: center;
   }
-  @media (max-width: 1366px) {
-    #s1-opening { padding: 0 48px; }
-    .s1-open-line { font-size: clamp(24px, 3.2vw, 40px); }
-    .s1-product-headline { font-size: clamp(17px, 1.9vw, 24px); margin: 0; }
-    .s1-right img { max-height: 88vh; }
-  }
+  .s1-campaign-line { display: none !important; }
   @media (max-width: 900px) {
     .s1-layout { flex-direction: column; }
     .s1-left,
@@ -910,34 +914,8 @@
       pointer-events: none;
       z-index: 0;
     }
-    .s1-left { width: 100%; }
-  }
-  .s1-campaign-line {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: clamp(14px, 2.5vh, 24px);
-    z-index: 3;
-    margin: 0;
-    padding: 0 clamp(24px, 4vw, 48px);
-    text-align: center;
-    font-family: var(--ff-body);
-    font-size: clamp(10px, 0.95vw, 12px);
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    line-height: 1.5;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 6px 4px;
-  }
-  .s1-camp-dot {
-    color: var(--peach);
-    margin: 0 6px;
-    font-weight: 700;
+    .s1-left { width: 100%; z-index: 2; }
+    .s1-open-line { font-size: clamp(2.4rem, 10vw, 3.5rem); }
   }
 
   /* ═══════════════════════════════════
@@ -959,8 +937,9 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: clamp(8px, 1.2vh, 12px);
+    gap: clamp(6px, 1vh, 10px);
     justify-content: space-between;
+    overflow: hidden;
   }
   .npl-overline {
     color: var(--peach) !important;
@@ -1166,10 +1145,12 @@
   }
   .npl-pillar-detail {
     font-family: var(--ff-body);
-    font-size: 11px;
-    line-height: 1.4;
+    font-size: 0.9rem;
+    line-height: 1.35;
     color: var(--muted);
   }
+  .npl-card-role { font-size: 0.9rem !important; }
+  .npl-tn-copy, .npl-loc-pill, .npl-owner-text { font-size: 0.9rem; }
   .npl-tn-split {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1331,8 +1312,8 @@
   .s3-type-visual {
     position: relative;
     width: 100%;
-    flex: 0 0 42%;
-    min-height: clamp(72px, 10vh, 110px);
+    flex: 0 0 40%;
+    min-height: 120px;
     height: auto;
     overflow: hidden;
     background: var(--dim);
@@ -1379,31 +1360,39 @@
     text-shadow: 0 6px 28px rgba(0,0,0,0.65);
   }
   .s3-type-body {
-    padding: 10px 12px 12px;
+    padding: 12px 14px 14px;
     display: flex;
     flex-direction: column;
     flex: 1;
     min-width: 0;
+    gap: 8px;
+    justify-content: flex-start;
   }
   #s3-consumer .s3-type-body .display-medium {
     font-family: var(--ff-display);
-    font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 4px !important;
+    margin: 0 !important;
     letter-spacing: -0.02em;
   }
   #s3-consumer .s3-type-body .body-medium {
-    font-size: clamp(11px, 0.95vw, 12px);
-    line-height: 1.45;
+    font-size: 0.9rem;
+    line-height: 1.4;
     max-width: none;
-    flex: 1;
+    flex: 0 0 auto;
+    margin: 0 !important;
+    color: var(--muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .s3-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-top: 14px !important;
+    margin-top: 0 !important;
   }
   .s3-tag {
     font-family: var(--ff-body);
@@ -1441,12 +1430,13 @@
   .s3-places-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-    margin-bottom: 10px;
+    gap: 12px;
+    margin-bottom: 0;
   }
   .s3-place {
     background: #0F0F18;
     border: 1px solid rgba(241,145,109,0.30);
+    padding: 16px 20px !important;
     border-radius: 10px;
     padding: 10px 12px;
     text-align: left;
@@ -1454,12 +1444,11 @@
     transform: scale(0);
   }
   .s3-place-name {
-    font-family: var(--ff-body);
-    font-size: clamp(12px, 1.05vw, 14px);
-    font-weight: 600;
+    font-family: var(--ff-display);
+    font-size: 1rem;
+    font-weight: 700;
     color: var(--text);
-    line-height: 1.3;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
   }
   .s3-place-desc {
     font-family: var(--ff-body);
@@ -1536,33 +1525,37 @@
     max-height: 100vh !important;
     overflow: hidden !important;
     align-items: stretch;
-    justify-content: center;
+    justify-content: flex-start;
     background: var(--canvas) !important;
     padding: 0;
   }
   .s5-sticky {
     position: relative; height: 100%; width: 100%;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; align-items: stretch; justify-content: stretch;
     overflow: hidden;
-    padding: clamp(40px, 5vh, 56px) clamp(20px, 3.5vw, 48px) clamp(44px, 5.5vh, 56px);
+    padding: 60px clamp(24px, 3vw, 48px) clamp(28px, 4vh, 40px);
     box-sizing: border-box;
   }
   .s5-framework {
-    width: 100%; max-width: 1120px;
+    width: 100%; max-width: none;
+    height: 100%;
     display: flex; flex-direction: column;
-    gap: clamp(14px, 2vh, 22px);
+    gap: clamp(16px, 2.2vh, 24px);
   }
-  .s5-fw-hero { text-align: left; }
+  .s5-fw-hero { text-align: left; flex-shrink: 0; }
   .s5-fw-hline {
     font-family: var(--ff-display);
-    font-size: clamp(26px, 3.2vw, 42px);
-    font-weight: 700; line-height: 1.06;
+    font-size: clamp(2.4rem, 4vw, 4rem);
+    font-weight: 700; line-height: 1.04;
     letter-spacing: -0.025em; color: var(--text);
     margin: 0; opacity: 0; transform: translateY(20px);
   }
   .s5-engines-row {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: clamp(14px, 2vw, 22px); align-items: stretch;
+    display: grid; grid-template-columns: 48% 48%;
+    column-gap: 4%;
+    align-items: stretch;
+    flex: 1;
+    min-height: calc(100vh - 280px);
   }
   .s5-eng-card {
     background: #0F0F18;
@@ -1570,54 +1563,57 @@
     border-radius: 14px; padding: 0;
     display: flex; flex-direction: column;
     overflow: hidden; opacity: 0; box-sizing: border-box;
+    min-height: calc(100vh - 280px);
+    height: 100%;
   }
   .s5-eng-left { transform: translateX(-40px); }
   .s5-eng-right { transform: translateX(40px); }
-  .s5-eng-body { padding: 14px 16px 16px; display: flex; flex-direction: column; flex: 1; }
+  .s5-eng-body { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
   .s5-eng-topband {
     display: block; width: 100%;
     font-family: var(--ff-body); font-size: 1rem; font-weight: 700;
     letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 10px 16px; box-sizing: border-box;
+    padding: 12px 18px; box-sizing: border-box;
   }
   .s5-band-peach { color: #F1916D; background: rgba(241,145,109,0.2); }
   .s5-band-lav { color: #AE7DAC; background: rgba(174,125,172,0.2); }
   .s5-eng-demand {
-    font-family: var(--ff-display); font-size: 1.1rem; font-weight: 700;
-    letter-spacing: 0.04em; margin: 0 0 6px;
+    font-family: var(--ff-display); font-size: 1.2rem; font-weight: 700;
+    letter-spacing: 0.04em; margin: 0 0 8px;
   }
   .s5-eng-demand.peach { color: #F1916D; }
   .s5-eng-demand.lavender { color: #AE7DAC; }
   .s5-eng-amt {
     font-family: var(--ff-display);
-    font-size: clamp(32px, 3.6vw, 46px); font-weight: 800;
-    letter-spacing: -0.03em; line-height: 1; margin-bottom: 12px;
+    font-size: clamp(2.8rem, 4vw, 4rem); font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1; margin-bottom: 16px;
   }
   .s5-eng-amt.peach { color: var(--peach); }
   .s5-eng-amt.lavender { color: var(--lavender); }
-  .s5-eng-items { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; flex: 1; }
+  .s5-eng-items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; flex: 1; }
   .s5-eng-item {
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
     opacity: 0; transform: translateY(8px);
   }
   .s5-eng-item-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
-  .s5-eng-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--peach); flex-shrink: 0; }
-  .s5-eng-item-name { font-family: var(--ff-body); font-size: 13px; color: var(--text); }
-  .s5-eng-item-val { font-family: var(--ff-display); font-size: 14px; font-weight: 700; color: var(--peach); flex-shrink: 0; }
-  .s5-partners { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 6px; margin-bottom: 12px; flex: 1; }
+  .s5-eng-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--peach); flex-shrink: 0; }
+  .s5-eng-item-name { font-family: var(--ff-body); font-size: 1rem; font-weight: 600; color: var(--text); }
+  .s5-eng-item-val { font-family: var(--ff-display); font-size: 1rem; font-weight: 700; color: var(--peach); flex-shrink: 0; }
+  .s5-partners { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-bottom: 14px; flex: 1; }
   .s5-partner {
-    font-family: var(--ff-body); font-size: 11px; font-weight: 600; color: var(--text);
+    font-family: var(--ff-body); font-size: 1rem; font-weight: 600; color: var(--text);
     background: rgba(10,10,15,0.55); border: 1px solid var(--border);
-    border-radius: 8px; padding: 7px 8px; text-align: center;
+    border-radius: 8px; padding: 10px 12px; text-align: center;
     opacity: 0; transform: translateY(8px);
   }
   .s5-eng-foot {
-    font-family: var(--ff-body); font-size: 12px; line-height: 1.4; color: var(--muted);
-    border-top: 1px solid var(--border); padding-top: 10px;
+    font-family: var(--ff-body); font-size: 13px; line-height: 1.4; color: var(--muted);
+    border-top: 1px solid var(--border); padding-top: 12px;
   }
-  @media (max-width: 900px) { .s5-engines-row { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .s5-engines-row { grid-template-columns: 1fr; min-height: 0; } .s5-eng-card { min-height: 0; } }
 
   /* ═══════════════════════════════════
+     S5 — V60 VS S2 BUDGET  /* ═══════════════════════════════════
      S5 — V60 VS S2 BUDGET (was S6 comment)
   ═══════════════════════════════════ */
   #s5-v60-vs-s2 {
@@ -1633,12 +1629,13 @@
     width: 100%;
     max-width: 1120px;
     margin: 0 auto;
-    height: auto;
+    height: 100%;
     min-height: 0;
     display: flex;
     flex-direction: column;
-    gap: clamp(14px, 2vh, 22px);
+    gap: clamp(8px, 1.2vh, 14px);
     justify-content: flex-start;
+    overflow: hidden;
   }
   .v60-overline {
     font-family: var(--ff-body);
@@ -1652,7 +1649,7 @@
   }
   .v60-hline {
     font-family: var(--ff-display);
-    font-size: clamp(28px, 3.4vw, 48px);
+    font-size: clamp(1.8rem, 3.2vw, 3.5rem);
     font-weight: 700;
     line-height: 1.08;
     letter-spacing: -0.025em;
@@ -1660,6 +1657,7 @@
     margin: 0;
     opacity: 0;
     transform: translateY(24px);
+    white-space: nowrap;
   }
   .v60-sub {
     font-family: var(--ff-body);
@@ -1738,14 +1736,11 @@
     opacity: 0;
   }
   .v60-table-wrap {
-    flex: 1;
+    flex: 0 0 auto;
     min-height: 0;
-    max-height: calc(100vh - 320px);
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: none;
+    max-height: none;
+    overflow: visible;
   }
-  .v60-table-wrap::-webkit-scrollbar { display: none; }
   .v60-table {
     width: 100%;
     border-collapse: collapse;
@@ -1753,18 +1748,16 @@
     font-family: var(--ff-body);
   }
   .v60-table thead th {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #F0EBF8;
     text-align: left;
-    padding: 8px 12px;
+    padding: 6px 12px;
     border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    background: var(--canvas);
-    z-index: 2;
+    position: static;
+    background: transparent;
   }
   .v60-table thead th:nth-child(4) { color: #F1916D; }
   .v60-table thead th:nth-child(1),
@@ -1789,10 +1782,11 @@
     transform: translateY(8px);
   }
   .v60-row td {
-    font-size: clamp(11px, 1vw, 13px);
+    font-size: 0.8rem;
     color: var(--text);
-    padding: 10px 16px;
-    min-height: 44px;
+    padding: 6px 12px;
+    height: 36px;
+    min-height: 36px;
     border-bottom: 1px solid rgba(240,235,248,0.04);
     vertical-align: middle;
   }
@@ -1845,11 +1839,8 @@
   }
   .v60-row-total td:first-child { border-radius: 0; }
   .v60-row-total td:last-child { border-radius: 0; }
-  .v60-insights {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-  }
+  .v60-insights,
+  .v60-insight { display: none !important; }
   .v60-insight {
     background: var(--surface);
     border: 1px solid rgba(241,145,109,0.15);
@@ -2065,29 +2056,40 @@
   .s6-content { width: 100%; max-width: 1180px; margin: 0 auto; }
   #s6-strategy .display-large { font-size: clamp(22px, 2.8vw, 36px) !important; margin-bottom: 14px !important; }
   #s6-strategy .s6-activities { margin-top: 10px !important; }
-  .s6-ho-wrap { margin-top: 10px; width: 100%; }
-  .s6-ho-label {
-    font-family: var(--ff-body); font-size: 10px; font-weight: 700;
-    letter-spacing: 0.12em; text-transform: uppercase; color: var(--peach); margin: 0 0 8px;
+  .s6-ho-wrap { margin-top: 14px; width: 100%; }
+  .s6-ho-simple {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
   }
-  .s6-ho-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
-  .s6-ho-card {
-    background: #0F0F18; border: 1px solid rgba(241,145,109,0.18);
-    border-radius: 12px; padding: 10px 12px; box-sizing: border-box;
+  .s6-ho-stat {
+    border: 1px solid rgba(241,145,109,0.3);
+    border-radius: 8px;
+    padding: 12px 24px;
+    background: #0F0F18;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
-  .s6-ho-title { font-family: var(--ff-display); font-size: 13px; font-weight: 700; color: var(--text); margin: 0 0 2px; }
-  .s6-ho-budget { font-family: var(--ff-display); font-size: 16px; font-weight: 800; color: var(--peach); margin: 0 0 8px; }
-  .s6-ho-bars { display: flex; flex-direction: column; gap: 5px; margin-bottom: 6px; }
-  .s6-ho-bar-row { display: flex; align-items: center; gap: 6px; }
-  .s6-ho-bar-label { font-family: var(--ff-body); font-size: 9px; color: var(--muted); min-width: 62px; }
-  .s6-ho-bar-track { flex: 1; height: 3px; background: var(--dim); border-radius: 2px; overflow: hidden; }
-  .s6-ho-bar-fill { height: 100%; width: 0; background: var(--peach); border-radius: 2px; transition: width 0.8s ease; }
-  .s6-ho-bar-val { font-family: var(--ff-body); font-size: 9px; color: var(--text); min-width: 44px; text-align: right; }
-  .s6-ho-note { font-family: var(--ff-body); font-size: 9px; color: var(--muted); line-height: 1.3; margin: 0; }
-  @media (max-width: 900px) { .s6-ho-grid { grid-template-columns: 1fr; } }
+  .s6-ho-stat-label {
+    font-family: var(--ff-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .s6-ho-stat-amt {
+    font-family: var(--ff-display);
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 800;
+    color: var(--peach);
+    letter-spacing: -0.02em;
+  }
+  @media (max-width: 900px) { .s6-ho-simple { grid-template-columns: 1fr; } }
 
   /* ═══════════════════════════════════
-     S7 — KOL INTELLIGENCE  /* ═══════════════════════════════════
      S7 — KOL INTELLIGENCE
   ═══════════════════════════════════ */
   .s7-sticky {
@@ -2107,11 +2109,27 @@
     font-family: var(--ff-display);
     font-size: clamp(100px,14vw,200px);
     font-weight: 800;
-    color: rgba(240,235,248,0.015);
+    color: rgba(240,235,248,0.04);
     letter-spacing: -0.04em;
     pointer-events: none;
     user-select: none;
     line-height: 1;
+  }
+  #s7-timeline {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+  }
+  #s7-timeline .s7-sticky {
+    position: relative;
+    height: 100%;
+  }
+  #s7-timeline .s7-content {
+    opacity: 1;
+    visibility: visible;
+  }
+  #s7-timeline .s7-act-body {
+    opacity: 1;
   }
   .s7-content {
     position: relative;
@@ -3813,7 +3831,8 @@
 <!-- Floating section label (Option C nav) -->
 <div id="section-label"></div>
 
-<!-- Export button -->
+<!-- Present + Export -->
+<button type="button" id="present-btn" title="Fullscreen presentation">⛶ Present</button>
 <button id="export-btn">Export ↓</button>
 <div id="export-dropdown">
   <button class="export-option" id="export-pdf">Download as PDF</button>
@@ -3865,8 +3884,8 @@
         </h2>
 
         <p class="s1-positioning s1-block">
-          A powerful price band entry. 35K-45K.<br>
-          The new medium segment. Owned.
+          A powerful price band entry.<br>
+          ₹35K–₹45K · The new medium segment. Owned.
         </p>
 
         <div class="s1-block">
@@ -3899,9 +3918,8 @@
           </div>
           <div class="s1-spec-divider"></div>
           <div class="s1-spec-item">
-            <span class="s1-spec-value">Y to S to X</span>
-            <span class="s1-spec-label">Growth Ladder</span>
-            <span class="s1-spec-sub">S2 bridges Y-series to V-series. Today's S2 buyer is tomorrow's X user.</span>
+            <span class="s1-spec-value">Y → S → X</span>
+            <span class="s1-spec-label">Growth<br>Ladder</span>
           </div>
         </div>
 
@@ -3919,16 +3937,6 @@
       </div>
     </div>
 
-    <p class="s1-campaign-line s1-block">
-      <span>#MyNewStory</span>
-      <span class="s1-camp-dot" aria-hidden="true">·</span>
-      <span>Friends. Weekends. Never Ends.</span>
-      <span class="s1-camp-dot" aria-hidden="true">·</span>
-      <span>Caught in 4K</span>
-      <span class="s1-camp-dot" aria-hidden="true">·</span>
-      <span>Go-Live: 23 Jul 2026</span>
-    </p>
-
   </section>
 
   <!-- S2-NPL-ROLES: HQ & STATE ROLES -->
@@ -3943,7 +3951,6 @@
         <p class="eyebrow npl-overline">How S2 Goes to Market</p>
         <h2 class="npl-hline">One strategy.</h2>
         <h2 class="npl-hline">Two teams.</h2>
-        <h2 class="npl-hline">One Tamil Nadu.</h2>
         <p class="body-large npl-sub">
           vivo India builds the brand nationally.<br>
           FTPL makes it real in Tamil Nadu.
@@ -4061,11 +4068,6 @@
       </div>
 
       <!-- Closing -->
-      <p class="npl-closing">
-        The national campaign creates desire.<br>
-        Tamil Nadu converts it<span class="peach">.</span>
-      </p>
-
     </div>
   </section>
 
@@ -4245,8 +4247,7 @@
 
       <div class="v60-hero">
         <p class="v60-overline">Budget Intelligence</p>
-        <h2 class="v60-hline">Not just more.</h2>
-        <h2 class="v60-hline">Smarter.</h2>
+        <h2 class="v60-hline">Not just more. <span class="peach">Smarter.</span></h2>
         <p class="v60-sub">
           V60 taught us what works. S2 acts on it.<br>
           Total investment up ₹3L. Every rupee repositioned.
@@ -4649,39 +4650,19 @@
 
         </div><!-- end activities -->
           <div class="s6-ho-wrap">
-            <p class="s6-ho-label">HO Investment Breakdown</p>
-            <div class="s6-ho-grid">
-              <article class="s6-ho-card">
-                <h3 class="s6-ho-title">KOL Campaign</h3>
-                <div class="s6-ho-budget">₹10L</div>
-                <div class="s6-ho-bars">
-                  <div class="s6-ho-bar-row"><span class="s6-ho-bar-label">Pre-Buzz</span><div class="s6-ho-bar-track"><div class="s6-ho-bar-fill" data-w="75%"></div></div><span class="s6-ho-bar-val">₹3L</span></div>
-                  <div class="s6-ho-bar-row"><span class="s6-ho-bar-label">Pre-Book</span><div class="s6-ho-bar-track"><div class="s6-ho-bar-fill" data-w="100%"></div></div><span class="s6-ho-bar-val">₹4L</span></div>
-                  <div class="s6-ho-bar-row"><span class="s6-ho-bar-label">Super Day</span><div class="s6-ho-bar-track"><div class="s6-ho-bar-fill" data-w="50%"></div></div><span class="s6-ho-bar-val">₹2L</span></div>
-                  <div class="s6-ho-bar-row"><span class="s6-ho-bar-label">Super Week</span><div class="s6-ho-bar-track"><div class="s6-ho-bar-fill" data-w="25%"></div></div><span class="s6-ho-bar-val">₹1L</span></div>
-                </div>
-                <p class="s6-ho-note">14 KOLs across Chennai &amp; Coimbatore</p>
-              </article>
-              <article class="s6-ho-card">
-                <h3 class="s6-ho-title">Retailer Unboxing</h3>
-                <div class="s6-ho-budget">₹1L</div>
-                <div class="s6-ho-bars">
-                  <div class="s6-ho-bar-row"><span class="s6-ho-bar-label">Pre-Book</span><div class="s6-ho-bar-track"><div class="s6-ho-bar-fill" data-w="40%"></div></div><span class="s6-ho-bar-val">1 Video</span></div>
-                  <div class="s6-ho-bar-row"><span class="s6-ho-bar-label">Super Day+</span><div class="s6-ho-bar-track"><div class="s6-ho-bar-fill" data-w="80%"></div></div><span class="s6-ho-bar-val">2 Videos</span></div>
-                </div>
-                <p class="s6-ho-note">Selected key retail partners</p>
-              </article>
-              <article class="s6-ho-card">
-                <h3 class="s6-ho-title">Social Media</h3>
-                <div class="s6-ho-budget">₹1L</div>
-                <div class="s6-ho-bars">
-                  <div class="s6-ho-bar-row"><span class="s6-ho-bar-label">Pre-Buzz</span><div class="s6-ho-bar-track"><div class="s6-ho-bar-fill" data-w="30%"></div></div><span class="s6-ho-bar-val">₹30K</span></div>
-                  <div class="s6-ho-bar-row"><span class="s6-ho-bar-label">Pre-Book</span><div class="s6-ho-bar-track"><div class="s6-ho-bar-fill" data-w="30%"></div></div><span class="s6-ho-bar-val">₹30K</span></div>
-                  <div class="s6-ho-bar-row"><span class="s6-ho-bar-label">Super+</span><div class="s6-ho-bar-track"><div class="s6-ho-bar-fill" data-w="20%"></div></div><span class="s6-ho-bar-val">₹20K</span></div>
-                  <div class="s6-ho-bar-row"><span class="s6-ho-bar-label">Sustenance</span><div class="s6-ho-bar-track"><div class="s6-ho-bar-fill" data-w="20%"></div></div><span class="s6-ho-bar-val">₹20K</span></div>
-                </div>
-                <p class="s6-ho-note">FTPL owned channels</p>
-              </article>
+            <div class="s6-ho-simple">
+              <div class="s6-ho-stat">
+                <span class="s6-ho-stat-label">KOL</span>
+                <span class="s6-ho-stat-amt">₹10L</span>
+              </div>
+              <div class="s6-ho-stat">
+                <span class="s6-ho-stat-label">Retailer Unboxing</span>
+                <span class="s6-ho-stat-amt">₹1L</span>
+              </div>
+              <div class="s6-ho-stat">
+                <span class="s6-ho-stat-label">Social Media</span>
+                <span class="s6-ho-stat-amt">₹1L</span>
+              </div>
             </div>
           </div>
 
@@ -4694,8 +4675,7 @@
 
   <!-- S7: THE KOL SYSTEM -->
   <section class="scene" id="s7-timeline"
-    data-label="Timeline"
-    style="height:150vh; display:block; overflow:visible">
+    data-label="Timeline">
     <span class="slide-num">07 / 11</span>
 
     <div class="s7-sticky">
@@ -4775,7 +4755,7 @@
                 14 confirmed KOLs across
                 Celebrity · Influencer · Model tiers.
                 Deployed across 4 campaign phases.
-                Top fit score: 85%.
+                Top fit score: 100%.
                 Every selection is defensible.
               </p>
               <!-- Inline stats -->
@@ -4789,13 +4769,13 @@
                 <div class="s7-stat">
                   <span class="s7-stat-val lavender"
                         data-countup
-                        data-target="85">0</span>
+                        data-target="100">0</span>
                   <span class="s7-stat-label">
                     % Top Score
                   </span>
                 </div>
                 <div class="s7-stat">
-                  <span class="s7-stat-val">10</span>
+                  <span class="s7-stat-val">15</span>
                   <span class="s7-stat-label">
                     Parameters
                   </span>
@@ -5395,6 +5375,8 @@ function enterKolMode(tab = 'kol-params') {
   document.getElementById('kol-nav').classList.add('active');
   document.getElementById('section-label').classList.remove('visible');
   document.getElementById('export-btn').style.display = 'none';
+  const _pb = document.getElementById('present-btn');
+  if (_pb) _pb.style.display = 'none';
   document.getElementById('slide-nav').classList.add('hidden');
   document.body.style.overflow = 'hidden';
   window.scrollTo(0, 0);
@@ -5410,6 +5392,8 @@ function exitKolMode() {
   });
   document.getElementById('kol-nav').classList.remove('active');
   document.getElementById('export-btn').style.display = '';
+  const _pb2 = document.getElementById('present-btn');
+  if (_pb2) _pb2.style.display = '';
   document.getElementById('slide-nav').classList.remove('hidden');
   document.body.style.overflow = '';
   window.scrollTo(0, document.getElementById('s8-kol').offsetTop);
@@ -5543,6 +5527,25 @@ const labelObserver = new IntersectionObserver(
 scenes.forEach(s => labelObserver.observe(s));
 
 // ─── EXPORT FUNCTIONALITY ─────────────
+const presentBtn = document.getElementById('present-btn');
+if (presentBtn) {
+  const syncPresentLabel = () => {
+    presentBtn.textContent = document.fullscreenElement ? '✕ Exit' : '⛶ Present';
+  };
+  presentBtn.addEventListener('click', async () => {
+    try {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (err) {
+      console.warn('Fullscreen unavailable', err);
+    }
+  });
+  document.addEventListener('fullscreenchange', syncPresentLabel);
+}
+
 const exportBtn = document.getElementById('export-btn');
 const exportDropdown = document.getElementById('export-dropdown');
 
@@ -6122,15 +6125,6 @@ v60Tl
     opacity: 1, duration: 0.45, stagger: 0.15,
     ease: 'power2.out'
   }, '-=0.15');
-
-document.querySelectorAll('#s6-strategy .s6-ho-bar-fill').forEach((el) => {
-  ScrollTrigger.create({
-    trigger: '#s6-strategy',
-    start: 'top 60%',
-    once: true,
-    onEnter: () => { el.style.width = el.getAttribute('data-w') || '50%'; }
-  });
-});
 
 gsap.fromTo('#s6-strategy .s6-pin .reveal-line',
   { y: 28, opacity: 0 },
