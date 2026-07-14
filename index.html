@@ -455,8 +455,7 @@
     #slide-nav,
     #progress-bar,
     #kol-nav,
-    #s4-music-btn,
-    .s1-scroll-cue { display: none !important; }
+        .s1-scroll-cue { display: none !important; }
     .scene {
       page-break-after: always;
       break-after: page;
@@ -466,42 +465,48 @@
       position: relative !important;
     }
     .scene[style] { height: 100vh !important; }
-    #s7-strategy.scene {
+    #s6-strategy.scene {
       height: auto !important;
       min-height: 100vh !important;
       overflow: visible !important;
       page-break-inside: auto;
     }
-    #s7-strategy .s6-pin {
+    #s6-strategy .s6-pin {
       height: auto !important;
       min-height: 100vh;
     }
-    #s7-strategy .s6-sticky {
+    #s6-strategy .s6-sticky {
       position: relative !important;
       height: auto !important;
       overflow: visible !important;
     }
-    #s10-jbp.scene {
+    #s9-jbp.scene {
       height: auto !important;
       min-height: 100vh !important;
       overflow: visible !important;
       page-break-inside: auto;
     }
-    #s10-jbp .s9-sticky {
+    #s9-jbp .s9-sticky {
       position: relative !important;
       height: auto !important;
       overflow: visible !important;
     }
-    #s11-store.scene {
+    #s10-store.scene {
       height: auto !important;
       min-height: 100vh !important;
       overflow: visible !important;
       page-break-inside: auto;
     }
-    #s11-store .s9-sticky {
+    #s10-store .s9-sticky {
       position: relative !important;
       height: auto !important;
       overflow: visible !important;
+    }
+    #s5-v60-vs-s2.scene {
+      height: auto !important;
+      min-height: 100vh !important;
+      overflow: visible !important;
+      page-break-inside: auto;
     }
     body { background: #0A0A0F !important; }
     * {
@@ -616,7 +621,6 @@
   body.print-mode .s9-gantt-seg.on .s9-gantt-fill {
     transform: scaleX(1) !important;
   }
-  body.print-mode #s4-music-btn,
   body.print-mode #slide-nav,
   body.print-mode #export-btn,
   body.print-mode #section-label { display: none !important; }
@@ -630,7 +634,6 @@
   body.export-capturing #export-dropdown,
   body.export-capturing #slide-nav,
   body.export-capturing #progress-bar,
-  body.export-capturing #s4-music-btn,
   body.export-capturing #kol-nav,
   body.export-capturing .s1-scroll-cue {
     display: none !important;
@@ -659,6 +662,7 @@
     background: var(--canvas);
     padding: 0 clamp(40px, 5vw, 80px);
     box-sizing: border-box;
+    position: relative;
   }
   .s1-layout {
     width: 100%;
@@ -676,10 +680,10 @@
     width: 52%;
     flex: 0 0 52%;
     max-height: 100%;
-    padding: clamp(16px, 2.5vh, 28px) 0;
+    padding: clamp(20px, 3vh, 36px) 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     gap: 0;
     box-sizing: border-box;
     overflow: hidden;
@@ -695,7 +699,7 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 8px;
+    margin-bottom: 0;
   }
   .s1-open-line {
     font-family: var(--ff-display);
@@ -712,7 +716,7 @@
     line-height: 1.12;
     letter-spacing: -0.025em;
     color: var(--text);
-    margin: 14px 0 6px;
+    margin: 0;
   }
   .s1-positioning {
     font-family: var(--ff-body);
@@ -720,7 +724,7 @@
     line-height: 1.4;
     color: var(--muted);
     max-width: 420px;
-    margin-bottom: 10px;
+    margin: 0;
   }
   .s1-colours-label {
     font-family: var(--ff-body);
@@ -729,14 +733,14 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
   .s1-colour-row {
     display: flex;
     gap: 16px;
     align-items: center;
     flex-wrap: wrap;
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
   .s1-colour-item {
     display: flex;
@@ -758,7 +762,7 @@
     align-items: flex-start;
     gap: 0;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
   .s1-spec-item {
     display: flex;
@@ -804,7 +808,7 @@
     font-family: var(--ff-body);
     font-size: 11px;
     letter-spacing: 0.1em;
-    margin-top: 2px;
+    margin-top: 0;
     flex-shrink: 0;
   }
   .s1-scroll-line {
@@ -848,11 +852,13 @@
     width: 100%;
     height: 100%;
     max-height: 100%;
+    position: relative;
+    top: -3%;
   }
   .s1-right img {
     width: auto;
     height: auto;
-    max-height: 80vh;
+    max-height: 90vh;
     max-width: 100%;
     object-fit: contain;
     object-position: center;
@@ -860,8 +866,8 @@
   @media (max-width: 1366px) {
     #s1-opening { padding: 0 48px; }
     .s1-open-line { font-size: clamp(24px, 3.2vw, 40px); }
-    .s1-product-headline { font-size: clamp(17px, 1.9vw, 24px); margin: 12px 0 6px; }
-    .s1-right img { max-height: 72vh; }
+    .s1-product-headline { font-size: clamp(17px, 1.9vw, 24px); margin: 0; }
+    .s1-right img { max-height: 88vh; }
   }
   @media (max-width: 900px) {
     .s1-layout { flex-direction: column; }
@@ -876,14 +882,44 @@
     }
     .s1-left { width: 100%; }
   }
+  .s1-campaign-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: clamp(14px, 2.5vh, 24px);
+    z-index: 3;
+    margin: 0;
+    padding: 0 clamp(24px, 4vw, 48px);
+    text-align: center;
+    font-family: var(--ff-body);
+    font-size: clamp(10px, 0.95vw, 12px);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 4px;
+  }
+  .s1-camp-dot {
+    color: var(--peach);
+    margin: 0 6px;
+    font-weight: 700;
+  }
 
   /* ═══════════════════════════════════
      S2-NPL-ROLES — HQ & STATE ROLES
   ═══════════════════════════════════ */
   #s2-npl-roles {
+    height: 100vh;
+    max-height: 100dvh;
+    overflow: hidden;
     align-items: stretch;
     justify-content: flex-start;
-    padding: clamp(56px, 7vh, 72px) clamp(28px, 5vw, 64px) clamp(28px, 4vh, 40px);
+    padding: clamp(48px, 5.5vh, 64px) clamp(24px, 4vw, 56px) clamp(20px, 3vh, 32px);
     background: var(--canvas);
   }
   .npl-wrap {
@@ -893,7 +929,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: clamp(16px, 2.4vh, 28px);
+    gap: clamp(10px, 1.6vh, 16px);
     justify-content: space-between;
   }
   .npl-overline {
@@ -919,12 +955,12 @@
   }
   .npl-block-label {
     font-family: var(--ff-display);
-    font-size: clamp(12px, 1.1vw, 14px);
+    font-size: clamp(11px, 1vw, 13px);
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--peach);
-    margin-bottom: 14px;
+    margin-bottom: 10px;
     opacity: 0;
   }
   .npl-timeline {
@@ -933,12 +969,12 @@
     grid-template-columns: repeat(7, 1fr);
     gap: 0;
     align-items: start;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
   .npl-timeline::before {
     content: '';
     position: absolute;
-    top: 11px;
+    top: 9px;
     left: calc(100% / 14);
     right: calc(100% / 14);
     height: 1px;
@@ -957,8 +993,8 @@
     transform: translateY(16px);
   }
   .npl-dot {
-    width: 14px;
-    height: 14px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
     background: var(--peach);
     border: 2px solid var(--canvas);
@@ -1045,8 +1081,8 @@
   .npl-card {
     background: var(--surface);
     border: 1px solid rgba(241,145,109,0.15);
-    border-radius: 14px;
-    padding: clamp(14px, 1.8vw, 22px);
+    border-radius: 12px;
+    padding: 1rem;
     opacity: 0;
   }
   .npl-card-hq { transform: translateX(-48px); }
@@ -1058,24 +1094,24 @@
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 4px 10px;
+    padding: 3px 9px;
     border-radius: 999px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   .npl-card-title {
     font-family: var(--ff-display);
-    font-size: clamp(20px, 2.2vw, 30px);
+    font-size: 1.6rem;
     font-weight: 700;
     line-height: 1.15;
     letter-spacing: -0.02em;
     color: var(--text);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
   .npl-card-role {
     font-family: var(--ff-body);
     font-size: 12px;
     color: var(--muted);
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
   .npl-pillars {
     display: grid;
@@ -1151,14 +1187,14 @@
   }
   .npl-closing {
     text-align: center;
-    font-family: var(--ff-display);
-    font-size: clamp(16px, 1.8vw, 22px);
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    font-family: var(--ff-body);
+    font-size: clamp(12px, 1.15vw, 14px);
+    font-weight: 500;
+    letter-spacing: 0.02em;
     line-height: 1.45;
-    color: var(--text);
+    color: var(--muted);
     opacity: 0;
-    margin-top: 2px;
+    margin-top: 0;
   }
   @media (max-width: 900px) {
     #s2-npl-roles {
@@ -1248,23 +1284,26 @@
     padding: 0;
     outline: none;
     border: 1px solid rgba(240,235,248,0.08);
+    border-left: 3px solid #F1916D;
     border-radius: 16px;
     overflow: hidden;
-    background: rgba(15,15,24,0.62);
+    background: #0D0D16;
     box-shadow: 0 12px 40px rgba(0,0,0,0.22);
     transition: border-color 0.25s ease,
                 transform 0.25s ease;
   }
   .s3-type:hover {
     border-color: rgba(241,145,109,0.28);
+    border-left-color: #F1916D;
     transform: translateY(-3px);
   }
   .s3-type-visual {
     position: relative;
     width: 100%;
-    height: clamp(110px, 18vh, 180px);
+    flex: 0 0 55%;
+    min-height: clamp(120px, 16vh, 200px);
+    height: auto;
     overflow: hidden;
-    flex-shrink: 0;
     background: var(--dim);
     border: none;
   }
@@ -1299,12 +1338,13 @@
     bottom: 10px;
     z-index: 2;
     font-family: var(--ff-display);
-    font-size: clamp(28px, 3vw, 42px);
+    font-size: 5rem;
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1;
     min-width: 0;
     padding: 0;
+    color: #F1916D;
     text-shadow: 0 6px 28px rgba(0,0,0,0.65);
   }
   .s3-type-body {
@@ -1317,13 +1357,16 @@
     min-width: 0;
   }
   #s3-consumer .s3-type-body .display-medium {
-    font-size: clamp(18px, 1.8vw, 24px);
+    font-family: var(--ff-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text);
     margin-bottom: 8px !important;
     letter-spacing: -0.02em;
   }
   #s3-consumer .s3-type-body .body-medium {
     font-size: clamp(12px, 1.05vw, 14px);
-    line-height: 1.55;
+    line-height: 1.7;
     max-width: none;
     flex: 1;
   }
@@ -1339,8 +1382,8 @@
     font-weight: 500;
     color: var(--muted);
     padding: 4px 10px;
-    border: 1px solid rgba(240,235,248,0.12);
-    background: transparent;
+    border: 1px solid rgba(241,145,109,0.4);
+    background: rgba(241,145,109,0.08);
     border-radius: 20px;
     letter-spacing: 0.05em;
   }
@@ -1404,6 +1447,14 @@
     line-height: 1.4;
     opacity: 0;
   }
+  @media (max-width: 1366px) {
+    .s3-type-num { font-size: 3.6rem; }
+    #s3-consumer .s3-type-body .display-medium { font-size: 1.5rem; }
+    .s3-type-visual {
+      flex: 0 0 48%;
+      min-height: clamp(100px, 14vh, 160px);
+    }
+  }
   @media (max-width: 900px) {
     .s3-types {
       grid-template-columns: 1fr;
@@ -1434,248 +1485,24 @@
     .s3-places-grid { grid-template-columns: 1fr; }
   }
 
-  /* ═══════════════════════════════════
-     S4 — THE CAMPAIGN
-  ═══════════════════════════════════ */
-  .s4-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-  }
-  .s4-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      90deg,
-      rgba(10,10,15,1.00) 0%,
-      rgba(10,10,15,0.94) 42%,
-      rgba(10,10,15,0.35) 70%,
-      rgba(10,10,15,0.15) 100%
-    );
-    z-index: 2;
-    pointer-events: none;
-  }
-  .s4-content {
-    position: relative;
-    z-index: 3;
-    padding-left: 8%;
-    width: 54%;
-  }
-  .s4-music-btn {
-    position: absolute;
-    left: 8%;
-    bottom: 6%;
-    z-index: 5;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    border: 1px solid rgba(241,145,109,0.28);
-    background: rgba(10,10,15,0.78);
-    backdrop-filter: blur(12px);
-    color: var(--text);
-    cursor: pointer;
-    font-family: var(--ff-body);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: border-color 0.2s, background 0.2s,
-                color 0.2s, transform 0.2s;
-    pointer-events: auto;
-  }
-  .s4-music-btn:hover {
-    border-color: rgba(241,145,109,0.55);
-    background: rgba(241,145,109,0.12);
-    color: var(--peach);
-    transform: translateY(-1px);
-  }
-  .s4-music-btn.is-playing {
-    border-color: rgba(174,125,172,0.45);
-    color: var(--lavender);
-  }
-  .s4-music-btn svg {
-    width: 14px;
-    height: 14px;
-    fill: currentColor;
-    flex-shrink: 0;
-  }
-  .s4-music-btn .icon-pause { display: none; }
-  .s4-music-btn.is-playing .icon-play { display: none; }
-  .s4-music-btn.is-playing .icon-pause { display: block; }
-  @media (max-width: 768px) {
-    .s4-music-btn {
-      left: 6%;
-      bottom: 4%;
-      padding: 8px 12px;
-      font-size: 10px;
-    }
-  }
-  .s4-friends-collage {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 48%;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible;
-    pointer-events: none;
-  }
-  .s4-img-door {
-    position: relative;
-    width: min(280px, 32vw);
-    height: min(78vh, 720px);
-    overflow: hidden;
-    border: 1px solid rgba(241,145,109,0.35);
-    border-radius: 8px;
-    z-index: 2;
-    box-shadow:
-      0 0 0 1px rgba(174,125,172,0.12),
-      0 24px 80px rgba(0,0,0,0.55),
-      0 0 60px rgba(241,145,109,0.12);
-    animation: s4-door-float 5.5s ease-in-out infinite;
-  }
-  .s4-img-door::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 8px;
-    box-shadow: inset 0 0 40px rgba(10,10,15,0.35);
-    z-index: 2;
-    pointer-events: none;
-  }
-  .s4-img-door::after {
-    content: '';
-    position: absolute;
-    inset: -18%;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(241,145,109,0.22) 0%,
-      rgba(174,125,172,0.08) 40%,
-      transparent 70%
-    );
-    z-index: -1;
-    animation: s4-door-glow 4s ease-in-out infinite alternate;
-    pointer-events: none;
-  }
-  .s4-img-door img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    filter: brightness(0.82) saturate(0.95) contrast(1.05);
-    transform: scale(1.04);
-    animation: s4-door-ken 12s ease-in-out infinite alternate;
-  }
-  @keyframes s4-door-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  @keyframes s4-door-glow {
-    0% { opacity: 0.55; transform: scale(0.95); }
-    100% { opacity: 1; transform: scale(1.05); }
-  }
-  @keyframes s4-door-ken {
-    0% { transform: scale(1.04) translateY(0); }
-    100% { transform: scale(1.10) translateY(-2%); }
-  }
-  .s4-friends-glow {
-    position: absolute;
-    right: 8%;
-    top: 20%;
-    width: 55%;
-    height: 60%;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(200,120,40,0.14) 0%,
-      transparent 70%
-    );
-    z-index: 0;
-    pointer-events: none;
-    filter: blur(8px);
-  }
-  .s4-tagline {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0;
-  }
+  /* Close section Friends letter dots (kept after S4 removal) */
   .s4-friends-dot {
     font-family: var(--ff-display);
-    font-size: clamp(18px, 2vw, 26px);
-    font-weight: 800;
+    font-size: clamp(14px, 1.4vw, 18px);
+    font-weight: 700;
     color: var(--peach);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
   }
   .s4-friends-dot-sep {
-    font-family: var(--ff-display);
-    font-size: clamp(14px, 1.5vw, 20px);
-    color: var(--lavender);
+    color: var(--muted);
     margin: 0 2px;
-  }
-  .s4-friends-word {
-    font-family: var(--ff-body);
-    font-size: clamp(14px, 1.4vw, 18px);
-    color: var(--muted);
-    font-weight: 400;
-  }
-  .s4-pillars {
-    display: flex;
-    align-items: flex-start;
-    gap: 0;
-    flex-wrap: wrap;
-    row-gap: 20px;
-  }
-  .s4-pillar {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding-right: 28px;
-  }
-  .s4-pillar-label {
-    font-family: var(--ff-body);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .s4-pillar-value {
-    font-family: var(--ff-display);
-    font-size: clamp(13px, 1.3vw, 16px);
-    font-weight: 600;
-    color: var(--text);
-  }
-  .s4-pillar-sep {
-    width: 1px;
-    height: 36px;
-    background: var(--border);
-    margin-right: 28px;
-    margin-top: 8px;
-    flex-shrink: 0;
-  }
-  @media (max-width: 768px) {
-    .s4-friends-collage { display: none; }
-    .s4-content {
-      width: 94%;
-      padding-left: 6%;
-    }
-    .s4-pillars { gap: 16px; }
-    .s4-pillar-sep { display: none; }
+    opacity: 0.7;
   }
 
   /* ═══════════════════════════════════
      S5 — THE STRATEGY (two engines)
   ═══════════════════════════════════ */
-  #s5-story {
+  #s4-story {
     height: 100vh !important;
     overflow: hidden !important;
   }
@@ -1733,21 +1560,23 @@
     display: inline-block;
     width: fit-content;
     font-family: var(--ff-body);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.10em;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 999px;
+    padding: 6px 12px;
+    border-radius: 0 8px 8px 0;
     margin-bottom: 12px;
   }
   .s5-badge-peach {
-    color: var(--canvas);
-    background: var(--peach);
+    color: var(--peach);
+    background: rgba(241,145,109,0.15);
+    border-left: 3px solid var(--peach);
   }
   .s5-badge-lav {
-    color: var(--canvas);
-    background: var(--lavender);
+    color: var(--lavender);
+    background: rgba(174,125,172,0.15);
+    border-left: 3px solid var(--lavender);
   }
   .s5-eng-amt {
     font-family: var(--ff-display);
@@ -1836,11 +1665,14 @@
   .s5-eng-foot strong {
     display: block;
     font-family: var(--ff-display);
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 0.8rem;
+    font-weight: 600;
     letter-spacing: 0.10em;
-    color: var(--text);
+    color: var(--peach);
     margin-bottom: 4px;
+  }
+  .s5-eng-right .s5-eng-foot strong {
+    color: var(--lavender);
   }
   .s5-arrow {
     display: flex;
@@ -1891,22 +1723,25 @@
   /* ═══════════════════════════════════
      S6 — V60 VS S2 BUDGET
   ═══════════════════════════════════ */
-  #s6-v60-vs-s2 {
+  #s5-v60-vs-s2 {
     align-items: stretch;
     justify-content: flex-start;
-    padding: clamp(52px, 6vh, 68px) clamp(24px, 4vw, 56px) clamp(24px, 3vh, 36px);
+    padding: clamp(52px, 6vh, 68px) clamp(24px, 4vw, 56px) clamp(32px, 4vh, 48px);
     background: var(--canvas);
-    overflow: hidden;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
   }
   .v60-wrap {
     width: 100%;
     max-width: 1120px;
     margin: 0 auto;
-    height: 100%;
+    height: auto;
+    min-height: 0;
     display: flex;
     flex-direction: column;
-    gap: clamp(10px, 1.6vh, 18px);
-    justify-content: space-between;
+    gap: clamp(14px, 2vh, 22px);
+    justify-content: flex-start;
   }
   .v60-overline {
     font-family: var(--ff-body);
@@ -1998,32 +1833,43 @@
     font-family: var(--ff-body);
     font-size: 10px;
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--peach);
     margin-bottom: 8px;
     opacity: 0;
   }
   .v60-table-wrap {
-    flex: 1;
+    flex: none;
     min-height: 0;
-    overflow: hidden;
+    overflow: visible;
   }
   .v60-table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
     font-family: var(--ff-body);
   }
   .v60-table thead th {
-    font-size: 9px;
+    font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.10em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
     text-align: left;
-    padding: 4px 8px 8px;
+    padding: 10px 16px;
     border-bottom: 1px solid var(--border);
   }
+  .v60-table thead th:nth-child(1),
+  .v60-table td:nth-child(1) { width: 35%; }
+  .v60-table thead th:nth-child(2),
+  .v60-table td:nth-child(2) { width: 18%; }
+  .v60-table thead th:nth-child(3),
+  .v60-table td:nth-child(3) { width: 8%; }
+  .v60-table thead th:nth-child(4),
+  .v60-table td:nth-child(4) { width: 18%; }
+  .v60-table thead th:nth-child(5),
+  .v60-table td:nth-child(5) { width: 21%; }
   .v60-table thead th:nth-child(2),
   .v60-table thead th:nth-child(3),
   .v60-table thead th:nth-child(4),
@@ -2038,7 +1884,8 @@
   .v60-row td {
     font-size: clamp(11px, 1vw, 13px);
     color: var(--text);
-    padding: 5px 8px;
+    padding: 10px 16px;
+    min-height: 44px;
     border-bottom: 1px solid rgba(240,235,248,0.04);
     vertical-align: middle;
   }
@@ -2054,7 +1901,7 @@
   .v60-tag {
     display: inline-block;
     font-size: 9px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 2px 7px;
@@ -2064,14 +1911,16 @@
     border: 1px solid var(--border);
   }
   .v60-tag-new {
-    color: #7dcea0;
-    background: rgba(74,222,128,0.10);
-    border-color: rgba(74,222,128,0.25);
+    color: #4ade80;
+    background: rgba(74,222,128,0.15);
+    border-color: rgba(74,222,128,0.28);
+    font-weight: 600;
   }
   .v60-tag-drop {
-    color: #e57a7a;
-    background: rgba(248,113,113,0.10);
-    border-color: rgba(248,113,113,0.25);
+    color: #f87171;
+    background: rgba(248,113,113,0.15);
+    border-color: rgba(248,113,113,0.28);
+    font-weight: 600;
   }
   .v60-tag-up {
     color: var(--peach);
@@ -2080,15 +1929,15 @@
   }
   .v60-row-total td {
     font-family: var(--ff-display);
-    font-weight: 800;
-    font-size: clamp(12px, 1.1vw, 14px);
-    background: var(--surface);
-    border: 1px solid rgba(241,145,109,0.15);
-    border-top: none;
-    padding: 8px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    background: #0F0F18;
+    border: none;
+    border-top: 2px solid #F1916D;
+    padding: 12px 16px;
   }
-  .v60-row-total td:first-child { border-radius: 8px 0 0 8px; }
-  .v60-row-total td:last-child { border-radius: 0 8px 8px 0; }
+  .v60-row-total td:first-child { border-radius: 0; }
+  .v60-row-total td:last-child { border-radius: 0; }
   .v60-insights {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -2121,7 +1970,7 @@
     color: var(--muted);
   }
   @media (max-width: 900px) {
-    #s6-v60-vs-s2 {
+    #s5-v60-vs-s2 {
       height: auto;
       min-height: 100vh;
       overflow: visible;
@@ -2752,7 +2601,7 @@
     pointer-events: auto;
     transform: none;
   }
-  #s11-store .s9-part2 {
+  #s10-store .s9-part2 {
     opacity: 1;
     pointer-events: auto;
     transform: none;
@@ -3207,7 +3056,7 @@
     .s10-friends-bg { display: none; }
   }
   @media (max-width: 1440px) {
-    #s12-close .display-hero {
+    #s11-close .display-hero {
       font-size: clamp(44px, 5.5vw, 72px);
     }
   }
@@ -4167,6 +4016,16 @@
       </div>
     </div>
 
+    <p class="s1-campaign-line s1-block">
+      <span>#MyNewStory</span>
+      <span class="s1-camp-dot" aria-hidden="true">·</span>
+      <span>Friends. Weekends. Never Ends.</span>
+      <span class="s1-camp-dot" aria-hidden="true">·</span>
+      <span>Caught in 4K</span>
+      <span class="s1-camp-dot" aria-hidden="true">·</span>
+      <span>Go-Live: 23 Jul 2026</span>
+    </p>
+
   </section>
 
   <!-- S2-NPL-ROLES: HQ & STATE ROLES -->
@@ -4439,122 +4298,8 @@
     </div>
   </section>
 
-  <!-- S4: THE CAMPAIGN -->
-  <section class="scene" id="s4-campaign"
-    data-label="Campaign"
-    style="height:150vh; display:block; overflow:visible">
-
-    <div class="s4-sticky">
-
-      <div class="s4-friends-collage">
-        <div class="s4-friends-glow"></div>
-        <div class="s4-img-door">
-          <img src="img/friends_door.jpg"
-               alt="Friends — peeping through the door"
-               loading="eager">
-        </div>
-      </div>
-
-      <div class="s4-overlay"></div>
-
-      <button type="button" id="s4-music-btn"
-              class="s4-music-btn"
-              aria-pressed="false"
-              aria-label="Play Friends theme">
-        <svg class="icon-play" viewBox="0 0 24 24"
-             aria-hidden="true">
-          <path d="M8 5v14l11-7z"></path>
-        </svg>
-        <svg class="icon-pause" viewBox="0 0 24 24"
-             aria-hidden="true">
-          <path d="M6 5h4v14H6zm8 0h4v14h-4z"></path>
-        </svg>
-        <span class="s4-music-label">Play theme</span>
-      </button>
-
-      <!-- Main content -->
-      <div class="s4-content">
-
-        <p class="eyebrow reveal-line"
-           style="margin-bottom:20px">
-          The Campaign
-        </p>
-
-        <!-- Hero: Caught in 4K -->
-        <h2 class="display-hero reveal-line"
-            style="margin-bottom:4px">
-          Caught
-        </h2>
-        <h2 class="display-hero reveal-line peach"
-            style="margin-bottom:4px">
-          in 4K.
-        </h2>
-
-        <!-- Campaign tagline with FRIENDS-style dot treatment -->
-        <div class="s4-tagline reveal-line"
-             style="margin-top:32px; margin-bottom:12px">
-          <span class="s4-friends-dot">F</span>
-          <span class="s4-friends-dot-sep">·</span>
-          <span class="s4-friends-dot">R</span>
-          <span class="s4-friends-dot-sep">·</span>
-          <span class="s4-friends-dot">I</span>
-          <span class="s4-friends-dot-sep">·</span>
-          <span class="s4-friends-dot">E</span>
-          <span class="s4-friends-dot-sep">·</span>
-          <span class="s4-friends-dot">N</span>
-          <span class="s4-friends-dot-sep">·</span>
-          <span class="s4-friends-dot">D</span>
-          <span class="s4-friends-dot-sep">·</span>
-          <span class="s4-friends-dot">S</span>
-          <span class="s4-friends-word"
-                style="margin-left:16px">
-            Weekends. Never Ends.
-          </span>
-        </div>
-
-        <p class="body-large reveal-line"
-           style="max-width:440px; margin-bottom:40px">
-          Gen Z don't just create content anymore.<br>
-          They create themselves.<br>
-          The vivo S2 captures who they're becoming.
-        </p>
-
-        <!-- Four campaign pillars: horizontal,
-             text only, no boxes -->
-        <div class="s4-pillars reveal-line">
-          <div class="s4-pillar">
-            <span class="s4-pillar-label">Campaign</span>
-            <span class="s4-pillar-value peach">
-              #MyNewStory
-            </span>
-          </div>
-          <div class="s4-pillar-sep"></div>
-          <div class="s4-pillar">
-            <span class="s4-pillar-label">Tagline</span>
-            <span class="s4-pillar-value lavender">
-              Friends. Weekends. Never Ends.
-            </span>
-          </div>
-          <div class="s4-pillar-sep"></div>
-          <div class="s4-pillar">
-            <span class="s4-pillar-label">Feature</span>
-            <span class="s4-pillar-value">
-              4K Front & Rear Video
-            </span>
-          </div>
-          <div class="s4-pillar-sep"></div>
-          <div class="s4-pillar">
-            <span class="s4-pillar-label">Go-Live</span>
-            <span class="s4-pillar-value">23 Jul 2026</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
   <!-- S5: THE STRATEGY (two engines) -->
-  <section class="scene" id="s5-story"
+  <section class="scene" id="s4-story"
     data-label="Story">
 
     <div class="s5-sticky">
@@ -4643,7 +4388,7 @@
 
   <!-- S6: THE PLAN -->
   <!-- S6: V60 VS S2 BUDGET -->
-  <section class="scene" id="s6-v60-vs-s2"
+  <section class="scene" id="s5-v60-vs-s2"
     data-label="V60 vs S2">
 
     <div class="v60-wrap">
@@ -4810,7 +4555,7 @@
     </div>
   </section>
 
-  <section class="scene" id="s7-strategy"
+  <section class="scene" id="s6-strategy"
     data-label="Strategy"
     style="height:auto; min-height:100vh; display:block; overflow:visible; align-items:stretch; justify-content:flex-start">
 
@@ -5141,7 +4886,7 @@
   </section>
 
   <!-- S7: THE KOL SYSTEM -->
-  <section class="scene" id="s8-timeline"
+  <section class="scene" id="s7-timeline"
     data-label="Timeline"
     style="height:150vh; display:block; overflow:visible">
 
@@ -5270,7 +5015,7 @@
   </section>
 
   <!-- S8: KOL TOOL BRIDGE -->
-  <section class="scene" id="s9-kol"
+  <section class="scene" id="s8-kol"
     data-label="KOL System">
 
     <!-- Ambient glow -->
@@ -5309,7 +5054,7 @@
   </section>
 
   <!-- S9: JBP PARTNERS -->
-  <section class="scene" id="s10-jbp"
+  <section class="scene" id="s9-jbp"
     data-label="JBP Strategy"
     style="height:auto; min-height:100vh; display:block; overflow:visible; align-items:stretch; justify-content:flex-start">
 
@@ -5747,7 +5492,7 @@
   </section>
 
   <!-- S10: STORE LAUNCH -->
-  <section class="scene" id="s11-store"
+  <section class="scene" id="s10-store"
     data-label="Store Launch"
     style="height:auto; min-height:100vh; display:block; overflow:visible; align-items:stretch; justify-content:flex-start">
     <div class="s9-sticky" style="position:relative; height:auto; min-height:100vh; overflow:visible; align-items:flex-start; padding-top:clamp(52px,6vh,72px); padding-bottom:clamp(40px,5vh,64px)">
@@ -5928,7 +5673,7 @@
   </section>
 
   <!-- S10: THE CLOSE -->
-  <section class="scene" id="s12-close"
+  <section class="scene" id="s11-close"
     data-label="The Close">
 
     <div class="s10-friends-bg">
@@ -6216,7 +5961,7 @@ function exitKolMode() {
   document.getElementById('export-btn').style.display = '';
   document.getElementById('slide-nav').classList.remove('hidden');
   document.body.style.overflow = '';
-  window.scrollTo(0, document.getElementById('s9-kol').offsetTop);
+  window.scrollTo(0, document.getElementById('s8-kol').offsetTop);
   updateSlideNav();
 }
 
@@ -6612,7 +6357,7 @@ async function exportPPTX() {
 
   const chrome = [
     '#section-label', '#export-btn', '#export-dropdown',
-    '#slide-nav', '#progress-bar', '#s4-music-btn', '#kol-nav'
+    '#slide-nav', '#progress-bar', '#kol-nav'
   ];
   const chromeRestores = chrome.map((sel) => {
     const el = document.querySelector(sel);
@@ -6636,15 +6381,14 @@ async function exportPPTX() {
     { id: 's1-opening', mode: null, title: 'Opening' },
     { id: 's2-npl-roles', mode: null, title: 'NPL Strategy' },
     { id: 's3-consumer', mode: null, title: 'Consumer' },
-    { id: 's4-campaign', mode: null, title: 'Campaign' },
-    { id: 's5-story', mode: 's5-engines', title: 'Strategy Engines' },
-    { id: 's6-v60-vs-s2', mode: null, title: 'V60 vs S2' },
-    { id: 's7-strategy', mode: 's6-full', title: 'Campaign Timeline' },
-    { id: 's8-timeline', mode: null, title: 'KOL System' },
-    { id: 's9-kol', mode: null, title: 'KOL Tool' },
-    { id: 's10-jbp', mode: null, title: 'JBP Strategy' },
-    { id: 's11-store', mode: null, title: 'Store Launch' },
-    { id: 's12-close', mode: null, title: 'The Close' }
+    { id: 's4-story', mode: 's5-engines', title: 'Strategy Engines' },
+    { id: 's5-v60-vs-s2', mode: null, title: 'V60 vs S2' },
+    { id: 's6-strategy', mode: 's6-full', title: 'Campaign Timeline' },
+    { id: 's7-timeline', mode: null, title: 'KOL System' },
+    { id: 's8-kol', mode: null, title: 'KOL Tool' },
+    { id: 's9-jbp', mode: null, title: 'JBP Strategy' },
+    { id: 's10-store', mode: null, title: 'Store Launch' },
+    { id: 's11-close', mode: null, title: 'The Close' }
   ];
 
   try {
@@ -6666,7 +6410,7 @@ async function exportPPTX() {
         scene.querySelectorAll('.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s2-step,.s3-type,.s5-fw-hline,.s5-eng-card,.s5-eng-item,.s5-partner,.s5-arrow,.s5-fw-closing,.s6-phase,.s6-work-label,.s6-work-phase,.s7-act,.s9-phase,.s9-gantt-label,.s9-gantt-head,.s9-gantt-row,.s11-block-label,.s11-why-card,.s11-flow-step,.s11-flow-arrow,.s11-flow-close,.s11-callout,.npl-overline,.npl-hline,.npl-sub,.npl-block-label,.npl-node,.npl-owner-bar,.npl-card,.npl-pillar,.npl-loc-pill,.npl-closing').forEach((el) => {
           gsap.set(el, { clearProps: 'opacity,transform,visibility' });
         });
-        scene.querySelectorAll('#s10-jbp .s9-gantt-seg.on .s9-gantt-fill').forEach((el) => {
+        scene.querySelectorAll('#s9-jbp .s9-gantt-seg.on .s9-gantt-fill').forEach((el) => {
           gsap.set(el, { scaleX: 1 });
         });
       }
@@ -6865,79 +6609,43 @@ gsap.fromTo('#s3-type1, #s3-type2, #s3-type3',
   }
 );
 
-// ── S4: CAMPAIGN ──────────────────────
-gsap.from('.s4-img-door', {
-  x: 80, opacity: 0, scale: 0.92,
-  duration: 1.15, ease: 'power3.out',
-  scrollTrigger: {
-    trigger: '#s4-campaign',
-    start: 'top 80%',
-    once: true
-  }
-});
-gsap.from('.s4-friends-glow', {
-  opacity: 0,
-  duration: 1.4,
-  ease: 'power1.out',
-  scrollTrigger: {
-    trigger: '#s4-campaign',
-    start: 'top 80%',
-    once: true
-  }
-});
-
-// Text content reveals
-gsap.fromTo('#s4-campaign .reveal-line',
-  { y: 32, opacity: 0 },
-  {
-    y: 0, opacity: 1,
-    duration: 0.7, stagger: 0.10,
-    ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '#s4-campaign',
-      start: 'top 75%',
-      once: true
-    }
-  }
-);
-
 // ── S5: TWO ENGINE FRAMEWORK ──────────
 const s5Tl = gsap.timeline({
   scrollTrigger: {
-    trigger: '#s5-story',
+    trigger: '#s4-story',
     start: 'top 70%',
     once: true
   }
 });
 s5Tl
-  .to('#s5-story .s5-fw-hline', {
+  .to('#s4-story .s5-fw-hline', {
     opacity: 1, y: 0,
     duration: 0.55, stagger: 0.12,
     ease: 'power2.out'
   })
-  .to('#s5-story .s5-eng-left', {
+  .to('#s4-story .s5-eng-left', {
     opacity: 1, x: 0,
     duration: 0.7, ease: 'power2.out'
   }, '-=0.15')
-  .to('#s5-story .s5-eng-right', {
+  .to('#s4-story .s5-eng-right', {
     opacity: 1, x: 0,
     duration: 0.7, ease: 'power2.out'
   }, '<')
-  .to('#s5-story .s5-eng-item', {
+  .to('#s4-story .s5-eng-item', {
     opacity: 1, y: 0,
     duration: 0.35, stagger: 0.1,
     ease: 'power2.out'
   }, '-=0.35')
-  .to('#s5-story .s5-partner', {
+  .to('#s4-story .s5-partner', {
     opacity: 1, y: 0,
     duration: 0.3, stagger: 0.06,
     ease: 'power2.out'
   }, '-=0.25')
-  .to('#s5-story .s5-arrow', {
+  .to('#s4-story .s5-arrow', {
     opacity: 1,
     duration: 0.4, ease: 'power2.out'
   }, '-=0.1')
-  .to('#s5-story .s5-fw-closing', {
+  .to('#s4-story .s5-fw-closing', {
     opacity: 1,
     duration: 0.55, ease: 'power2.out'
   }, '-=0.05');
@@ -6948,54 +6656,54 @@ s5Tl
 // ── S6: V60 VS S2 BUDGET ─────────────
 const v60Tl = gsap.timeline({
   scrollTrigger: {
-    trigger: '#s6-v60-vs-s2',
+    trigger: '#s5-v60-vs-s2',
     start: 'top 70%',
     once: true
   }
 });
 v60Tl
-  .to('#s6-v60-vs-s2 .v60-overline', {
+  .to('#s5-v60-vs-s2 .v60-overline', {
     opacity: 1, duration: 0.4, ease: 'power2.out'
   })
-  .to('#s6-v60-vs-s2 .v60-hline', {
+  .to('#s5-v60-vs-s2 .v60-hline', {
     y: 0, opacity: 1,
     duration: 0.6, stagger: 0.18,
     ease: 'power2.out'
   }, '-=0.1')
-  .to('#s6-v60-vs-s2 .v60-sub', {
+  .to('#s5-v60-vs-s2 .v60-sub', {
     opacity: 1, duration: 0.5, ease: 'power2.out'
   }, '-=0.2')
-  .to('#s6-v60-vs-s2 .v60-total-v60', {
+  .to('#s5-v60-vs-s2 .v60-total-v60', {
     x: 0, opacity: 1, duration: 0.65, ease: 'power2.out'
   }, 'cards')
-  .to('#s6-v60-vs-s2 .v60-total-s2', {
+  .to('#s5-v60-vs-s2 .v60-total-s2', {
     x: 0, opacity: 1, duration: 0.65, ease: 'power2.out'
   }, 'cards')
-  .to('#s6-v60-vs-s2 .v60-delta', {
+  .to('#s5-v60-vs-s2 .v60-delta', {
     scale: 1, opacity: 1,
     duration: 0.4, ease: 'back.out(1.6)'
   }, '-=0.25')
-  .to('#s6-v60-vs-s2 .v60-table-label', {
+  .to('#s5-v60-vs-s2 .v60-table-label', {
     opacity: 1, duration: 0.35, ease: 'power2.out'
   }, '-=0.1')
-  .to('#s6-v60-vs-s2 .v60-row', {
+  .to('#s5-v60-vs-s2 .v60-row', {
     y: 0, opacity: 1,
     duration: 0.28, stagger: 0.05,
     ease: 'power2.out'
   })
-  .to('#s6-v60-vs-s2 .v60-insight', {
+  .to('#s5-v60-vs-s2 .v60-insight', {
     opacity: 1, duration: 0.45, stagger: 0.15,
     ease: 'power2.out'
   }, '-=0.15');
 
-gsap.fromTo('#s7-strategy .s6-pin .reveal-line',
+gsap.fromTo('#s6-strategy .s6-pin .reveal-line',
   { y: 28, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.7, stagger: 0.10,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s7-strategy .s6-pin',
+      trigger: '#s6-strategy .s6-pin',
       start: 'top 80%',
       once: true
     }
@@ -7004,7 +6712,7 @@ gsap.fromTo('#s7-strategy .s6-pin .reveal-line',
 
 // River fill animates as campaign phases reveal
 ScrollTrigger.create({
-  trigger: '#s7-strategy .s6-pin',
+  trigger: '#s6-strategy .s6-pin',
   start: 'top top',
   end: 'bottom bottom',
   onUpdate: (self) => {
@@ -7031,27 +6739,27 @@ ScrollTrigger.create({
   }
 });
 
-gsap.fromTo('#s7-strategy .s6-work-label',
+gsap.fromTo('#s6-strategy .s6-work-label',
   { opacity: 0, y: 12 },
   {
     opacity: 1, y: 0,
     duration: 0.45, ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s7-strategy .s6-worklist-wrap',
+      trigger: '#s6-strategy .s6-worklist-wrap',
       start: 'top 80%',
       once: true
     }
   }
 );
 
-gsap.fromTo('#s7-strategy .s6-work-phase',
+gsap.fromTo('#s6-strategy .s6-work-phase',
   { opacity: 0, y: 18 },
   {
     opacity: 1, y: 0,
     duration: 0.45, stagger: 0.1,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s7-strategy .s6-worklist-wrap',
+      trigger: '#s6-strategy .s6-worklist-wrap',
       start: 'top 75%',
       once: true
     }
@@ -7059,14 +6767,14 @@ gsap.fromTo('#s7-strategy .s6-work-phase',
 );
 
 // ── S7: KOL SYSTEM ────────────────────
-gsap.fromTo('#s8-timeline .reveal-line:not(.s7-act)',
+gsap.fromTo('#s7-timeline .reveal-line:not(.s7-act)',
   { y: 28, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.7, stagger: 0.10,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s8-timeline',
+      trigger: '#s7-timeline',
       start: 'top 80%',
       once: true
     }
@@ -7077,7 +6785,7 @@ gsap.set('#s7-act1, #s7-act2, #s7-act3',
   { y: 24, opacity: 0 });
 
 ScrollTrigger.create({
-  trigger: '#s8-timeline',
+  trigger: '#s7-timeline',
   start: 'top top',
   end: 'bottom bottom',
   onUpdate: (self) => {
@@ -7097,7 +6805,7 @@ ScrollTrigger.create({
 });
 
 ScrollTrigger.create({
-  trigger: '#s8-timeline',
+  trigger: '#s7-timeline',
   start: 'top top',
   end: 'bottom bottom',
   onUpdate: (self) => {
@@ -7133,14 +6841,14 @@ ScrollTrigger.create({
 });
 
 // ── S8: BRIDGE ────────────────────────
-gsap.fromTo('#s9-kol .reveal-line, #s9-kol .reveal-fade',
+gsap.fromTo('#s8-kol .reveal-line, #s8-kol .reveal-fade',
   { y: 28, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.75, stagger: 0.12,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s9-kol',
+      trigger: '#s8-kol',
       start: 'top 75%',
       once: true
     }
@@ -7148,21 +6856,21 @@ gsap.fromTo('#s9-kol .reveal-line, #s9-kol .reveal-fade',
 );
 
 // ── S9: JBP STRATEGY ─────────────────
-gsap.fromTo('#s10-jbp .reveal-line',
+gsap.fromTo('#s9-jbp .reveal-line',
   { y: 24, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.65, stagger: 0.08,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s10-jbp',
+      trigger: '#s9-jbp',
       start: 'top 80%',
       once: true
     },
     onComplete: () => {
       const river = document.getElementById('s9-river-fill');
       if (river) river.style.width = '100%';
-      document.querySelectorAll('#s10-jbp .s9-bar-fill').forEach((bar) => {
+      document.querySelectorAll('#s9-jbp .s9-bar-fill').forEach((bar) => {
         bar.style.background = bar.dataset.color;
         bar.style.width = bar.dataset.width;
       });
@@ -7182,44 +6890,44 @@ gsap.fromTo('#s10-jbp .reveal-line',
   }
 );
 
-gsap.fromTo('#s10-jbp .s9-gantt-label',
+gsap.fromTo('#s9-jbp .s9-gantt-label',
   { opacity: 0, y: 10 },
   {
     opacity: 1, y: 0,
     duration: 0.4, ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s10-jbp .s9-gantt-wrap',
+      trigger: '#s9-jbp .s9-gantt-wrap',
       start: 'top 80%',
       once: true
     }
   }
 );
 
-gsap.fromTo('#s10-jbp .s9-gantt-head',
+gsap.fromTo('#s9-jbp .s9-gantt-head',
   { opacity: 0, y: 8 },
   {
     opacity: 1, y: 0,
     duration: 0.35, ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s10-jbp .s9-gantt-wrap',
+      trigger: '#s9-jbp .s9-gantt-wrap',
       start: 'top 80%',
       once: true
     }
   }
 );
 
-gsap.to('#s10-jbp .s9-gantt-row', {
+gsap.to('#s9-jbp .s9-gantt-row', {
   opacity: 1, y: 0,
   duration: 0.4, stagger: 0.08,
   ease: 'power2.out',
   scrollTrigger: {
-    trigger: '#s10-jbp .s9-gantt-wrap',
+    trigger: '#s9-jbp .s9-gantt-wrap',
     start: 'top 78%',
     once: true
   }
 });
 
-gsap.utils.toArray('#s10-jbp .s9-gantt-row').forEach((row, i) => {
+gsap.utils.toArray('#s9-jbp .s9-gantt-row').forEach((row, i) => {
   const fills = row.querySelectorAll('.s9-gantt-seg.on .s9-gantt-fill');
   if (!fills.length) return;
   gsap.to(fills, {
@@ -7228,7 +6936,7 @@ gsap.utils.toArray('#s10-jbp .s9-gantt-row').forEach((row, i) => {
     stagger: 0.06,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s10-jbp .s9-gantt-wrap',
+      trigger: '#s9-jbp .s9-gantt-wrap',
       start: 'top 78%',
       once: true
     },
@@ -7237,14 +6945,14 @@ gsap.utils.toArray('#s10-jbp .s9-gantt-row').forEach((row, i) => {
 });
 
 // ── S10: STORE LAUNCH ────────────────
-gsap.fromTo('#s11-store .s9-reason, #s11-store .eyebrow, #s11-store .display-large, #s11-store .s9-condition',
+gsap.fromTo('#s10-store .s9-reason, #s10-store .eyebrow, #s10-store .display-large, #s10-store .s9-condition',
   { y: 24, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.6, stagger: 0.08,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s11-store',
+      trigger: '#s10-store',
       start: 'top 75%',
       once: true
     }
@@ -7253,61 +6961,61 @@ gsap.fromTo('#s11-store .s9-reason, #s11-store .eyebrow, #s11-store .display-lar
 
 const s11EnhanceTl = gsap.timeline({
   scrollTrigger: {
-    trigger: '#s11-store .s11-enhance',
+    trigger: '#s10-store .s11-enhance',
     start: 'top 78%',
     once: true
   }
 });
 s11EnhanceTl
-  .to('#s11-store .s11-why-block .s11-block-label', {
+  .to('#s10-store .s11-why-block .s11-block-label', {
     opacity: 1, duration: 0.4, ease: 'power2.out'
   })
-  .to('#s11-store .s11-why-card', {
+  .to('#s10-store .s11-why-card', {
     opacity: 1, y: 0,
     duration: 0.45, stagger: 0.1,
     ease: 'power2.out'
   }, '-=0.1')
-  .to('#s11-store .s11-flow-block .s11-block-label', {
+  .to('#s10-store .s11-flow-block .s11-block-label', {
     opacity: 1, duration: 0.4, ease: 'power2.out'
   }, '-=0.05')
-  .to('#s11-store .s11-flow-step', {
+  .to('#s10-store .s11-flow-step', {
     opacity: 1, x: 0, y: 0,
     duration: 0.45, stagger: 0.2,
     ease: 'power2.out'
   }, '-=0.1')
-  .to('#s11-store .s11-flow-arrow', {
+  .to('#s10-store .s11-flow-arrow', {
     opacity: 1,
     duration: 0.3, stagger: 0.12,
     ease: 'power2.out'
   }, '-=0.35')
-  .to('#s11-store .s11-flow-close', {
+  .to('#s10-store .s11-flow-close', {
     opacity: 1, duration: 0.45, ease: 'power2.out'
   }, '-=0.05')
-  .to('#s11-store .s11-callout', {
+  .to('#s10-store .s11-callout', {
     opacity: 1, duration: 0.5, ease: 'power2.out'
   }, '-=0.05');
 
 // ── S10: THE CLOSE ────────────────────
-gsap.fromTo('#s12-close .reveal-line',
+gsap.fromTo('#s11-close .reveal-line',
   { y: 32, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.8, stagger: 0.15,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s12-close',
+      trigger: '#s11-close',
       start: 'top 75%',
       once: true
     }
   }
 );
-gsap.fromTo('#s12-close .reveal-fade',
+gsap.fromTo('#s11-close .reveal-fade',
   { opacity: 0 },
   {
     opacity: 1, duration: 1.0,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s12-close',
+      trigger: '#s11-close',
       start: 'top 70%',
       once: true
     }
@@ -7317,7 +7025,7 @@ gsap.from('.s10-phone', {
   x: 40, opacity: 0,
   duration: 1.2, ease: 'power2.out',
   scrollTrigger: {
-    trigger: '#s12-close',
+    trigger: '#s11-close',
     start: 'top 80%',
     once: true
   }
@@ -7328,7 +7036,7 @@ gsap.to('.s10-phone img', {
   ease: 'power1.inOut',
   repeat: -1, yoyo: true,
   scrollTrigger: {
-    trigger: '#s12-close',
+    trigger: '#s11-close',
     start: 'top 80%',
     once: true
   }
@@ -8004,158 +7712,5 @@ gsap.to('.s8-cta', {
   delay: 2
 });
 
-let friendsThemeArmed = false;
-let friendsThemeAutoTried = false;
-let friendsFadeInTimer = null;
-let friendsFadeOutTimer = null;
-let friendsFadeOutDelay = null;
-
-function getFriendsAudio() {
-  return document.getElementById('friends-theme');
-}
-
-function getFriendsMusicBtn() {
-  return document.getElementById('s4-music-btn');
-}
-
-function clearFriendsFadeTimers() {
-  if (friendsFadeInTimer) clearInterval(friendsFadeInTimer);
-  if (friendsFadeOutTimer) clearInterval(friendsFadeOutTimer);
-  if (friendsFadeOutDelay) clearTimeout(friendsFadeOutDelay);
-  friendsFadeInTimer = null;
-  friendsFadeOutTimer = null;
-  friendsFadeOutDelay = null;
-}
-
-function setFriendsMusicUI(playing) {
-  const btn = getFriendsMusicBtn();
-  if (!btn) return;
-  btn.classList.toggle('is-playing', playing);
-  btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
-  btn.setAttribute(
-    'aria-label',
-    playing ? 'Stop Friends theme' : 'Play Friends theme'
-  );
-  const label = btn.querySelector('.s4-music-label');
-  if (label) label.textContent = playing ? 'Stop theme' : 'Play theme';
-}
-
-function stopFriendsTheme() {
-  clearFriendsFadeTimers();
-  const audio = getFriendsAudio();
-  if (audio) {
-    audio.pause();
-    audio.currentTime = 0;
-    audio.volume = 0;
-  }
-  setFriendsMusicUI(false);
-}
-
-function startFriendsTheme({ autoStop = true } = {}) {
-  const audio = getFriendsAudio();
-  if (!audio) return;
-
-  friendsThemeArmed = true;
-  clearFriendsFadeTimers();
-  audio.currentTime = 0;
-  audio.volume = 0;
-
-  const attempt = audio.play();
-  const onPlay = () => {
-    setFriendsMusicUI(true);
-    let v = 0;
-    friendsFadeInTimer = setInterval(() => {
-      v = Math.min(0.22, v + 0.01);
-      audio.volume = v;
-      if (v >= 0.22) {
-        clearInterval(friendsFadeInTimer);
-        friendsFadeInTimer = null;
-      }
-    }, 60);
-
-    if (autoStop) {
-      friendsFadeOutDelay = setTimeout(() => {
-        let fv = audio.volume;
-        friendsFadeOutTimer = setInterval(() => {
-          fv = Math.max(0, fv - 0.02);
-          audio.volume = fv;
-          if (fv <= 0) {
-            clearInterval(friendsFadeOutTimer);
-            friendsFadeOutTimer = null;
-            stopFriendsTheme();
-          }
-        }, 50);
-      }, 10500);
-    }
-  };
-
-  if (attempt && typeof attempt.then === 'function') {
-    attempt.then(onPlay).catch(() => {
-      setFriendsMusicUI(false);
-    });
-  } else {
-    onPlay();
-  }
-}
-
-function toggleFriendsTheme() {
-  const audio = getFriendsAudio();
-  const playing = audio && !audio.paused && audio.currentTime > 0;
-  if (playing) {
-    stopFriendsTheme();
-  } else {
-    // Manual play: no forced auto-stop so user controls stop
-    startFriendsTheme({ autoStop: false });
-  }
-}
-
-function unlockFriendsAudio() {
-  friendsThemeArmed = true;
-  const audio = getFriendsAudio();
-  if (!audio) return;
-  try { audio.load(); } catch (e) {}
-  const prevVol = audio.volume;
-  audio.volume = 0;
-  const unlock = audio.play();
-  if (unlock && typeof unlock.then === 'function') {
-    unlock.then(() => {
-      audio.pause();
-      audio.currentTime = 0;
-      audio.volume = prevVol || 0;
-    }).catch(() => {});
-  }
-}
-
-['scroll', 'wheel', 'touchstart', 'pointerdown', 'click', 'keydown']
-  .forEach((evt) => {
-    window.addEventListener(evt, unlockFriendsAudio, {
-      once: true,
-      passive: true
-    });
-  });
-
-const s4MusicBtn = getFriendsMusicBtn();
-if (s4MusicBtn) {
-  s4MusicBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    unlockFriendsAudio();
-    toggleFriendsTheme();
-  });
-}
-
-ScrollTrigger.create({
-  trigger: '#s4-campaign',
-  start: 'top 70%',
-  onEnter: () => {
-    if (friendsThemeAutoTried) return;
-    friendsThemeAutoTried = true;
-    // Soft auto-play once; user can stop/play via button
-    startFriendsTheme({ autoStop: true });
-  }
-});
-
 </script>
-<audio id="friends-theme"
-       src="img/friends_theme.mp3"
-       preload="auto"></audio>
 </body>
