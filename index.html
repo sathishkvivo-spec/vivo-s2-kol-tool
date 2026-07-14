@@ -2683,43 +2683,149 @@
     overflow: hidden !important;
     display: flex;
     align-items: stretch;
+    background: var(--canvas);
   }
   .s10-event-section {
     width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
     height: 100%;
-    padding: 52px 4% 40px;
+    padding: clamp(48px, 6vh, 64px) clamp(28px, 4vw, 56px) clamp(36px, 4.5vh, 52px);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    gap: clamp(18px, 2.8vh, 28px);
   }
-  #s10-event-flow .s9-event-wrap {
+  .ef-header {
+    flex: 0 0 auto;
+  }
+  .ef-label {
+    font-family: var(--ff-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin: 0 0 10px;
+  }
+  .ef-note {
+    font-family: var(--ff-body);
+    font-size: clamp(13px, 1.2vw, 15px);
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.45;
+    max-width: 720px;
+  }
+  .ef-timeline {
     flex: 1;
     min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: clamp(10px, 1.6vh, 16px) clamp(8px, 1vw, 14px);
+    align-items: stretch;
+  }
+  .ef-stop {
     display: flex;
     flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+    height: 100%;
   }
-  #s10-event-flow .s9-event-roadmap {
+  .ef-pin {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #F1916D;
+    color: #fff;
+    font-family: var(--ff-display);
+    font-size: 1.15rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px rgba(241,145,109,0.22);
+  }
+  .ef-card {
     flex: 1;
-    min-height: 360px;
+    background: #0F0F18;
+    border: 1px solid rgba(241,145,109,0.22);
+    border-radius: 12px;
+    padding: clamp(16px, 2vh, 22px) clamp(16px, 1.6vw, 20px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
-  #s9-store .s10-store-wrap {
-    justify-content: space-between;
-    gap: clamp(14px, 2vh, 24px);
+  .ef-time {
+    font-family: var(--ff-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin: 0 0 8px;
   }
-  #s9-store .s11-why-grid { gap: 12px; }
-  #s9-store .s11-why-card { padding: 14px 16px; }
-  #s9-store .s11-why-body { font-size: 12px; }
-  #s9-store .s11-flow-kicker { font-size: 14px; }
-  #s9-store .s11-flow-body { font-size: 12px; }
+  .ef-title {
+    font-family: var(--ff-display);
+    font-size: clamp(15px, 1.45vw, 18px);
+    font-weight: 700;
+    color: #F0EBF8;
+    margin: 0 0 10px;
+    line-height: 1.25;
+  }
+  .ef-body {
+    font-family: var(--ff-body);
+    font-size: clamp(12px, 1.15vw, 14px);
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .ef-arrow {
+    align-self: center;
+    font-family: var(--ff-display);
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-weight: 700;
+    color: var(--peach);
+    line-height: 1;
+    padding-top: 44px;
+  }
+  .ef-row-bridge {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8%;
+    height: clamp(28px, 4vh, 40px);
+  }
+  .ef-row-bridge span {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px dashed rgba(241,145,109,0.55);
+    color: var(--peach);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  @media (max-width: 900px) {
+    .ef-timeline {
+      grid-template-columns: 1fr;
+      grid-template-rows: none;
+      overflow-y: auto;
+    }
+    .ef-arrow, .ef-row-bridge { display: none; }
+  }
 
-  /* Store Influencer Event Flow roadmap */
-  .s9-event-wrap {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+  /* Legacy event roadmap selectors kept inert for export/print hooks */
+  .s9-event-wrap,
+  .s9-event-roadmap,
+  .s9-event-svg,
+  .s9-event-stops,
+  .s9-event-stop { display: none; }
   .s9-event-label {
     font-family: var(--ff-body);
     font-size: 10px;
@@ -2736,34 +2842,6 @@
     margin: 0 0 4px;
     line-height: 1.4;
   }
-  .s9-event-roadmap {
-    position: relative;
-    width: 100%;
-    flex: 1;
-    min-height: 220px;
-  }
-  .s9-event-svg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
-  .s9-event-stops {
-    position: absolute;
-    inset: 0;
-  }
-  .s9-event-stop {
-    position: absolute;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    width: min(280px, 42%);
-    z-index: 2;
-  }
-  .s9-event-stop.right { flex-direction: row; }
-  .s9-event-stop.left { flex-direction: row-reverse; text-align: right; }
-  .s9-event-stop.left .s9-event-card { text-align: left; }
   .s9-event-pin {
     width: 40px;
     height: 40px;
@@ -2777,75 +2855,131 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: 0 0 0 3px rgba(241,145,109,0.25);
   }
   .s9-event-card {
     background: #0F0F18;
     border: 1px solid rgba(241,145,109,0.2);
     border-radius: 8px;
     padding: 10px 14px;
-    max-width: 220px;
-    box-sizing: border-box;
   }
-  .s9-event-time {
-    font-family: var(--ff-body);
-    font-size: 10px;
-    color: var(--muted);
-    margin: 0 0 2px;
-  }
-  .s9-event-title {
-    font-family: var(--ff-display);
-    font-size: 1rem;
-    font-weight: 600;
-    color: #F0EBF8;
-    margin: 0 0 4px;
-    line-height: 1.2;
-  }
-  .s9-event-body {
-    font-family: var(--ff-body);
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin: 0;
-    line-height: 1.35;
-  }
-  /* Compact store wrap when roadmap present */
-  #s9-store .s10-store-wrap {
-    gap: 6px;
-    justify-content: flex-start;
-    padding-top: 40px;
-    padding-bottom: 36px;
-  }
-  #s9-store .s11-why-grid { gap: 8px; }
-  #s9-store .s11-why-card { padding: 8px 10px; }
-  #s9-store .s11-why-body { font-size: 10px; }
+  .s9-event-time { font-size: 10px; color: var(--muted); margin: 0 0 2px; }
+  .s9-event-title { font-size: 1rem; font-weight: 600; color: #F0EBF8; margin: 0 0 4px; }
+  .s9-event-body { font-size: 0.8rem; color: var(--muted); margin: 0; line-height: 1.35; }
   @media (max-width: 900px) {
     .s9-event-roadmap { min-height: 480px; }
     .s9-event-stop { width: 90%; left: 5% !important; right: auto !important; }
   }
 
-  /* S11 enhanced blocks — below existing store launch */
+  /* S9 Store Launch — fill full viewport (event flow split to S10) */
   .s10-store-wrap {
-    width: 100%; max-width: 1120px; margin: 0 auto; height: 100%;
-    padding: clamp(36px, 4.5vh, 48px) clamp(20px, 3.5vw, 48px) clamp(44px, 5.5vh, 56px);
-    box-sizing: border-box; display: flex; flex-direction: column;
-    gap: clamp(8px, 1.2vh, 12px); justify-content: space-between; overflow: hidden;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 100%;
+    min-height: 0;
+    padding: clamp(48px, 6vh, 64px) clamp(28px, 4vw, 56px) clamp(40px, 5vh, 56px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3.2vh, 36px);
+    justify-content: space-between;
+    overflow: hidden;
   }
   .s10-store-eyebrow { margin: 0 !important; color: var(--peach) !important; font-size: 11px !important; }
   .s10-store-headline {
     font-family: var(--ff-display); font-size: clamp(22px, 2.6vw, 34px); font-weight: 700;
     line-height: 1.08; letter-spacing: -0.02em; color: var(--text); margin: 0;
   }
-  #s9-store .s11-flow-block, #s9-store .s11-why-block, #s9-store .s11-callout { margin: 0; }
-  #s9-store .s11-block-label { font-size: 10px; margin-bottom: 6px; }
-  #s9-store .s11-flow-kicker { font-size: 12px; }
-  #s9-store .s11-flow-body { font-size: 11px; line-height: 1.35; }
-  #s9-store .s11-flow-close { font-size: 12px; margin-top: 6px; }
-  #s9-store .s11-why-card { padding: 10px 12px; border: 1px solid rgba(241,145,109,0.18); border-radius: 10px; box-sizing: border-box; }
-  #s9-store .s11-why-title { font-size: 13px; }
-  #s9-store .s11-why-body { font-size: 11px; line-height: 1.35; }
-  #s9-store .s11-callout { padding: 10px 14px; }
-  #s9-store .s11-callout-title { font-size: 12px; }
-  #s9-store .s11-callout-body { font-size: 11px; }
+  #s9-store {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+  #s9-store .s10-store-wrap {
+    flex: 1;
+    min-height: 0;
+  }
+  #s9-store .s11-flow-block {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+  #s9-store .s11-why-block {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  #s9-store .s11-callout {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+  #s9-store .s11-block-label {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    margin-bottom: clamp(10px, 1.6vh, 16px);
+  }
+  #s9-store .s11-flow {
+    gap: clamp(10px, 1.5vw, 16px);
+  }
+  #s9-store .s11-flow-step {
+    padding: clamp(16px, 2.2vh, 22px) clamp(16px, 1.8vw, 22px);
+  }
+  #s9-store .s11-flow-kicker {
+    font-size: clamp(15px, 1.5vw, 18px);
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  #s9-store .s11-flow-body {
+    font-size: clamp(13px, 1.2vw, 15px);
+    line-height: 1.5;
+  }
+  #s9-store .s11-flow-close {
+    font-size: clamp(13px, 1.25vw, 15px);
+    margin-top: clamp(12px, 1.8vh, 18px);
+    line-height: 1.45;
+  }
+  #s9-store .s11-why-grid {
+    flex: 1;
+    min-height: 0;
+    gap: clamp(12px, 1.8vh, 18px);
+    align-content: stretch;
+  }
+  #s9-store .s11-why-card {
+    padding: clamp(18px, 2.4vh, 26px) clamp(18px, 1.8vw, 24px);
+    border: 1px solid rgba(241,145,109,0.18);
+    border-radius: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  #s9-store .s11-why-num {
+    font-size: clamp(32px, 3.6vw, 44px);
+    margin-bottom: clamp(8px, 1.2vh, 14px);
+  }
+  #s9-store .s11-why-title {
+    font-size: clamp(16px, 1.6vw, 19px);
+    margin-bottom: 8px;
+  }
+  #s9-store .s11-why-body {
+    font-size: clamp(13px, 1.25vw, 15px);
+    line-height: 1.5;
+  }
+  #s9-store .s11-callout {
+    padding: clamp(16px, 2.2vh, 22px) clamp(18px, 2vw, 24px);
+  }
+  #s9-store .s11-callout-title {
+    font-size: clamp(13px, 1.2vw, 14px);
+    margin-bottom: 6px;
+  }
+  #s9-store .s11-callout-body {
+    font-size: clamp(13px, 1.25vw, 15px);
+    line-height: 1.5;
+  }
   .s11-enhance {
     width: 100%;
     margin-top: clamp(40px, 6vh, 56px);
@@ -4316,6 +4450,9 @@
   #main-experience .s11-callout,
   #main-experience .s9-event-stop,
   #main-experience .s9-event-card,
+  #main-experience .ef-stop,
+  #main-experience .ef-card,
+  #main-experience .ef-pin,
   #main-experience .s10-content .display-hero,
   #main-experience .s10-hash,
   #main-experience .s10-footer {
@@ -5543,65 +5680,67 @@
   <section class="scene" id="s10-event-flow" data-label="Event Flow">
     <span class="slide-num">10 / 11</span>
     <div class="s10-event-section">
-<div class="s9-event-wrap">
-        <p class="s9-event-note">24 hours before event — Influencer posts arrival announcement on Instagram Story tagging @vivoindiatamilnadu</p>
-        <p class="s9-event-label">Influencer Store Launch · Event Flow</p>
-        <div class="s9-event-roadmap" aria-label="Influencer store launch event flow">
-          <svg class="s9-event-svg" viewBox="0 0 1000 320" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M 60 40 C 220 40, 280 40, 360 100 S 520 220, 620 160 S 780 60, 940 260"
-                  fill="none" stroke="#F1916D" stroke-width="3" stroke-dasharray="10 8" stroke-linecap="round"/>
-          </svg>
-          <div class="s9-event-stops">
-            <div class="s9-event-stop right" style="top:2%; left:2%">
-              <div class="s9-event-pin">1</div>
-              <div class="s9-event-card">
-                <p class="s9-event-time">6:00 PM</p>
-                <h4 class="s9-event-title">Influencer Arrival &amp; Welcome</h4>
-                <p class="s9-event-body">Store Manager and Retailer Owner welcome the influencer. Trade Owner and vivo officials felicitate with a bouquet.</p>
-              </div>
-            </div>
-            <div class="s9-event-stop left" style="top:18%; right:28%">
-              <div class="s9-event-pin">2</div>
-              <div class="s9-event-card">
-                <p class="s9-event-time">6:15 PM</p>
-                <h4 class="s9-event-title">vivo S2 Unveiling</h4>
-                <p class="s9-event-body">Influencer officially unveils the all-new vivo S2. First reaction recorded. Retailer team and customers present.</p>
-              </div>
-            </div>
-            <div class="s9-event-stop right" style="top:38%; left:42%">
-              <div class="s9-event-pin">3</div>
-              <div class="s9-event-card">
-                <p class="s9-event-time">6:30 PM</p>
-                <h4 class="s9-event-title">Handover to Pre-Booked Customers</h4>
-                <p class="s9-event-body">Influencer personally hands over S2 smartphones to pre-booked customers. Testimonials captured.</p>
-              </div>
-            </div>
-            <div class="s9-event-stop left" style="top:52%; left:8%">
-              <div class="s9-event-pin">4</div>
-              <div class="s9-event-card">
-                <p class="s9-event-time">6:50 PM</p>
-                <h4 class="s9-event-title">Launch Celebration</h4>
-                <p class="s9-event-body">Cake-cutting with customers, Retailer Owner and Store Manager. Group photographs with vivo branding.</p>
-              </div>
-            </div>
-            <div class="s9-event-stop right" style="top:68%; left:48%">
-              <div class="s9-event-pin">5</div>
-              <div class="s9-event-card">
-                <p class="s9-event-time">7:10 PM</p>
-                <h4 class="s9-event-title">Product Experience &amp; Retailer Interaction</h4>
-                <p class="s9-event-body">Influencer showcases S2 highlights — camera, design, AI features, battery. Retailer explains launch offers.</p>
-              </div>
-            </div>
-            <div class="s9-event-stop left" style="top:78%; right:2%">
-              <div class="s9-event-pin">6</div>
-              <div class="s9-event-card">
-                <p class="s9-event-time">7:30 PM</p>
-                <h4 class="s9-event-title">Social Media Publishing &amp; Wrap-up</h4>
-                <p class="s9-event-body">Event footage edited into reels. Influencer publishes launch video tagging @vivoindiatamilnadu. Content shared across retailer channels.</p>
-              </div>
-            </div>
+      <header class="ef-header">
+        <p class="ef-label">Influencer Store Launch · Event Flow</p>
+        <p class="ef-note">24 hours before event — Influencer posts arrival announcement on Instagram Story tagging @vivoindiatamilnadu</p>
+      </header>
+
+      <div class="ef-timeline" aria-label="Influencer store launch event flow">
+        <article class="ef-stop">
+          <div class="ef-pin">1</div>
+          <div class="ef-card">
+            <p class="ef-time">6:00 PM</p>
+            <h4 class="ef-title">Influencer Arrival &amp; Welcome</h4>
+            <p class="ef-body">Store Manager and Retailer Owner welcome the influencer. Trade Owner and vivo officials felicitate with a bouquet.</p>
           </div>
-        </div>
+        </article>
+        <div class="ef-arrow" aria-hidden="true">→</div>
+        <article class="ef-stop">
+          <div class="ef-pin">2</div>
+          <div class="ef-card">
+            <p class="ef-time">6:15 PM</p>
+            <h4 class="ef-title">vivo S2 Unveiling</h4>
+            <p class="ef-body">Influencer officially unveils the all-new vivo S2. First reaction recorded. Retailer team and customers present.</p>
+          </div>
+        </article>
+        <div class="ef-arrow" aria-hidden="true">→</div>
+        <article class="ef-stop">
+          <div class="ef-pin">3</div>
+          <div class="ef-card">
+            <p class="ef-time">6:30 PM</p>
+            <h4 class="ef-title">Handover to Pre-Booked Customers</h4>
+            <p class="ef-body">Influencer personally hands over S2 smartphones to pre-booked customers. Testimonials captured.</p>
+          </div>
+        </article>
+
+        <div class="ef-row-bridge" aria-hidden="true"><span>↓</span></div>
+
+        <article class="ef-stop">
+          <div class="ef-pin">4</div>
+          <div class="ef-card">
+            <p class="ef-time">6:50 PM</p>
+            <h4 class="ef-title">Launch Celebration</h4>
+            <p class="ef-body">Cake-cutting with customers, Retailer Owner and Store Manager. Group photographs with vivo branding.</p>
+          </div>
+        </article>
+        <div class="ef-arrow" aria-hidden="true">→</div>
+        <article class="ef-stop">
+          <div class="ef-pin">5</div>
+          <div class="ef-card">
+            <p class="ef-time">7:10 PM</p>
+            <h4 class="ef-title">Product Experience &amp; Retailer Interaction</h4>
+            <p class="ef-body">Influencer showcases S2 highlights — camera, design, AI features, battery. Retailer explains launch offers.</p>
+          </div>
+        </article>
+        <div class="ef-arrow" aria-hidden="true">→</div>
+        <article class="ef-stop">
+          <div class="ef-pin">6</div>
+          <div class="ef-card">
+            <p class="ef-time">7:30 PM</p>
+            <h4 class="ef-title">Social Media Publishing &amp; Wrap-up</h4>
+            <p class="ef-body">Event footage edited into reels. Influencer publishes launch video tagging @vivoindiatamilnadu. Content shared across retailer channels.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
