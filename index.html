@@ -255,58 +255,34 @@
     flex-direction: column;
     overflow: hidden;
   }
-  #kol-brief.active,
   #kol-params.active {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-  }
-  #kol-params.active {
     padding: 64px 40px 18px;
     height: 100vh;
     max-height: 100dvh;
   }
-  #kol-brief .kt-brief-wrap,
   #kol-params .kt-params-wrap {
     flex: 1;
     min-height: 0;
     max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 8px 0 0;
-    overflow: hidden;
-  }
-  #kol-params .kt-params-wrap {
     max-width: 1240px;
     width: 100%;
     margin: 0 auto;
     padding: 0;
-    gap: 0;
     height: 100%;
     display: grid;
-    grid-template-rows: auto minmax(0, 1fr);
-    row-gap: 12px;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    row-gap: 10px;
+    overflow: hidden;
   }
-  #kol-params .kt-params-header {
-    flex-shrink: 0;
-  }
-  #kol-brief .kt-brief-cards {
-    flex: 1;
-    min-height: 0;
-    margin-bottom: 16px;
-  }
-  #kol-brief .kt-pills {
-    margin-bottom: 24px;
-  }
-  #kol-brief .kt-hashtags {
-    margin-top: auto;
-    flex-shrink: 0;
-  }
+  #kol-params .kt-params-header { flex-shrink: 0; }
   #kol-params .kt-params-grid {
     min-height: 0;
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(5, minmax(0, 1fr));
     gap: 8px;
     align-content: stretch;
@@ -539,7 +515,25 @@
   body.print-mode .s9-activities,
   body.print-mode .s9-trades .s9-trade,
   body.print-mode .s9-part1,
-  body.print-mode .s9-part2 {
+  body.print-mode .s9-part2,
+  body.print-mode .npl-overline,
+  body.print-mode .npl-hline,
+  body.print-mode .npl-sub,
+  body.print-mode .npl-block-label,
+  body.print-mode .npl-node,
+  body.print-mode .npl-owner-bar,
+  body.print-mode .npl-card,
+  body.print-mode .npl-pillar,
+  body.print-mode .npl-loc-pill,
+  body.print-mode .npl-closing,
+  body.print-mode .v60-overline,
+  body.print-mode .v60-hline,
+  body.print-mode .v60-sub,
+  body.print-mode .v60-total-card,
+  body.print-mode .v60-delta,
+  body.print-mode .v60-table-label,
+  body.print-mode .v60-row,
+  body.print-mode .v60-insight {
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;
@@ -576,56 +570,145 @@
   }
 
   /* ═══════════════════════════════════
-     S1 — OPENING
+     S1 — OPENING + PRODUCT (merged)
   ═══════════════════════════════════ */
-  .s1-phone {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 38%;
-    height: 100%;
+  #s1-opening {
     display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    background: var(--canvas);
+    overflow: hidden;
+  }
+  .s1-layout {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 55% 45%;
     align-items: center;
-    justify-content: center;
-    pointer-events: none;
   }
-  .s1-phone-img {
-    width: auto;
-    height: 85%;
-    max-height: 85vh;
-    object-fit: contain;
-    will-change: transform;
-  }
-  .s1-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      90deg,
-      rgba(10,10,15,1.0) 0%,
-      rgba(10,10,15,0.98) 40%,
-      rgba(10,10,15,0.60) 65%,
-      rgba(10,10,15,0.0) 100%
-    );
-    z-index: 1;
-  }
-  .s1-content {
+  .s1-left {
     position: relative;
     z-index: 2;
-    padding: 0 0 0 6%;
-    width: 58%;
+    padding: clamp(36px, 4.5vh, 56px) clamp(24px, 3.5vw, 48px)
+             clamp(28px, 3.5vh, 44px) clamp(24px, 4.5vw, 64px);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 100vh;
-    background: none !important;
-    border: none !important;
+    min-height: 100%;
+    max-height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
-  #s1, #s1 > *, .s1-sticky {
-    border: none !important;
-    outline: none !important;
-    background: transparent;
-    box-shadow: none !important;
+  .s1-block {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  .s1-tag {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .s1-open-line {
+    font-family: var(--ff-display);
+    font-size: clamp(28px, 3.8vw, 52px);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin: 0 0 2px;
+  }
+  .s1-product-headline {
+    font-family: var(--ff-display);
+    font-size: clamp(20px, 2.3vw, 30px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    margin: 18px 0 8px;
+  }
+  .s1-positioning {
+    font-family: var(--ff-body);
+    font-size: clamp(13px, 1.1vw, 15px);
+    line-height: 1.45;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 14px;
+  }
+  .s1-colours-label {
+    font-family: var(--ff-body);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .s1-colour-row {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .s1-colour-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--ff-body);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .s1-swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid rgba(240,235,248,0.18);
+    flex-shrink: 0;
+  }
+  .s1-specs {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 12px;
+  }
+  .s1-spec-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-right: 22px;
+    max-width: 210px;
+  }
+  .s1-spec-value {
+    font-family: var(--ff-display);
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--peach);
+  }
+  .s1-spec-label {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    line-height: 1.3;
+    color: var(--muted);
+  }
+  .s1-spec-sub {
+    font-family: var(--ff-body);
+    font-size: 10px;
+    line-height: 1.35;
+    color: var(--muted);
+    margin-top: 3px;
+    opacity: 0.85;
+  }
+  .s1-spec-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+    margin-right: 22px;
+    flex-shrink: 0;
+    margin-top: 4px;
   }
   .s1-scroll-cue {
     display: flex;
@@ -635,6 +718,7 @@
     font-family: var(--ff-body);
     font-size: 11px;
     letter-spacing: 0.1em;
+    margin-top: 4px;
   }
   .s1-scroll-line {
     width: 40px;
@@ -656,117 +740,330 @@
     50%  { left: 100%; }
     100% { left: 100%; }
   }
-  @media (max-width: 768px) {
-    .s1-phone {
-      width: 100%; right: 0; opacity: 0.25;
+  .s1-right {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 5%;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  .s1-right img {
+    width: auto;
+    height: min(88%, 88vh);
+    max-width: 92%;
+    object-fit: contain;
+  }
+  @media (max-width: 900px) {
+    .s1-layout { grid-template-columns: 1fr; }
+    .s1-right {
+      position: absolute;
+      inset: 0;
+      opacity: 0.18 !important;
+      padding-top: 8%;
+      pointer-events: none;
+      z-index: 0;
     }
-    .s1-content { width: 90%; padding-left: 6%; }
+    .s1-left { width: 100%; }
   }
 
   /* ═══════════════════════════════════
-     S2 — THE PRODUCT
+     S2-NPL-ROLES — HQ & STATE ROLES
   ═══════════════════════════════════ */
-  .s2-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
+  #s2-npl-roles {
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: clamp(56px, 7vh, 72px) clamp(28px, 5vw, 64px) clamp(28px, 4vh, 40px);
+    background: var(--canvas);
   }
-  .s2-bg-phone {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 44%;
+  .npl-wrap {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
     height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    flex-direction: column;
+    gap: clamp(16px, 2.4vh, 28px);
+    justify-content: space-between;
   }
-  .s2-bg-phone img {
-    width: auto;
-    height: 88%;
-    max-height: 88vh;
-    object-fit: contain;
-    object-position: right center;
+  .npl-overline {
+    color: var(--peach) !important;
+    margin-bottom: 10px;
+    opacity: 0;
   }
-  .s2-bg-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      90deg,
-      rgba(10,10,15,1.0) 0%,
-      rgba(10,10,15,0.90) 40%,
-      rgba(10,10,15,0.20) 70%,
-      transparent 100%
-    );
+  .npl-hline {
+    font-family: var(--ff-display);
+    font-size: clamp(28px, 3.6vw, 52px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    margin: 0;
+    opacity: 0;
+    transform: translateY(28px);
   }
-  .s2-content {
+  .npl-sub {
+    margin-top: 12px;
+    max-width: 520px;
+    opacity: 0;
+  }
+  .npl-block-label {
+    font-family: var(--ff-display);
+    font-size: clamp(12px, 1.1vw, 14px);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin-bottom: 14px;
+    opacity: 0;
+  }
+  .npl-timeline {
     position: relative;
-    z-index: 2;
-    padding-left: 8%;
-    width: 58%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    align-items: start;
+    margin-bottom: 14px;
   }
-  .s2-colours { margin-top: 0; }
-  .s2-colour-row {
+  .npl-timeline::before {
+    content: '';
+    position: absolute;
+    top: 11px;
+    left: calc(100% / 14);
+    right: calc(100% / 14);
+    height: 1px;
+    background: rgba(240,235,248,0.12);
+    z-index: 0;
+  }
+  .npl-node {
+    position: relative;
+    z-index: 1;
     display: flex;
-    gap: 24px;
+    flex-direction: column;
     align-items: center;
+    gap: 8px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(16px);
   }
-  .s2-colour-item {
+  .npl-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--peach);
+    border: 2px solid var(--canvas);
+    box-shadow: 0 0 0 1px rgba(241,145,109,0.35);
+    flex-shrink: 0;
+  }
+  .npl-dot-split {
+    display: flex;
+    overflow: hidden;
+    background: transparent;
+    padding: 0;
+    box-shadow: 0 0 0 1px rgba(174,125,172,0.35);
+  }
+  .npl-dot-half {
+    width: 50%;
+    height: 100%;
+  }
+  .npl-dot-half.peach-half { background: var(--peach); }
+  .npl-dot-half.lav-half { background: var(--lavender); }
+  .npl-node-label {
+    font-family: var(--ff-body);
+    font-size: clamp(10px, 0.95vw, 12px);
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+  .npl-owners {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 8px;
+    column-gap: 0;
+  }
+  .npl-owner-bar {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-family: var(--ff-body);
-    font-size: 13px;
-    color: var(--muted);
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid rgba(241,145,109,0.15);
+    min-width: 0;
+    opacity: 0;
   }
-  .s2-swatch {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 1px solid rgba(240,235,248,0.15);
+  .npl-owner-hq {
+    grid-column: 1 / span 4;
+    border-color: rgba(241,145,109,0.22);
+  }
+  .npl-owner-state {
+    grid-column: 3 / span 5;
+    border-color: rgba(174,125,172,0.28);
+  }
+  .npl-owner-badge {
     flex-shrink: 0;
-  }
-  .s2-specs {
-    display: flex;
-    align-items: center;
-    gap: 0;
-  }
-  .s2-spec-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding-right: 32px;
-  }
-  .s2-spec-value {
-    font-family: var(--ff-display);
-    font-size: clamp(24px,3vw,40px);
+    font-family: var(--ff-body);
+    font-size: 10px;
     font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .npl-badge-peach {
+    color: var(--canvas);
+    background: var(--peach);
+  }
+  .npl-badge-lav {
+    color: var(--canvas);
+    background: var(--lavender);
+  }
+  .npl-owner-text {
+    font-family: var(--ff-body);
+    font-size: clamp(11px, 1vw, 13px);
+    line-height: 1.35;
+    color: var(--muted);
+    min-width: 0;
+  }
+  .npl-roles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(12px, 1.8vw, 20px);
+    align-items: stretch;
+  }
+  .npl-card {
+    background: var(--surface);
+    border: 1px solid rgba(241,145,109,0.15);
+    border-radius: 14px;
+    padding: clamp(14px, 1.8vw, 22px);
+    opacity: 0;
+  }
+  .npl-card-hq { transform: translateX(-48px); }
+  .npl-card-state { transform: translateX(48px); }
+  .npl-card-badge {
+    display: inline-block;
+    font-family: var(--ff-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .npl-card-title {
+    font-family: var(--ff-display);
+    font-size: clamp(20px, 2.2vw, 30px);
+    font-weight: 700;
+    line-height: 1.15;
     letter-spacing: -0.02em;
     color: var(--text);
+    margin-bottom: 6px;
   }
-  .s2-spec-label {
+  .npl-card-role {
     font-family: var(--ff-body);
     font-size: 12px;
     color: var(--muted);
+    margin-bottom: 14px;
   }
-  .s2-spec-divider {
-    width: 1px;
-    height: 48px;
-    background: var(--border);
-    margin-right: 32px;
-    flex-shrink: 0;
+  .npl-pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
   }
-  @media (max-width: 768px) {
-    .s2-sticky { align-items: flex-end; padding-bottom: 10vh; }
-    .s2-content { width: 100%; padding: 0 6%; }
-    .s2-bg-phone { width: 100%; opacity: 0.15; right: 0; }
-    .s2-specs { flex-wrap: wrap; gap: 20px; }
-    .s2-spec-divider { display: none; }
+  .npl-pillar {
+    background: rgba(10,10,15,0.55);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .npl-pillar-name {
+    font-family: var(--ff-display);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--peach);
+    margin-bottom: 4px;
+  }
+  .npl-pillar-detail {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+  .npl-tn-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .npl-tn-col-label {
+    font-family: var(--ff-display);
+    font-size: clamp(13px, 1.2vw, 15px);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .npl-tn-col-label span {
+    display: block;
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .npl-loc-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .npl-loc-pill {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    border: 1px solid rgba(241,145,109,0.45);
+    background: rgba(241,145,109,0.06);
+    padding: 6px 10px;
+    border-radius: 999px;
+    opacity: 0;
+    transform: scale(0);
+  }
+  .npl-tn-note {
+    font-family: var(--ff-body);
+    font-size: 12px;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+  .npl-closing {
+    text-align: center;
+    font-family: var(--ff-display);
+    font-size: clamp(16px, 1.8vw, 22px);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.45;
+    color: var(--text);
+    opacity: 0;
+    margin-top: 2px;
+  }
+  @media (max-width: 900px) {
+    #s2-npl-roles {
+      height: auto;
+      min-height: 100vh;
+      overflow: visible;
+      padding-top: 72px;
+    }
+    .npl-roles { grid-template-columns: 1fr; }
+    .npl-owner-hq,
+    .npl-owner-state { grid-column: 1 / -1; }
+    .npl-node-label { font-size: 9px; }
   }
 
   /* ═══════════════════════════════════
@@ -816,13 +1113,13 @@
   .s3-hero {
     max-width: 720px;
   }
-  #s3 .display-large {
+  #s3-consumer .display-large {
     font-size: clamp(32px, 4.2vw, 56px);
     line-height: 1.1;
     padding-top: 0.06em;
     overflow: visible;
   }
-  #s3 .s3-hero-share {
+  #s3-consumer .s3-hero-share {
     margin-bottom: 0 !important;
   }
   .s3-hero-sub {
@@ -912,12 +1209,12 @@
     flex: 1;
     min-width: 0;
   }
-  #s3 .s3-type-body .display-medium {
+  #s3-consumer .s3-type-body .display-medium {
     font-size: clamp(18px, 1.8vw, 24px);
     margin-bottom: 8px !important;
     letter-spacing: -0.02em;
   }
-  #s3 .s3-type-body .body-medium {
+  #s3-consumer .s3-type-body .body-medium {
     font-size: clamp(12px, 1.05vw, 14px);
     line-height: 1.55;
     max-width: none;
@@ -1339,6 +1636,249 @@
     .s5-amount-num {
       font-size: clamp(72px, 20vw, 110px);
     }
+  }
+
+  /* ═══════════════════════════════════
+     S6 — V60 VS S2 BUDGET
+  ═══════════════════════════════════ */
+  #s6-v60-vs-s2 {
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: clamp(52px, 6vh, 68px) clamp(24px, 4vw, 56px) clamp(24px, 3vh, 36px);
+    background: var(--canvas);
+    overflow: hidden;
+  }
+  .v60-wrap {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 1.6vh, 18px);
+    justify-content: space-between;
+  }
+  .v60-overline {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin-bottom: 8px;
+    opacity: 0;
+  }
+  .v60-hline {
+    font-family: var(--ff-display);
+    font-size: clamp(28px, 3.4vw, 48px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    margin: 0;
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  .v60-sub {
+    font-family: var(--ff-body);
+    font-size: clamp(13px, 1.15vw, 15px);
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: 560px;
+    margin-top: 8px;
+    opacity: 0;
+  }
+  .v60-totals {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 14px;
+    align-items: center;
+  }
+  .v60-total-card {
+    background: var(--surface);
+    border: 1px solid rgba(241,145,109,0.15);
+    border-radius: 12px;
+    padding: clamp(12px, 1.8vh, 18px) clamp(14px, 1.6vw, 22px);
+    opacity: 0;
+  }
+  .v60-total-v60 { transform: translateX(-40px); }
+  .v60-total-s2 { transform: translateX(40px); }
+  .v60-total-label {
+    font-family: var(--ff-body);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .v60-total-amt {
+    font-family: var(--ff-display);
+    font-size: clamp(22px, 2.6vw, 34px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .v60-total-amt.peach { color: var(--peach); }
+  .v60-total-sub {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .v60-delta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--ff-body);
+    font-size: clamp(11px, 1.05vw, 13px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--lavender);
+    background: rgba(174,125,172,0.14);
+    border: 1px solid rgba(174,125,172,0.35);
+    padding: 8px 14px;
+    border-radius: 999px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: scale(0);
+  }
+  .v60-table-label {
+    font-family: var(--ff-body);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin-bottom: 8px;
+    opacity: 0;
+  }
+  .v60-table-wrap {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .v60-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--ff-body);
+  }
+  .v60-table thead th {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 4px 8px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .v60-table thead th:nth-child(2),
+  .v60-table thead th:nth-child(3),
+  .v60-table thead th:nth-child(4),
+  .v60-table thead th:nth-child(5) {
+    text-align: right;
+  }
+  .v60-table thead th:nth-child(3) { text-align: center; }
+  .v60-row {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .v60-row td {
+    font-size: clamp(11px, 1vw, 13px);
+    color: var(--text);
+    padding: 5px 8px;
+    border-bottom: 1px solid rgba(240,235,248,0.04);
+    vertical-align: middle;
+  }
+  .v60-row td:nth-child(2),
+  .v60-row td:nth-child(4),
+  .v60-row td:nth-child(5) { text-align: right; }
+  .v60-row td:nth-child(3) { text-align: center; color: var(--muted); font-weight: 700; }
+  .v60-row.row-new td { background: rgba(74,222,128,0.08); }
+  .v60-row.row-drop td { background: rgba(248,113,113,0.08); }
+  .v60-arrow-up { color: var(--peach); }
+  .v60-arrow-down,
+  .v60-arrow-same { color: var(--muted); }
+  .v60-tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: var(--muted);
+    background: rgba(240,235,248,0.05);
+    border: 1px solid var(--border);
+  }
+  .v60-tag-new {
+    color: #7dcea0;
+    background: rgba(74,222,128,0.10);
+    border-color: rgba(74,222,128,0.25);
+  }
+  .v60-tag-drop {
+    color: #e57a7a;
+    background: rgba(248,113,113,0.10);
+    border-color: rgba(248,113,113,0.25);
+  }
+  .v60-tag-up {
+    color: var(--peach);
+    background: var(--peach-dim);
+    border-color: rgba(241,145,109,0.28);
+  }
+  .v60-row-total td {
+    font-family: var(--ff-display);
+    font-weight: 800;
+    font-size: clamp(12px, 1.1vw, 14px);
+    background: var(--surface);
+    border: 1px solid rgba(241,145,109,0.15);
+    border-top: none;
+    padding: 8px;
+  }
+  .v60-row-total td:first-child { border-radius: 8px 0 0 8px; }
+  .v60-row-total td:last-child { border-radius: 0 8px 8px 0; }
+  .v60-insights {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .v60-insight {
+    background: var(--surface);
+    border: 1px solid rgba(241,145,109,0.15);
+    border-radius: 10px;
+    padding: 12px 14px;
+    opacity: 0;
+  }
+  .v60-insight-icon {
+    font-size: 14px;
+    color: var(--peach);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .v60-insight-title {
+    font-family: var(--ff-display);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--peach);
+    margin-bottom: 4px;
+  }
+  .v60-insight-body {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+  @media (max-width: 900px) {
+    #s6-v60-vs-s2 {
+      height: auto;
+      min-height: 100vh;
+      overflow: visible;
+    }
+    .v60-totals { grid-template-columns: 1fr; }
+    .v60-delta { justify-self: center; }
+    .v60-insights { grid-template-columns: 1fr; }
   }
 
   /* ═══════════════════════════════════
@@ -1872,21 +2412,20 @@
     opacity: 0;
   }
   .s9-part2 {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 8%;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-  .s9-part2.visible {
+    padding: 0;
     opacity: 1;
-    pointer-events: all;
-    transform: translateY(0);
+    pointer-events: auto;
+    transform: none;
+  }
+  #s11-store .s9-part2 {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
   }
   .s9-rationale {
     display: grid;
@@ -2026,143 +2565,9 @@
     .s10-friends-bg { display: none; }
   }
   @media (max-width: 1440px) {
-    #s10 .display-hero {
+    #s12-close .display-hero {
       font-size: clamp(44px, 5.5vw, 72px);
     }
-  }
-
-  /* ═══════════════════════════════════
-     KOL TOOL — PRODUCT BRIEF
-  ═══════════════════════════════════ */
-  .kt-brief-wrap {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 0;
-  }
-  #kol-brief .display-large {
-    font-size: clamp(28px, 3.2vw, 44px);
-  }
-  #kol-brief .body-large {
-    margin-bottom: 24px !important;
-  }
-  #kol-brief .kt-brief-card {
-    padding: 20px 22px;
-  }
-  #kol-params .display-large {
-    font-size: clamp(24px, 2.6vw, 36px);
-    margin-bottom: 2px !important;
-    line-height: 1.1;
-  }
-  #kol-params .eyebrow {
-    margin-bottom: 4px !important;
-  }
-  #kol-params .body-large {
-    margin-bottom: 0 !important;
-    font-size: clamp(13px, 1.1vw, 15px);
-    line-height: 1.4;
-  }
-  #kol-params .kt-param {
-    padding: 8px 12px;
-    gap: 10px;
-    min-height: 0;
-    height: 100%;
-    align-items: center;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-  #kol-params .kt-param-body {
-    min-width: 0;
-    overflow: hidden;
-  }
-  #kol-params .kt-params-grid {
-    gap: 8px;
-  }
-  #kol-params .kt-param-num {
-    font-size: 13px;
-    min-width: 26px;
-    padding-top: 0;
-  }
-  #kol-params .kt-param-name {
-    font-size: clamp(12px, 1.15vw, 15px);
-    margin-bottom: 1px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  #kol-params .kt-param-desc {
-    font-size: 11px;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  #kol-params .kt-mandatory-badge {
-    font-size: 8px;
-    padding: 1px 6px;
-    margin-bottom: 2px;
-  }
-  .kt-pills {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 48px;
-  }
-  .kt-pill {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 16px 24px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: rgba(15,15,24,0.60);
-    backdrop-filter: blur(12px);
-    min-width: 140px;
-  }
-  .kt-pill-val {
-    font-family: var(--ff-display);
-    font-size: clamp(20px,2.5vw,28px);
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.02em;
-  }
-  .kt-pill-label {
-    font-family: var(--ff-body);
-    font-size: 11px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  .kt-brief-cards {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 24px;
-    margin-bottom: 40px;
-  }
-  .kt-brief-card {
-    padding: 28px;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    background: rgba(15,15,24,0.50);
-  }
-  .kt-hashtags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .kt-hash {
-    font-family: var(--ff-body);
-    font-size: 12px;
-    color: var(--muted);
-    padding: 6px 14px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-  }
-  @media (max-width: 768px) {
-    .kt-brief-cards {
-      grid-template-columns: 1fr;
-    }
-    .kt-pills { gap: 10px; }
   }
 
   /* ═══════════════════════════════════
@@ -2173,68 +2578,109 @@
     margin: 0 auto;
     padding: 40px 0;
   }
+  #kol-params .display-large {
+    font-size: clamp(22px, 2.4vw, 32px);
+    margin-bottom: 2px !important;
+    line-height: 1.1;
+  }
+  #kol-params .eyebrow { margin-bottom: 4px !important; }
+  #kol-params .body-large {
+    margin-bottom: 0 !important;
+    font-size: clamp(12px, 1.05vw, 14px);
+    line-height: 1.35;
+  }
   .kt-params-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
   .kt-param {
     display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 20px 24px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 14px;
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 10px;
     background: rgba(15,15,24,0.50);
     transition: border-color 0.2s;
+    min-height: 0;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
-  .kt-param:hover {
-    border-color: rgba(240,235,248,0.12);
-  }
+  .kt-param:hover { border-color: rgba(240,235,248,0.12); }
   .kt-param-mandatory {
-    border-color: rgba(241,145,109,0.25);
-    background: rgba(241,145,109,0.05);
+    border-color: rgba(174,125,172,0.35);
+    background: rgba(174,125,172,0.06);
   }
-  .kt-param-mandatory:hover {
-    border-color: rgba(241,145,109,0.40);
-  }
-  .kt-param-num {
-    font-family: var(--ff-display);
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--muted);
-    min-width: 32px;
-    padding-top: 2px;
-    flex-shrink: 0;
-  }
-  .kt-num-mandatory { color: var(--peach); }
+  .kt-param-mandatory:hover { border-color: rgba(174,125,172,0.50); }
   .kt-mandatory-badge {
     display: inline-block;
     font-family: var(--ff-body);
-    font-size: 9px;
-    font-weight: 600;
+    font-size: 8px;
+    font-weight: 700;
     letter-spacing: 0.10em;
     color: var(--canvas);
-    background: var(--peach);
-    padding: 2px 8px;
+    background: var(--lavender);
+    padding: 2px 7px;
     border-radius: 3px;
-    margin-bottom: 6px;
+    margin-bottom: 2px;
+    width: fit-content;
   }
   .kt-param-name {
     font-family: var(--ff-display);
-    font-size: clamp(14px,1.4vw,18px);
+    font-size: clamp(13px, 1.15vw, 16px);
     font-weight: 700;
-    color: var(--text);
-    margin-bottom: 4px;
+    color: var(--peach);
+    margin: 0;
+    line-height: 1.2;
   }
   .kt-param-desc {
     font-family: var(--ff-body);
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.5;
+    font-size: clamp(10px, 0.9vw, 12px);
+    color: rgba(240,235,248,0.55);
+    line-height: 1.35;
   }
-  @media (max-width: 768px) {
-    .kt-params-grid { grid-template-columns: 1fr; }
+  .kt-sop-gates {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .kt-sop-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    background: rgba(174,125,172,0.12);
+    border: 1px solid rgba(174,125,172,0.35);
+    padding: 8px 14px;
+    border-radius: 20px;
+  }
+  .kt-sop-pill-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    color: var(--lavender);
+    text-transform: uppercase;
+  }
+  @media (max-width: 900px) {
+    #kol-params .kt-params-grid, .kt-params-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(8, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 560px) {
+    #kol-params .kt-params-grid, .kt-params-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: none;
+      overflow-y: auto;
+    }
   }
 
   /* ═══════════════════════════════════
@@ -2569,9 +3015,10 @@
     pointer-events: none;
   }
   .kt-modal-details {
-    padding: clamp(24px, 3.5vh, 40px)
-             clamp(28px, 4vw, 48px);
-    overflow: hidden;
+    padding: clamp(20px, 2.8vh, 36px)
+             clamp(24px, 3.5vw, 44px);
+    overflow-y: auto;
+    overflow-x: hidden;
     max-height: none;
     height: 100%;
     box-sizing: border-box;
@@ -2692,53 +3139,216 @@
     line-height: 1;
     margin-top: 2px;
   }
+  .kt-engage-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 4px;
+    flex-shrink: 0;
+  }
+  .kt-engage-card {
+    background: #0F0F18;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .kt-engage-val {
+    font-family: var(--ff-display);
+    font-size: clamp(14px, 1.4vw, 18px);
+    font-weight: 800;
+    color: var(--peach);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .kt-engage-label {
+    font-family: var(--ff-body);
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+  .kt-er-badge {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--lavender);
+    background: rgba(174,125,172,0.14);
+    border: 1px solid rgba(174,125,172,0.30);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+  .kt-assess-header {
+    font-family: var(--ff-display);
+    font-size: clamp(16px, 1.8vw, 22px);
+    font-weight: 700;
+    color: var(--peach);
+    margin: 16px 0 10px;
+    flex-shrink: 0;
+  }
   .kt-modal-params {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px 18px;
-    margin-bottom: 4px;
-    flex: 1;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+    flex: 0 0 auto;
     min-height: 0;
     align-content: start;
-    overflow: hidden;
   }
-  .kt-modal-param-row {
+  .kt-assess-card {
+    background: #0F0F18;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .kt-assess-card:hover { border-color: rgba(240,235,248,0.14); }
+  .kt-assess-card.expanded {
+    border-color: rgba(241,145,109,0.28);
+    background: rgba(241,145,109,0.04);
+  }
+  .kt-assess-num {
+    font-family: var(--ff-body);
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+  .kt-assess-top {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: space-between;
     gap: 8px;
   }
-  .kt-modal-param-label {
-    font-family: var(--ff-body);
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text);
-    min-width: 0;
-    flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .kt-modal-param-track {
-    flex: 1.2;
-    height: 4px;
-    background: var(--dim);
-    border-radius: 2px;
-    overflow: hidden;
-    min-width: 48px;
-  }
-  .kt-modal-param-fill {
-    height: 100%;
-    border-radius: 2px;
-    width: 0%;
-    transition: width 0.8s ease;
-  }
-  .kt-modal-param-score {
+  .kt-assess-name {
     font-family: var(--ff-display);
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--text);
-    min-width: 28px;
-    text-align: right;
+    line-height: 1.25;
+    flex: 1;
+    min-width: 0;
+  }
+  .kt-result-pill {
+    flex-shrink: 0;
+    font-family: var(--ff-body);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 3px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .kt-result-yes {
+    color: #7dcea0;
+    background: rgba(125,206,160,0.12);
+    border: 1px solid rgba(125,206,160,0.25);
+  }
+  .kt-result-no {
+    color: #e57a7a;
+    background: rgba(229,122,122,0.12);
+    border: 1px solid rgba(229,122,122,0.25);
+  }
+  .kt-result-caution {
+    color: #e8b86d;
+    background: rgba(232,184,109,0.12);
+    border: 1px solid rgba(232,184,109,0.28);
+  }
+  .kt-assess-reason {
+    display: none;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(240,235,248,0.08);
+    font-family: var(--ff-body);
+    font-size: 11px;
+    line-height: 1.45;
+    color: rgba(240,235,248,0.70);
+    animation: ktReasonIn 0.22s ease;
+  }
+  .kt-assess-card.expanded .kt-assess-reason { display: block; }
+  @keyframes ktReasonIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .kt-modal-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 18px;
+    margin: 4px 0 12px;
+    flex-shrink: 0;
+  }
+  .kt-summary-score {
+    font-family: var(--ff-display);
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 800;
+    color: var(--peach);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .kt-summary-match {
+    font-family: var(--ff-display);
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 700;
+    color: var(--text);
+  }
+  .kt-rec-tag {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 6px;
+  }
+  .kt-rec-high {
+    color: var(--peach);
+    background: var(--peach-dim);
+    border: 1px solid rgba(241,145,109,0.30);
+  }
+  .kt-rec-rec {
+    color: var(--lavender);
+    background: var(--lav-dim);
+    border: 1px solid rgba(174,125,172,0.30);
+  }
+  .kt-rec-consider {
+    color: #e8b86d;
+    background: rgba(232,184,109,0.10);
+    border: 1px solid rgba(232,184,109,0.28);
+  }
+  .kt-priority-badge {
+    font-family: var(--ff-display);
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--lavender);
+    background: rgba(174,125,172,0.14);
+    border: 1px solid rgba(174,125,172,0.35);
+    padding: 4px 12px;
+    border-radius: 6px;
+  }
+  .kt-modal-note {
+    background: rgba(15,15,24,0.80);
+    border-left: 3px solid #e8b86d;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 14px;
+    font-family: var(--ff-body);
+    font-size: 13px;
+    line-height: 1.45;
+    color: rgba(240,235,248,0.80);
+    flex-shrink: 0;
+    margin-bottom: 8px;
+  }
+  @media (max-width: 900px) {
+    .kt-engage-row { grid-template-columns: repeat(3, 1fr); }
+    .kt-modal-params { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .kt-engage-row { grid-template-columns: 1fr 1fr; }
+    .kt-modal-params { grid-template-columns: 1fr; }
   }
   .kt-modal-angle {
     background: var(--peach-dim);
@@ -2835,157 +3445,228 @@
 
 <!-- ═══════════════════════════════════
      MAIN PRESENTATION SCROLL EXPERIENCE
-     10 scenes, each exactly 100vh
+     12 scenes, each exactly 100vh
      (some scenes are 150-200vh to allow
      scroll-driven storytelling within them)
 ═══════════════════════════════════ -->
 <main id="main-experience">
 
-  <!-- S1: OPENING -->
-  <section class="scene" id="s1"
-    data-label="vivo S2 · Tamil Nadu 2026">
+  <!-- S1: OPENING + PRODUCT -->
+  <section class="scene" id="s1-opening"
+    data-label="Opening">
 
-    <!-- Phone image: right side, vertically centred,
-         slightly clipped at edges for drama -->
-    <div class="s1-phone">
-      <picture>
-        <source srcset="img/phone_hero.webp" type="image/webp">
-        <img src="img/phone_hero.png" alt="vivo S2"
-             class="s1-phone-img" loading="eager">
-      </picture>
-    </div>
+    <div class="s1-layout">
+      <div class="s1-left">
+        <p class="s1-tag s1-block">FTPL · Tamil Nadu · 2026</p>
 
-    <!-- Gradient overlay: left-to-right so text is readable -->
-    <div class="s1-overlay"></div>
+        <div class="s1-block">
+          <h1 class="s1-open-line">Tamil Nadu.</h1>
+          <h1 class="s1-open-line peach">vivo S2.</h1>
+          <h1 class="s1-open-line" style="color:var(--muted)">2026.</h1>
+        </div>
 
-    <!-- Text content: left-aligned, vertically centred -->
-    <div class="s1-content">
-      <p class="eyebrow reveal-line" style="margin-bottom:20px">
-        FTPL · Tamil Nadu · 2026
-      </p>
-      <h1 class="display-hero reveal-line"
-          style="margin-bottom:8px">
-        Tamil Nadu.
-      </h1>
-      <h1 class="display-hero reveal-line peach"
-          style="margin-bottom:8px">
-        vivo S2.
-      </h1>
-      <h1 class="display-hero reveal-line"
-          style="margin-bottom:48px; color:var(--muted)">
-        2026.
-      </h1>
-      <p class="body-large reveal-line"
-         style="max-width:420px; margin-bottom:40px">
-        A lifestyle identity they resonate with.<br>
-        The new medium segment. Owned.
-      </p>
-      <!-- Scroll cue -->
-      <div class="s1-scroll-cue reveal-fade">
-        <div class="s1-scroll-line"></div>
-        <span>Scroll</span>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- S2: THE PRODUCT -->
-  <section class="scene" id="s2"
-    data-label="The Product"
-    style="height:200vh; display:block; overflow:visible">
-
-    <!-- Sticky wrapper holds everything in viewport -->
-    <div class="s2-sticky">
-
-      <!-- Background: phone back image, large, right side -->
-      <div class="s2-bg-phone">
-        <picture>
-          <source srcset="img/phone_back.webp" type="image/webp">
-          <img src="img/phone_back.png" alt="vivo S2 design" loading="lazy">
-        </picture>
-      </div>
-      <div class="s2-bg-overlay"></div>
-
-      <!-- Content: left side -->
-      <div class="s2-content">
-
-        <!-- Step 1: revealed immediately on entry -->
-        <p class="eyebrow reveal-line s2-step"
-           data-step="1"
-           style="margin-bottom:16px">
-          The Product
-        </p>
-        <h2 class="display-large reveal-line s2-step"
-            data-step="1"
-            style="margin-bottom:24px">
+        <h2 class="s1-product-headline s1-block">
           Built for who<br>
           <span class="peach">you're becoming.</span>
         </h2>
-        <p class="body-large reveal-line s2-step"
-           data-step="1"
-           style="max-width:400px; margin-bottom:48px">
-          A space for non-tech mainstream youth.<br>
-          The new ₹35K–₹45K medium segment.
+
+        <p class="s1-positioning s1-block">
+          A powerful price band entry. 35K-45K.<br>
+          The new medium segment. Owned.
         </p>
 
-        <!-- Step 2: three colour variants revealed on scroll -->
-        <div class="s2-colours reveal-line s2-step"
-             data-step="2">
-          <p class="eyebrow"
-             style="margin-bottom:20px; color:var(--muted)">
-            Three expressions
-          </p>
-          <div class="s2-colour-row">
-            <div class="s2-colour-item">
-              <div class="s2-swatch"
-                   style="background:linear-gradient(135deg,
-                   #F8F6F2,#E8E4DC)"></div>
+        <div class="s1-block">
+          <p class="s1-colours-label">Three expressions</p>
+          <div class="s1-colour-row">
+            <div class="s1-colour-item">
+              <div class="s1-swatch" style="background:#F5F5F5"></div>
               <span>Silk White</span>
             </div>
-            <div class="s2-colour-item">
-              <div class="s2-swatch"
-                   style="background:linear-gradient(135deg,
-                   #8B6914,#C4962A)"></div>
+            <div class="s1-colour-item">
+              <div class="s1-swatch" style="background:#8B6914"></div>
               <span>Regal Bronze</span>
             </div>
-            <div class="s2-colour-item">
-              <div class="s2-swatch"
-                   style="background:linear-gradient(135deg,
-                   #1E3A6E,#2E5BA8)"></div>
+            <div class="s1-colour-item">
+              <div class="s1-swatch" style="background:#1B3A6B"></div>
               <span>Sapphire Blue</span>
             </div>
           </div>
         </div>
 
-        <!-- Step 3: key specs -->
-        <div class="s2-specs reveal-line s2-step"
-             data-step="3"
-             style="margin-top:40px">
-          <div class="s2-spec-item">
-            <span class="s2-spec-value peach">4K</span>
-            <span class="s2-spec-label">
-              Front & Rear Video
-            </span>
+        <div class="s1-specs s1-block">
+          <div class="s1-spec-item">
+            <span class="s1-spec-value">4K</span>
+            <span class="s1-spec-label">Front &amp; Rear<br>Video</span>
           </div>
-          <div class="s2-spec-divider"></div>
-          <div class="s2-spec-item">
-            <span class="s2-spec-value lavender">8GB</span>
-            <span class="s2-spec-label">RAM · 128/256</span>
+          <div class="s1-spec-divider"></div>
+          <div class="s1-spec-item">
+            <span class="s1-spec-value">8GB</span>
+            <span class="s1-spec-label">RAM 128/256</span>
           </div>
-          <div class="s2-spec-divider"></div>
-          <div class="s2-spec-item">
-            <span class="s2-spec-value">Gen Z</span>
-            <span class="s2-spec-label">Tamil Nadu TG</span>
+          <div class="s1-spec-divider"></div>
+          <div class="s1-spec-item">
+            <span class="s1-spec-value">Y to S to X</span>
+            <span class="s1-spec-label">Growth Ladder</span>
+            <span class="s1-spec-sub">S2 bridges Y-series to V-series. Today's S2 buyer is tomorrow's X user.</span>
           </div>
         </div>
 
+        <div class="s1-scroll-cue s1-block">
+          <div class="s1-scroll-line"></div>
+          <span>Scroll</span>
+        </div>
       </div>
+
+      <div class="s1-right">
+        <picture>
+          <source srcset="img/phone_back.webp" type="image/webp">
+          <img src="img/phone_back.png" alt="vivo S2" loading="eager">
+        </picture>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- S2-NPL-ROLES: HQ & STATE ROLES -->
+  <section class="scene" id="s2-npl-roles"
+    data-label="NPL Strategy">
+
+    <div class="npl-wrap">
+
+      <!-- Block 1 — Headline -->
+      <div class="npl-hero">
+        <p class="eyebrow npl-overline">How S2 Goes to Market</p>
+        <h2 class="npl-hline">One strategy.</h2>
+        <h2 class="npl-hline">Two teams.</h2>
+        <h2 class="npl-hline">One Tamil Nadu.</h2>
+        <p class="body-large npl-sub">
+          vivo India builds the brand nationally.<br>
+          FTPL makes it real in Tamil Nadu.
+        </p>
+      </div>
+
+      <!-- Block 2 — Consumer Decision Journey -->
+      <div class="npl-journey">
+        <p class="npl-block-label">The Consumer Journey</p>
+
+        <div class="npl-timeline" aria-label="Consumer decision journey">
+          <div class="npl-node">
+            <div class="npl-dot"></div>
+            <span class="npl-node-label">See</span>
+          </div>
+          <div class="npl-node">
+            <div class="npl-dot"></div>
+            <span class="npl-node-label">Interest</span>
+          </div>
+          <div class="npl-node">
+            <div class="npl-dot npl-dot-split" aria-hidden="true">
+              <span class="npl-dot-half peach-half"></span>
+              <span class="npl-dot-half lav-half"></span>
+            </div>
+            <span class="npl-node-label">Learn</span>
+          </div>
+          <div class="npl-node">
+            <div class="npl-dot npl-dot-split" aria-hidden="true">
+              <span class="npl-dot-half peach-half"></span>
+              <span class="npl-dot-half lav-half"></span>
+            </div>
+            <span class="npl-node-label">Experience</span>
+          </div>
+          <div class="npl-node">
+            <div class="npl-dot" style="background:var(--lavender);box-shadow:0 0 0 1px rgba(174,125,172,0.35)"></div>
+            <span class="npl-node-label">Purchase</span>
+          </div>
+          <div class="npl-node">
+            <div class="npl-dot" style="background:var(--lavender);box-shadow:0 0 0 1px rgba(174,125,172,0.35)"></div>
+            <span class="npl-node-label">Share</span>
+          </div>
+          <div class="npl-node">
+            <div class="npl-dot" style="background:var(--lavender);box-shadow:0 0 0 1px rgba(174,125,172,0.35)"></div>
+            <span class="npl-node-label">Loyal</span>
+          </div>
+        </div>
+
+        <div class="npl-owners">
+          <div class="npl-owner-bar npl-owner-hq">
+            <span class="npl-owner-badge npl-badge-peach">vivo India</span>
+            <span class="npl-owner-text">Builds national brand awareness — establishes why consumers should love S2</span>
+          </div>
+          <div class="npl-owner-bar npl-owner-state">
+            <span class="npl-owner-badge npl-badge-lav">FTPL Tamil Nadu</span>
+            <span class="npl-owner-text">Localises and activates — converts awareness into purchase here and now</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Block 3 — Role cards -->
+      <div class="npl-roles">
+
+        <article class="npl-card npl-card-hq">
+          <span class="npl-card-badge npl-badge-peach">vivo India</span>
+          <h3 class="npl-card-title">
+            Why should consumers<br>love S2?
+          </h3>
+          <p class="npl-card-role">Build the national brand narrative</p>
+          <div class="npl-pillars">
+            <div class="npl-pillar">
+              <div class="npl-pillar-name">Brand Story</div>
+              <div class="npl-pillar-detail">Weekend Explorer · Self Expression · First Discover · First Share</div>
+            </div>
+            <div class="npl-pillar">
+              <div class="npl-pillar-name">Visual Unity</div>
+              <div class="npl-pillar-detail">Same KV · Same music · Same DVC — nationwide</div>
+            </div>
+            <div class="npl-pillar">
+              <div class="npl-pillar-name">Content Themes</div>
+              <div class="npl-pillar-detail">Friends · Music · Cafe · Unified KOL theme</div>
+            </div>
+            <div class="npl-pillar">
+              <div class="npl-pillar-name">Consumer Outcome</div>
+              <div class="npl-pillar-detail">“I know what S2 stands for”</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="npl-card npl-card-state">
+          <span class="npl-card-badge npl-badge-lav">FTPL Tamil Nadu</span>
+          <h3 class="npl-card-title">
+            Why should I buy S2<br>here and now?
+          </h3>
+          <p class="npl-card-role">Localise the brand. Activate Tamil Nadu.</p>
+          <div class="npl-tn-split">
+            <div class="npl-tn-col-label">
+              Weekend Explorer
+              <span>(National concept)</span>
+            </div>
+            <div class="npl-tn-col-label">
+              Weekend Explorer
+              <span>in Tamil Nadu</span>
+            </div>
+          </div>
+          <div class="npl-loc-pills">
+            <span class="npl-loc-pill">☕ Best Café in Chennai</span>
+            <span class="npl-loc-pill">🌅 Sunrise at Marina</span>
+            <span class="npl-loc-pill">🚲 Coimbatore Cycling</span>
+          </div>
+          <p class="npl-tn-note">
+            Not repeating HQ. Making Tamil Nadu feel it’s their story.
+          </p>
+        </article>
+
+      </div>
+
+      <!-- Closing -->
+      <p class="npl-closing">
+        The national campaign creates desire.<br>
+        Tamil Nadu converts it<span class="peach">.</span>
+      </p>
+
     </div>
   </section>
 
   <!-- S3: THE CONSUMER -->
-  <section class="scene" id="s3"
-    data-label="The Consumer"
+  <section class="scene" id="s3-consumer"
+    data-label="Consumer"
     style="height:100vh; display:block; overflow:hidden">
 
     <div class="s3-sticky">
@@ -3081,8 +3762,8 @@
   </section>
 
   <!-- S4: THE CAMPAIGN -->
-  <section class="scene" id="s4"
-    data-label="The Campaign"
+  <section class="scene" id="s4-campaign"
+    data-label="Campaign"
     style="height:150vh; display:block; overflow:visible">
 
     <div class="s4-sticky">
@@ -3195,8 +3876,8 @@
   </section>
 
   <!-- S5: THE STRATEGY -->
-  <section class="scene" id="s5"
-    data-label="The Strategy"
+  <section class="scene" id="s5-story"
+    data-label="Story"
     style="height:150vh; display:block; overflow:visible">
 
     <div class="s5-sticky">
@@ -3309,8 +3990,176 @@
   </section>
 
   <!-- S6: THE PLAN -->
-  <section class="scene" id="s6"
-    data-label="Campaign Execution"
+  <!-- S6: V60 VS S2 BUDGET -->
+  <section class="scene" id="s6-v60-vs-s2"
+    data-label="V60 vs S2">
+
+    <div class="v60-wrap">
+
+      <div class="v60-hero">
+        <p class="v60-overline">Budget Intelligence</p>
+        <h2 class="v60-hline">Not just more.</h2>
+        <h2 class="v60-hline">Smarter.</h2>
+        <p class="v60-sub">
+          V60 taught us what works. S2 acts on it.<br>
+          Total investment up ₹3L. Every rupee repositioned.
+        </p>
+      </div>
+
+      <div class="v60-totals">
+        <div class="v60-total-card v60-total-v60">
+          <div class="v60-total-label">V Series 60</div>
+          <div class="v60-total-amt">₹40,98,539</div>
+          <div class="v60-total-sub">Total State Investment</div>
+        </div>
+        <div class="v60-delta">▲ ₹3,01,461&nbsp;&nbsp;+7.4%</div>
+        <div class="v60-total-card v60-total-s2">
+          <div class="v60-total-label">S Series 2</div>
+          <div class="v60-total-amt peach">₹44,00,000</div>
+          <div class="v60-total-sub">Total State Investment</div>
+        </div>
+      </div>
+
+      <div class="v60-table-block">
+        <p class="v60-table-label">Where the Money Moved</p>
+        <div class="v60-table-wrap">
+          <table class="v60-table">
+            <thead>
+              <tr>
+                <th>Line Item</th>
+                <th>V60</th>
+                <th></th>
+                <th>S2</th>
+                <th>Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="v60-row row-new">
+                <td>Influencer Campaign</td>
+                <td>₹0</td>
+                <td class="v60-arrow-up">↑</td>
+                <td>₹10,00,000</td>
+                <td><span class="v60-tag v60-tag-new">NEW</span></td>
+              </tr>
+              <tr class="v60-row row-new">
+                <td>Retailer Unboxing</td>
+                <td>₹0</td>
+                <td class="v60-arrow-up">↑</td>
+                <td>₹1,00,000</td>
+                <td><span class="v60-tag v60-tag-new">NEW</span></td>
+              </tr>
+              <tr class="v60-row">
+                <td>Social Media</td>
+                <td>₹10,000</td>
+                <td class="v60-arrow-up">↑</td>
+                <td>₹1,00,000</td>
+                <td><span class="v60-tag v60-tag-up">+10x</span></td>
+              </tr>
+              <tr class="v60-row">
+                <td>Darling</td>
+                <td>₹2,00,000</td>
+                <td class="v60-arrow-up">↑</td>
+                <td>₹4,00,000</td>
+                <td><span class="v60-tag v60-tag-up">+100%</span></td>
+              </tr>
+              <tr class="v60-row">
+                <td>Vasanth &amp; Co</td>
+                <td>₹1,00,000</td>
+                <td class="v60-arrow-up">↑</td>
+                <td>₹2,00,000</td>
+                <td><span class="v60-tag v60-tag-up">+100%</span></td>
+              </tr>
+              <tr class="v60-row">
+                <td>Sathya</td>
+                <td>₹6,00,000</td>
+                <td class="v60-arrow-same">→</td>
+                <td>₹6,00,000</td>
+                <td><span class="v60-tag">SAME</span></td>
+              </tr>
+              <tr class="v60-row">
+                <td>Supreme</td>
+                <td>₹2,00,000</td>
+                <td class="v60-arrow-same">→</td>
+                <td>₹2,00,000</td>
+                <td><span class="v60-tag">SAME</span></td>
+              </tr>
+              <tr class="v60-row">
+                <td>TCM</td>
+                <td>₹5,00,000</td>
+                <td class="v60-arrow-down">↓</td>
+                <td>₹4,00,000</td>
+                <td><span class="v60-tag">-20%</span></td>
+              </tr>
+              <tr class="v60-row">
+                <td>Poorvika</td>
+                <td>₹15,00,000</td>
+                <td class="v60-arrow-down">↓</td>
+                <td>₹10,00,000</td>
+                <td><span class="v60-tag">Rationalised</span></td>
+              </tr>
+              <tr class="v60-row">
+                <td>Sangeetha</td>
+                <td>₹4,98,540</td>
+                <td class="v60-arrow-down">↓</td>
+                <td>₹2,00,000</td>
+                <td><span class="v60-tag">Rationalised</span></td>
+              </tr>
+              <tr class="v60-row">
+                <td>Reliance</td>
+                <td>₹1,99,999</td>
+                <td class="v60-arrow-down">↓</td>
+                <td>₹1,00,000</td>
+                <td><span class="v60-tag">Rationalised</span></td>
+              </tr>
+              <tr class="v60-row">
+                <td>Croma</td>
+                <td>₹2,00,000</td>
+                <td class="v60-arrow-down">↓</td>
+                <td>₹1,00,000</td>
+                <td><span class="v60-tag">Rationalised</span></td>
+              </tr>
+              <tr class="v60-row row-drop">
+                <td>AI Videos</td>
+                <td>₹90,000</td>
+                <td class="v60-arrow-down">↓</td>
+                <td>₹0</td>
+                <td><span class="v60-tag v60-tag-drop">DROPPED</span></td>
+              </tr>
+              <tr class="v60-row v60-row-total">
+                <td>TOTAL</td>
+                <td>₹40,98,539</td>
+                <td class="v60-arrow-up">↑</td>
+                <td class="peach">₹44,00,000</td>
+                <td><span class="v60-tag v60-tag-up">+7.4%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="v60-insights">
+        <div class="v60-insight">
+          <div class="v60-insight-icon">↑</div>
+          <div class="v60-insight-title">What we added</div>
+          <div class="v60-insight-body">Influencer campaign and retailer unboxing — capabilities V60 never had.</div>
+        </div>
+        <div class="v60-insight">
+          <div class="v60-insight-icon">◎</div>
+          <div class="v60-insight-title">What we rationalised</div>
+          <div class="v60-insight-body">Poorvika, Sangeetha, Reliance, Croma — freed budget moved to higher-impact activations.</div>
+        </div>
+        <div class="v60-insight">
+          <div class="v60-insight-icon">✕</div>
+          <div class="v60-insight-title">What we dropped</div>
+          <div class="v60-insight-body">AI videos showed no measurable return. Removed entirely for S2.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="scene" id="s7-strategy"
+    data-label="Strategy"
     style="height:200vh; display:block; overflow:visible">
 
     <div class="s6-sticky">
@@ -3573,8 +4422,8 @@
   </section>
 
   <!-- S7: THE KOL SYSTEM -->
-  <section class="scene" id="s7"
-    data-label="KOL Intelligence"
+  <section class="scene" id="s8-timeline"
+    data-label="Timeline"
     style="height:150vh; display:block; overflow:visible">
 
     <div class="s7-sticky">
@@ -3625,7 +4474,7 @@
             <div class="s7-act-body">
               <h3 class="display-medium"
                   style="margin-bottom:10px">
-                10 Parameters Scored
+                15 Parameters Scored
               </h3>
               <p class="body-medium"
                  style="max-width:380px">
@@ -3651,7 +4500,7 @@
               </h3>
               <p class="body-medium"
                  style="max-width:380px">
-                11 confirmed KOLs across
+                14 confirmed KOLs across
                 Celebrity · Influencer · Model tiers.
                 Deployed across 4 campaign phases.
                 Top fit score: 85%.
@@ -3662,7 +4511,7 @@
                 <div class="s7-stat">
                   <span class="s7-stat-val peach"
                         data-countup
-                        data-target="11">0</span>
+                        data-target="14">0</span>
                   <span class="s7-stat-label">KOLs</span>
                 </div>
                 <div class="s7-stat">
@@ -3702,8 +4551,8 @@
   </section>
 
   <!-- S8: KOL TOOL BRIDGE -->
-  <section class="scene" id="s8"
-    data-label="KOL Intelligence Tool">
+  <section class="scene" id="s9-kol"
+    data-label="KOL System">
 
     <!-- Ambient glow -->
     <div class="s8-glow"></div>
@@ -3726,12 +4575,12 @@
          style="text-align:center;
                 max-width:420px;
                 margin:0 auto 48px">
-        11 confirmed creators. 10 parameters.
+        14 confirmed creators. 15 parameters.
         Every selection scored and defensible.
       </p>
       <div style="text-align:center" class="reveal-line">
         <button class="s8-cta"
-                onclick="enterKolMode('kol-brief')">
+                onclick="enterKolMode('kol-params')">
           Open KOL Intelligence Tool
           <span class="s8-cta-arrow">→</span>
         </button>
@@ -3741,9 +4590,9 @@
   </section>
 
   <!-- S9: JBP PARTNERS -->
-  <section class="scene" id="s9"
-    data-label="JBP Trade Strategy"
-    style="height:200vh; display:block; overflow:visible">
+  <section class="scene" id="s10-jbp"
+    data-label="JBP Strategy"
+    style="height:100vh; display:block; overflow:hidden">
 
     <div class="s9-sticky">
 
@@ -4008,6 +4857,14 @@
         </div><!-- end s9-content -->
       </div><!-- end part1 -->
 
+    </div><!-- end sticky -->
+  </section>
+
+  <!-- S10: STORE LAUNCH -->
+  <section class="scene" id="s11-store"
+    data-label="Store Launch"
+    style="height:100vh; display:block; overflow:hidden">
+    <div class="s9-sticky">
       <!-- PART 2: Store launch rationale -->
       <!-- Hidden initially, revealed at 50% scroll -->
       <div class="s9-part2" id="s9-part2">
@@ -4104,13 +4961,12 @@
         </div>
 
       </div><!-- end part2 -->
-
-    </div><!-- end sticky -->
+    </div>
   </section>
 
   <!-- S10: THE CLOSE -->
-  <section class="scene" id="s10"
-    data-label="Friends. Weekends. Never Ends.">
+  <section class="scene" id="s12-close"
+    data-label="The Close">
 
     <div class="s10-friends-bg">
       <img src="img/friends_apt1.jpg"
@@ -4183,7 +5039,7 @@
 
 <!-- ═══════════════════════════════════
      KOL TOOL SECTIONS
-     Hidden until triggered from S8
+     Hidden until triggered from S8 KOL
 ═══════════════════════════════════ -->
 
 <!-- KOL Navigation bar (shown only in KOL mode) -->
@@ -4192,268 +5048,96 @@
     vivo S2 <span>KOL Intelligence</span>
   </div>
   <div class="kol-nav-tabs">
-    <button class="kol-tab active" data-kol-tab="kol-brief">Product Brief</button>
-    <button class="kol-tab" data-kol-tab="kol-params">Parameters</button>
+    <button class="kol-tab active" data-kol-tab="kol-params">Parameters</button>
     <button class="kol-tab" data-kol-tab="kol-match">KOL Match</button>
   </div>
   <button class="kol-nav-back" id="kol-back">← Back to Strategy</button>
 </nav>
 
-<section class="kol-section" id="kol-brief">
-  <div class="kt-brief-wrap">
-
-    <!-- Hero -->
-    <p class="eyebrow"
-       style="margin-bottom:16px">
-      VIVO S2 · TAMIL NADU · 2026
-    </p>
-    <h1 class="display-large"
-        style="margin-bottom:8px">
-      Built for the
-    </h1>
-    <h1 class="display-large peach"
-        style="margin-bottom:24px">
-      Weekend Generation.
-    </h1>
-    <p class="body-large"
-       style="max-width:580px; margin-bottom:40px">
-      Caught in 4K. Friends. Weekends. Never Ends.
-    </p>
-
-    <!-- Three stat pills -->
-    <div class="kt-pills">
-      <div class="kt-pill">
-        <span class="kt-pill-val peach">₹35K–₹45K</span>
-        <span class="kt-pill-label">Price Band</span>
-      </div>
-      <div class="kt-pill">
-        <span class="kt-pill-val">4K</span>
-        <span class="kt-pill-label">
-          Front & Rear Video
-        </span>
-      </div>
-      <div class="kt-pill">
-        <span class="kt-pill-val lavender">Gen Z</span>
-        <span class="kt-pill-label">Tamil Nadu TG</span>
-      </div>
-    </div>
-
-    <!-- Three info cards -->
-    <div class="kt-brief-cards">
-
-      <div class="kt-brief-card">
-        <p class="eyebrow"
-           style="color:var(--peach);
-                  margin-bottom:12px">
-          The Product
-        </p>
-        <h3 class="display-medium"
-            style="margin-bottom:16px">
-          vivo S2
-        </h3>
-        <p class="body-medium">
-          ₹35K–₹45K · Young Lifestyle<br>
-          4K Front & Rear Video<br>
-          Y-series → S-series → V-series
-        </p>
-      </div>
-
-      <div class="kt-brief-card">
-        <p class="eyebrow"
-           style="color:var(--lavender);
-                  margin-bottom:12px">
-          The Consumer
-        </p>
-        <h3 class="display-medium"
-            style="margin-bottom:16px">
-          Gen Z · Tamil Nadu
-        </h3>
-        <p class="body-medium">
-          17–22 · Undergrad<br>
-          23–28 · Young White Collar<br>
-          25–30 · Young Shop Owner
-        </p>
-      </div>
-
-      <div class="kt-brief-card">
-        <p class="eyebrow"
-           style="color:var(--peach);
-                  margin-bottom:12px">
-          Campaign
-        </p>
-        <h3 class="display-medium peach"
-            style="margin-bottom:16px">
-          #MyNewStory
-        </h3>
-        <p class="body-medium">
-          Caught in 4K<br>
-          Friends. Weekends. Never Ends.<br>
-          Café · City · Campus
-        </p>
-      </div>
-
-    </div><!-- end cards -->
-
-    <!-- Hashtag pills -->
-    <div class="kt-hashtags">
-      <span class="kt-hash">#MyNewStory</span>
-      <span class="kt-hash">#CaughtIn4K</span>
-      <span class="kt-hash">#vivoS2</span>
-      <span class="kt-hash">#FriendsWeekendsNeverEnds</span>
-    </div>
-
-  </div>
-</section>
-
 <section class="kol-section" id="kol-params">
   <div class="kt-params-wrap">
-
     <div class="kt-params-header">
-      <p class="eyebrow">
-        S2 · Selection Logic
-      </p>
-      <h1 class="display-large">
-        10 Parameters.
-      </h1>
-      <p class="body-large"
-         style="max-width:520px">
-        Built for Tamil Nadu's Gen Z market.
-        2 mandatory hard blocks.
-        No exceptions.
+      <p class="eyebrow">S2 · Selection Logic</p>
+      <h1 class="display-large">15 Parameters.</h1>
+      <p class="body-large" style="max-width:560px">
+        Framework for Tamil Nadu Gen Z. Brand-safe gate + Kevin SOP hard gates. No exceptions.
       </p>
     </div>
 
     <div class="kt-params-grid">
-
       <div class="kt-param">
-        <span class="kt-param-num">P1</span>
-        <div class="kt-param-body">
-          <h4 class="kt-param-name">
-            TN Audience Depth
-          </h4>
-          <p class="kt-param-desc">
-            Out-of-state reach is wasted spend
-          </p>
-        </div>
+        <h4 class="kt-param-name">Premium profile &amp; aesthetic</h4>
+        <p class="kt-param-desc">Does the KOL's visual identity reflect a polished, brand-worthy image?</p>
       </div>
-
       <div class="kt-param">
-        <span class="kt-param-num">P2</span>
-        <div class="kt-param-body">
-          <h4 class="kt-param-name">Age Alignment</h4>
-          <p class="kt-param-desc">
-            Wrong age = wrong room
-          </p>
-        </div>
+        <h4 class="kt-param-name">Fits cafe culture</h4>
+        <p class="kt-param-desc">Does the KOL naturally create content in cafe/food/dining environments?</p>
       </div>
-
       <div class="kt-param">
-        <span class="kt-param-num">P3</span>
-        <div class="kt-param-body">
-          <h4 class="kt-param-name">Scene Fit</h4>
-          <p class="kt-param-desc">
-            Café · City · Campus must be in their feed
-          </p>
-        </div>
+        <h4 class="kt-param-name">Weekend lifestyle creator</h4>
+        <p class="kt-param-desc">Does the KOL document outings, travel and social weekend experiences?</p>
       </div>
-
       <div class="kt-param">
-        <span class="kt-param-num">P4</span>
-        <div class="kt-param-body">
-          <h4 class="kt-param-name">
-            Weekend Explorer Vibe
-          </h4>
-          <p class="kt-param-desc">
-            Must live it — not perform it
-          </p>
-        </div>
+        <h4 class="kt-param-name">Young audience appeal</h4>
+        <p class="kt-param-desc">Does the KOL connect with Gen Z and young working professionals?</p>
       </div>
-
+      <div class="kt-param">
+        <h4 class="kt-param-name">Natural storyteller</h4>
+        <p class="kt-param-desc">Does the KOL communicate authentically without scripted or forced delivery?</p>
+      </div>
+      <div class="kt-param">
+        <h4 class="kt-param-name">Strong photography &amp; video quality</h4>
+        <p class="kt-param-desc">Does the KOL's content meet premium visual production standards?</p>
+      </div>
+      <div class="kt-param">
+        <h4 class="kt-param-name">Social &amp; friend-oriented content</h4>
+        <p class="kt-param-desc">Does the KOL create group/social content, not just solo shoots?</p>
+      </div>
+      <div class="kt-param">
+        <h4 class="kt-param-name">Tamil Nadu relevance</h4>
+        <p class="kt-param-desc">Does the KOL have strong local cultural connect with TN audiences?</p>
+      </div>
+      <div class="kt-param">
+        <h4 class="kt-param-name">Lifestyle-first, not tech-first</h4>
+        <p class="kt-param-desc">Is the KOL's identity built around life experiences, not gadgets?</p>
+      </div>
+      <div class="kt-param">
+        <h4 class="kt-param-name">Good engagement</h4>
+        <p class="kt-param-desc">Does the KOL drive meaningful interaction relative to their reach?</p>
+      </div>
+      <div class="kt-param">
+        <h4 class="kt-param-name">Matches S2 personality</h4>
+        <p class="kt-param-desc">Does the KOL embody Young · Stylish · Curious · Explorer · Sharing?</p>
+      </div>
       <div class="kt-param kt-param-mandatory">
-        <span class="kt-param-num kt-num-mandatory">
-          P5
-        </span>
-        <div class="kt-param-body">
-          <div class="kt-mandatory-badge">
-            MANDATORY
-          </div>
-          <h4 class="kt-param-name peach">
-            Reel Dominance
-          </h4>
-          <p class="kt-param-desc">
-            4K can't be shown in statics
-          </p>
-        </div>
+        <div class="kt-mandatory-badge">MANDATORY GATE</div>
+        <h4 class="kt-param-name">Brand-safe profile</h4>
+        <p class="kt-param-desc">Is the KOL free from controversy, mature content or competitor conflicts?</p>
       </div>
-
       <div class="kt-param">
-        <span class="kt-param-num">P6</span>
-        <div class="kt-param-body">
-          <h4 class="kt-param-name">
-            Engagement Quality
-          </h4>
-          <p class="kt-param-desc">
-            Low ER = audience doesn't trust them
-          </p>
-        </div>
+        <h4 class="kt-param-name">Creates reusable content</h4>
+        <p class="kt-param-desc">Does the KOL produce content that can be repurposed across formats?</p>
       </div>
-
       <div class="kt-param">
-        <span class="kt-param-num">P7</span>
-        <div class="kt-param-body">
-          <h4 class="kt-param-name">
-            Gen Z Relatability
-          </h4>
-          <p class="kt-param-desc">
-            Campaign is gender-mixed —
-            must appeal to all
-          </p>
-        </div>
+        <h4 class="kt-param-name">Comfortable with campaign guidelines</h4>
+        <p class="kt-param-desc">Does the KOL show experience working within brand briefs?</p>
       </div>
-
-      <div class="kt-param kt-param-mandatory">
-        <span class="kt-param-num kt-num-mandatory">
-          P8
-        </span>
-        <div class="kt-param-body">
-          <div class="kt-mandatory-badge">
-            MANDATORY
-          </div>
-          <h4 class="kt-param-name peach">
-            No Competitor Conflict
-          </h4>
-          <p class="kt-param-desc">
-            No exceptions — hard block
-          </p>
-        </div>
-      </div>
-
       <div class="kt-param">
-        <span class="kt-param-num">P9</span>
-        <div class="kt-param-body">
-          <h4 class="kt-param-name">
-            Commercial Fit
-          </h4>
-          <p class="kt-param-desc">
-            Overspend on one kills the whole portfolio
-          </p>
-        </div>
+        <h4 class="kt-param-name">Long-term collaboration potential</h4>
+        <p class="kt-param-desc">Does the KOL show stability and longevity as a creator?</p>
       </div>
+    </div>
 
-      <div class="kt-param">
-        <span class="kt-param-num">P10</span>
-        <div class="kt-param-body">
-          <h4 class="kt-param-name">
-            4K Content Quality
-          </h4>
-          <p class="kt-param-desc">
-            Content must prove the feature —
-            not explain it
-          </p>
-        </div>
+    <div class="kt-sop-gates">
+      <div class="kt-sop-pill">
+        <span class="kt-sop-pill-label">Kevin SOP Mandatory Gates</span>
+        Reel Dominance
       </div>
-
-    </div><!-- end grid -->
+      <div class="kt-sop-pill">
+        <span class="kt-sop-pill-label">Kevin SOP Mandatory Gates</span>
+        No Competitor Conflict
+      </div>
+    </div>
   </div>
 </section>
 
@@ -4540,9 +5224,9 @@ document.fonts.ready.then(() => {
 // ─── MODE MANAGEMENT ──────────────────
 // Two modes: 'strategy' (main scroll) and 'kol' (tool tabs)
 let currentMode = 'strategy';
-let currentKolTab = 'kol-brief';
+let currentKolTab = 'kol-params';
 
-function enterKolMode(tab = 'kol-brief') {
+function enterKolMode(tab = 'kol-params') {
   currentMode = 'kol';
   document.getElementById('main-experience').style.display = 'none';
   document.querySelectorAll('.kol-section').forEach(s => {
@@ -4569,7 +5253,7 @@ function exitKolMode() {
   document.getElementById('export-btn').style.display = '';
   document.getElementById('slide-nav').classList.remove('hidden');
   document.body.style.overflow = '';
-  window.scrollTo(0, document.getElementById('s8').offsetTop);
+  window.scrollTo(0, document.getElementById('s9-kol').offsetTop);
   updateSlideNav();
 }
 
@@ -4712,7 +5396,7 @@ document.getElementById('export-pdf').addEventListener('click', () => {
   // Force animated elements visible before print
   document.body.classList.add('print-mode');
   document.querySelectorAll(
-    '.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s3-type,.s5-engine,.s6-phase,.s7-act,.s9-phase'
+    '.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s3-type,.s5-engine,.s6-phase,.s7-act,.s9-phase,.npl-overline,.npl-hline,.npl-sub,.npl-block-label,.npl-node,.npl-owner-bar,.npl-card,.npl-pillar,.npl-loc-pill,.npl-closing,.v60-overline,.v60-hline,.v60-sub,.v60-total-card,.v60-delta,.v60-table-label,.v60-row,.v60-insight'
   ).forEach(el => {
     el.style.opacity = '1';
     el.style.transform = 'none';
@@ -4782,7 +5466,10 @@ function pptxForceVisible(root) {
   const sel = [
     '.reveal-line', '.reveal-fade', '.reveal-left', '.reveal-right',
     '.reveal-scale', '.s2-step', '.s3-type', '.s5-engine', '.s5-engine-divider',
-    '.s6-phase', '.s7-act', '.s9-phase', '.s9-reason'
+    '.s6-phase', '.s7-act', '.s9-phase', '.s9-reason',
+    '.npl-overline', '.npl-hline', '.npl-sub', '.npl-block-label',
+    '.npl-node', '.npl-owner-bar', '.npl-card', '.npl-pillar',
+    '.npl-loc-pill', '.npl-closing', '.v60-overline', '.v60-hline', '.v60-sub', '.v60-total-card', '.v60-delta', '.v60-table-label', '.v60-row', '.v60-insight'
   ].join(',');
   root.querySelectorAll(sel).forEach((el) => {
     restores.push(pptxSetInlineStyles(el, {
@@ -5005,20 +5692,19 @@ async function exportPPTX() {
   if (typeof gsap !== 'undefined') gsap.globalTimeline.pause();
 
   const shots = [
-    { id: 's1', mode: null, title: 'Opening' },
-    { id: 's2', mode: 's2-step1', title: 'Product' },
-    { id: 's2', mode: 's2-step2', title: 'Colours' },
-    { id: 's2', mode: 's2-step3', title: 'Specs' },
-    { id: 's3', mode: null, title: 'Consumer' },
-    { id: 's4', mode: null, title: 'Friends Theme' },
-    { id: 's5', mode: 's5-hero', title: 'Investment' },
-    { id: 's5', mode: 's5-engines', title: 'Two Engines' },
-    { id: 's6', mode: 's6-full', title: 'Campaign Execution' },
-    { id: 's7', mode: null, title: 'KOL Strategy' },
-    { id: 's8', mode: null, title: 'Content Pillars' },
-    { id: 's9', mode: 's9-part1', title: 'JBP Partners' },
-    { id: 's9', mode: 's9-part2', title: 'JBP Rationale' },
-    { id: 's10', mode: null, title: 'Close' }
+    { id: 's1-opening', mode: null, title: 'Opening' },
+    { id: 's2-npl-roles', mode: null, title: 'NPL Strategy' },
+    { id: 's3-consumer', mode: null, title: 'Consumer' },
+    { id: 's4-campaign', mode: null, title: 'Campaign' },
+    { id: 's5-story', mode: 's5-hero', title: 'Story' },
+    { id: 's5-story', mode: 's5-engines', title: 'Strategy Engines' },
+    { id: 's6-v60-vs-s2', mode: null, title: 'V60 vs S2' },
+    { id: 's7-strategy', mode: 's6-full', title: 'Campaign Timeline' },
+    { id: 's8-timeline', mode: null, title: 'KOL System' },
+    { id: 's9-kol', mode: null, title: 'KOL Tool' },
+    { id: 's10-jbp', mode: null, title: 'JBP Strategy' },
+    { id: 's11-store', mode: null, title: 'Store Launch' },
+    { id: 's12-close', mode: null, title: 'The Close' }
   ];
 
   try {
@@ -5037,7 +5723,7 @@ async function exportPPTX() {
       const frame = pptxPrepSceneFrame(scene);
       // Kill GSAP inline transforms that can leave content mid-tween
       if (typeof gsap !== 'undefined') {
-        scene.querySelectorAll('.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s2-step,.s3-type,.s5-engine,.s6-phase,.s7-act,.s9-phase').forEach((el) => {
+        scene.querySelectorAll('.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s2-step,.s3-type,.s5-engine,.s6-phase,.s7-act,.s9-phase,.npl-overline,.npl-hline,.npl-sub,.npl-block-label,.npl-node,.npl-owner-bar,.npl-card,.npl-pillar,.npl-loc-pill,.npl-closing').forEach((el) => {
           gsap.set(el, { clearProps: 'opacity,transform,visibility' });
         });
       }
@@ -5112,85 +5798,89 @@ gsap.to('.s1-phone-img', {
 
 // Text lines stagger in on page load (S1 is first)
 // fromTo end-state required: reveal-* CSS starts at opacity 0
-gsap.fromTo('#s1 .reveal-line',
-  { y: 32, opacity: 0 },
-  {
+// ── S1: OPENING + PRODUCT (load once) ─
+const s1LoadTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+s1LoadTl
+  .to('#s1-opening .s1-block', {
     y: 0, opacity: 1,
-    duration: 0.75, stagger: 0.12,
-    ease: 'power2.out', delay: 0.5
-  }
-);
-gsap.fromTo('#s1 .reveal-fade',
-  { opacity: 0 },
-  {
-    opacity: 1, duration: 1,
-    ease: 'power2.out', delay: 1.2
-  }
-);
+    duration: 0.7,
+    stagger: 0.15
+  }, 0)
+  .to('#s1-opening .s1-right', {
+    opacity: 1, scale: 1,
+    duration: 0.85, ease: 'power2.out'
+  }, 0.3);
 
-// ── S2: PRODUCT (scroll-driven) ───────
-// Set initial hidden state for steps 2 and 3 first
-gsap.set('#s2 .s2-step[data-step="2"]',
-  { y: 24, opacity: 0 });
-gsap.set('#s2 .s2-step[data-step="3"]',
-  { y: 24, opacity: 0 });
-
-// Step 1: eyebrow + headline + body reveal on S2 entry
-const s2tl = gsap.timeline({
+// ── S2-NPL-ROLES: HQ & STATE ──────────
+const nplTl = gsap.timeline({
   scrollTrigger: {
-    trigger: '#s2',
-    start: 'top 80%',
+    trigger: '#s2-npl-roles',
+    start: 'top 70%',
     once: true
   }
 });
-s2tl
-  .fromTo('#s2 .s2-step[data-step="1"]',
-    { y: 32, opacity: 0 },
-    {
-      y: 0, opacity: 1,
-      duration: 0.7, stagger: 0.1,
-      ease: 'power2.out'
-    });
-
-// Step 2: colours reveal at 30% through S2
-ScrollTrigger.create({
-  trigger: '#s2',
-  start: 'top top',
-  end: 'bottom bottom',
-  onUpdate: (self) => {
-    if (self.progress > 0.30) {
-      gsap.to('#s2 .s2-step[data-step="2"]', {
-        y: 0, opacity: 1,
-        duration: 0.7, ease: 'power2.out',
-        overwrite: 'auto'
-      });
-    }
-    if (self.progress > 0.60) {
-      gsap.to('#s2 .s2-step[data-step="3"]', {
-        y: 0, opacity: 1,
-        duration: 0.7, ease: 'power2.out',
-        overwrite: 'auto'
-      });
-    }
-  }
-});
+nplTl
+  .to('#s2-npl-roles .npl-overline', {
+    opacity: 1, duration: 0.45, ease: 'power2.out'
+  })
+  .to('#s2-npl-roles .npl-hline', {
+    y: 0, opacity: 1,
+    duration: 0.65, stagger: 0.2,
+    ease: 'power2.out'
+  }, '-=0.15')
+  .to('#s2-npl-roles .npl-sub', {
+    opacity: 1, duration: 0.55, ease: 'power2.out'
+  }, '-=0.2')
+  .to('#s2-npl-roles .npl-block-label', {
+    opacity: 1, duration: 0.4, ease: 'power2.out'
+  }, '-=0.15')
+  .to('#s2-npl-roles .npl-node', {
+    y: 0, opacity: 1,
+    duration: 0.45, stagger: 0.15,
+    ease: 'power2.out'
+  })
+  .to('#s2-npl-roles .npl-owner-bar', {
+    opacity: 1, duration: 0.5, stagger: 0.12,
+    ease: 'power2.out'
+  })
+  .to('#s2-npl-roles .npl-card-hq', {
+    x: 0, opacity: 1,
+    duration: 0.7, ease: 'power2.out'
+  }, 'cards')
+  .to('#s2-npl-roles .npl-card-state', {
+    x: 0, opacity: 1,
+    duration: 0.7, ease: 'power2.out'
+  }, 'cards')
+  .to('#s2-npl-roles .npl-pillar', {
+    y: 0, opacity: 1,
+    duration: 0.4, stagger: 0.1,
+    ease: 'power2.out'
+  }, '-=0.25')
+  .to('#s2-npl-roles .npl-loc-pill', {
+    scale: 1, opacity: 1,
+    duration: 0.35, stagger: 0.1,
+    ease: 'back.out(1.6)'
+  }, '-=0.35')
+  .to('#s2-npl-roles .npl-closing', {
+    opacity: 1, duration: 0.6, ease: 'power2.out'
+  }, '-=0.05');
 
 // ── S3: CONSUMER (single viewport) ────
-gsap.fromTo('#s3 .s3-hero .reveal-line',
+gsap.fromTo('#s3-consumer .s3-hero .reveal-line',
   { y: 24, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.65, stagger: 0.08,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s3',
+      trigger: '#s3-consumer',
       start: 'top 70%',
       once: true
     }
   }
 );
 
-gsap.set('#s3 .s3-type-visual img', { scale: 1.08 });
+gsap.set('#s3-consumer .s3-type-visual img', { scale: 1.08 });
 gsap.fromTo('#s3-type1, #s3-type2, #s3-type3',
   { y: 28, opacity: 0 },
   {
@@ -5199,12 +5889,12 @@ gsap.fromTo('#s3-type1, #s3-type2, #s3-type3',
     stagger: 0.12,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s3',
+      trigger: '#s3-consumer',
       start: 'top 65%',
       once: true
     },
     onStart: () => {
-      gsap.to('#s3 .s3-type-visual img', {
+      gsap.to('#s3-consumer .s3-type-visual img', {
         scale: 1.04,
         duration: 1.3,
         stagger: 0.12,
@@ -5219,7 +5909,7 @@ gsap.from('.s4-img-door', {
   x: 80, opacity: 0, scale: 0.92,
   duration: 1.15, ease: 'power3.out',
   scrollTrigger: {
-    trigger: '#s4',
+    trigger: '#s4-campaign',
     start: 'top 80%',
     once: true
   }
@@ -5229,21 +5919,21 @@ gsap.from('.s4-friends-glow', {
   duration: 1.4,
   ease: 'power1.out',
   scrollTrigger: {
-    trigger: '#s4',
+    trigger: '#s4-campaign',
     start: 'top 80%',
     once: true
   }
 });
 
 // Text content reveals
-gsap.fromTo('#s4 .reveal-line',
+gsap.fromTo('#s4-campaign .reveal-line',
   { y: 32, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.7, stagger: 0.10,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s4',
+      trigger: '#s4-campaign',
       start: 'top 75%',
       once: true
     }
@@ -5258,7 +5948,7 @@ gsap.fromTo('.s5-amount-wrap',
     scale: 1, opacity: 1,
     duration: 1.0, ease: 'power3.out',
     scrollTrigger: {
-      trigger: '#s5',
+      trigger: '#s5-story',
       start: 'top 75%',
       once: true
     }
@@ -5271,7 +5961,7 @@ gsap.fromTo('.s5-hero-amount .reveal-line',
     duration: 0.7, stagger: 0.12,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s5',
+      trigger: '#s5-story',
       start: 'top 70%',
       once: true
     }
@@ -5280,7 +5970,7 @@ gsap.fromTo('.s5-hero-amount .reveal-line',
 
 // Count up ₹44L
 ScrollTrigger.create({
-  trigger: '#s5',
+  trigger: '#s5-story',
   start: 'top 70%',
   once: true,
   onEnter: () => {
@@ -5314,7 +6004,7 @@ gsap.set('.s5-engine-divider', { opacity: 0 });
 // Engines reveal: hero fades out,
 // engines slide in from sides
 ScrollTrigger.create({
-  trigger: '#s5',
+  trigger: '#s5-story',
   start: 'top top',
   end: 'bottom bottom',
   onUpdate: (self) => {
@@ -5360,14 +6050,57 @@ ScrollTrigger.create({
 // ─── S6–S10 GSAP ANIMATIONS ───────────
 
 // ── S6: CAMPAIGN TIMELINE ─────────────
-gsap.fromTo('#s6 .reveal-line',
+// ── S6: V60 VS S2 BUDGET ─────────────
+const v60Tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: '#s6-v60-vs-s2',
+    start: 'top 70%',
+    once: true
+  }
+});
+v60Tl
+  .to('#s6-v60-vs-s2 .v60-overline', {
+    opacity: 1, duration: 0.4, ease: 'power2.out'
+  })
+  .to('#s6-v60-vs-s2 .v60-hline', {
+    y: 0, opacity: 1,
+    duration: 0.6, stagger: 0.18,
+    ease: 'power2.out'
+  }, '-=0.1')
+  .to('#s6-v60-vs-s2 .v60-sub', {
+    opacity: 1, duration: 0.5, ease: 'power2.out'
+  }, '-=0.2')
+  .to('#s6-v60-vs-s2 .v60-total-v60', {
+    x: 0, opacity: 1, duration: 0.65, ease: 'power2.out'
+  }, 'cards')
+  .to('#s6-v60-vs-s2 .v60-total-s2', {
+    x: 0, opacity: 1, duration: 0.65, ease: 'power2.out'
+  }, 'cards')
+  .to('#s6-v60-vs-s2 .v60-delta', {
+    scale: 1, opacity: 1,
+    duration: 0.4, ease: 'back.out(1.6)'
+  }, '-=0.25')
+  .to('#s6-v60-vs-s2 .v60-table-label', {
+    opacity: 1, duration: 0.35, ease: 'power2.out'
+  }, '-=0.1')
+  .to('#s6-v60-vs-s2 .v60-row', {
+    y: 0, opacity: 1,
+    duration: 0.28, stagger: 0.05,
+    ease: 'power2.out'
+  })
+  .to('#s6-v60-vs-s2 .v60-insight', {
+    opacity: 1, duration: 0.45, stagger: 0.15,
+    ease: 'power2.out'
+  }, '-=0.15');
+
+gsap.fromTo('#s7-strategy .reveal-line',
   { y: 28, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.7, stagger: 0.10,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s6',
+      trigger: '#s7-strategy',
       start: 'top 80%',
       once: true
     }
@@ -5376,7 +6109,7 @@ gsap.fromTo('#s6 .reveal-line',
 
 // River fill animates as S6 phases reveal
 ScrollTrigger.create({
-  trigger: '#s6',
+  trigger: '#s7-strategy',
   start: 'top top',
   end: 'bottom bottom',
   onUpdate: (self) => {
@@ -5404,14 +6137,14 @@ ScrollTrigger.create({
 });
 
 // ── S7: KOL SYSTEM ────────────────────
-gsap.fromTo('#s7 .reveal-line:not(.s7-act)',
+gsap.fromTo('#s8-timeline .reveal-line:not(.s7-act)',
   { y: 28, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.7, stagger: 0.10,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s7',
+      trigger: '#s8-timeline',
       start: 'top 80%',
       once: true
     }
@@ -5422,7 +6155,7 @@ gsap.set('#s7-act1, #s7-act2, #s7-act3',
   { y: 24, opacity: 0 });
 
 ScrollTrigger.create({
-  trigger: '#s7',
+  trigger: '#s8-timeline',
   start: 'top top',
   end: 'bottom bottom',
   onUpdate: (self) => {
@@ -5442,7 +6175,7 @@ ScrollTrigger.create({
 });
 
 ScrollTrigger.create({
-  trigger: '#s7',
+  trigger: '#s8-timeline',
   start: 'top top',
   end: 'bottom bottom',
   onUpdate: (self) => {
@@ -5478,113 +6211,91 @@ ScrollTrigger.create({
 });
 
 // ── S8: BRIDGE ────────────────────────
-gsap.fromTo('#s8 .reveal-line, #s8 .reveal-fade',
+gsap.fromTo('#s9-kol .reveal-line, #s9-kol .reveal-fade',
   { y: 28, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.75, stagger: 0.12,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s8',
+      trigger: '#s9-kol',
       start: 'top 75%',
       once: true
     }
   }
 );
 
-// ── S9: JBP PARTNERS ──────────────────
-gsap.fromTo('#s9 .reveal-line',
+// ── S9: JBP STRATEGY ─────────────────
+gsap.fromTo('#s10-jbp .reveal-line',
   { y: 24, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.65, stagger: 0.08,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s9',
+      trigger: '#s10-jbp',
       start: 'top 80%',
+      once: true
+    },
+    onComplete: () => {
+      const river = document.getElementById('s9-river-fill');
+      if (river) river.style.width = '100%';
+      document.querySelectorAll('#s10-jbp .s9-bar-fill').forEach((bar) => {
+        bar.style.background = bar.dataset.color;
+        bar.style.width = bar.dataset.width;
+      });
+      const strip = document.getElementById('s9-trades');
+      if (strip && !strip.dataset.revealed) {
+        strip.dataset.revealed = '1';
+        gsap.fromTo('#s9-trades .s9-trade',
+          { y: 18, opacity: 0 },
+          {
+            y: 0, opacity: 1,
+            duration: 0.5, stagger: 0.05,
+            ease: 'power2.out'
+          }
+        );
+      }
+    }
+  }
+);
+
+// ── S10: STORE LAUNCH ────────────────
+gsap.fromTo('#s11-store .s9-reason, #s11-store .eyebrow, #s11-store .display-large, #s11-store .s9-condition',
+  { y: 24, opacity: 0 },
+  {
+    y: 0, opacity: 1,
+    duration: 0.6, stagger: 0.08,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '#s11-store',
+      start: 'top 75%',
       once: true
     }
   }
 );
 
-// Part 2 (rationale) appears at 50% scroll;
-// river + activity bars fill like S6
-ScrollTrigger.create({
-  trigger: '#s9',
-  start: 'top top',
-  end: 'bottom bottom',
-  onUpdate: (self) => {
-    const part1 = document.getElementById('s9-part1');
-    const part2 = document.getElementById('s9-part2');
-    const river = document.getElementById('s9-river-fill');
-    if (river) {
-      const fill = Math.min(self.progress * 2, 1) * 100;
-      river.style.width = fill + '%';
-    }
-    if (self.progress > 0.35) {
-      document.querySelectorAll('.s9-bar-fill').forEach((bar) => {
-        if (!bar.dataset.filled) {
-          bar.dataset.filled = '1';
-          bar.style.background = bar.dataset.color;
-          setTimeout(() => {
-            bar.style.width = bar.dataset.width;
-          }, 50);
-        }
-      });
-      if (!document.getElementById('s9-trades')?.dataset.revealed) {
-        const strip = document.getElementById('s9-trades');
-        if (strip) {
-          strip.dataset.revealed = '1';
-          gsap.fromTo('#s9-trades .s9-trade',
-            { y: 18, opacity: 0 },
-            {
-              y: 0, opacity: 1,
-              duration: 0.5, stagger: 0.05,
-              ease: 'power2.out'
-            }
-          );
-        }
-      }
-    }
-    if (self.progress > 0.50) {
-      gsap.to(part1, {
-        opacity: 0, y: -20,
-        duration: 0.4, ease: 'power2.in',
-        overwrite: 'auto'
-      });
-      part2.classList.add('visible');
-    } else {
-      gsap.to(part1, {
-        opacity: 1, y: 0,
-        duration: 0.4, ease: 'power2.out',
-        overwrite: 'auto'
-      });
-      part2.classList.remove('visible');
-    }
-  }
-});
-
 // ── S10: THE CLOSE ────────────────────
-gsap.fromTo('#s10 .reveal-line',
+gsap.fromTo('#s12-close .reveal-line',
   { y: 32, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.8, stagger: 0.15,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s10',
+      trigger: '#s12-close',
       start: 'top 75%',
       once: true
     }
   }
 );
-gsap.fromTo('#s10 .reveal-fade',
+gsap.fromTo('#s12-close .reveal-fade',
   { opacity: 0 },
   {
     opacity: 1, duration: 1.0,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s10',
+      trigger: '#s12-close',
       start: 'top 70%',
       once: true
     }
@@ -5594,7 +6305,7 @@ gsap.from('.s10-phone', {
   x: 40, opacity: 0,
   duration: 1.2, ease: 'power2.out',
   scrollTrigger: {
-    trigger: '#s10',
+    trigger: '#s12-close',
     start: 'top 80%',
     once: true
   }
@@ -5605,7 +6316,7 @@ gsap.to('.s10-phone img', {
   ease: 'power1.inOut',
   repeat: -1, yoyo: true,
   scrollTrigger: {
-    trigger: '#s10',
+    trigger: '#s12-close',
     start: 'top 80%',
     once: true
   }
@@ -5613,339 +6324,440 @@ gsap.to('.s10-phone img', {
 
 // ─── KOL TOOL DATA + UI ───────────────
 
+const PARAM_NAMES = [
+  "Premium profile & aesthetic",
+  "Fits cafe culture",
+  "Weekend lifestyle creator",
+  "Young audience appeal",
+  "Natural storyteller",
+  "Strong photography & video quality",
+  "Social & friend-oriented content",
+  "Tamil Nadu relevance",
+  "Lifestyle-first, not tech-first",
+  "Good engagement",
+  "Matches S2 personality",
+  "Brand-safe profile",
+  "Creates reusable content",
+  "Comfortable with campaign guidelines",
+  "Long-term collaboration potential"
+];
+
 const KOL_DATA = [
   {
-    id: 1,
-    name: "Gayu Sri",
-    handle: "@gayu_sri_offl",
-    followers: "149K",
-    tier: "Celebrity",
-    phase: "launch",
-    score: 74,
-    img: "img/gayu_sri.jpg",
-    params: {
-      P1:8, P2:8, P3:7, P4:7,
-      P6:8, P7:7, P9:8, P10:7
-    },
-    angle: "Mass-appeal celebrity presence " +
-           "for launch day maximum visibility",
-    cost: "₹80K",
-    deliverable: "Collab Reel",
-    city: "Chennai"
+    id: 1, name: "Gayu Sri", handle: "@gayu_sri_offl", followers: "149K",
+    tier: "Celebrity", phase: "launch", img: "img/gayu_sri.jpg",
+    cost: "₹80K", deliverable: "Collab Reel", city: "Chennai",
+    engagement: { likes: 60483, comments: 88, shares: 9373, views: 1340000, er: 5.22 },
+    parameters: [
+      { result: "YES", reason: "TV actress with polished serial promos and brand shoots, clean premium look" },
+      { result: "NO", reason: "No cafe-specific content found; posts lean TV promos and resort stays" },
+      { result: "YES", reason: "Collabs with nature resorts show weekend-getaway content" },
+      { result: "YES", reason: "Worked with mCaffeine and Be Bodywise, Gen Z/young-millennial D2C brands" },
+      { result: "NO", reason: "Content is mostly scripted serial promotion, not personal storytelling" },
+      { result: "YES", reason: "TV-serial-grade photo and video production quality" },
+      { result: "NO", reason: "Mostly solo fashion/beauty shoots and serial promos, not friend-group moments" },
+      { result: "YES", reason: "Strong Tamil Nadu regional relevance confirmed" },
+      { result: "YES", reason: "Lifestyle and beauty content, not tech-first" },
+      { result: "YES", reason: "Engagement is consistent with follower base" },
+      { result: "YES", reason: "Young, stylish, on-trend image fits S2 personality well" },
+      { result: "YES", reason: "No controversy found; brand-safe profile" },
+      { result: "YES", reason: "Brand shoot content is reusable across formats" },
+      { result: "YES", reason: "Multiple brand collaborations show brief compliance" },
+      { result: "YES", reason: "Established multi-year content career" }
+    ],
+    score: 12, matchPct: 80, recommendation: "Recommended", priority: "P2",
+    note: "Her premiumness is an advantage."
   },
   {
-    id: 2,
-    name: "Aurora Sinclair",
-    handle: "@the_aurora_sinclair_",
-    followers: "881K",
-    tier: "Celebrity",
-    phase: "pre-buzz",
-    score: 71,
-    img: "img/aurora.jpg",
-    params: {
-      P1:7, P2:8, P3:7, P4:7,
-      P6:7, P7:7, P9:8, P10:7
-    },
-    angle: "Lifestyle storytelling — " +
-           "early buzz for the S2 world",
-    cost: "₹1–1.5L",
-    deliverable: "Story + Reel",
-    city: "Chennai"
+    id: 2, name: "Aurora Sinclair", handle: "@the_aurora_sinclair_", followers: "881K",
+    tier: "Celebrity", phase: "pre-buzz", img: "img/aurora.jpg",
+    cost: "₹1–1.5L", deliverable: "Story + Reel", city: "Chennai",
+    engagement: { likes: 50947, comments: 225, shares: 7357, views: 1740000, er: 3.36 },
+    parameters: [
+      { result: "YES", reason: "Professional model; consistently described as premium and trendy" },
+      { result: "NO", reason: "No cafe-specific content found; content is fashion, modeling and beachwear" },
+      { result: "YES", reason: "Frequently pictured in beachwear/travel-style shoots — leisure lifestyle content" },
+      { result: "YES", reason: "Most talked-about Tamil digital personality post-Bigg Boss Tamil 9 — huge young reach" },
+      { result: "YES", reason: "Known for candid, unfiltered communication — real storyteller signal" },
+      { result: "YES", reason: "Professional model with high-quality photoshoots" },
+      { result: "YES", reason: "Bigg Boss format is inherently group/social — lots of viral clips with co-contestants" },
+      { result: "YES", reason: "Strong Tamil Nadu relevance confirmed" },
+      { result: "YES", reason: "Fashion/lifestyle content, not tech-first" },
+      { result: "YES", reason: "Strong engagement consistent with macro reach" },
+      { result: "YES", reason: "Young, stylish, expressive — fits S2 personality well" },
+      { result: "CAUTION", reason: "Runs a paid Instagram subscription described in multiple sources as bold/mature content; concern for a mainstream campus-friendly launch" },
+      { result: "YES", reason: "Content is reusable across formats" },
+      { result: "YES", reason: "Multiple brand collaborations show brief compliance" },
+      { result: "YES", reason: "Active multi-platform presence shows longevity" }
+    ],
+    score: 13, matchPct: 87, recommendation: "Highly Recommended", priority: "P1",
+    note: "Trendy among TN audience post-Bigg Boss Tamil 9. Last option — brand safety to be confirmed before featuring prominently."
   },
   {
-    id: 3,
-    name: "Sangeetha Sai",
-    handle: "@sangeethsai_offl",
-    followers: "304K",
-    tier: "Influencer",
-    phase: "launch",
-    score: 70,
-    img: "img/sangeetha.jpg",
-    params: {
-      P1:7, P2:8, P3:7, P4:7,
-      P6:7, P7:7, P9:7, P10:7
-    },
-    angle: "Content-first creator — " +
-           "authentic launch day voice",
-    cost: "₹80K",
-    deliverable: "Collab Reel",
-    city: "Chennai"
+    id: 3, name: "Sangeetha Sai", handle: "@sangeethasai_offl", followers: "304K",
+    tier: "Celebrity", phase: "launch", img: "img/sangeetha.jpg",
+    cost: "₹80K", deliverable: "Collab Reel", city: "Chennai",
+    engagement: { likes: 65402, comments: 157, shares: 2879, views: 1540000, er: 4.45 },
+    parameters: [
+      { result: "YES", reason: "TV anchor/actress with professional saree and traditional-modern shoots" },
+      { result: "NO", reason: "No cafe-specific content; Marina Mall tie-in is a mall collab, not a cafe" },
+      { result: "NO", reason: "No explicit weekend-getaway content pattern found" },
+      { result: "YES", reason: "Featuring in Cooku with Comali which has strong youth viewers" },
+      { result: "YES", reason: "Anchor/VJ background gives natural, expressive on-camera style" },
+      { result: "YES", reason: "TV production-grade photo and video quality" },
+      { result: "YES", reason: "Cooku with Comali is group cooking-and-comedy format; appears as a couple — strongly social" },
+      { result: "YES", reason: "Strong Tamil Nadu relevance confirmed" },
+      { result: "YES", reason: "Lifestyle/cooking content, not tech-first" },
+      { result: "YES", reason: "Engagement consistent with follower base" },
+      { result: "NO", reason: "Married family-anchor persona is a less precise match to S2 young explorer positioning" },
+      { result: "YES", reason: "No controversy found; brand-safe profile" },
+      { result: "YES", reason: "Content is reusable across formats" },
+      { result: "YES", reason: "Multiple brand collaborations show brief compliance" },
+      { result: "YES", reason: "Established multi-year content career" }
+    ],
+    score: 12, matchPct: 80, recommendation: "Recommended", priority: "P2",
+    note: "Currently trending as a young couple on CWC — associating as a relatable young couple works."
   },
   {
-    id: 4,
-    name: "Meenakshi Govindharajan",
-    handle: "@meenakshigovindharajan_",
-    followers: "404K",
-    tier: "Influencer",
-    phase: "launch",
-    score: 74,
-    img: "img/meenakshi.jpg",
-    params: {
-      P1:8, P2:8, P3:7, P4:8,
-      P6:7, P7:8, P9:8, P10:7
-    },
-    angle: "Weekend lifestyle — " +
-           "Caught in 4K storytelling",
-    cost: "₹80K",
-    deliverable: "Collab Reel",
-    city: "Chennai"
+    id: 4, name: "Meenakshi Govindharajan", handle: "@meenakshigovindharajan_", followers: "404K",
+    tier: "Celebrity", phase: "launch", img: "img/meenakshi.jpg",
+    cost: "₹80K", deliverable: "Collab Reel", city: "Chennai",
+    engagement: { likes: 11672, comments: 43, shares: 1259, views: 365000, er: 3.56 },
+    parameters: [
+      { result: "YES", reason: "Film actress with polished, curated photoshoots" },
+      { result: "YES", reason: "Confirmed collaboration with Lafayette Bakery Cafe — direct cafe-culture match" },
+      { result: "NO", reason: "No clear weekend-getaway content pattern found" },
+      { result: "YES", reason: "Age 26; roles in Gen-Z-favoured films and D2C youth brand collabs" },
+      { result: "YES", reason: "Described in press as delivering natural, relatable performances" },
+      { result: "YES", reason: "Film-actress-grade photo and video quality" },
+      { result: "NO", reason: "Public content is mostly solo fashion/brand shoots — no confirmed friend-group content" },
+      { result: "YES", reason: "Strong Tamil Nadu relevance confirmed" },
+      { result: "YES", reason: "Fashion/lifestyle content, not tech-first" },
+      { result: "NO", reason: "126.8K avg views vs 404K followers — low relative reach" },
+      { result: "YES", reason: "Young, stylish, curious persona is a close fit for S2" },
+      { result: "YES", reason: "No controversy found; brand-safe profile" },
+      { result: "YES", reason: "Content is reusable across formats" },
+      { result: "YES", reason: "Multiple brand collaborations show brief compliance" },
+      { result: "YES", reason: "Established multi-year content career" }
+    ],
+    score: 12, matchPct: 80, recommendation: "Recommended", priority: "P2",
+    note: "Well-known actress with great fan following. Fits premium positioning."
   },
   {
-    id: 5,
-    name: "VJ Kalyani",
-    handle: "@vj_kalyani",
-    followers: "242K",
-    tier: "Celebrity",
-    phase: "pre-buzz",
-    score: 79,
-    img: "img/vj_kalyani.jpg",
-    params: {
-      P1:9, P2:8, P3:8, P4:8,
-      P6:7, P7:8, P9:7, P10:8
-    },
-    angle: "High-reach celebrity — " +
-           "anchors pre-buzz awareness",
-    cost: "₹50K",
-    deliverable: "Collab Reel",
-    city: "Chennai"
+    id: 5, name: "VJ Kalyani", handle: "@vj_kalyani", followers: "242K",
+    tier: "Celebrity", phase: "pre-buzz", img: "img/vj_kalyani.jpg",
+    cost: "₹50K", deliverable: "Collab Reel", city: "Chennai",
+    engagement: { likes: 10661, comments: 42, shares: 513, views: 155800, er: 7.20 },
+    parameters: [
+      { result: "YES", reason: "Professional TV anchor with polished on-air styling" },
+      { result: "NO", reason: "No cafe-specific content found" },
+      { result: "NO", reason: "No clear weekend-getaway content pattern found" },
+      { result: "YES", reason: "Linked to Kanaa Kaanum Kaalangal 2, a youth-centric Hotstar drama" },
+      { result: "YES", reason: "Anchor/VJ/podcast host by profession — natural communicator" },
+      { result: "YES", reason: "Professional TV-grade photo and video quality" },
+      { result: "YES", reason: "VJ/anchor/podcast role is inherently social; hosts events regularly" },
+      { result: "YES", reason: "Strong Tamil Nadu relevance confirmed" },
+      { result: "YES", reason: "Lifestyle/entertainment content, not tech-first" },
+      { result: "NO", reason: "107.5K avg views vs 242K followers — below expected relative reach" },
+      { result: "YES", reason: "Loud, expressive style fits S2 Friends and Social Sharing pillar well" },
+      { result: "YES", reason: "No controversy found; brand-safe profile" },
+      { result: "YES", reason: "Content is reusable across formats" },
+      { result: "YES", reason: "Multiple brand collaborations show brief compliance" },
+      { result: "YES", reason: "Established multi-year content career" }
+    ],
+    score: 12, matchPct: 80, recommendation: "Recommended", priority: "P2",
+    note: "Young, good media presence. Expressive style fits Friends and Social Sharing pillar."
   },
   {
-    id: 6,
-    name: "Chandni Ayani",
-    handle: "@bloggerchandni",
-    followers: "111K",
-    tier: "Influencer",
-    phase: "sustenance",
-    score: 74,
-    img: "img/chandni.jpg",
-    params: {
-      P1:8, P2:8, P3:7, P4:7,
-      P6:7, P7:8, P9:8, P10:7
-    },
-    angle: "Fashion-forward content — " +
-           "style caught in 4K",
-    cost: "₹65K",
-    deliverable: "Collab Reel",
-    city: "Chennai"
+    id: 6, name: "Chandni Ayani", handle: "@bloggerchandni", followers: "111K",
+    tier: "Influencer", phase: "sustenance", img: "img/chandni.jpg",
+    cost: "₹65K", deliverable: "Collab Reel", city: "Chennai",
+    engagement: { likes: 21307, comments: 68, shares: 403, views: 463000, er: 4.70 },
+    parameters: [
+      { result: "YES", reason: "Polished food/fashion blogger aesthetic" },
+      { result: "YES", reason: "IG bio literally reads Food | Lifestyle | Fashion blogger — direct self-described cafe match" },
+      { result: "YES", reason: "Lifestyle and exploring-new-spots content confirmed" },
+      { result: "YES", reason: "Worked with Wishcare, a Gen Z-focused clean-beauty D2C brand" },
+      { result: "YES", reason: "IG bio: Create and share stories that inspire — self-described storyteller" },
+      { result: "YES", reason: "Professional TV-grade photo and video quality" },
+      { result: "YES", reason: "Confirmed friend/family-oriented captions in cafe/lifestyle posts" },
+      { result: "YES", reason: "Strong Tamil Nadu relevance confirmed" },
+      { result: "YES", reason: "Food/lifestyle/fashion content, not tech-first" },
+      { result: "YES", reason: "Good engagement consistent with follower base" },
+      { result: "YES", reason: "Curious, explorer, sharing personality matches S2 well" },
+      { result: "YES", reason: "No controversy found; brand-safe profile" },
+      { result: "YES", reason: "Content is reusable across formats" },
+      { result: "YES", reason: "Multiple brand collaborations show brief compliance" },
+      { result: "YES", reason: "Established multi-year content career" }
+    ],
+    score: 15, matchPct: 100, recommendation: "Highly Recommended", priority: "P1",
+    note: "Best fit in terms of all S2 selection logic parameters."
   },
   {
-    id: 7,
-    name: "Nakshatra Murthy",
-    handle: "@nakshatra.murthy",
-    followers: "368K",
-    tier: "Influencer",
-    phase: "launch",
-    score: 73,
-    img: "img/nakshatra.jpg",
-    params: {
-      P1:8, P2:8, P3:7, P4:7,
-      P6:7, P7:7, P9:8, P10:7
-    },
-    angle: "Youthful campus energy — " +
-           "Gen Z peer influence",
-    cost: "₹70K",
-    deliverable: "Collab Reel",
-    city: "Chennai"
+    id: 7, name: "Nakshatra Murthy", handle: "@nakshatra.murthy", followers: "368K",
+    tier: "Influencer", phase: "launch", img: "img/nakshatra.jpg",
+    cost: "₹70K", deliverable: "Collab Reel", city: "Chennai",
+    engagement: { likes: 24859, comments: 66, shares: 3825, views: 624600, er: 4.60 },
+    parameters: [
+      { result: "YES", reason: "Fashion designer with her own label — polished, professional shoots" },
+      { result: "YES", reason: "Verified post showing her reviewing a cosy restaurant in Coimbatore with cafe-specific hashtags" },
+      { result: "YES", reason: "Same post explicitly says go with your friends and family — genuine weekend/hangout content" },
+      { result: "YES", reason: "Amazon Great Indian Festival campaign is a large youth-targeted national digital push" },
+      { result: "YES", reason: "IG bio: Create and share stories that inspire — self-described storyteller" },
+      { result: "YES", reason: "Fashion-designer-grade photo and video quality" },
+      { result: "YES", reason: "Confirmed friend/family-oriented captions in cafe/lifestyle posts" },
+      { result: "YES", reason: "Strong Tamil Nadu relevance confirmed" },
+      { result: "YES", reason: "Fashion/lifestyle content, not tech-first" },
+      { result: "YES", reason: "Good engagement consistent with follower base" },
+      { result: "YES", reason: "Stylish, self-expression-led personality — good S2 fit" },
+      { result: "YES", reason: "No controversy found; brand-safe profile" },
+      { result: "YES", reason: "Content is reusable across formats" },
+      { result: "YES", reason: "Multiple brand collaborations show brief compliance" },
+      { result: "YES", reason: "Active multi-platform presence shows longevity" }
+    ],
+    score: 15, matchPct: 100, recommendation: "Highly Recommended", priority: "P1",
+    note: "83.8% male audience — flag for team. Strong fit on all 15 parameters."
   },
   {
-    id: 8,
-    name: "Dharshini S",
-    handle: "@dharshurisha",
-    followers: "202K",
-    tier: "Influencer",
-    phase: "pre-buzz",
-    score: 85,
-    img: "img/dharshini.jpg",
-    params: {
-      P1:9, P2:9, P3:8, P4:9,
-      P6:8, P7:8, P9:8, P10:8
-    },
-    angle: "Highest fit — weekend lifestyle " +
-           "creator with deep TN audience",
-    cost: "₹25–30K",
-    deliverable: "Collab Reel",
-    city: "Chennai"
+    id: 8, name: "Dharshini S", handle: "@dharshurisha", followers: "202K",
+    tier: "Influencer", phase: "pre-buzz", img: "img/dharshini.jpg",
+    cost: "₹25–30K", deliverable: "Collab Reel", city: "Chennai",
+    engagement: { likes: 9442, comments: 141, shares: 655, views: 178500, er: 5.74 },
+    parameters: [
+      { result: "YES", reason: "TV-actress-grade polished photoshoots" },
+      { result: "NO", reason: "No cafe-specific content found" },
+      { result: "NO", reason: "No explicit weekend-lifestyle content pattern found; visibility mainly through TV serials" },
+      { result: "YES", reason: "Genuinely 21 years old, college-aged herself, known for youth drama Kana Kaanum Kaalangal" },
+      { result: "YES", reason: "Young, natural actress known for relatable youth roles" },
+      { result: "YES", reason: "TV-serial-grade photo and video quality" },
+      { result: "YES", reason: "Genuine signal of youth/social/campus content style" },
+      { result: "YES", reason: "Strong Tamil Nadu relevance confirmed" },
+      { result: "YES", reason: "Lifestyle/entertainment content, not tech-first" },
+      { result: "YES", reason: "Engagement consistent with follower base" },
+      { result: "YES", reason: "Youngest and most naturally relatable to college audience — strong personality fit" },
+      { result: "YES", reason: "No controversy found; brand-safe profile" },
+      { result: "YES", reason: "Content is reusable across formats" },
+      { result: "YES", reason: "Multiple brand collaborations show brief compliance" },
+      { result: "YES", reason: "Active content career with established following" }
+    ],
+    score: 13, matchPct: 87, recommendation: "Highly Recommended", priority: "P2",
+    note: "Youngest and most naturally relatable to college audience. Creates everyday content."
   },
   {
-    id: 9,
-    name: "Priyadarshini",
-    handle: "@highonstyl",
-    followers: "125K",
-    tier: "Influencer",
-    phase: "sustenance",
-    score: 79,
-    img: "img/priyadarshini.jpg",
-    params: {
-      P1:8, P2:8, P3:8, P4:8,
-      P6:8, P7:8, P9:8, P10:7
-    },
-    angle: "Style creator — " +
-           "sustenance phase social proof",
-    cost: "Pending",
-    deliverable: "Collab Reel",
-    city: "Chennai"
+    id: 9, name: "Priyadarshini", handle: "@highonstyl", followers: "125K",
+    tier: "Influencer", phase: "sustenance", img: "img/priyadarshini.jpg",
+    cost: "₹55K", deliverable: "Collab Reel", city: "Chennai",
+    engagement: { likes: 813, comments: 40, shares: 1149, views: 53800, er: 3.72 },
+    parameters: [
+      { result: "YES", reason: "Long-established professional fashion blog; press describes style as classy and chic" },
+      { result: "YES", reason: "Food is a confirmed, regular content pillar" },
+      { result: "YES", reason: "Travel is a confirmed, regular content pillar" },
+      { result: "CAUTION", reason: "New mom; does not fit college age category however collaborates with premium brands and has audience of all ages" },
+      { result: "YES", reason: "Long-running personal blog with consistent personal narrative voice" },
+      { result: "YES", reason: "Long professional content history; high, consistent production quality" },
+      { result: "NO", reason: "No confirmed friend-group content found; recent coverage points to personal/family-life content" },
+      { result: "YES", reason: "Strong Tamil Nadu relevance confirmed" },
+      { result: "YES", reason: "Fashion/lifestyle content, not tech-first" },
+      { result: "YES", reason: "Engagement consistent with follower base" },
+      { result: "NO", reason: "Family-lifestyle content today reads differently from S2 weekend-explorer-with-friends brief" },
+      { result: "YES", reason: "No controversy found; brand-safe profile" },
+      { result: "YES", reason: "Content is reusable across formats" },
+      { result: "YES", reason: "Multiple brand collaborations show brief compliance" },
+      { result: "YES", reason: "Established multi-year content career" }
+    ],
+    score: 12, matchPct: 80, recommendation: "Recommended", priority: "P2",
+    note: "Fits best as a premium genuine content creator."
   },
   {
-    id: 10,
-    name: "Shanmathi",
-    handle: "@shanna_ananth",
-    followers: "21.7K",
-    tier: "Model",
-    phase: "sustenance",
-    score: 78,
-    img: "img/shanmathi.jpg",
-    params: {
-      P1:8, P2:9, P3:7, P4:8,
-      P6:7, P7:8, P9:9, P10:6
-    },
-    angle: "Hyperlocal model content — " +
-           "natural outdoor authentic Gen Z",
-    cost: "₹20K",
-    deliverable: "Collab Reel",
-    city: "Chennai"
+    id: 10, name: "Shanmathi", handle: "@shanna_ananth", followers: "21.7K",
+    tier: "Model", phase: "sustenance", img: "img/shanmathi.jpg",
+    cost: "₹20K", deliverable: "Collab Reel", city: "Chennai",
+    engagement: { likes: 7045, comments: 58, shares: 1303, views: 257900, er: 3.26 },
+    parameters: [
+      { result: "YES", reason: "Professional model; ad-shoot-grade image expected from her profession" },
+      { result: "NO", reason: "No cafe-specific content found" },
+      { result: "NO", reason: "No explicit weekend-lifestyle content found beyond ad shoots" },
+      { result: "NO", reason: "2026 press coverage describes her as a new mom also sharing kids-fashion content; content mix shifted toward parenting/family life" },
+      { result: "NO", reason: "No personal storytelling content found; bio is minimal" },
+      { result: "YES", reason: "Professional model; ad-shoot experience implies good photo/video quality" },
+      { result: "NO", reason: "No group/friend content evidence found publicly" },
+      { result: "YES", reason: "Strong Tamil Nadu relevance confirmed" },
+      { result: "YES", reason: "Modeling/fashion content, not tech-first" },
+      { result: "NO", reason: "Likely one or two viral reels rather than consistent engagement" },
+      { result: "YES", reason: "Young, professional image fits S2 personality" },
+      { result: "YES", reason: "No controversy found; brand-safe profile" },
+      { result: "YES", reason: "Model-style content is generally reusable" },
+      { result: "YES", reason: "Ad-shoot background implies brief compliance experience" },
+      { result: "NO", reason: "Low public footprint makes long-term reliability hard to assess" }
+    ],
+    score: 9, matchPct: 60, recommendation: "Consider", priority: "P3",
+    note: "Works best as a model."
   },
   {
-    id: 11,
-    name: "Sneha Haridas",
-    handle: "@sneha_haridas__",
-    followers: "21.3K",
-    tier: "Influencer",
-    phase: "sustenance",
-    score: 71,
-    img: "img/sneha.jpg",
-    params: {
-      P1:7, P2:8, P3:7, P4:7,
-      P6:7, P7:7, P9:8, P10:7
-    },
-    angle: "Lifestyle sustenance — " +
-           "keeps S2 relevant post-launch",
-    cost: "₹12–18K",
-    deliverable: "Collab Reel",
-    city: "Chennai"
+    id: 11, name: "Sneha Haridas", handle: "@sneha_haridas__", followers: "21.3K",
+    tier: "Model", phase: "sustenance", img: "img/sneha.jpg",
+    cost: "₹12–18K", deliverable: "Collab Reel", city: "Chennai",
+    engagement: { likes: 1892, comments: 32, shares: 725, views: 37700, er: 6.99 },
+    parameters: [
+      { result: "YES", reason: "Professional model per her profession" },
+      { result: "YES", reason: "Cafe collaborations confirmed; fits local Chennai lifestyle shoots" },
+      { result: "NO", reason: "No explicit weekend-lifestyle content pattern found" },
+      { result: "NO", reason: "Could not independently verify audience age/composition; low public footprint" },
+      { result: "NO", reason: "No personal storytelling content found publicly" },
+      { result: "YES", reason: "Professional model; presumed good photo/video quality" },
+      { result: "NO", reason: "No group/friend content evidence found publicly" },
+      { result: "YES", reason: "Strong Tamil Nadu/Kerala relevance confirmed" },
+      { result: "YES", reason: "Modeling/lifestyle content, not tech-first" },
+      { result: "NO", reason: "Could not independently verify current engagement" },
+      { result: "YES", reason: "Professional image fits S2 personality" },
+      { result: "YES", reason: "No controversy found; brand-safe profile" },
+      { result: "YES", reason: "Model-style content is generally reusable" },
+      { result: "YES", reason: "Brand shoot background implies brief compliance experience" },
+      { result: "NO", reason: "Low public footprint; long-term reliability unproven" }
+    ],
+    score: 9, matchPct: 60, recommendation: "Consider", priority: "P3",
+    note: "Works best as a model."
   },
   {
-    id: 12,
-    name: "Birla Jo",
-    handle: "@birla_jo",
-    followers: "511K",
-    tier: "Influencer",
-    phase: "pre-buzz",
-    score: 84,
-    img: "img/birla_jo.jpg",
-    params: {
-      P1:9, P2:8, P3:8, P4:9,
-      P6:9, P7:9, P9:7, P10:8
-    },
-    angle: "Caught in 4K — funny relatable " +
-           "Tamil comedy reels, viral reach",
-    cost: "₹75K (incl. production)",
-    deliverable: "Reel Collab",
-    city: "Coimbatore",
-    pending: false
+    id: 12, name: "Meera", handle: "@_meera_an_", followers: "19.1K",
+    tier: "Model", phase: "pre-buzz", img: "img/meera_an.jpg",
+    cost: "₹35K", deliverable: "Reel Collab", city: "Coimbatore",
+    engagement: { likes: 990, comments: 19, shares: 223, views: 31162, er: 3.95 },
+    parameters: [
+      { result: "YES", reason: "Aesthetic-led feed; professional model/costume designer" },
+      { result: "NO", reason: "No cafe-specific content found publicly" },
+      { result: "NO", reason: "No explicit weekend-exploration content pattern found" },
+      { result: "YES", reason: "Genuinely 21 years old; naturally appeals to similarly young audience" },
+      { result: "YES", reason: "Certain collaboration videos show her narration" },
+      { result: "YES", reason: "Professional model/costume-designer background implies strong visual sense" },
+      { result: "YES", reason: "A few videos with friends; more personalized content" },
+      { result: "YES", reason: "Coimbatore-based confirmed directly in her bio" },
+      { result: "YES", reason: "Modeling/fashion/costume design content, not tech-first" },
+      { result: "NO", reason: "Could not verify engagement independently" },
+      { result: "YES", reason: "Young, suits the age category, matches the explorer persona" },
+      { result: "YES", reason: "No controversy found; limited public data" },
+      { result: "YES", reason: "Model-style content is generally reusable" },
+      { result: "NO", reason: "No visible history of branded campaign work found; unproven at scale" },
+      { result: "NO", reason: "Low public footprint makes long-term reliability hard to assess" }
+    ],
+    score: 10, matchPct: 65, recommendation: "Consider", priority: "P3",
+    note: "Works best as a model. Coimbatore-based, age 21 — naturally appeals to young audience."
   },
   {
-    id: 13,
-    name: "Varunya Jayaprakasham",
-    handle: "@beingshe.vj",
-    followers: "181K",
-    tier: "Influencer",
-    phase: "pre-buzz",
-    score: 84,
-    img: "img/beingshe_vj.jpg",
-    params: {
-      P1:8, P2:9, P3:9, P4:9,
-      P6:6, P7:9, P9:8, P10:9
-    },
-    angle: "Café culture lifestyle — " +
-           "affordable fashion Pre-Buzz",
-    cost: "₹45K",
-    deliverable: "Reel Collab",
-    city: "Coimbatore",
-    pending: false
+    id: 13, name: "Birla Jo", handle: "@birla_jo", followers: "511K",
+    tier: "Influencer", phase: "pre-buzz", img: "img/birla_jo.jpg",
+    cost: "₹75K (incl. production)", deliverable: "Reel Collab", city: "Coimbatore",
+    highestEr: true,
+    engagement: { likes: 25228, comments: 220, shares: 8501, views: 342600, er: 9.91 },
+    parameters: [
+      { result: "NO", reason: "Content style is casual comedy/vlog format (Tamil reels, pranks, challenges) rather than polished premium aesthetic" },
+      { result: "YES", reason: "Linked vlogging persona described as Food Travel Lifestyle Vlogger; food/cafe content is a regular pillar" },
+      { result: "YES", reason: "Vlogs/travel format across Coimbatore-Chennai-Bangalore fits weekend-exploration content well" },
+      { result: "YES", reason: "Tamil comedy reels have gone genuinely viral; one reel alone hit ~670K views — strong pull with young TN audience" },
+      { result: "YES", reason: "Described in press as having a conversational tone and endearing and authentic humour — real storyteller signal" },
+      { result: "YES", reason: "Established vlogger/YouTube presence implies solid, consistent production quality" },
+      { result: "YES", reason: "Comedy/prank/challenge format is inherently social and group-oriented" },
+      { result: "YES", reason: "Coimbatore-based, Tamil-language reels" },
+      { result: "YES", reason: "Food/travel/fashion/comedy content — clearly not tech-first" },
+      { result: "YES", reason: "One reel alone reached ~670K views — well above typical follower-based reach showing strong viral pull" },
+      { result: "YES", reason: "Playful, relatable, life after work energy is a close match to the weekend-culture brief" },
+      { result: "NO", reason: "NEEDS CONTENT REVIEW: comedy/prank-style Tamil reels can sometimes lean into edgy humour; recommend a quick review of his last 10-15 reels against the no-cuss-words/indecent-gestures guideline before confirming" },
+      { result: "YES", reason: "Vlog-style content format is easy to repurpose across formats" },
+      { result: "YES", reason: "Established Emcee/Vlogger career suggests experience working within structured briefs" },
+      { result: "YES", reason: "Active multi-platform (Instagram + YouTube) presence suggests good longevity" }
+    ],
+    score: 13, matchPct: 87, recommendation: "Highly Recommended", priority: "P1",
+    note: "Comedy/prank-format creator. Do a quick tone/language check on recent reels before finalising. Otherwise strongest engagement in portfolio for Coimbatore."
   },
   {
-    id: 14,
-    name: "Meera",
-    handle: "@_meera_an_",
-    followers: "19.1K",
-    tier: "Model",
-    phase: "pre-buzz",
-    score: 65,
-    img: "img/meera_an.jpg",
-    params: {
-      P1:8, P2:9, P3:6, P4:5,
-      P6:5, P7:7, P9:7, P10:7
-    },
-    angle: "Fashion model — lifestyle " +
-           "and costume design aesthetic",
-    cost: "₹35K",
-    deliverable: "Reel Collab",
-    city: "Coimbatore",
-    pending: false
+    id: 14, name: "Varunya Jayaprakasham", handle: "@beingshe.vj", followers: "181K",
+    tier: "Influencer", phase: "pre-buzz", img: "img/beingshe_vj.jpg",
+    cost: "₹45K", deliverable: "Reel Collab", city: "Coimbatore",
+    engagement: { likes: 2059, comments: 214, shares: 277, views: 77410, er: 3.29 },
+    parameters: [
+      { result: "YES", reason: "Affordable fashion girl with polished outfit-inspo reels; press describes content as chic outfit inspiration" },
+      { result: "YES", reason: "Press coverage confirms food content (mouthwatering food ideas) is a core pillar alongside fashion" },
+      { result: "YES", reason: "Mix of fashion, food and lifestyle content (a well-rounded life) fits weekend-exploration well" },
+      { result: "YES", reason: "Affordable fashion positioning and fun reels format speaks directly to a young, budget-conscious college/young-professional audience" },
+      { result: "YES", reason: "Described as a virtual BFF sharing tips — a relatable, friendly voice, not a scripted one" },
+      { result: "YES", reason: "Established fashion-influencer-grade content; 181K followers, 823 posts, consistent visual style" },
+      { result: "YES", reason: "The virtual BFF framing and fun reels format suggest a warm, friend-to-friend content style" },
+      { result: "YES", reason: "Based between Bangalore and Coimbatore; genuinely active in Coimbatore per her own bio" },
+      { result: "YES", reason: "Fashion/food/lifestyle content — clearly not tech-first" },
+      { result: "NO", reason: "Could not independently verify a specific engagement rate or average views; recommend checking own analytics before scoring this higher" },
+      { result: "YES", reason: "Stylish, affordable-fashion, relatable BFF persona is a strong match for S2 young, expressive, social personality" },
+      { result: "YES", reason: "No controversy found; wholesome fashion-and-food content" },
+      { result: "YES", reason: "Consistent outfit-inspo format is highly reusable" },
+      { result: "YES", reason: "Reels already follow a consistent branded-post format showing she is used to structured campaign asks" },
+      { result: "YES", reason: "Large, consistent post history (823 posts) shows a stable, ongoing creator career" }
+    ],
+    score: 14, matchPct: 93, recommendation: "Highly Recommended", priority: "P1",
+    note: "Splits time between Bangalore and Coimbatore — confirm shoot dates/logistics early given dual-city base."
   }
 ];
 
 function scoreColor(s) {
-  if (s >= 80) return 'var(--peach)';
-  if (s >= 70) return 'var(--lavender)';
-  return 'var(--muted)';
+  if (s >= 85) return "var(--peach)";
+  if (s >= 70) return "var(--lavender)";
+  return "var(--muted)";
 }
 
 function phaseBadgeClass(phase) {
-  if (phase === 'pre-buzz')   return 'kt-phase-prebuzz';
-  if (phase === 'launch')     return 'kt-phase-launch';
-  return 'kt-phase-sustenance';
+  if (phase === "pre-buzz") return "kt-phase-prebuzz";
+  if (phase === "launch") return "kt-phase-launch";
+  return "kt-phase-sustenance";
 }
 
 function phaseLabel(phase) {
-  if (phase === 'pre-buzz')   return 'Pre-Buzz';
-  if (phase === 'launch')     return 'Launch';
-  if (phase === 'sustenance') return 'Sustenance';
+  if (phase === "pre-buzz") return "Pre-Buzz";
+  if (phase === "launch") return "Launch";
+  if (phase === "sustenance") return "Sustenance";
   return phase;
 }
 
-function renderCards(filter = 'all') {
-  const grid = document.getElementById('kt-cards-grid');
-  const filtered = (filter === 'all'
+function formatMetric(n) {
+  if (n == null || isNaN(n)) return "—";
+  if (n >= 100000) return (n / 100000).toFixed(1).replace(/\.0$/, "") + "L";
+  if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+  return String(n);
+}
+
+function resultPillClass(result) {
+  if (result === "YES") return "kt-result-yes";
+  if (result === "NO") return "kt-result-no";
+  return "kt-result-caution";
+}
+
+function resultPillLabel(result) {
+  if (result === "YES") return "✓ YES";
+  if (result === "NO") return "✗ NO";
+  return "⚠ CAUTION";
+}
+
+function recClass(rec) {
+  if (rec === "Highly Recommended") return "kt-rec-high";
+  if (rec === "Recommended") return "kt-rec-rec";
+  return "kt-rec-consider";
+}
+
+function renderCards(filter = "all") {
+  const grid = document.getElementById("kt-cards-grid");
+  const filtered = (filter === "all"
     ? [...KOL_DATA]
     : KOL_DATA.filter(k =>
         k.phase === filter ||
         k.tier.toLowerCase() === filter
       ))
-    .sort((a, b) => {
-      if (a.pending && !b.pending) return 1;
-      if (!a.pending && b.pending) return -1;
-      return (b.score || 0) - (a.score || 0);
-    });
+    .sort((a, b) => (b.matchPct || 0) - (a.matchPct || 0));
 
   grid.innerHTML = filtered.map(k => {
     const photoHtml = k.img
       ? `<img src="${k.img}" alt="${k.name}" loading="lazy"
            onerror="this.onerror=null;this.style.display='none';var p=this.parentElement;p.classList.add('kt-card-placeholder');if(!p.dataset.fb){p.dataset.fb='1';p.insertAdjacentText('afterbegin','?');}">`
-      : '?';
-    const placeholderClass = !k.img
-      ? 'kt-card-placeholder' : '';
-    const scoreBar = k.pending ? '' :
-      `<div class="kt-card-score-bar">
-        <div class="kt-card-score-fill"
-             style="width:${k.score}%;
-                    background:${scoreColor(k.score)}">
-        </div>
-       </div>`;
-    const scoreDisplay = k.pending
-      ? `<span class="kt-card-pct"
-               style="color:var(--muted);
-                      font-size:14px">
-           Pending
-         </span>`
-      : `<span class="kt-card-pct"
-               style="color:${scoreColor(k.score)}">
-           ${k.score}%
-         </span>`;
+      : "?";
+    const placeholderClass = !k.img ? "kt-card-placeholder" : "";
     return `
-      <div class="kt-card"
-           data-kol-id="${k.id}"
-           onclick="openModal(${k.id})">
+      <div class="kt-card" data-kol-id="${k.id}" onclick="openModal(${k.id})">
         <div class="kt-card-photo ${placeholderClass}">
           ${photoHtml}
           <div class="kt-card-photo-grad"></div>
@@ -5956,255 +6768,161 @@ function renderCards(filter = 'all') {
           <div class="kt-card-meta">
             <div class="kt-card-meta-row">
               <span class="kt-card-meta-label">Followers</span>
-              <span class="kt-card-meta-val">${k.followers || '—'}</span>
+              <span class="kt-card-meta-val">${k.followers || "—"}</span>
             </div>
             <div class="kt-card-meta-row">
               <span class="kt-card-meta-label">Cost / Reel</span>
-              <span class="kt-card-meta-val">${k.cost || '—'}</span>
+              <span class="kt-card-meta-val">${k.cost || "—"}</span>
             </div>
             <div class="kt-card-meta-row">
               <span class="kt-card-meta-label">City</span>
-              <span class="kt-card-meta-val">${k.city || '—'}</span>
+              <span class="kt-card-meta-val">${k.city || "—"}</span>
             </div>
           </div>
-          ${scoreBar}
+          <div class="kt-card-score-bar">
+            <div class="kt-card-score-fill"
+                 style="width:${k.matchPct}%;background:${scoreColor(k.matchPct)}"></div>
+          </div>
           <div class="kt-card-footer">
-            ${scoreDisplay}
-            <span class="kt-phase-badge ${phaseBadgeClass(k.phase)}">
-              ${phaseLabel(k.phase)}
-            </span>
+            <span class="kt-card-pct" style="color:${scoreColor(k.matchPct)}">${k.matchPct}%</span>
+            <span class="kt-phase-badge ${phaseBadgeClass(k.phase)}">${phaseLabel(k.phase)}</span>
           </div>
         </div>
       </div>`;
-  }).join('');
+  }).join("");
   bindKtCardHovers();
   grid.scrollLeft = 0;
 }
 
-document.querySelectorAll('.kt-filter')
-  .forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.kt-filter')
-        .forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderCards(btn.dataset.filter);
-    });
+document.querySelectorAll(".kt-filter").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".kt-filter").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    renderCards(btn.dataset.filter);
   });
+});
 
 function openModal(id) {
   const k = KOL_DATA.find(x => x.id === id);
   if (!k) return;
 
-  const overlay = document.getElementById(
-    'kt-modal-overlay'
-  );
-  const photoEl = document.getElementById(
-    'kt-modal-photo'
-  );
-  const detailsEl = document.getElementById(
-    'kt-modal-details'
-  );
+  const overlay = document.getElementById("kt-modal-overlay");
+  const photoEl = document.getElementById("kt-modal-photo");
+  const detailsEl = document.getElementById("kt-modal-details");
 
   photoEl.innerHTML = k.img
     ? `<img src="${k.img}" alt="${k.name}" loading="lazy">`
-    : `<div style="display:flex;align-items:center;
-                   justify-content:center;
-                   height:100%;
-                   font-size:64px;
-                   color:var(--dim)">?</div>`;
+    : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:64px;color:var(--dim)">?</div>`;
 
-  const circumference = 2 * Math.PI * 34;
-  const dashOffset = k.pending ? circumference
-    : circumference - (k.score / 100) * circumference;
+  const e = k.engagement || {};
+  const erBadge = k.highestEr
+    ? `<div class="kt-er-badge">★ Highest in Portfolio</div>`
+    : "";
 
-  const paramNames = {
-    P1:'TN Audience Depth', P2:'Age Alignment',
-    P3:'Scene Fit',          P4:'Weekend Vibe',
-    P6:'Engagement Quality', P7:'Gen Z Relatability',
-    P9:'Commercial Fit',     P10:'4K Content Quality'
-  };
-  const paramRows = k.params
-    ? Object.entries(k.params).map(([p, v]) => `
-        <div class="kt-modal-param-row">
-          <span class="kt-modal-param-label">
-            ${paramNames[p] || p}
-          </span>
-          <div class="kt-modal-param-track">
-            <div class="kt-modal-param-fill"
-                 data-width="${v * 10}%"
-                 style="background:${
-                   v >= 8
-                     ? 'var(--peach)'
-                     : 'var(--lavender)'
-                 }">
-            </div>
-          </div>
-          <span class="kt-modal-param-score">
-            ${v}/10
-          </span>
-        </div>`).join('')
-    : '<p class="body-medium">Scores pending.</p>';
+  const paramCards = (k.parameters || []).map((p, i) => `
+    <div class="kt-assess-card" onclick="toggleAssessCard(this)">
+      <div class="kt-assess-num">${String(i + 1).padStart(2, "0")}</div>
+      <div class="kt-assess-top">
+        <div class="kt-assess-name">${PARAM_NAMES[i] || ("P" + (i + 1))}</div>
+        <span class="kt-result-pill ${resultPillClass(p.result)}">${resultPillLabel(p.result)}</span>
+      </div>
+      <div class="kt-assess-reason">${p.reason || ""}</div>
+    </div>
+  `).join("");
 
   detailsEl.innerHTML = `
     <div class="kt-modal-badges">
-      <span class="kt-modal-badge kt-phase-badge ${phaseBadgeClass(k.phase)}">
-        ${phaseLabel(k.phase)}
-      </span>
-      <span class="kt-modal-badge"
-            style="background:rgba(240,235,248,0.06);
-                   color:var(--text);
-                   font-weight:700">
-        ${k.tier}
-      </span>
+      <span class="kt-modal-badge kt-phase-badge ${phaseBadgeClass(k.phase)}">${phaseLabel(k.phase)}</span>
+      <span class="kt-modal-badge" style="background:rgba(240,235,248,0.06);color:var(--text);font-weight:700">${k.tier}</span>
+      <span class="kt-priority-badge">${k.priority}</span>
     </div>
     <div class="kt-modal-name">${k.name}</div>
     <div class="kt-modal-handle">${k.handle}</div>
-    <div class="kt-modal-followers">
-      <strong>${k.followers}</strong> followers
-    </div>
-    <div class="kt-modal-checkpoints">
-      <span class="kt-checkpoint">
-        ✓ P5 · Reel Dominance
-      </span>
-      <span class="kt-checkpoint">
-        ✓ P8 · No Competitor Conflict
-      </span>
-    </div>
-    <div class="kt-modal-section-label">
-      S2 Fit Score · out of 100
-    </div>
-    <div class="kt-score-ring-wrap">
-      <div class="kt-score-ring">
-        <svg viewBox="0 0 80 80">
-          <circle cx="40" cy="40" r="34"
-            fill="none"
-            stroke="var(--dim)"
-            stroke-width="5"/>
-          <circle cx="40" cy="40" r="34"
-            fill="none"
-            stroke="${scoreColor(k.score)}"
-            stroke-width="5"
-            stroke-linecap="round"
-            stroke-dasharray="${circumference}"
-            stroke-dashoffset="${circumference}"
-            id="modal-ring-arc"/>
-        </svg>
-        <div class="kt-score-ring-text">
-          <span class="kt-score-ring-val"
-                style="color:${scoreColor(k.score)}">
-            ${k.pending ? '–' : k.score}
-          </span>
-          <span class="kt-score-ring-sub">
-            FIT / 100
-          </span>
-        </div>
+    <div class="kt-modal-followers"><strong>${k.followers}</strong> followers · ${k.city}</div>
+
+    <div class="kt-modal-section-label">Engagement Intelligence</div>
+    <div class="kt-engage-row">
+      <div class="kt-engage-card">
+        <div class="kt-engage-val">${formatMetric(e.likes)}</div>
+        <div class="kt-engage-label">❤ Avg Likes</div>
       </div>
-      <div>
-        <div style="font-family:var(--ff-display);
-                    font-size:28px;font-weight:800;
-                    color:${scoreColor(k.score)};
-                    letter-spacing:-0.02em;line-height:1">
-          ${k.pending ? 'Pending' : k.score + '%'}
-        </div>
-        <div style="font-size:12px;font-weight:600;
-                    color:var(--muted);margin-top:4px;
-                    letter-spacing:0.06em;text-transform:uppercase">
-          Match strength
-        </div>
+      <div class="kt-engage-card">
+        <div class="kt-engage-val">${formatMetric(e.comments)}</div>
+        <div class="kt-engage-label">💬 Avg Comments</div>
+      </div>
+      <div class="kt-engage-card">
+        <div class="kt-engage-val">${formatMetric(e.shares)}</div>
+        <div class="kt-engage-label">↗ Avg Shares</div>
+      </div>
+      <div class="kt-engage-card">
+        <div class="kt-engage-val">${formatMetric(e.views)}</div>
+        <div class="kt-engage-label">👁 Avg Views</div>
+      </div>
+      <div class="kt-engage-card">
+        <div class="kt-engage-val">${e.er != null ? e.er.toFixed(2) + "%" : "—"}</div>
+        <div class="kt-engage-label">% ER</div>
+        ${erBadge}
       </div>
     </div>
-    <div class="kt-modal-section-label">
-      Parameter Scores
+
+    <div class="kt-assess-header">Selection Assessment</div>
+    <div class="kt-modal-params">${paramCards}</div>
+
+    <div class="kt-modal-summary">
+      <div class="kt-summary-score">${k.score}/15</div>
+      <div class="kt-summary-match">${k.matchPct}%</div>
+      <span class="kt-rec-tag ${recClass(k.recommendation)}">${k.recommendation}</span>
+      <span class="kt-priority-badge">${k.priority}</span>
     </div>
-    <div class="kt-modal-params">${paramRows}</div>
-    <div class="kt-modal-section-label">
-      S2 Content Angle
-    </div>
-    <div class="kt-modal-angle">
-      “${k.angle}”
-    </div>
-    <div class="kt-modal-section-label">
-      Commercial Details
-    </div>
+
+    <div class="kt-modal-note">${k.note || ""}</div>
+
+    <div class="kt-modal-section-label">Commercial Details</div>
     <div class="kt-modal-commercial">
       <div class="kt-modal-comm-item">
-        <div class="kt-modal-comm-label">
-          Cost Per Reel
-        </div>
-        <div class="kt-modal-comm-val">
-          ${k.cost}
-        </div>
+        <div class="kt-modal-comm-label">Cost Per Reel</div>
+        <div class="kt-modal-comm-val">${k.cost}</div>
       </div>
       <div class="kt-modal-comm-item">
-        <div class="kt-modal-comm-label">
-          Deliverable
-        </div>
-        <div class="kt-modal-comm-val">
-          ${k.deliverable}
-        </div>
+        <div class="kt-modal-comm-label">Deliverable</div>
+        <div class="kt-modal-comm-val">${k.deliverable}</div>
       </div>
       <div class="kt-modal-comm-item">
         <div class="kt-modal-comm-label">Phase</div>
-        <div class="kt-modal-comm-val">
-          ${phaseLabel(k.phase)}
-        </div>
+        <div class="kt-modal-comm-val">${phaseLabel(k.phase)}</div>
       </div>
       <div class="kt-modal-comm-item">
         <div class="kt-modal-comm-label">City</div>
-        <div class="kt-modal-comm-val">
-          ${k.city}
-        </div>
+        <div class="kt-modal-comm-val">${k.city}</div>
       </div>
     </div>`;
 
-  overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-
-  setTimeout(() => {
-    const arc = document.getElementById(
-      'modal-ring-arc'
-    );
-    if (arc) {
-      arc.style.transition =
-        'stroke-dashoffset 1s ease';
-      arc.style.strokeDashoffset = dashOffset;
-    }
-    document.querySelectorAll(
-      '.kt-modal-param-fill[data-width]'
-    ).forEach(bar => {
-      bar.style.width = bar.dataset.width;
-    });
-  }, 50);
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
 }
 
-document.getElementById('kt-modal-close')
-  .addEventListener('click', closeModal);
-document.getElementById('kt-modal-overlay')
-  .addEventListener('click', (e) => {
-    if (e.target.id === 'kt-modal-overlay') {
-      closeModal();
-    }
-  });
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeModal();
+function toggleAssessCard(el) {
+  el.classList.toggle("expanded");
+}
+
+document.getElementById("kt-modal-close").addEventListener("click", closeModal);
+document.getElementById("kt-modal-overlay").addEventListener("click", (e) => {
+  if (e.target.id === "kt-modal-overlay") closeModal();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeModal();
 });
 
 function closeModal() {
-  const overlay = document.getElementById(
-    'kt-modal-overlay'
-  );
-  overlay.classList.remove('open');
-  document.body.style.overflow =
-    currentMode === 'kol' ? 'hidden' : '';
+  document.getElementById("kt-modal-overlay").classList.remove("open");
+  document.body.style.overflow = currentMode === "kol" ? "hidden" : "";
 }
 
 const origEnterKolMode = enterKolMode;
 window.enterKolMode = function(tab) {
-  origEnterKolMode(tab);
+  origEnterKolMode(tab || "kol-params");
   setTimeout(() => {
-    document.querySelectorAll(
-      '#kol-match [data-countup]'
-    ).forEach(el => {
+    document.querySelectorAll("#kol-match [data-countup]").forEach(el => {
       const target = parseInt(el.dataset.target);
       if (!isNaN(target)) {
         gsap.fromTo(el,
@@ -6212,12 +6930,10 @@ window.enterKolMode = function(tab) {
           {
             innerText: target,
             duration: 1.2,
-            ease: 'power1.out',
+            ease: "power1.out",
             snap: { innerText: 1 },
             onUpdate: function() {
-              el.innerText = Math.round(
-                parseFloat(el.innerText)
-              );
+              el.innerText = Math.round(parseFloat(el.innerText));
             }
           }
         );
@@ -6227,6 +6943,7 @@ window.enterKolMode = function(tab) {
 };
 
 renderCards('all');
+
 
 // ─── PHASE 5: HOVER + MICRO-INTERACTIONS ───
 
@@ -6415,7 +7132,7 @@ if (s4MusicBtn) {
 }
 
 ScrollTrigger.create({
-  trigger: '#s4',
+  trigger: '#s4-campaign',
   start: 'top 70%',
   onEnter: () => {
     if (friendsThemeAutoTried) return;
