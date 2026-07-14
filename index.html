@@ -1765,10 +1765,51 @@
   .v60-table-wrap {
     flex: 1;
     min-height: 0;
-    max-height: none;
-    overflow: visible;
+    max-height: calc(100vh - 320px);
+    overflow-y: auto;
+    overflow-x: hidden;
     width: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(241,145,109,0.4) transparent;
+    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   }
+  .v60-table-wrap::-webkit-scrollbar { width: 6px; }
+  .v60-table-wrap::-webkit-scrollbar-thumb {
+    background: rgba(241,145,109,0.4); border-radius: 3px;
+  }
+  .v60-total-footer {
+    flex-shrink: 0;
+    border-top: 2px solid #F1916D;
+    background: #0A0A0F;
+    padding: 0;
+    margin-top: 0;
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+  }
+  .v60-total-footer table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-family: var(--ff-body);
+  }
+  .v60-total-footer td {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    padding: 12px 16px;
+    vertical-align: middle;
+  }
+  .v60-total-footer td:nth-child(2),
+  .v60-total-footer td:nth-child(4),
+  .v60-total-footer td:nth-child(5) { text-align: right; }
+  .v60-total-footer td:nth-child(3) { text-align: center; }
+  .v60-total-footer td:nth-child(1) { width: 35%; }
+  .v60-total-footer td:nth-child(2) { width: 18%; }
+  .v60-total-footer td:nth-child(3) { width: 8%; }
+  .v60-total-footer td:nth-child(4) { width: 18%; }
+  .v60-total-footer td:nth-child(5) { width: 21%; }
   .v60-table {
     width: 100%;
     border-collapse: collapse;
@@ -2636,6 +2677,41 @@
   }
 
 
+  #s10-event-flow {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+    display: flex;
+    align-items: stretch;
+  }
+  .s10-event-section {
+    width: 100%;
+    height: 100%;
+    padding: 52px 4% 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  #s10-event-flow .s9-event-wrap {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  #s10-event-flow .s9-event-roadmap {
+    flex: 1;
+    min-height: 360px;
+  }
+  #s9-store .s10-store-wrap {
+    justify-content: space-between;
+    gap: clamp(14px, 2vh, 24px);
+  }
+  #s9-store .s11-why-grid { gap: 12px; }
+  #s9-store .s11-why-card { padding: 14px 16px; }
+  #s9-store .s11-why-body { font-size: 12px; }
+  #s9-store .s11-flow-kicker { font-size: 14px; }
+  #s9-store .s11-flow-body { font-size: 12px; }
+
   /* Store Influencer Event Flow roadmap */
   .s9-event-wrap {
     flex: 1;
@@ -3103,7 +3179,7 @@
     object-position: center top;
     filter: brightness(0.10) saturate(0.50);
   }
-  #s10-close {
+  #s11-close {
     height: 100vh !important;
     max-height: 100vh !important;
     overflow: hidden !important;
@@ -3176,7 +3252,7 @@
     .s10-friends-bg { display: none; }
   }
   @media (max-width: 1440px) {
-    #s10-close .display-hero {
+    #s11-close .display-hero {
       font-size: clamp(44px, 5.5vw, 72px);
     }
   }
@@ -3188,11 +3264,17 @@
   #kol-story.active {
     display: block;
     background: #0A0A0F;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
+  #kol-story.active::-webkit-scrollbar { display: none; }
   .kt-story-wrap {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 32px 24px 64px;
+    padding: 24px 24px 48px;
     box-sizing: border-box;
     color: var(--text);
   }
@@ -3257,7 +3339,7 @@
   }
   .kt-story-board img {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    height: 200px;
     object-fit: cover;
     border-radius: 8px;
     display: block;
@@ -4301,7 +4383,7 @@
   <!-- S1: OPENING + PRODUCT -->
   <section class="scene" id="s1-opening"
     data-label="Opening">
-    <span class="slide-num">01 / 10</span>
+    <span class="slide-num">01 / 11</span>
 
     <div class="s1-layout">
       <div class="s1-left">
@@ -4377,7 +4459,7 @@
   <!-- S2-NPL-ROLES: HQ & STATE ROLES -->
   <section class="scene" id="s2-npl-roles"
     data-label="NPL Strategy">
-    <span class="slide-num">02 / 10</span>
+    <span class="slide-num">02 / 11</span>
 
     <div class="npl-wrap">
 
@@ -4510,7 +4592,7 @@
   <section class="scene" id="s3-consumer"
     data-label="Consumer"
     style="height:100vh; display:block; overflow:hidden">
-    <span class="slide-num">03 / 10</span>
+    <span class="slide-num">03 / 11</span>
 
     <div class="s3-sticky">
 
@@ -4630,7 +4712,7 @@
   <!-- S6: V60 VS S2 BUDGET -->
   <section class="scene" id="s4-v60-vs-s2"
     data-label="V60 vs S2">
-    <span class="slide-num">04 / 10</span>
+    <span class="slide-num">04 / 11</span>
 
     <div class="v60-wrap">
 
@@ -4762,14 +4844,18 @@
                 <td>₹0</td>
                 <td><span class="v60-tag v60-tag-drop">DROPPED</span></td>
               </tr>
-              <tr class="v60-row v60-row-total">
-                <td>TOTAL</td>
-                <td>₹40,98,539</td>
-                <td class="v60-arrow-up">↑</td>
-                <td class="peach">₹44,00,000</td>
-                <td><span class="v60-tag v60-tag-up">+7.4%</span></td>
-              </tr>
             </tbody>
+          </table>
+        </div>
+        <div class="v60-total-footer">
+          <table>
+            <tr>
+              <td>TOTAL</td>
+              <td>₹40,98,539</td>
+              <td class="v60-arrow-up">↑</td>
+              <td class="peach">₹44,00,000</td>
+              <td><span class="v60-tag v60-tag-up">+7.4%</span></td>
+            </tr>
           </table>
         </div>
       </div>
@@ -4780,7 +4866,7 @@
 
     <!-- S5: ₹44L TWO ENGINES (Strategy) -->
   <section class="scene" id="s5-strategy" data-label="Strategy">
-    <span class="slide-num">05 / 10</span>
+    <span class="slide-num">05 / 11</span>
     <div class="s5-sticky">
       <div class="s5-framework">
         <div class="s5-fw-hero">
@@ -4828,7 +4914,7 @@
 
 <section class="scene" id="s6-timeline"
     data-label="Timeline">
-    <span class="slide-num">06 / 10</span>
+    <span class="slide-num">06 / 11</span>
 
     <div class="s6-pin">
     <div class="s6-sticky">
@@ -5113,7 +5199,7 @@
   
 <!-- S7: KOL SYSTEM + TOOL BRIDGE -->
   <section class="scene" id="s7-kol" data-label="KOL System">
-    <span class="slide-num">07 / 10</span>
+    <span class="slide-num">07 / 11</span>
     <div class="s8-glow"></div>
     <div class="s7-kol-system">
       <p class="eyebrow" style="margin-bottom:10px">The Intelligence Behind the Selection</p>
@@ -5177,7 +5263,7 @@
 <!-- S9: JBP PARTNERS -->
   <section class="scene" id="s8-jbp"
     data-label="JBP Strategy">
-    <span class="slide-num">08 / 10</span>
+    <span class="slide-num">08 / 11</span>
 
     <div class="s9-sticky" style="position:relative;height:100%;overflow:hidden;align-items:flex-start;padding:clamp(40px,5vh,52px) clamp(20px,3.5vw,48px) clamp(44px,5.5vh,56px);box-sizing:border-box">
 
@@ -5411,7 +5497,7 @@
 
   <!-- S10: STORE LAUNCH -->
   <section class="scene" id="s9-store" data-label="Store Launch">
-    <span class="slide-num">09 / 10</span>
+    <span class="slide-num">09 / 11</span>
     <div class="s10-store-wrap">
       <div class="s11-flow-block">
         <p class="s11-block-label">From Awareness To Purchase</p>
@@ -5444,9 +5530,22 @@
         </div>
       </div>
 
-      <div class="s9-event-wrap">
+      
+<div class="s11-callout">
+        <p class="s11-callout-title">⚑ Activation Condition</p>
+        <p class="s11-callout-body">All trade-side employees (excluding competitor brand staff) must promote their store's influencer launch on personal social media platforms.</p>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- S10: EVENT FLOW -->
+  <section class="scene" id="s10-event-flow" data-label="Event Flow">
+    <span class="slide-num">10 / 11</span>
+    <div class="s10-event-section">
+<div class="s9-event-wrap">
         <p class="s9-event-note">24 hours before event — Influencer posts arrival announcement on Instagram Story tagging @vivoindiatamilnadu</p>
-        <p class="s9-event-label">Influencer Store Launch — Event Flow</p>
+        <p class="s9-event-label">Influencer Store Launch · Event Flow</p>
         <div class="s9-event-roadmap" aria-label="Influencer store launch event flow">
           <svg class="s9-event-svg" viewBox="0 0 1000 320" preserveAspectRatio="none" aria-hidden="true">
             <path d="M 60 40 C 220 40, 280 40, 360 100 S 520 220, 620 160 S 780 60, 940 260"
@@ -5504,18 +5603,13 @@
           </div>
         </div>
       </div>
-
-      <div class="s11-callout">
-        <p class="s11-callout-title">⚑ Activation Condition</p>
-        <p class="s11-callout-body">All trade-side employees (excluding competitor brand staff) must promote their store's influencer launch on personal social media platforms.</p>
-      </div>
     </div>
   </section>
 
-  <!-- S10: THE CLOSE -->  <!-- S10: THE CLOSE -->
-  <section class="scene" id="s10-close"
+<!-- S11: THE CLOSE -->
+  <section class="scene" id="s11-close"
     data-label="The Close">
-    <span class="slide-num">10 / 10</span>
+    <span class="slide-num">11 / 11</span>
 
     <div class="s10-friends-bg">
       <img src="img/friends_apt1.jpg"
@@ -5629,19 +5723,19 @@
       <div class="kt-story-boards">
         <article class="kt-story-board">
           <img src="img/Storyboard 1.png" alt="Weekend Exploration"
-               onerror="console.warn('Storyboard1 fail',this.src);if(!this.dataset.try){this.dataset.try='1';this.src='./img/Storyboard 1.png';}else if(this.dataset.try==='1'){this.dataset.try='2';this.src='img/Storyboard%201.png';}">
+               onerror="if(!this.dataset.try){this.dataset.try='1';this.src='./img/Storyboard 1.png';}else if(this.dataset.try==='1'){this.dataset.try='2';this.src='img/Storyboard%201.png';}else{this.onerror=null;this.removeAttribute('src');this.style.cssText='background:#1a1a2e;height:200px;border-radius:8px;display:block;width:100%';}">
           <h3>Weekend Exploration</h3>
           <p>Friends, golden hour, spontaneous outings — S2 as the natural flaunt device.</p>
         </article>
         <article class="kt-story-board">
           <img src="img/Storyboard 2.png" alt="The Café They've Heard Of"
-               onerror="console.warn('Storyboard2 fail',this.src);if(!this.dataset.try){this.dataset.try='1';this.src='./img/Storyboard 2.png';}else if(this.dataset.try==='1'){this.dataset.try='2';this.src='img/Storyboard%202.png';}">
+               onerror="if(!this.dataset.try){this.dataset.try='1';this.src='./img/Storyboard 2.png';}else if(this.dataset.try==='1'){this.dataset.try='2';this.src='img/Storyboard%202.png';}else{this.onerror=null;this.removeAttribute('src');this.style.cssText='background:#1a1a2e;height:200px;border-radius:8px;display:block;width:100%';}">
           <h3>The Café They've Heard Of</h3>
           <p>Aspirational space, warm light, S2 on the table — content worth posting.</p>
         </article>
         <article class="kt-story-board">
           <img src="img/Storyboard 3.png" alt="Tamil Nadu Discovered"
-               onerror="console.warn('Storyboard3 fail',this.src);if(!this.dataset.try){this.dataset.try='1';this.src='./img/Storyboard 3.png';}else if(this.dataset.try==='1'){this.dataset.try='2';this.src='img/Storyboard%203.png';}">
+               onerror="if(!this.dataset.try){this.dataset.try='1';this.src='./img/Storyboard 3.png';}else if(this.dataset.try==='1'){this.dataset.try='2';this.src='img/Storyboard%203.png';}else{this.onerror=null;this.removeAttribute('src');this.style.cssText='background:#1a1a2e;height:200px;border-radius:8px;display:block;width:100%';}">
           <h3>Tamil Nadu Discovered</h3>
           <p>Hidden locations, heritage, real TN moments — captured in 4K rear.</p>
         </article>
@@ -6368,7 +6462,8 @@ async function exportPPTX() {
     { id: 's7-kol', mode: null, title: 'KOL Tool' },
     { id: 's8-jbp', mode: null, title: 'JBP Strategy' },
     { id: 's9-store', mode: null, title: 'Store Launch' },
-    { id: 's10-close', mode: null, title: 'The Close' }
+    { id: 's10-event-flow', mode: null, title: 'Event Flow' },
+    { id: 's11-close', mode: null, title: 'The Close' }
   ];
 
   try {
@@ -6883,26 +6978,26 @@ s11EnhanceTl
   }, '-=0.05');
 
 // ── S10: THE CLOSE ────────────────────
-gsap.fromTo('#s10-close .reveal-line',
+gsap.fromTo('#s11-close .reveal-line',
   { y: 32, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.8, stagger: 0.15,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s10-close',
+      trigger: '#s11-close',
       start: 'top 75%',
       once: true
     }
   }
 );
-gsap.fromTo('#s10-close .reveal-fade',
+gsap.fromTo('#s11-close .reveal-fade',
   { opacity: 0 },
   {
     opacity: 1, duration: 1.0,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s10-close',
+      trigger: '#s11-close',
       start: 'top 70%',
       once: true
     }
@@ -6912,7 +7007,7 @@ gsap.from('.s10-phone', {
   x: 40, opacity: 0,
   duration: 1.2, ease: 'power2.out',
   scrollTrigger: {
-    trigger: '#s10-close',
+    trigger: '#s11-close',
     start: 'top 80%',
     once: true
   }
@@ -6923,7 +7018,7 @@ gsap.to('.s10-phone img', {
   ease: 'power1.inOut',
   repeat: -1, yoyo: true,
   scrollTrigger: {
-    trigger: '#s10-close',
+    trigger: '#s11-close',
     start: 'top 80%',
     once: true
   }
@@ -7441,89 +7536,97 @@ function openModal(id) {
   const detailsEl = document.getElementById("kt-modal-details");
 
   photoEl.innerHTML = k.img
-    ? `<img src="${k.img}" alt="${k.name}" loading="lazy">`
-    : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:64px;color:var(--dim)">?</div>`;
+    ? `<img src="${k.img}" alt="${k.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block">`
+    : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:64px;color:#6B6480">?</div>`;
 
   const e = k.engagement || {};
-  const erBadge = k.highestEr
-    ? `<div class="kt-er-badge">★ Highest in Portfolio</div>`
+  const erVal = e.er != null ? e.er.toFixed(2) + "%" : "—";
+  const erExtra = k.highestEr
+    ? `<div style="font-size:0.6rem;color:#F1916D;margin-top:4px">★ Highest in Portfolio</div>`
     : "";
 
-  const paramCards = (k.parameters || []).map((p, i) => `
-    <div class="kt-assess-card" onclick="toggleAssessCard(this)">
-      <div class="kt-assess-num">${String(i + 1).padStart(2, "0")}</div>
-      <div class="kt-assess-top">
-        <div class="kt-assess-name">${PARAM_NAMES[i] || ("P" + (i + 1))}</div>
-        <span class="kt-result-pill ${resultPillClass(p.result)}">${resultPillLabel(p.result)}</span>
-      </div>
-      <div class="kt-assess-reason">${p.reason || ""}</div>
-    </div>
-  `).join("");
+  const resultStyle = (result) => {
+    const r = (result || "").toString().toLowerCase();
+    if (r.includes("yes") || r === "pass" || r === "y") {
+      return { bg: "rgba(34,197,94,0.15)", color: "#22C55E", text: "✓ YES" };
+    }
+    if (r.includes("caution") || r.includes("warn") || r === "maybe") {
+      return { bg: "rgba(245,158,11,0.15)", color: "#F59E0B", text: "⚠ CAUTION" };
+    }
+    return { bg: "rgba(239,68,68,0.15)", color: "#EF4444", text: "✗ NO" };
+  };
+
+  const paramCards = (k.parameters || []).map((p, i) => {
+    const st = resultStyle(p.result);
+    const num = String(i + 1).padStart(2, "0");
+    const name = PARAM_NAMES[i] || ("P" + (i + 1));
+    const reason = (p.reason || "").replace(/"/g, "&quot;");
+    return `<div style="background:#0F0F18;border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:8px;cursor:pointer" onclick="toggleAssessCard(this)" title="${reason}">
+      <div style="font-size:0.65rem;color:#6B6480">${num}</div>
+      <div style="font-size:0.75rem;color:#F0EBF8;font-weight:500;margin:2px 0">${name}</div>
+      <span style="font-size:0.65rem;padding:2px 6px;border-radius:4px;background:${st.bg};color:${st.color}">${st.text}</span>
+      <div class="kt-assess-reason" style="display:none;font-size:0.7rem;color:#6B6480;margin-top:6px;line-height:1.35">${p.reason || ""}</div>
+    </div>`;
+  }).join("");
 
   detailsEl.innerHTML = `
-    <div class="kt-modal-badges">
-      <span class="kt-modal-badge kt-phase-badge ${phaseBadgeClass(kolPhaseKey(k))}">${phaseLabelFromKol(k)}</span>
-      <span class="kt-modal-badge" style="background:rgba(240,235,248,0.06);color:var(--text);font-weight:700">${k.tier}</span>
-      <span class="kt-priority-badge">${k.priority}</span>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+      <span style="padding:4px 10px;border-radius:12px;font-size:0.7rem;font-weight:700;background:rgba(241,145,109,0.18);color:#F1916D">${phaseLabelFromKol(k)}</span>
+      <span style="padding:4px 10px;border-radius:12px;font-size:0.7rem;font-weight:700;background:rgba(240,235,248,0.06);color:#F0EBF8">${k.tier}</span>
+      <span style="padding:4px 10px;border-radius:12px;font-size:0.7rem;font-weight:700;background:rgba(174,125,172,0.2);color:#AE7DAC">${k.priority}</span>
     </div>
-    <div class="kt-modal-name">${k.name}</div>
-    <div class="kt-modal-handle">${k.handle}</div>
-    <div class="kt-modal-followers"><strong>${k.followers}</strong> followers · ${k.city}</div>
+    <div style="font-family:var(--ff-display);font-size:1.8rem;font-weight:800;color:#F0EBF8;letter-spacing:-0.02em">${k.name}</div>
+    <div style="font-size:0.9rem;color:#6B6480;margin-top:2px">${k.handle}</div>
+    <div style="font-size:0.85rem;color:#F0EBF8;margin:6px 0 16px"><strong>${k.followers}</strong> followers · ${k.city}</div>
 
-    <div class="kt-modal-section-label">Engagement Intelligence</div>
-    <div class="kt-engage-row">
-      <div class="kt-engage-card">
-        <div class="kt-engage-val">${formatMetric(e.likes)}</div>
-        <div class="kt-engage-label">❤ Avg Likes</div>
+    <div style="color:#F1916D;font-size:0.7rem;letter-spacing:0.1em;font-weight:600;margin-bottom:8px">ENGAGEMENT INTELLIGENCE</div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+      <div style="background:#0F0F18;border:1px solid rgba(241,145,109,0.2);border-radius:8px;padding:12px;text-align:center;flex:1;min-width:80px">
+        <div style="font-size:1.2rem;font-weight:700;color:#F1916D">${formatMetric(e.likes)}</div>
+        <div style="font-size:0.7rem;color:#6B6480;margin-top:4px">❤ Avg Likes</div>
       </div>
-      <div class="kt-engage-card">
-        <div class="kt-engage-val">${formatMetric(e.comments)}</div>
-        <div class="kt-engage-label">💬 Avg Comments</div>
+      <div style="background:#0F0F18;border:1px solid rgba(241,145,109,0.2);border-radius:8px;padding:12px;text-align:center;flex:1;min-width:80px">
+        <div style="font-size:1.2rem;font-weight:700;color:#F1916D">${formatMetric(e.comments)}</div>
+        <div style="font-size:0.7rem;color:#6B6480;margin-top:4px">💬 Avg Comments</div>
       </div>
-      <div class="kt-engage-card">
-        <div class="kt-engage-val">${formatMetric(e.shares)}</div>
-        <div class="kt-engage-label">↗ Avg Shares</div>
+      <div style="background:#0F0F18;border:1px solid rgba(241,145,109,0.2);border-radius:8px;padding:12px;text-align:center;flex:1;min-width:80px">
+        <div style="font-size:1.2rem;font-weight:700;color:#F1916D">${formatMetric(e.shares)}</div>
+        <div style="font-size:0.7rem;color:#6B6480;margin-top:4px">↗ Avg Shares</div>
       </div>
-      <div class="kt-engage-card">
-        <div class="kt-engage-val">${formatMetric(e.views)}</div>
-        <div class="kt-engage-label">👁 Avg Views</div>
+      <div style="background:#0F0F18;border:1px solid rgba(241,145,109,0.2);border-radius:8px;padding:12px;text-align:center;flex:1;min-width:80px">
+        <div style="font-size:1.2rem;font-weight:700;color:#F1916D">${formatMetric(e.views)}</div>
+        <div style="font-size:0.7rem;color:#6B6480;margin-top:4px">👁 Avg Views</div>
       </div>
-      <div class="kt-engage-card">
-        <div class="kt-engage-val">${e.er != null ? e.er.toFixed(2) + "%" : "—"}</div>
-        <div class="kt-engage-label">% ER</div>
-        ${erBadge}
+      <div style="background:#0F0F18;border:1px solid rgba(241,145,109,0.2);border-radius:8px;padding:12px;text-align:center;flex:1;min-width:80px">
+        <div style="font-size:1.2rem;font-weight:700;color:#F1916D">${erVal}</div>
+        <div style="font-size:0.7rem;color:#6B6480;margin-top:4px">% ER</div>
+        ${erExtra}
       </div>
-    </div>
-
-    <div class="kt-assess-header">Selection Assessment</div>
-    <div class="kt-modal-params">${paramCards}</div>
-
-    <div class="kt-modal-summary">
-      <div class="kt-summary-score">${k.score}/15</div>
-      <div class="kt-summary-match">${k.matchPct}%</div>
-      <span class="kt-rec-tag ${recClass(k.recommendation)}">${k.recommendation}</span>
-      <span class="kt-priority-badge">${k.priority}</span>
     </div>
 
-    <div class="kt-modal-note">${k.note || ""}</div>
+    <div style="color:#F1916D;font-size:0.7rem;letter-spacing:0.1em;font-weight:600;margin-bottom:8px">SELECTION ASSESSMENT</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:16px">${paramCards}</div>
 
-    <div class="kt-modal-section-label">Commercial Details</div>
-    <div class="kt-modal-commercial">
-      <div class="kt-modal-comm-item">
-        <div class="kt-modal-comm-label">Cost Per Reel</div>
-        <div class="kt-modal-comm-val">${k.cost}</div>
-      </div>
-      <div class="kt-modal-comm-item">
-        <div class="kt-modal-comm-label">Deliverable</div>
-        <div class="kt-modal-comm-val">${k.deliverable}</div>
-      </div>
-      <div class="kt-modal-comm-item">
-        <div class="kt-modal-comm-label">Phase</div>
-        <div class="kt-modal-comm-val">${phaseLabelFromKol(k)}</div>
-      </div>
-      <div class="kt-modal-comm-item">
-        <div class="kt-modal-comm-label">City</div>
-        <div class="kt-modal-comm-val">${k.city}</div>
+    <div style="display:flex;align-items:center;gap:12px;margin:12px 0;flex-wrap:wrap">
+      <span style="font-size:2rem;font-weight:700;color:#F1916D">${k.score}/15</span>
+      <span style="font-size:1rem;color:#F0EBF8">${k.matchPct}%</span>
+      <span style="padding:4px 12px;border:1px solid #F1916D;border-radius:20px;font-size:0.75rem;color:#F1916D">${k.recommendation}</span>
+      <span style="padding:4px 10px;background:rgba(174,125,172,0.2);border-radius:12px;font-size:0.75rem;color:#AE7DAC">${k.priority}</span>
+    </div>
+
+    ${k.note ? `<div style="border-left:3px solid #F59E0B;padding:8px 12px;background:rgba(245,158,11,0.08);border-radius:0 6px 6px 0;font-size:0.8rem;color:#F0EBF8;margin-bottom:12px">${k.note}</div>` : ""}
+
+    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;margin-top:8px;padding-bottom:16px">
+      <div style="font-size:0.65rem;letter-spacing:0.1em;color:#6B6480;margin-bottom:8px">COMMERCIAL DETAILS</div>
+      <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div>
+          <div style="font-size:0.7rem;color:#6B6480">COST / REEL</div>
+          <div style="color:#F0EBF8;font-weight:600;font-size:0.9rem">${k.cost}</div>
+        </div>
+        <div>
+          <div style="font-size:0.7rem;color:#6B6480">DELIVERABLE</div>
+          <div style="color:#F0EBF8;font-weight:600;font-size:0.9rem">${k.deliverable}</div>
+        </div>
       </div>
     </div>`;
 
@@ -7533,6 +7636,8 @@ function openModal(id) {
 
 function toggleAssessCard(el) {
   el.classList.toggle("expanded");
+  const reason = el.querySelector(".kt-assess-reason");
+  if (reason) reason.style.display = el.classList.contains("expanded") ? "block" : "none";
 }
 
 document.getElementById("kt-modal-close").addEventListener("click", closeModal);
