@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0A0A0F">
+  <meta name="deck-build" content="20260714c">
   <title>vivo S2 · Tamil Nadu Launch Strategy · FTPL 2026</title>
 
   <!-- Preconnect -->
@@ -3115,7 +3116,7 @@
     transform: translateY(-50%);
     width: 45%;
     height: 100%;
-    opacity: 0.55;
+    opacity: 0.55 !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -5993,6 +5994,8 @@ function goToSlide(dir) {
   slideNavLock = true;
   revealSceneContent(target);
   target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(() => { if (window.__forceDeckVisible) window.__forceDeckVisible(); }, 50);
+  setTimeout(() => { if (window.__forceDeckVisible) window.__forceDeckVisible(); }, 350);
   setTimeout(() => {
     revealSceneContent(target);
     slideNavLock = false;
@@ -7620,52 +7623,32 @@ gsap.to('.s8-cta', {
   delay: 2
 });
 
+
+window.__forceDeckVisible = function forceDeckVisible() {
+  const sel = '#main-experience .reveal-line, #main-experience .reveal-fade, #main-experience .reveal-left, #main-experience .reveal-right, #main-experience .reveal-scale, #main-experience .s1-block, #main-experience .s1-right, #main-experience .s5-fw-hline, #main-experience .s5-eng-card, #main-experience .s5-eng-item, #main-experience .s5-partner, #main-experience .s5-eng-left, #main-experience .s5-eng-right, #main-experience .v60-overline, #main-experience .v60-hline, #main-experience .v60-sub, #main-experience .v60-total-card, #main-experience .v60-delta, #main-experience .v60-table-label, #main-experience .v60-row, #main-experience .s6-phase, #main-experience .s6-activity, #main-experience .s6-ho-stat, #main-experience .npl-overline, #main-experience .npl-hline, #main-experience .npl-sub, #main-experience .npl-card, #main-experience .npl-node, #main-experience .npl-pillar, #main-experience .s11-flow-step, #main-experience .s11-why-card, #main-experience .s11-callout, #main-experience .s11-flow-close, #main-experience .s9-trade, #main-experience .s9-gantt-row, #main-experience .s9-event-stop, #main-experience .s7-act, #main-experience .s10-phone, #main-experience .s10-content, #main-experience .display-hero, #main-experience .s10-hash, #main-experience .s10-footer';
+  if (typeof gsap !== 'undefined') {
+    try { gsap.set(sel, { opacity: 1, x: 0, y: 0, scale: 1, clearProps: '' }); } catch (e) {}
+  }
+  document.querySelectorAll(sel).forEach((el) => {
+    el.style.setProperty('opacity', '1', 'important');
+    el.style.setProperty('visibility', 'visible', 'important');
+    el.style.setProperty('transform', 'none', 'important');
+  });
+  // Never leave engines/timeline wrappers invisible
+  ['#s5-strategy', '#s5-strategy .s5-sticky', '#s5-strategy .s5-framework', '#s5-strategy .s5-engines-row',
+   '#s6-timeline', '#s6-timeline .s6-pin', '#s6-timeline .s6-sticky', '#s6-timeline .s6-content'].forEach((s) => {
+    document.querySelectorAll(s).forEach((el) => {
+      el.style.setProperty('opacity', '1', 'important');
+      el.style.setProperty('visibility', 'visible', 'important');
+    });
+  });
+};
+
 // ── FINALIZE: snap all deck content to final visible state (no blank slides) ──
 (function finalizeDeckVisibility() {
   const force = () => {
-    if (typeof gsap !== 'undefined') {
-      gsap.set([
-        '#main-experience .reveal-line',
-        '#main-experience .reveal-fade',
-        '#main-experience .reveal-left',
-        '#main-experience .reveal-right',
-        '#main-experience .reveal-scale',
-        '#main-experience .s1-block',
-        '#main-experience .s1-right',
-        '#main-experience .s5-fw-hline',
-        '#main-experience .s5-eng-card',
-        '#main-experience .s5-eng-item',
-        '#main-experience .s5-partner',
-        '#main-experience .v60-overline',
-        '#main-experience .v60-hline',
-        '#main-experience .v60-sub',
-        '#main-experience .v60-total-card',
-        '#main-experience .v60-delta',
-        '#main-experience .v60-table-label',
-        '#main-experience .v60-row',
-        '#main-experience .s6-phase',
-        '#main-experience .npl-overline',
-        '#main-experience .npl-hline',
-        '#main-experience .npl-sub',
-        '#main-experience .npl-card',
-        '#main-experience .npl-node',
-        '#main-experience .npl-pillar',
-        '#main-experience .s11-flow-step',
-        '#main-experience .s11-why-card',
-        '#main-experience .s11-callout',
-        '#main-experience .s9-gantt-row',
-        '#main-experience .s7-act'
-      ].join(','), { opacity: 1, x: 0, y: 0, scale: 1 });
-    }
+    if (typeof window.__forceDeckVisible === 'function') window.__forceDeckVisible();
     if (typeof revealAllScenes === 'function') revealAllScenes();
-    // Pin visibility with !important so later GSAP tweens cannot re-hide
-    document.querySelectorAll(
-      '#main-experience .reveal-line, #main-experience .reveal-fade, #main-experience .reveal-left, #main-experience .reveal-right, #main-experience .reveal-scale, #main-experience .s5-fw-hline, #main-experience .s5-eng-card, #main-experience .s5-eng-item, #main-experience .s5-partner, #main-experience .v60-overline, #main-experience .v60-hline, #main-experience .v60-sub, #main-experience .v60-total-card, #main-experience .v60-delta, #main-experience .v60-table-label, #main-experience .v60-row, #main-experience .s6-phase, #main-experience .npl-hline, #main-experience .npl-card, #main-experience .s11-flow-step, #main-experience .s11-why-card, #main-experience .s9-trade, #main-experience .s9-gantt-row, #main-experience .s7-act, #main-experience .s1-block'
-    ).forEach((el) => {
-      el.style.setProperty('opacity', '1', 'important');
-      el.style.setProperty('visibility', 'visible', 'important');
-      el.style.setProperty('transform', 'none', 'important');
-    });
     if (typeof ScrollTrigger !== 'undefined') {
       ScrollTrigger.getAll().forEach((st) => {
         try { st.progress(1); } catch (err) { /* ignore */ }
@@ -7673,9 +7656,14 @@ gsap.to('.s8-cta', {
     }
   };
   force();
-  setTimeout(force, 200);
-  setTimeout(force, 800);
-  setTimeout(force, 1500);
+  setTimeout(force, 100);
+  setTimeout(force, 400);
+  setTimeout(force, 1000);
+  window.addEventListener('load', force);
+  window.addEventListener('scroll', () => {
+    clearTimeout(window.__visT);
+    window.__visT = setTimeout(force, 80);
+  }, { passive: true });
 })();
 
 </script>
