@@ -99,6 +99,7 @@
     pointer-events: none;
   }
   #section-label.visible { opacity: 1; }
+  #section-label.on-cream { color: #1A1A1A; }
 
   /* ═══════════════════════════════════
      EXPORT BUTTON
@@ -502,6 +503,13 @@
       height: auto !important;
       overflow: visible !important;
     }
+    #s4-story.scene {
+      height: auto !important;
+      min-height: 100vh !important;
+      overflow: visible !important;
+      background: #F9F5F0 !important;
+      page-break-inside: auto;
+    }
     #s5-v60-vs-s2.scene {
       height: auto !important;
       min-height: 100vh !important;
@@ -522,12 +530,15 @@
     .reveal-scale,
     .s2-step,
     .s3-type,
-    .s5-fw-hline,
-    .s5-eng-card,
-    .s5-eng-item,
-    .s5-partner,
-    .s5-arrow,
-    .s5-fw-closing,
+    .st-title,
+    .st-sub,
+    .st-copy,
+    .st-label,
+    .st-bridge,
+    .st-beh,
+    .st-board,
+    .st-rules-col,
+    .st-close,
     .s6-phase,
     .s6-work-label,
     .s6-work-phase,
@@ -566,12 +577,15 @@
   body.print-mode .s3-places-intro,
   body.print-mode .s3-place,
   body.print-mode .s3-places-close,
-  body.print-mode .s5-fw-hline,
-  body.print-mode .s5-eng-card,
-  body.print-mode .s5-eng-item,
-  body.print-mode .s5-partner,
-  body.print-mode .s5-arrow,
-  body.print-mode .s5-fw-closing,
+  body.print-mode .st-title,
+  body.print-mode .st-sub,
+  body.print-mode .st-copy,
+  body.print-mode .st-label,
+  body.print-mode .st-bridge,
+  body.print-mode .st-beh,
+  body.print-mode .st-board,
+  body.print-mode .st-rules-col,
+  body.print-mode .st-close,
   body.print-mode .s6-phase,
   body.print-mode .s6-work-label,
   body.print-mode .s6-work-phase,
@@ -1500,226 +1514,211 @@
   }
 
   /* ═══════════════════════════════════
-     S5 — THE STRATEGY (two engines)
+     S4 — THE STORY WE'RE TELLING (cream)
   ═══════════════════════════════════ */
   #s4-story {
-    height: 100vh !important;
-    overflow: hidden !important;
+    height: auto !important;
+    min-height: 100vh;
+    overflow: visible !important;
+    display: block;
+    align-items: stretch;
+    justify-content: flex-start;
+    background: #0A0A0F;
+    padding: 0;
   }
-  .s5-sticky {
-    position: relative;
-    top: auto;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: clamp(52px, 6vh, 72px) clamp(24px, 4vw, 56px);
-    box-sizing: border-box;
-  }
-  .s5-framework {
+  .st-wrap {
     width: 100%;
     max-width: 1120px;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(16px, 2.5vh, 28px);
+    margin: 0 auto;
+    padding: clamp(56px, 8vh, 88px) clamp(24px, 5vw, 64px) clamp(64px, 9vh, 96px);
+    box-sizing: border-box;
+    color: #1A1A1A;
   }
-  .s5-fw-hero {
-    text-align: left;
+  .st-label {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #F1916D;
+    margin: 0 0 14px;
+    opacity: 0;
   }
-  .s5-fw-hline {
+  .st-insight {
+    margin-bottom: clamp(36px, 5vh, 56px);
+  }
+  .st-title {
     font-family: var(--ff-display);
-    font-size: clamp(28px, 3.6vw, 48px);
+    font-size: clamp(32px, 4.2vw, 56px);
     font-weight: 700;
     line-height: 1.08;
     letter-spacing: -0.025em;
-    color: var(--text);
-    margin: 0;
+    color: #1A1A1A;
+    margin: 0 0 12px;
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(20px);
   }
-  .s5-engines-row {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: clamp(10px, 1.5vw, 18px);
-    align-items: stretch;
-  }
-  .s5-eng-card {
-    background: #0F0F18;
-    border: 1px solid rgba(241,145,109,0.15);
-    border-radius: 14px;
-    padding: clamp(16px, 2vh, 24px);
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-  }
-  .s5-eng-left { transform: translateX(-48px); }
-  .s5-eng-right { transform: translateX(48px); }
-  .s5-eng-badge {
-    display: inline-block;
-    width: fit-content;
+  .st-sub {
     font-family: var(--ff-body);
-    font-size: 0.85rem;
+    font-size: clamp(14px, 1.3vw, 17px);
+    font-style: italic;
+    color: #6B6480;
+    margin: 0 0 28px;
+    opacity: 0;
+  }
+  .st-copy {
+    font-family: var(--ff-body);
+    font-size: clamp(15px, 1.25vw, 17px);
+    line-height: 1.75;
+    color: #1A1A1A;
+    max-width: 680px;
+    margin: 0 0 16px;
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  .st-link {
+    margin-bottom: clamp(36px, 5vh, 56px);
+  }
+  .st-bridge {
+    font-family: var(--ff-display);
+    font-size: clamp(20px, 2.2vw, 28px);
     font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 6px 12px;
-    border-radius: 0 8px 8px 0;
-    margin-bottom: 12px;
-  }
-  .s5-badge-peach {
-    color: var(--peach);
-    background: rgba(241,145,109,0.15);
-    border-left: 3px solid var(--peach);
-  }
-  .s5-badge-lav {
-    color: var(--lavender);
-    background: rgba(174,125,172,0.15);
-    border-left: 3px solid var(--lavender);
-  }
-  .s5-eng-amt {
-    font-family: var(--ff-display);
-    font-size: clamp(36px, 4vw, 52px);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .s5-eng-amt.peach { color: var(--peach); }
-  .s5-eng-amt.lavender { color: var(--lavender); }
-  .s5-eng-label {
-    font-family: var(--ff-body);
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 16px;
-  }
-  .s5-eng-items {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 16px;
-    flex: 1;
-  }
-  .s5-eng-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    color: #1A1A1A;
+    letter-spacing: -0.02em;
+    margin: 0 0 22px;
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(12px);
   }
-  .s5-eng-item-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-  }
-  .s5-eng-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--peach);
-    flex-shrink: 0;
-  }
-  .s5-eng-item-name {
-    font-family: var(--ff-body);
-    font-size: 13px;
-    color: var(--text);
-  }
-  .s5-eng-item-val {
-    font-family: var(--ff-display);
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--peach);
-    flex-shrink: 0;
-  }
-  .s5-partners {
+  .st-behaviors {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-    margin-bottom: 16px;
-    flex: 1;
+    gap: 14px;
   }
-  .s5-partner {
-    font-family: var(--ff-body);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text);
-    background: rgba(10,10,15,0.55);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 10px;
-    text-align: center;
+  .st-beh {
+    background: #0F0F18;
+    border: 1px solid rgba(241,145,109,0.18);
+    border-left: 3px solid #F1916D;
+    border-radius: 0 12px 12px 0;
+    padding: clamp(16px, 2vh, 22px);
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(18px);
   }
-  .s5-eng-foot {
-    font-family: var(--ff-body);
-    font-size: 12px;
-    line-height: 1.45;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
-    padding-top: 12px;
-  }
-  .s5-eng-foot strong {
-    display: block;
+  .st-beh-title {
     font-family: var(--ff-display);
-    font-size: 0.8rem;
+    font-size: clamp(16px, 1.6vw, 20px);
+    font-weight: 700;
+    color: #F0EBF8;
+    margin: 0 0 8px;
+  }
+  .st-beh-body {
+    font-family: var(--ff-body);
+    font-size: clamp(12px, 1.1vw, 14px);
+    line-height: 1.55;
+    color: #6B6480;
+    margin: 0;
+  }
+  .st-boards {
+    margin-bottom: clamp(36px, 5vh, 56px);
+  }
+  .st-board-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(14px, 2vw, 22px);
+  }
+  .st-board {
+    opacity: 0;
+    transform: translateY(22px) scale(0.98);
+  }
+  .st-board-img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    background: #E8E0D6;
+    margin-bottom: 12px;
+  }
+  .st-board-theme {
+    font-family: var(--ff-display);
+    font-size: clamp(15px, 1.4vw, 18px);
     font-weight: 600;
-    letter-spacing: 0.10em;
-    color: var(--peach);
-    margin-bottom: 4px;
+    color: #1A1A1A;
+    margin: 0 0 6px;
   }
-  .s5-eng-right .s5-eng-foot strong {
-    color: var(--lavender);
+  .st-board-desc {
+    font-family: var(--ff-body);
+    font-size: clamp(12px, 1.05vw, 13px);
+    line-height: 1.5;
+    color: #6B6480;
+    margin: 0;
   }
-  .s5-arrow {
+  .st-rules {
+    margin-bottom: clamp(32px, 4vh, 48px);
+  }
+  .st-rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(18px, 3vw, 36px);
+  }
+  .st-rules-col {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  .st-rules-head {
+    font-family: var(--ff-display);
+    font-size: clamp(18px, 1.8vw, 22px);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    margin: 0 0 14px;
+  }
+  .st-rules-head.do { color: #22C55E; }
+  .st-rules-head.dont { color: #EF4444; }
+  .st-rules-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
+    gap: 12px;
+  }
+  .st-rules-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
     font-family: var(--ff-body);
-    font-size: 10px;
+    font-size: clamp(13px, 1.15vw, 15px);
+    line-height: 1.5;
+    color: #1A1A1A;
+  }
+  .st-mark {
+    flex-shrink: 0;
     font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--peach);
-    opacity: 0;
-    align-self: center;
-    min-width: 72px;
+    width: 1.1em;
+    margin-top: 1px;
   }
-  .s5-arrow-flow {
-    font-size: 16px;
-    letter-spacing: 0.08em;
-    animation: s5ArrowPulse 1.4s ease-in-out infinite;
-  }
-  @keyframes s5ArrowPulse {
-    0%, 100% { opacity: 0.35; transform: translateX(-2px); }
-    50% { opacity: 1; transform: translateX(2px); }
-  }
-  .s5-fw-closing {
+  .st-mark.do { color: #22C55E; }
+  .st-mark.dont { color: #EF4444; }
+  .st-close {
     text-align: center;
     font-family: var(--ff-display);
-    font-size: clamp(16px, 1.8vw, 22px);
+    font-size: clamp(18px, 2vw, 24px);
     font-weight: 600;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.01em;
     line-height: 1.4;
-    color: var(--text);
+    color: #1A1A1A;
+    margin: 0;
     opacity: 0;
   }
   @media (max-width: 900px) {
-    .s5-engines-row {
+    .st-behaviors,
+    .st-board-grid,
+    .st-rules-grid {
       grid-template-columns: 1fr;
-    }
-    .s5-arrow {
-      flex-direction: row;
-      gap: 10px;
-      padding: 4px 0;
     }
   }
 
+  /* ═══════════════════════════════════
+     S6 — V60 VS S2 BUDGET
   /* ═══════════════════════════════════
      S6 — V60 VS S2 BUDGET
   ═══════════════════════════════════ */
@@ -4298,94 +4297,130 @@
     </div>
   </section>
 
-  <!-- S5: THE STRATEGY (two engines) -->
+  <!-- S4: THE STORY WE'RE TELLING -->
   <section class="scene" id="s4-story"
-    data-label="Story">
+    data-label="The Story">
 
-    <div class="s5-sticky">
-      <div class="s5-framework">
+    <div class="st-wrap">
 
-        <div class="s5-fw-hero">
-          <h2 class="s5-fw-hline">₹44 Lakhs.</h2>
-          <h2 class="s5-fw-hline" style="color:var(--peach)">Two engines.</h2>
-          <h2 class="s5-fw-hline">One mission.</h2>
-        </div>
-
-        <div class="s5-engines-row">
-
-          <!-- Engine 01: State Company -->
-          <div class="s5-eng-card s5-eng-left">
-            <span class="s5-eng-badge s5-badge-peach">ENGINE 01</span>
-            <div class="s5-eng-amt peach">₹12L</div>
-            <div class="s5-eng-label">State Company Investment</div>
-            <div class="s5-eng-items">
-              <div class="s5-eng-item">
-                <div class="s5-eng-item-left">
-                  <span class="s5-eng-dot"></span>
-                  <span class="s5-eng-item-name">KOL Campaign</span>
-                </div>
-                <span class="s5-eng-item-val">₹10L</span>
-              </div>
-              <div class="s5-eng-item">
-                <div class="s5-eng-item-left">
-                  <span class="s5-eng-dot"></span>
-                  <span class="s5-eng-item-name">Retailer Unboxing</span>
-                </div>
-                <span class="s5-eng-item-val">₹1L</span>
-              </div>
-              <div class="s5-eng-item">
-                <div class="s5-eng-item-left">
-                  <span class="s5-eng-dot"></span>
-                  <span class="s5-eng-item-name">Social Media</span>
-                </div>
-                <span class="s5-eng-item-val">₹1L</span>
-              </div>
-            </div>
-            <div class="s5-eng-foot">
-              <strong>CREATE DEMAND</strong>
-              Builds awareness, aspiration and content reach across Tamil Nadu.
-            </div>
-          </div>
-
-          <div class="s5-arrow" aria-hidden="true">
-            <span>CREATE</span>
-            <span class="s5-arrow-flow">→→→</span>
-            <span>CONVERT</span>
-          </div>
-
-          <!-- Engine 02: JBP Partners -->
-          <div class="s5-eng-card s5-eng-right">
-            <span class="s5-eng-badge s5-badge-lav">ENGINE 02</span>
-            <div class="s5-eng-amt lavender">₹32L</div>
-            <div class="s5-eng-label">JBP Partner Investment</div>
-            <div class="s5-partners">
-              <span class="s5-partner">Poorvika</span>
-              <span class="s5-partner">Sathya</span>
-              <span class="s5-partner">Darling</span>
-              <span class="s5-partner">TCM</span>
-              <span class="s5-partner">Vasanth &amp; Co</span>
-              <span class="s5-partner">Supreme</span>
-              <span class="s5-partner">Sangeetha</span>
-              <span class="s5-partner">Reliance</span>
-              <span class="s5-partner">Croma</span>
-            </div>
-            <div class="s5-eng-foot">
-              <strong>CONVERT DEMAND</strong>
-              Activates trade, drives footfall and closes purchase at point of sale.
-            </div>
-          </div>
-
-        </div>
-
-        <p class="s5-fw-closing">
-          Engine 01 makes Tamil Nadu want S2.<br>
-          <span style="color:var(--peach)">Engine 02 makes Tamil Nadu buy S2.</span>
+      <div class="st-insight">
+        <h2 class="st-title">The Story We're Telling</h2>
+        <p class="st-sub">Friends. Weekends. Never Ends. — Caught in 4K.</p>
+        <p class="st-copy">
+          Gen Z don't just create content anymore. They create themselves.
+          Every café they visit, every place they discover, every weekend they share
+          — it becomes part of who they are.
         </p>
-
+        <p class="st-copy">
+          The vivo S2 is built for this generation. Not to define them.
+          To help them express themselves. #MyNewStory.
+        </p>
       </div>
+
+      <div class="st-link">
+        <p class="st-label">Why 4K Front &amp; Rear</p>
+        <p class="st-bridge">One feature. Three behaviours. Infinite stories.</p>
+        <div class="st-behaviors">
+          <article class="st-beh">
+            <h3 class="st-beh-title">Capture</h3>
+            <p class="st-beh-body">
+              4K Rear — every location, every golden hour, every hidden spot. Shot like it deserves to be remembered.
+            </p>
+          </article>
+          <article class="st-beh">
+            <h3 class="st-beh-title">Express</h3>
+            <p class="st-beh-body">
+              4K Front — every reaction, every group moment, every story worth telling. Clarity that matches the moment.
+            </p>
+          </article>
+          <article class="st-beh">
+            <h3 class="st-beh-title">Share</h3>
+            <p class="st-beh-body">
+              Content that stops the scroll. Because when the quality is this good, the story tells itself.
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <div class="st-boards">
+        <p class="st-label">How Our KOLs Will Tell It</p>
+        <div class="st-board-grid">
+          <figure class="st-board">
+            <img class="st-board-img"
+                 src="img/Storyboard 1.png"
+                 alt="Weekend Exploration storyboard"
+                 loading="lazy">
+            <figcaption>
+              <h3 class="st-board-theme">Weekend Exploration</h3>
+              <p class="st-board-desc">
+                Friends, golden hour, spontaneous outings — S2 as the natural flaunt device.
+              </p>
+            </figcaption>
+          </figure>
+          <figure class="st-board">
+            <img class="st-board-img"
+                 src="img/Storyboard 2.png"
+                 alt="The Café They've Heard Of storyboard"
+                 loading="lazy">
+            <figcaption>
+              <h3 class="st-board-theme">The Café They've Heard Of</h3>
+              <p class="st-board-desc">
+                Aspirational space, warm light, S2 on the table — content worth posting.
+              </p>
+            </figcaption>
+          </figure>
+          <figure class="st-board">
+            <img class="st-board-img"
+                 src="img/Storyboard 3.png"
+                 alt="Tamil Nadu Discovered storyboard"
+                 loading="lazy">
+            <figcaption>
+              <h3 class="st-board-theme">Tamil Nadu Discovered</h3>
+              <p class="st-board-desc">
+                Hidden locations, heritage, real TN moments — captured in 4K rear.
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="st-rules">
+        <p class="st-label">What We Expect From Our Creators</p>
+        <div class="st-rules-grid">
+          <div class="st-rules-col">
+            <h3 class="st-rules-head do">DO</h3>
+            <ul class="st-rules-list">
+              <li><span class="st-mark do" aria-hidden="true">✓</span><span>Tell a story first — the product follows naturally</span></li>
+              <li><span class="st-mark do" aria-hidden="true">✓</span><span>Stay true to your content style — comedy, fashion, travel, lifestyle</span></li>
+              <li><span class="st-mark do" aria-hidden="true">✓</span><span>Make the experience the hero — café, road trip, run club, outing</span></li>
+              <li><span class="st-mark do" aria-hidden="true">✓</span><span>Let the phone appear organically — the way you'd actually use it</span></li>
+              <li><span class="st-mark do" aria-hidden="true">✓</span><span>Show 4K quality through the content itself — never explain it technically</span></li>
+              <li><span class="st-mark do" aria-hidden="true">✓</span><span>Keep it real — spontaneous moments always outperform scripted ads</span></li>
+            </ul>
+          </div>
+          <div class="st-rules-col">
+            <h3 class="st-rules-head dont">DON'T</h3>
+            <ul class="st-rules-list">
+              <li><span class="st-mark dont" aria-hidden="true">✗</span><span>Don't make it feel like an ad — no forced product mentions</span></li>
+              <li><span class="st-mark dont" aria-hidden="true">✗</span><span>Don't explain specifications — let the content demonstrate quality</span></li>
+              <li><span class="st-mark dont" aria-hidden="true">✗</span><span>Don't force product shots — no static beauty shots without context</span></li>
+              <li><span class="st-mark dont" aria-hidden="true">✗</span><span>Don't compromise your content style for the brand</span></li>
+              <li><span class="st-mark dont" aria-hidden="true">✗</span><span>Don't over-brand — S2 present, not overpowering</span></li>
+              <li><span class="st-mark dont" aria-hidden="true">✗</span><span>Don't fake relatability — only use moments genuine to your life</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="st-close">
+        Flaunting the all new vivo S2.<br>
+        With your people. In your places.
+      </p>
+
     </div>
   </section>
 
+  <!-- S6: THE PLAN -->
   <!-- S6: THE PLAN -->
   <!-- S6: V60 VS S2 BUDGET -->
   <section class="scene" id="s5-v60-vs-s2"
@@ -6074,8 +6109,13 @@ const labelObserver = new IntersectionObserver(
       sectionLabel.textContent =
         mostVisible.dataset.label;
       sectionLabel.classList.add('visible');
+      sectionLabel.classList.toggle(
+        'on-cream',
+        mostVisible.id === 's4-story'
+      );
     } else if (maxRatio === 0) {
       sectionLabel.classList.remove('visible');
+      sectionLabel.classList.remove('on-cream');
     }
   },
   {
@@ -6104,7 +6144,7 @@ document.getElementById('export-pdf').addEventListener('click', () => {
   // Force animated elements visible before print
   document.body.classList.add('print-mode');
   document.querySelectorAll(
-    '.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s3-type,.s3-places-label,.s3-places-intro,.s3-place,.s3-places-close,.s5-fw-hline,.s5-eng-card,.s5-eng-item,.s5-partner,.s5-arrow,.s5-fw-closing,.s6-phase,.s6-work-label,.s6-work-phase,.s7-act,.s9-phase,.s9-gantt-label,.s9-gantt-head,.s9-gantt-row,.s11-block-label,.s11-why-card,.s11-flow-step,.s11-flow-arrow,.s11-flow-close,.s11-callout,.npl-overline,.npl-hline,.npl-sub,.npl-block-label,.npl-node,.npl-owner-bar,.npl-card,.npl-pillar,.npl-loc-pill,.npl-closing,.v60-overline,.v60-hline,.v60-sub,.v60-total-card,.v60-delta,.v60-table-label,.v60-row,.v60-insight'
+    '.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s3-type,.s3-places-label,.s3-places-intro,.s3-place,.s3-places-close,.st-title,.st-sub,.st-copy,.st-label,.st-bridge,.st-beh,.st-board,.st-rules-col,.st-close,.s6-phase,.s6-work-label,.s6-work-phase,.s7-act,.s9-phase,.s9-gantt-label,.s9-gantt-head,.s9-gantt-row,.s11-block-label,.s11-why-card,.s11-flow-step,.s11-flow-arrow,.s11-flow-close,.s11-callout,.npl-overline,.npl-hline,.npl-sub,.npl-block-label,.npl-node,.npl-owner-bar,.npl-card,.npl-pillar,.npl-loc-pill,.npl-closing,.v60-overline,.v60-hline,.v60-sub,.v60-total-card,.v60-delta,.v60-table-label,.v60-row,.v60-insight'
   ).forEach(el => {
     el.style.opacity = '1';
     el.style.transform = 'none';
@@ -6172,8 +6212,8 @@ function pptxForceVisible(root) {
   const sel = [
     '.reveal-line', '.reveal-fade', '.reveal-left', '.reveal-right',
     '.reveal-scale', '.s2-step', '.s3-type', '.s3-places-label', '.s3-places-intro',
-    '.s3-place', '.s3-places-close', '.s5-fw-hline', '.s5-eng-card',
-    '.s5-eng-item', '.s5-partner', '.s5-arrow', '.s5-fw-closing',
+    '.s3-place', '.s3-places-close', '.st-title', '.st-sub', '.st-copy', '.st-label',
+    '.st-bridge', '.st-beh', '.st-board', '.st-rules-col', '.st-close',
     '.s6-phase', '.s6-work-label', '.s6-work-phase', '.s7-act', '.s9-phase',
     '.s9-gantt-label', '.s9-gantt-head', '.s9-gantt-row', '.s9-reason',
     '.s11-block-label', '.s11-why-card', '.s11-flow-step', '.s11-flow-arrow',
@@ -6241,14 +6281,10 @@ function pptxApplyMode(scene, mode) {
       }
     });
   }
-  if (mode === 's5-engines') {
+  if (mode === 's4-story') {
     const sceneEls = [
-      '.s5-fw-hline',
-      '.s5-eng-card',
-      '.s5-eng-item',
-      '.s5-partner',
-      '.s5-arrow',
-      '.s5-fw-closing'
+      '.st-title', '.st-sub', '.st-copy', '.st-label',
+      '.st-bridge', '.st-beh', '.st-board', '.st-rules-col', '.st-close'
     ];
     sceneEls.forEach((sel) => {
       scene.querySelectorAll(sel).forEach((el) => {
@@ -6257,6 +6293,9 @@ function pptxApplyMode(scene, mode) {
         }));
       });
     });
+    restores.push(pptxSetInlineStyles(scene, {
+      backgroundColor: '#F9F5F0'
+    }));
   }
   if (mode === 's9-part1') {
     const p1 = scene.querySelector('.s9-part1');
@@ -6381,7 +6420,7 @@ async function exportPPTX() {
     { id: 's1-opening', mode: null, title: 'Opening' },
     { id: 's2-npl-roles', mode: null, title: 'NPL Strategy' },
     { id: 's3-consumer', mode: null, title: 'Consumer' },
-    { id: 's4-story', mode: 's5-engines', title: 'Strategy Engines' },
+    { id: 's4-story', mode: 's4-story', title: 'The Story' },
     { id: 's5-v60-vs-s2', mode: null, title: 'V60 vs S2' },
     { id: 's6-strategy', mode: 's6-full', title: 'Campaign Timeline' },
     { id: 's7-timeline', mode: null, title: 'KOL System' },
@@ -6407,7 +6446,7 @@ async function exportPPTX() {
       const frame = pptxPrepSceneFrame(scene);
       // Kill GSAP inline transforms that can leave content mid-tween
       if (typeof gsap !== 'undefined') {
-        scene.querySelectorAll('.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s2-step,.s3-type,.s5-fw-hline,.s5-eng-card,.s5-eng-item,.s5-partner,.s5-arrow,.s5-fw-closing,.s6-phase,.s6-work-label,.s6-work-phase,.s7-act,.s9-phase,.s9-gantt-label,.s9-gantt-head,.s9-gantt-row,.s11-block-label,.s11-why-card,.s11-flow-step,.s11-flow-arrow,.s11-flow-close,.s11-callout,.npl-overline,.npl-hline,.npl-sub,.npl-block-label,.npl-node,.npl-owner-bar,.npl-card,.npl-pillar,.npl-loc-pill,.npl-closing').forEach((el) => {
+        scene.querySelectorAll('.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s2-step,.s3-type,.st-title,.st-sub,.st-copy,.st-label,.st-bridge,.st-beh,.st-board,.st-rules-col,.st-close,.s6-phase,.s6-work-label,.s6-work-phase,.s7-act,.s9-phase,.s9-gantt-label,.s9-gantt-head,.s9-gantt-row,.s11-block-label,.s11-why-card,.s11-flow-step,.s11-flow-arrow,.s11-flow-close,.s11-callout,.npl-overline,.npl-hline,.npl-sub,.npl-block-label,.npl-node,.npl-owner-bar,.npl-card,.npl-pillar,.npl-loc-pill,.npl-closing').forEach((el) => {
           gsap.set(el, { clearProps: 'opacity,transform,visibility' });
         });
         scene.querySelectorAll('#s9-jbp .s9-gantt-seg.on .s9-gantt-fill').forEach((el) => {
@@ -6609,47 +6648,86 @@ gsap.fromTo('#s3-type1, #s3-type2, #s3-type3',
   }
 );
 
-// ── S5: TWO ENGINE FRAMEWORK ──────────
-const s5Tl = gsap.timeline({
+// ── S4: THE STORY WE'RE TELLING ───────
+ScrollTrigger.create({
+  trigger: '#s4-story',
+  start: 'top bottom',
+  end: 'top 35%',
+  scrub: true,
+  onUpdate: (self) => {
+    const t = self.progress;
+    const r = Math.round(10 + (249 - 10) * t);
+    const g = Math.round(10 + (245 - 10) * t);
+    const b = Math.round(15 + (240 - 15) * t);
+    document.getElementById('s4-story').style.backgroundColor =
+      `rgb(${r},${g},${b})`;
+  }
+});
+ScrollTrigger.create({
+  trigger: '#s4-story',
+  start: 'bottom 65%',
+  end: 'bottom top',
+  scrub: true,
+  onUpdate: (self) => {
+    const t = self.progress;
+    const r = Math.round(249 + (10 - 249) * t);
+    const g = Math.round(245 + (10 - 245) * t);
+    const b = Math.round(240 + (15 - 240) * t);
+    document.getElementById('s4-story').style.backgroundColor =
+      `rgb(${r},${g},${b})`;
+  }
+});
+
+const stTl = gsap.timeline({
   scrollTrigger: {
     trigger: '#s4-story',
     start: 'top 70%',
     once: true
   }
 });
-s5Tl
-  .to('#s4-story .s5-fw-hline', {
-    opacity: 1, y: 0,
-    duration: 0.55, stagger: 0.12,
-    ease: 'power2.out'
+stTl
+  .to('#s4-story .st-title', {
+    opacity: 1, y: 0, duration: 0.55, ease: 'power2.out'
   })
-  .to('#s4-story .s5-eng-left', {
-    opacity: 1, x: 0,
-    duration: 0.7, ease: 'power2.out'
-  }, '-=0.15')
-  .to('#s4-story .s5-eng-right', {
-    opacity: 1, x: 0,
-    duration: 0.7, ease: 'power2.out'
-  }, '<')
-  .to('#s4-story .s5-eng-item', {
+  .to('#s4-story .st-sub', {
+    opacity: 1, duration: 0.4, ease: 'power2.out'
+  }, '-=0.2')
+  .to('#s4-story .st-copy', {
     opacity: 1, y: 0,
-    duration: 0.35, stagger: 0.1,
-    ease: 'power2.out'
-  }, '-=0.35')
-  .to('#s4-story .s5-partner', {
-    opacity: 1, y: 0,
-    duration: 0.3, stagger: 0.06,
-    ease: 'power2.out'
-  }, '-=0.25')
-  .to('#s4-story .s5-arrow', {
-    opacity: 1,
-    duration: 0.4, ease: 'power2.out'
+    duration: 0.5, stagger: 0.2, ease: 'power2.out'
   }, '-=0.1')
-  .to('#s4-story .s5-fw-closing', {
-    opacity: 1,
-    duration: 0.55, ease: 'power2.out'
+  .to('#s4-story .st-link > .st-label', {
+    opacity: 1, duration: 0.35, ease: 'power2.out'
+  }, '-=0.05')
+  .to('#s4-story .st-bridge', {
+    opacity: 1, y: 0, duration: 0.45, ease: 'power2.out'
+  }, '-=0.1')
+  .to('#s4-story .st-beh', {
+    opacity: 1, y: 0,
+    duration: 0.45, stagger: 0.15, ease: 'power2.out'
+  }, '-=0.05')
+  .to('#s4-story .st-boards > .st-label', {
+    opacity: 1, duration: 0.35, ease: 'power2.out'
+  }, '-=0.05')
+  .to('#s4-story .st-board', {
+    opacity: 1, y: 0, scale: 1,
+    duration: 0.5, stagger: 0.2, ease: 'power2.out'
+  }, '-=0.05')
+  .to('#s4-story .st-rules > .st-label', {
+    opacity: 1, duration: 0.35, ease: 'power2.out'
+  }, '-=0.05')
+  .to('#s4-story .st-rules-col', {
+    opacity: 1, y: 0,
+    duration: 0.3, stagger: 0, ease: 'power2.out'
+  }, '-=0.05')
+  .to('#s4-story .st-close', {
+    opacity: 1, duration: 0.5, ease: 'power2.out'
   }, '-=0.05');
 
+// ─── S6–S10 GSAP ANIMATIONS ───────────
+
+// ── S6: CAMPAIGN TIMELINE ─────────────
+// ── S6: V60 VS S2 BUDGET ─────────────
 // ─── S6–S10 GSAP ANIMATIONS ───────────
 
 // ── S6: CAMPAIGN TIMELINE ─────────────
