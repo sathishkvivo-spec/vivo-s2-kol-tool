@@ -466,6 +466,43 @@
       position: relative !important;
     }
     .scene[style] { height: 100vh !important; }
+    #s7-strategy.scene {
+      height: auto !important;
+      min-height: 100vh !important;
+      overflow: visible !important;
+      page-break-inside: auto;
+    }
+    #s7-strategy .s6-pin {
+      height: auto !important;
+      min-height: 100vh;
+    }
+    #s7-strategy .s6-sticky {
+      position: relative !important;
+      height: auto !important;
+      overflow: visible !important;
+    }
+    #s10-jbp.scene {
+      height: auto !important;
+      min-height: 100vh !important;
+      overflow: visible !important;
+      page-break-inside: auto;
+    }
+    #s10-jbp .s9-sticky {
+      position: relative !important;
+      height: auto !important;
+      overflow: visible !important;
+    }
+    #s11-store.scene {
+      height: auto !important;
+      min-height: 100vh !important;
+      overflow: visible !important;
+      page-break-inside: auto;
+    }
+    #s11-store .s9-sticky {
+      position: relative !important;
+      height: auto !important;
+      overflow: visible !important;
+    }
     body { background: #0A0A0F !important; }
     * {
       -webkit-print-color-adjust: exact !important;
@@ -480,22 +517,37 @@
     .reveal-scale,
     .s2-step,
     .s3-type,
-    .s5-engines,
-    .s5-engine,
-    .s5-hero-amount,
+    .s5-fw-hline,
+    .s5-eng-card,
+    .s5-eng-item,
+    .s5-partner,
+    .s5-arrow,
+    .s5-fw-closing,
     .s6-phase,
+    .s6-work-label,
+    .s6-work-phase,
     .s6-activities,
     .s7-act,
     .s9-phase,
     .s9-activities,
     .s9-part1,
-    .s9-part2 {
+    .s9-gantt-label,
+    .s9-gantt-head,
+    .s9-gantt-row,
+    .s9-part2,
+    .s11-block-label,
+    .s11-why-card,
+    .s11-flow-step,
+    .s11-flow-arrow,
+    .s11-flow-close,
+    .s11-callout {
       opacity: 1 !important;
       visibility: visible !important;
       transform: none !important;
     }
-    .s5-engines { display: flex !important; }
-    .s5-hero-amount { opacity: 1 !important; }
+    .s9-gantt-seg.on .s9-gantt-fill {
+      transform: scaleX(1) !important;
+    }
     [data-countup] { /* keep final text from DOM */ }
   }
   body.print-mode .reveal-line,
@@ -505,17 +557,35 @@
   body.print-mode .reveal-scale,
   body.print-mode .s2-step,
   body.print-mode .s3-type,
-  body.print-mode .s5-engines,
-  body.print-mode .s5-engine,
-  body.print-mode .s5-hero-amount,
+  body.print-mode .s3-places-label,
+  body.print-mode .s3-places-intro,
+  body.print-mode .s3-place,
+  body.print-mode .s3-places-close,
+  body.print-mode .s5-fw-hline,
+  body.print-mode .s5-eng-card,
+  body.print-mode .s5-eng-item,
+  body.print-mode .s5-partner,
+  body.print-mode .s5-arrow,
+  body.print-mode .s5-fw-closing,
   body.print-mode .s6-phase,
+  body.print-mode .s6-work-label,
+  body.print-mode .s6-work-phase,
   body.print-mode .s6-activities,
   body.print-mode .s7-act,
   body.print-mode .s9-phase,
   body.print-mode .s9-activities,
   body.print-mode .s9-trades .s9-trade,
   body.print-mode .s9-part1,
+  body.print-mode .s9-gantt-label,
+  body.print-mode .s9-gantt-head,
+  body.print-mode .s9-gantt-row,
   body.print-mode .s9-part2,
+  body.print-mode .s11-block-label,
+  body.print-mode .s11-why-card,
+  body.print-mode .s11-flow-step,
+  body.print-mode .s11-flow-arrow,
+  body.print-mode .s11-flow-close,
+  body.print-mode .s11-callout,
   body.print-mode .npl-overline,
   body.print-mode .npl-hline,
   body.print-mode .npl-sub,
@@ -538,7 +608,14 @@
     visibility: visible !important;
     transform: none !important;
   }
-  body.print-mode .s5-engines { display: flex !important; }
+  body.print-mode .s9-gantt-row {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+  body.print-mode .s9-gantt-seg.on .s9-gantt-fill {
+    transform: scaleX(1) !important;
+  }
   body.print-mode #s4-music-btn,
   body.print-mode #slide-nav,
   body.print-mode #export-btn,
@@ -1106,7 +1183,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    padding: clamp(64px, 9vh, 88px) 0 clamp(28px, 4vh, 48px);
+    padding: clamp(52px, 6.5vh, 72px) 0 clamp(20px, 2.8vh, 32px);
     box-sizing: border-box;
     overflow: hidden;
     border: none;
@@ -1138,7 +1215,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: clamp(20px, 3.5vh, 36px);
+    gap: clamp(14px, 2.2vh, 24px);
   }
   .s3-hero {
     max-width: 720px;
@@ -1185,7 +1262,7 @@
   .s3-type-visual {
     position: relative;
     width: 100%;
-    height: clamp(150px, 26vh, 240px);
+    height: clamp(110px, 18vh, 180px);
     overflow: hidden;
     flex-shrink: 0;
     background: var(--dim);
@@ -1231,9 +1308,9 @@
     text-shadow: 0 6px 28px rgba(0,0,0,0.65);
   }
   .s3-type-body {
-    padding: clamp(14px, 2vh, 22px)
+    padding: clamp(12px, 1.6vh, 18px)
              clamp(14px, 1.6vw, 22px)
-             clamp(16px, 2.2vh, 24px);
+             clamp(14px, 1.8vh, 20px);
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -1267,12 +1344,72 @@
     border-radius: 20px;
     letter-spacing: 0.05em;
   }
+  .s3-places {
+    margin-top: 2px;
+  }
+  .s3-places-label {
+    font-family: var(--ff-body);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin-bottom: 6px;
+    opacity: 0;
+  }
+  .s3-places-intro {
+    font-family: var(--ff-body);
+    font-size: clamp(12px, 1.05vw, 14px);
+    line-height: 1.45;
+    color: var(--muted);
+    margin-bottom: 10px;
+    max-width: 560px;
+    opacity: 0;
+  }
+  .s3-places-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .s3-place {
+    background: #0F0F18;
+    border: 1px solid rgba(241,145,109,0.30);
+    border-radius: 10px;
+    padding: 10px 12px;
+    text-align: left;
+    opacity: 0;
+    transform: scale(0);
+  }
+  .s3-place-name {
+    font-family: var(--ff-body);
+    font-size: clamp(12px, 1.05vw, 14px);
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+  .s3-place-desc {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.35;
+  }
+  .s3-places-close {
+    font-family: var(--ff-body);
+    font-size: clamp(12px, 1.05vw, 14px);
+    font-style: italic;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.4;
+    opacity: 0;
+  }
   @media (max-width: 900px) {
     .s3-types {
       grid-template-columns: 1fr;
       gap: 12px;
       overflow-y: auto;
-      max-height: 58vh;
+      max-height: 40vh;
     }
     .s3-type {
       flex-direction: row;
@@ -1284,6 +1421,7 @@
       min-height: 120px;
     }
     .s3-type-body { padding: 14px 16px; }
+    .s3-places-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 768px) {
     .s3-ambient { display: none; }
@@ -1293,6 +1431,7 @@
       width: 100%;
       height: 140px;
     }
+    .s3-places-grid { grid-template-columns: 1fr; }
   }
 
   /* ═══════════════════════════════════
@@ -1534,137 +1673,218 @@
   }
 
   /* ═══════════════════════════════════
-     S5 — THE STRATEGY
+     S5 — THE STRATEGY (two engines)
   ═══════════════════════════════════ */
+  #s5-story {
+    height: 100vh !important;
+    overflow: hidden !important;
+  }
   .s5-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
+    position: relative;
+    top: auto;
+    height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding: clamp(52px, 6vh, 72px) clamp(24px, 4vw, 56px);
+    box-sizing: border-box;
   }
-  .s5-hero-amount {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  .s5-framework {
     width: 100%;
-  }
-  .s5-amount-wrap {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    line-height: 1;
-    margin-bottom: 0;
-  }
-  .s5-currency, .s5-amount-suffix {
-    font-family: var(--ff-display);
-    font-size: clamp(32px, 4vw, 56px);
-    font-weight: 700;
-    color: var(--peach);
-    margin-right: 4px;
-  }
-  .s5-amount-num {
-    font-family: var(--ff-display);
-    font-size: clamp(120px, 18vw, 240px);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    color: var(--text);
-    line-height: 0.9;
-  }
-  .s5-amount-suffix {
-    margin-left: 4px;
-    margin-right: 0;
-  }
-  .s5-engines {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    opacity: 0;
-    pointer-events: none;
-    padding: 0 6%;
-  }
-  .s5-engines.revealed {
-    opacity: 1;
-    pointer-events: all;
-  }
-  .s5-engine {
-    flex: 1;
-    padding: 0 5%;
-  }
-  .s5-engine-divider {
-    width: 1px;
-    height: 50vh;
-    background: linear-gradient(
-      180deg,
-      transparent,
-      var(--border) 30%,
-      var(--border) 70%,
-      transparent
-    );
-    flex-shrink: 0;
-  }
-  .s5-engine-items {
+    max-width: 1120px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    margin-bottom: 28px;
+    gap: clamp(16px, 2.5vh, 28px);
   }
-  .s5-engine-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
+  .s5-fw-hero {
+    text-align: left;
   }
-  .s5-item-label {
-    font-family: var(--ff-body);
-    font-size: 14px;
-    color: var(--muted);
-  }
-  .s5-item-value {
+  .s5-fw-hline {
     font-family: var(--ff-display);
-    font-size: 18px;
+    font-size: clamp(28px, 3.6vw, 48px);
     font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
     color: var(--text);
-    font-variant-numeric: tabular-nums;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(24px);
   }
-  .s5-engine-total {
-    margin-top: 8px;
+  .s5-engines-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: clamp(10px, 1.5vw, 18px);
+    align-items: stretch;
   }
-  .s5-total-value {
+  .s5-eng-card {
+    background: #0F0F18;
+    border: 1px solid rgba(241,145,109,0.15);
+    border-radius: 14px;
+    padding: clamp(16px, 2vh, 24px);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+  }
+  .s5-eng-left { transform: translateX(-48px); }
+  .s5-eng-right { transform: translateX(48px); }
+  .s5-eng-badge {
+    display: inline-block;
+    width: fit-content;
+    font-family: var(--ff-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .s5-badge-peach {
+    color: var(--canvas);
+    background: var(--peach);
+  }
+  .s5-badge-lav {
+    color: var(--canvas);
+    background: var(--lavender);
+  }
+  .s5-eng-amt {
     font-family: var(--ff-display);
-    font-size: clamp(36px, 5vw, 64px);
+    font-size: clamp(36px, 4vw, 52px);
     font-weight: 800;
     letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 4px;
   }
-  @media (max-width: 768px) {
-    .s5-engines {
-      flex-direction: column;
-      padding: 0 6%;
-      gap: 32px;
-      overflow-y: auto;
-    }
-    .s5-engine-divider {
-      width: 80%;
-      height: 1px;
-    }
-    .s5-amount-num {
-      font-size: clamp(80px, 22vw, 140px);
-    }
+  .s5-eng-amt.peach { color: var(--peach); }
+  .s5-eng-amt.lavender { color: var(--lavender); }
+  .s5-eng-label {
+    font-family: var(--ff-body);
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 16px;
   }
-  @media (max-width: 480px) {
-    .s5-amount-num {
-      font-size: clamp(72px, 20vw, 110px);
+  .s5-eng-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  .s5-eng-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .s5-eng-item-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .s5-eng-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--peach);
+    flex-shrink: 0;
+  }
+  .s5-eng-item-name {
+    font-family: var(--ff-body);
+    font-size: 13px;
+    color: var(--text);
+  }
+  .s5-eng-item-val {
+    font-family: var(--ff-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--peach);
+    flex-shrink: 0;
+  }
+  .s5-partners {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  .s5-partner {
+    font-family: var(--ff-body);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    background: rgba(10,10,15,0.55);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .s5-eng-foot {
+    font-family: var(--ff-body);
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+  .s5-eng-foot strong {
+    display: block;
+    font-family: var(--ff-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .s5-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: var(--ff-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--peach);
+    opacity: 0;
+    align-self: center;
+    min-width: 72px;
+  }
+  .s5-arrow-flow {
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    animation: s5ArrowPulse 1.4s ease-in-out infinite;
+  }
+  @keyframes s5ArrowPulse {
+    0%, 100% { opacity: 0.35; transform: translateX(-2px); }
+    50% { opacity: 1; transform: translateX(2px); }
+  }
+  .s5-fw-closing {
+    text-align: center;
+    font-family: var(--ff-display);
+    font-size: clamp(16px, 1.8vw, 22px);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    color: var(--text);
+    opacity: 0;
+  }
+  @media (max-width: 900px) {
+    .s5-engines-row {
+      grid-template-columns: 1fr;
+    }
+    .s5-arrow {
+      flex-direction: row;
+      gap: 10px;
+      padding: 4px 0;
     }
   }
 
@@ -2076,6 +2296,86 @@
     .s6-act-divider { width: 100%; height: 1px;
                        margin: 0; }
     .s6-phase-desc { display: none; }
+  }
+
+  /* Campaign work list (below timeline) */
+  .s6-pin {
+    height: 200vh;
+    display: block;
+    position: relative;
+  }
+  .s6-worklist-wrap {
+    width: 100%;
+    padding: clamp(48px, 7vh, 72px) 8% clamp(64px, 10vh, 96px);
+    box-sizing: border-box;
+    border-top: 1px solid rgba(241,145,109,0.15);
+    background: var(--canvas);
+  }
+  .s6-work-label {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin: 0 0 clamp(20px, 3vh, 28px);
+  }
+  .s6-work-phases {
+    display: flex;
+    flex-direction: column;
+    max-width: 920px;
+  }
+  .s6-work-phase {
+    padding: clamp(14px, 2vh, 20px) 0;
+    border-bottom: 1px solid rgba(241,145,109,0.18);
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  .s6-work-phase:last-child {
+    border-bottom: none;
+  }
+  .s6-work-phase-name {
+    font-family: var(--ff-display);
+    font-size: clamp(16px, 1.8vw, 22px);
+    font-weight: 700;
+    color: var(--peach);
+    letter-spacing: -0.01em;
+    margin: 0 0 4px;
+  }
+  .s6-work-phase-dates {
+    font-family: var(--ff-body);
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 12px;
+  }
+  .s6-work-tasks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .s6-work-tasks li {
+    position: relative;
+    padding-left: 16px;
+    font-family: var(--ff-body);
+    font-size: clamp(12px, 1.15vw, 14px);
+    line-height: 1.45;
+    color: var(--text);
+  }
+  .s6-work-tasks li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--peach);
+  }
+  @media (max-width: 768px) {
+    .s6-worklist-wrap { padding-left: 6%; padding-right: 6%; }
   }
 
   /* ═══════════════════════════════════
@@ -2509,6 +2809,318 @@
   }
   @media (max-width: 480px) {
     .s9-condition { flex-direction: column; gap: 8px; }
+  }
+
+  /* S11 enhanced blocks — below existing store launch */
+  .s11-enhance {
+    width: 100%;
+    margin-top: clamp(40px, 6vh, 56px);
+    padding-top: clamp(28px, 4vh, 40px);
+    border-top: 1px solid rgba(241,145,109,0.15);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 4vh, 40px);
+  }
+  .s11-block-label {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin: 0 0 16px;
+    opacity: 0;
+  }
+  .s11-why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .s11-why-card {
+    background: #0F0F18;
+    border: 1px solid rgba(241,145,109,0.15);
+    border-radius: 12px;
+    padding: clamp(16px, 2vh, 22px);
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  .s11-why-num {
+    font-family: var(--ff-display);
+    font-size: clamp(28px, 3.2vw, 40px);
+    font-weight: 800;
+    color: var(--peach);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .s11-why-title {
+    font-family: var(--ff-display);
+    font-size: clamp(15px, 1.5vw, 18px);
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 8px;
+  }
+  .s11-why-body {
+    font-family: var(--ff-body);
+    font-size: clamp(12px, 1.15vw, 14px);
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0;
+  }
+  .s11-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: clamp(8px, 1.2vw, 14px);
+    align-items: stretch;
+  }
+  .s11-flow-step {
+    background: #0F0F18;
+    border: 1px solid rgba(241,145,109,0.15);
+    border-radius: 12px;
+    padding: clamp(14px, 1.8vh, 20px);
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  .s11-flow-step.lav {
+    border-color: rgba(174,125,172,0.25);
+  }
+  .s11-flow-step.bold {
+    border-color: rgba(241,145,109,0.35);
+    box-shadow: 0 0 0 1px rgba(241,145,109,0.08);
+  }
+  .s11-flow-kicker {
+    font-family: var(--ff-display);
+    font-size: clamp(14px, 1.4vw, 17px);
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 10px;
+  }
+  .s11-flow-step.peach .s11-flow-kicker { color: var(--peach); }
+  .s11-flow-step.lav .s11-flow-kicker { color: var(--lavender); }
+  .s11-flow-step.bold .s11-flow-kicker {
+    color: var(--peach);
+    font-weight: 800;
+  }
+  .s11-flow-body {
+    font-family: var(--ff-body);
+    font-size: clamp(11px, 1.05vw, 13px);
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0;
+  }
+  .s11-flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--ff-display);
+    font-size: 20px;
+    color: var(--peach);
+    opacity: 0;
+    align-self: center;
+  }
+  .s11-flow-close {
+    text-align: center;
+    font-family: var(--ff-body);
+    font-size: clamp(13px, 1.25vw, 15px);
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 4px auto 0;
+    max-width: 520px;
+    opacity: 0;
+  }
+  .s11-callout {
+    background: #0F0F18;
+    border: 1px solid rgba(245,158,11,0.25);
+    border-left: 3px solid #F59E0B;
+    border-radius: 0 10px 10px 0;
+    padding: clamp(14px, 1.8vh, 18px) clamp(16px, 2vw, 22px);
+    max-width: 720px;
+    opacity: 0;
+  }
+  .s11-callout-title {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #F59E0B;
+    margin: 0 0 8px;
+  }
+  .s11-callout-body {
+    font-family: var(--ff-body);
+    font-size: clamp(12px, 1.15vw, 14px);
+    line-height: 1.5;
+    color: var(--text);
+    margin: 0;
+  }
+  @media (max-width: 800px) {
+    .s11-why-grid { grid-template-columns: 1fr; }
+    .s11-flow {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .s11-flow-arrow {
+      transform: rotate(90deg);
+      padding: 2px 0;
+    }
+    .s11-flow-step { transform: translateY(16px); }
+  }
+
+  /* JBP partner activation timeline */
+  .s9-gantt-wrap {
+    width: 100%;
+    margin-top: clamp(36px, 5vh, 52px);
+    padding-top: clamp(28px, 4vh, 36px);
+    border-top: 1px solid rgba(241,145,109,0.15);
+  }
+  .s9-gantt-label {
+    font-family: var(--ff-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--peach);
+    margin: 0 0 clamp(16px, 2.2vh, 22px);
+    opacity: 0;
+  }
+  .s9-gantt {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .s9-gantt-head {
+    display: grid;
+    grid-template-columns: minmax(118px, 150px) repeat(5, minmax(0, 1fr));
+    gap: 6px;
+    align-items: center;
+    opacity: 0;
+  }
+  .s9-gantt-row {
+    display: grid;
+    grid-template-columns: minmax(118px, 150px) 1fr;
+    gap: 6px 6px;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  .s9-gantt-corner {
+    min-height: 1px;
+  }
+  .s9-gantt-phase {
+    text-align: center;
+    padding: 6px 4px;
+    border-radius: 6px;
+    background: rgba(15,15,24,0.9);
+    border: 1px solid var(--border);
+  }
+  .s9-gantt-phase-name {
+    display: block;
+    font-family: var(--ff-display);
+    font-size: clamp(9px, 0.85vw, 11px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  .s9-gantt-phase-dates {
+    display: block;
+    font-family: var(--ff-body);
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 3px;
+    line-height: 1.2;
+  }
+  .s9-gantt-phase.p-buzz .s9-gantt-phase-name { color: var(--peach); }
+  .s9-gantt-phase.p-book .s9-gantt-phase-name { color: var(--lavender); }
+  .s9-gantt-phase.p-super {
+    border-color: rgba(241,145,109,0.35);
+    background: rgba(241,145,109,0.08);
+  }
+  .s9-gantt-phase.p-super .s9-gantt-phase-name {
+    color: var(--peach);
+    font-weight: 800;
+    font-size: clamp(10px, 0.95vw, 12px);
+  }
+  .s9-gantt-phase.p-week .s9-gantt-phase-name { color: var(--lavender); }
+  .s9-gantt-phase.p-sust .s9-gantt-phase-name { color: var(--muted); }
+  .s9-gantt-partner {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    padding-right: 4px;
+  }
+  .s9-gantt-name {
+    font-family: var(--ff-body);
+    font-size: clamp(12px, 1.1vw, 13px);
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .s9-gantt-budget {
+    font-family: var(--ff-body);
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .s9-gantt-track {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 6px;
+    align-items: stretch;
+  }
+  .s9-gantt-seg {
+    position: relative;
+    min-height: 28px;
+    border-radius: 5px;
+    background: #0F0F18;
+    border: 1px solid rgba(240,235,248,0.06);
+    overflow: hidden;
+  }
+  .s9-gantt-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--peach);
+    transform: scaleX(0);
+    transform-origin: left center;
+    border-radius: 4px;
+  }
+  .s9-gantt-seg.on .s9-gantt-fill {
+    opacity: 1;
+  }
+  .s9-gantt-seg.on.super .s9-gantt-fill {
+    background: #FF9E78;
+  }
+  .s9-gantt-activity {
+    grid-column: 2;
+    font-family: var(--ff-body);
+    font-size: 10px;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.3;
+    margin: -2px 0 4px;
+    opacity: 0.75;
+    padding-left: 2px;
+  }
+  .s9-gantt-row:hover .s9-gantt-activity {
+    opacity: 1;
+    color: var(--text);
+  }
+  @media (max-width: 900px) {
+    .s9-gantt-head {
+      grid-template-columns: minmax(96px, 120px) repeat(5, minmax(0, 1fr));
+    }
+    .s9-gantt-row {
+      grid-template-columns: minmax(96px, 120px) 1fr;
+    }
+    .s9-gantt-phase-dates { display: none; }
+    .s9-gantt-activity { font-size: 9px; }
+  }
+  @media (max-width: 640px) {
+    .s9-gantt-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .s9-gantt { min-width: 640px; }
   }
 
   /* ═══════════════════════════════════
@@ -3787,6 +4399,42 @@
 
         </div>
 
+        <div class="s3-places">
+          <p class="s3-places-label">Where They Want to Be</p>
+          <p class="s3-places-intro">
+            Gen Z in Tamil Nadu doesn't just go out. They go to places worth posting.
+          </p>
+          <div class="s3-places-grid">
+            <div class="s3-place">
+              <div class="s3-place-name">☕ Aesthetic Cafés</div>
+              <div class="s3-place-desc">Brew &amp; be seen</div>
+            </div>
+            <div class="s3-place">
+              <div class="s3-place-name">🏙 City Rooftops</div>
+              <div class="s3-place-desc">Above the crowd</div>
+            </div>
+            <div class="s3-place">
+              <div class="s3-place-name">🎵 Open Mic Nights</div>
+              <div class="s3-place-desc">Find the vibe</div>
+            </div>
+            <div class="s3-place">
+              <div class="s3-place-name">🛍 Flea &amp; Thrift Markets</div>
+              <div class="s3-place-desc">Old finds, new content</div>
+            </div>
+            <div class="s3-place">
+              <div class="s3-place-name">🌅 Marina at Golden Hour</div>
+              <div class="s3-place-desc">The shot everyone wants</div>
+            </div>
+            <div class="s3-place">
+              <div class="s3-place-name">🎨 Art &amp; Pottery Studios</div>
+              <div class="s3-place-desc">Create, not just consume</div>
+            </div>
+          </div>
+          <p class="s3-places-close">
+            Every location is a story. The vivo S2 captures all of it in 4K.
+          </p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -3905,115 +4553,89 @@
     </div>
   </section>
 
-  <!-- S5: THE STRATEGY -->
+  <!-- S5: THE STRATEGY (two engines) -->
   <section class="scene" id="s5-story"
-    data-label="Story"
-    style="height:150vh; display:block; overflow:visible">
+    data-label="Story">
 
     <div class="s5-sticky">
+      <div class="s5-framework">
 
-      <!-- Phase 1: ₹44L dominates the screen -->
-      <div class="s5-hero-amount">
-        <p class="eyebrow reveal-line"
-           style="text-align:center; margin-bottom:24px">
-          FTPL · S2 Launch Investment
+        <div class="s5-fw-hero">
+          <h2 class="s5-fw-hline">₹44 Lakhs.</h2>
+          <h2 class="s5-fw-hline" style="color:var(--peach)">Two engines.</h2>
+          <h2 class="s5-fw-hline">One mission.</h2>
+        </div>
+
+        <div class="s5-engines-row">
+
+          <!-- Engine 01: State Company -->
+          <div class="s5-eng-card s5-eng-left">
+            <span class="s5-eng-badge s5-badge-peach">ENGINE 01</span>
+            <div class="s5-eng-amt peach">₹12L</div>
+            <div class="s5-eng-label">State Company Investment</div>
+            <div class="s5-eng-items">
+              <div class="s5-eng-item">
+                <div class="s5-eng-item-left">
+                  <span class="s5-eng-dot"></span>
+                  <span class="s5-eng-item-name">KOL Campaign</span>
+                </div>
+                <span class="s5-eng-item-val">₹10L</span>
+              </div>
+              <div class="s5-eng-item">
+                <div class="s5-eng-item-left">
+                  <span class="s5-eng-dot"></span>
+                  <span class="s5-eng-item-name">Retailer Unboxing</span>
+                </div>
+                <span class="s5-eng-item-val">₹1L</span>
+              </div>
+              <div class="s5-eng-item">
+                <div class="s5-eng-item-left">
+                  <span class="s5-eng-dot"></span>
+                  <span class="s5-eng-item-name">Social Media</span>
+                </div>
+                <span class="s5-eng-item-val">₹1L</span>
+              </div>
+            </div>
+            <div class="s5-eng-foot">
+              <strong>CREATE DEMAND</strong>
+              Builds awareness, aspiration and content reach across Tamil Nadu.
+            </div>
+          </div>
+
+          <div class="s5-arrow" aria-hidden="true">
+            <span>CREATE</span>
+            <span class="s5-arrow-flow">→→→</span>
+            <span>CONVERT</span>
+          </div>
+
+          <!-- Engine 02: JBP Partners -->
+          <div class="s5-eng-card s5-eng-right">
+            <span class="s5-eng-badge s5-badge-lav">ENGINE 02</span>
+            <div class="s5-eng-amt lavender">₹32L</div>
+            <div class="s5-eng-label">JBP Partner Investment</div>
+            <div class="s5-partners">
+              <span class="s5-partner">Poorvika</span>
+              <span class="s5-partner">Sathya</span>
+              <span class="s5-partner">Darling</span>
+              <span class="s5-partner">TCM</span>
+              <span class="s5-partner">Vasanth &amp; Co</span>
+              <span class="s5-partner">Supreme</span>
+              <span class="s5-partner">Sangeetha</span>
+              <span class="s5-partner">Reliance</span>
+              <span class="s5-partner">Croma</span>
+            </div>
+            <div class="s5-eng-foot">
+              <strong>CONVERT DEMAND</strong>
+              Activates trade, drives footfall and closes purchase at point of sale.
+            </div>
+          </div>
+
+        </div>
+
+        <p class="s5-fw-closing">
+          Engine 01 makes Tamil Nadu want S2.<br>
+          <span style="color:var(--peach)">Engine 02 makes Tamil Nadu buy S2.</span>
         </p>
-        <div class="s5-amount-wrap reveal-scale">
-          <span class="s5-currency">₹</span>
-          <span class="s5-amount-num"
-                data-countup data-target="44">0</span>
-          <span class="s5-amount-suffix">L</span>
-        </div>
-        <p class="body-large reveal-line"
-           style="text-align:center; margin-top:16px">
-          One launch. Two engines. Tamil Nadu.
-        </p>
-      </div>
-
-      <!-- Phase 2: splits into two engines -->
-      <!-- These are hidden initially, revealed by scroll -->
-      <div class="s5-engines">
-
-        <!-- Engine 1: left -->
-        <div class="s5-engine s5-engine-left reveal-left">
-          <span class="eyebrow"
-                style="color:var(--peach);
-                       margin-bottom:12px;
-                       display:block">
-            Engine 01 · State Company
-          </span>
-          <h3 class="display-medium"
-              style="margin-bottom:8px">
-            Create Demand.
-          </h3>
-          <p class="body-medium"
-             style="margin-bottom:28px">
-            KOL content · Retailer unboxing<br>
-            Social media promotions
-          </p>
-          <div class="s5-engine-items">
-            <div class="s5-engine-item">
-              <span class="s5-item-label">KOL Campaign</span>
-              <span class="s5-item-value peach">₹10L</span>
-            </div>
-            <div class="s5-engine-item">
-              <span class="s5-item-label">
-                Retailer Unboxing
-              </span>
-              <span class="s5-item-value peach">₹1L</span>
-            </div>
-            <div class="s5-engine-item">
-              <span class="s5-item-label">Social Media</span>
-              <span class="s5-item-value peach">₹1L</span>
-            </div>
-          </div>
-          <div class="s5-engine-total">
-            <span class="s5-total-value peach">₹12L</span>
-          </div>
-        </div>
-
-        <!-- Divider -->
-        <div class="s5-engine-divider reveal-fade"></div>
-
-        <!-- Engine 2: right -->
-        <div class="s5-engine s5-engine-right reveal-right">
-          <span class="eyebrow"
-                style="color:var(--lavender);
-                       margin-bottom:12px;
-                       display:block">
-            Engine 02 · JBP Partners
-          </span>
-          <h3 class="display-medium"
-              style="margin-bottom:8px">
-            Convert Demand.
-          </h3>
-          <p class="body-medium"
-             style="margin-bottom:28px">
-            9 trade partners · Store activations<br>
-            Influencer launches · FM campaigns
-          </p>
-          <div class="s5-engine-items">
-            <div class="s5-engine-item">
-              <span class="s5-item-label">
-                9 JBP Partners
-              </span>
-              <span class="s5-item-value lavender">
-                Across Tamil Nadu
-              </span>
-            </div>
-            <div class="s5-engine-item">
-              <span class="s5-item-label">
-                Coverage
-              </span>
-              <span class="s5-item-value lavender">
-                Poorvika · Sathya · TCM + 6 more
-              </span>
-            </div>
-          </div>
-          <div class="s5-engine-total">
-            <span class="s5-total-value lavender">₹32L</span>
-          </div>
-        </div>
 
       </div>
     </div>
@@ -4190,8 +4812,9 @@
 
   <section class="scene" id="s7-strategy"
     data-label="Strategy"
-    style="height:200vh; display:block; overflow:visible">
+    style="height:auto; min-height:100vh; display:block; overflow:visible; align-items:stretch; justify-content:flex-start">
 
+    <div class="s6-pin">
     <div class="s6-sticky">
 
       <div class="s6-content">
@@ -4449,6 +5072,72 @@
         </div><!-- end activities -->
       </div><!-- end s6-content -->
     </div><!-- end s6-sticky -->
+    </div><!-- end s6-pin -->
+
+    <!-- Campaign Work List -->
+    <div class="s6-worklist-wrap">
+      <p class="s6-work-label">What Happens When</p>
+      <div class="s6-work-phases">
+
+        <div class="s6-work-phase">
+          <h3 class="s6-work-phase-name">Phase 1 — Pre-Buzz</h3>
+          <p class="s6-work-phase-dates">23 Jul – 5 Aug</p>
+          <ul class="s6-work-tasks">
+            <li>KOL content goes live (Go-live: 23 Jul)</li>
+            <li>Lampcloth changeover at all WOD stores</li>
+            <li>Dummy &amp; color card dispatch to trade</li>
+            <li>Teaser video deployment on social media</li>
+            <li>HO creative assets shared to state (22 Jul)</li>
+          </ul>
+        </div>
+
+        <div class="s6-work-phase">
+          <h3 class="s6-work-phase-name">Phase 2 — Pre-Book</h3>
+          <p class="s6-work-phase-dates">6 – 10 Aug</p>
+          <ul class="s6-work-tasks">
+            <li>S2 Launch announcement (6 Aug)</li>
+            <li>Pre-booking activation at Poorvika + Reliance</li>
+            <li>Offer-led POSM deployment (6–11 Aug)</li>
+            <li>Hard POSM deployment complete (27 Jul–8 Aug)</li>
+            <li>App promotions live on Reliance digital</li>
+          </ul>
+        </div>
+
+        <div class="s6-work-phase">
+          <h3 class="s6-work-phase-name">Phase 3 — Super Day</h3>
+          <p class="s6-work-phase-dates">11 Aug</p>
+          <ul class="s6-work-tasks">
+            <li>Influencer store launches — Sathya, Darling, TCM, Vasanth &amp; Co, Supreme, Sangeetha, Croma</li>
+            <li>Peak social media push</li>
+            <li>Retailer unboxing content live</li>
+            <li>All JBP partners at maximum activation</li>
+          </ul>
+        </div>
+
+        <div class="s6-work-phase">
+          <h3 class="s6-work-phase-name">Phase 4 — Super Week</h3>
+          <p class="s6-work-phase-dates">12 – 18 Aug</p>
+          <ul class="s6-work-tasks">
+            <li>Post-launch momentum content</li>
+            <li>KOL sustenance reels</li>
+            <li>Trade partner sell-through push</li>
+            <li>Social proof amplification</li>
+          </ul>
+        </div>
+
+        <div class="s6-work-phase">
+          <h3 class="s6-work-phase-name">Phase 5 — Sustenance</h3>
+          <p class="s6-work-phase-dates">19 – 31 Aug</p>
+          <ul class="s6-work-tasks">
+            <li>UGC and customer content amplification</li>
+            <li>Ongoing KOL story reposts</li>
+            <li>Retail visibility maintained</li>
+            <li>Sales review and reorder planning</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
   </section>
 
   <!-- S7: THE KOL SYSTEM -->
@@ -4622,9 +5311,9 @@
   <!-- S9: JBP PARTNERS -->
   <section class="scene" id="s10-jbp"
     data-label="JBP Strategy"
-    style="height:100vh; display:block; overflow:hidden">
+    style="height:auto; min-height:100vh; display:block; overflow:visible; align-items:stretch; justify-content:flex-start">
 
-    <div class="s9-sticky">
+    <div class="s9-sticky" style="position:relative; height:auto; min-height:100vh; overflow:visible; align-items:flex-start; padding-top:clamp(52px,6vh,72px); padding-bottom:clamp(40px,5vh,64px)">
 
       <!-- PART 1: Phase timeline + activation columns -->
       <div class="s9-part1" id="s9-part1">
@@ -4884,6 +5573,173 @@
             </div>
           </div>
 
+          <!-- JBP Partner Activation Timeline -->
+          <div class="s9-gantt-wrap">
+            <p class="s9-gantt-label">JBP Activation Timeline</p>
+            <div class="s9-gantt" id="s9-gantt">
+
+              <div class="s9-gantt-head">
+                <div class="s9-gantt-corner"></div>
+                <div class="s9-gantt-phase p-buzz">
+                  <span class="s9-gantt-phase-name">Pre-Buzz</span>
+                  <span class="s9-gantt-phase-dates">23 Jul–5 Aug</span>
+                </div>
+                <div class="s9-gantt-phase p-book">
+                  <span class="s9-gantt-phase-name">Pre-Book</span>
+                  <span class="s9-gantt-phase-dates">6–10 Aug</span>
+                </div>
+                <div class="s9-gantt-phase p-super">
+                  <span class="s9-gantt-phase-name">Super Day</span>
+                  <span class="s9-gantt-phase-dates">11 Aug</span>
+                </div>
+                <div class="s9-gantt-phase p-week">
+                  <span class="s9-gantt-phase-name">Super Week</span>
+                  <span class="s9-gantt-phase-dates">12–18 Aug</span>
+                </div>
+                <div class="s9-gantt-phase p-sust">
+                  <span class="s9-gantt-phase-name">Sustenance</span>
+                  <span class="s9-gantt-phase-dates">19–31 Aug</span>
+                </div>
+              </div>
+
+              <div class="s9-gantt-row">
+                <div class="s9-gantt-partner">
+                  <span class="s9-gantt-name">Poorvika</span>
+                  <span class="s9-gantt-budget">₹10L</span>
+                </div>
+                <div class="s9-gantt-track">
+                  <div class="s9-gantt-seg on"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg on"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                </div>
+                <div class="s9-gantt-activity">Influencer Campaign + FM</div>
+              </div>
+
+              <div class="s9-gantt-row">
+                <div class="s9-gantt-partner">
+                  <span class="s9-gantt-name">Sathya</span>
+                  <span class="s9-gantt-budget">₹6L</span>
+                </div>
+                <div class="s9-gantt-track">
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg on super"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                </div>
+                <div class="s9-gantt-activity">Influencer Store Launch</div>
+              </div>
+
+              <div class="s9-gantt-row">
+                <div class="s9-gantt-partner">
+                  <span class="s9-gantt-name">Darling</span>
+                  <span class="s9-gantt-budget">₹4L</span>
+                </div>
+                <div class="s9-gantt-track">
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg on super"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                </div>
+                <div class="s9-gantt-activity">Influencer Store Launch</div>
+              </div>
+
+              <div class="s9-gantt-row">
+                <div class="s9-gantt-partner">
+                  <span class="s9-gantt-name">TCM</span>
+                  <span class="s9-gantt-budget">₹4L</span>
+                </div>
+                <div class="s9-gantt-track">
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg on super"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                </div>
+                <div class="s9-gantt-activity">Influencer Store Launch</div>
+              </div>
+
+              <div class="s9-gantt-row">
+                <div class="s9-gantt-partner">
+                  <span class="s9-gantt-name">Vasanth &amp; Co</span>
+                  <span class="s9-gantt-budget">₹2L</span>
+                </div>
+                <div class="s9-gantt-track">
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg on super"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                </div>
+                <div class="s9-gantt-activity">Influencer Store Launch</div>
+              </div>
+
+              <div class="s9-gantt-row">
+                <div class="s9-gantt-partner">
+                  <span class="s9-gantt-name">Supreme</span>
+                  <span class="s9-gantt-budget">₹2L</span>
+                </div>
+                <div class="s9-gantt-track">
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg on super"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                </div>
+                <div class="s9-gantt-activity">Influencer Store Launch</div>
+              </div>
+
+              <div class="s9-gantt-row">
+                <div class="s9-gantt-partner">
+                  <span class="s9-gantt-name">Sangeetha</span>
+                  <span class="s9-gantt-budget">₹2L</span>
+                </div>
+                <div class="s9-gantt-track">
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg on super"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                </div>
+                <div class="s9-gantt-activity">Influencer Store Launch</div>
+              </div>
+
+              <div class="s9-gantt-row">
+                <div class="s9-gantt-partner">
+                  <span class="s9-gantt-name">Reliance</span>
+                  <span class="s9-gantt-budget">₹1L</span>
+                </div>
+                <div class="s9-gantt-track">
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg on"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                </div>
+                <div class="s9-gantt-activity">App Promotions</div>
+              </div>
+
+              <div class="s9-gantt-row">
+                <div class="s9-gantt-partner">
+                  <span class="s9-gantt-name">Croma</span>
+                  <span class="s9-gantt-budget">₹1L</span>
+                </div>
+                <div class="s9-gantt-track">
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg on super"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                  <div class="s9-gantt-seg"><div class="s9-gantt-fill"></div></div>
+                </div>
+                <div class="s9-gantt-activity">Influencer Store Launch</div>
+              </div>
+
+            </div>
+          </div>
+
         </div><!-- end s9-content -->
       </div><!-- end part1 -->
 
@@ -4893,8 +5749,8 @@
   <!-- S10: STORE LAUNCH -->
   <section class="scene" id="s11-store"
     data-label="Store Launch"
-    style="height:100vh; display:block; overflow:hidden">
-    <div class="s9-sticky">
+    style="height:auto; min-height:100vh; display:block; overflow:visible; align-items:stretch; justify-content:flex-start">
+    <div class="s9-sticky" style="position:relative; height:auto; min-height:100vh; overflow:visible; align-items:flex-start; padding-top:clamp(52px,6vh,72px); padding-bottom:clamp(40px,5vh,64px)">
       <!-- PART 2: Store launch rationale -->
       <!-- Hidden initially, revealed at 50% scroll -->
       <div class="s9-part2" id="s9-part2">
@@ -4988,6 +5844,83 @@
             launch on personal social media platforms.
             Their reach amplifies ours.
           </p>
+        </div>
+
+        <!-- NEW: awareness + conversion enhance -->
+        <div class="s11-enhance">
+
+          <div class="s11-why-block">
+            <p class="s11-block-label">Why It Works At Retail</p>
+            <div class="s11-why-grid">
+              <article class="s11-why-card">
+                <div class="s11-why-num">01</div>
+                <h3 class="s11-why-title">Store Manager Confidence</h3>
+                <p class="s11-why-body">
+                  An influencer presence on launch day signals brand seriousness — managers commit harder to sell-through.
+                </p>
+              </article>
+              <article class="s11-why-card">
+                <div class="s11-why-num">02</div>
+                <h3 class="s11-why-title">Promoter Pride</h3>
+                <p class="s11-why-body">
+                  When the store becomes an event, every promoter interaction carries more energy and conviction.
+                </p>
+              </article>
+              <article class="s11-why-card">
+                <div class="s11-why-num">03</div>
+                <h3 class="s11-why-title">Retailer Satisfaction</h3>
+                <p class="s11-why-body">
+                  Honouring a campaign request builds long-term trust — retailers become advocates, not just stockists.
+                </p>
+              </article>
+              <article class="s11-why-card">
+                <div class="s11-why-num">04</div>
+                <h3 class="s11-why-title">Customer Delight</h3>
+                <p class="s11-why-body">
+                  A first-ownership experience customers remember creates word-of-mouth that no media spend can buy.
+                </p>
+              </article>
+            </div>
+          </div>
+
+          <div class="s11-flow-block">
+            <p class="s11-block-label">From Awareness To Purchase</p>
+            <div class="s11-flow">
+              <div class="s11-flow-step peach">
+                <h3 class="s11-flow-kicker">HO Campaign<br>Creates Desire</h3>
+                <p class="s11-flow-body">
+                  National KV, DVC, music and KOL content builds S2 aspiration across Tamil Nadu.
+                </p>
+              </div>
+              <div class="s11-flow-arrow" aria-hidden="true">→</div>
+              <div class="s11-flow-step lav">
+                <h3 class="s11-flow-kicker">State KOL Campaign<br>Builds Trust</h3>
+                <p class="s11-flow-body">
+                  Tamil Nadu creators show real weekend moments with S2 — making aspiration feel locally real.
+                </p>
+              </div>
+              <div class="s11-flow-arrow" aria-hidden="true">→</div>
+              <div class="s11-flow-step peach bold">
+                <h3 class="s11-flow-kicker">Influencer Store Launch<br>Converts to Sale</h3>
+                <p class="s11-flow-body">
+                  Customer walks in already wanting S2. The in-store event seals the decision at point of purchase.
+                </p>
+              </div>
+            </div>
+            <p class="s11-flow-close">
+              The demand is created before the customer enters the store.<br>
+              The store launch closes it.
+            </p>
+          </div>
+
+          <div class="s11-callout">
+            <p class="s11-callout-title">⚑ Activation Condition</p>
+            <p class="s11-callout-body">
+              All trade-side employees (excluding competitor brand staff) must promote
+              their store's influencer launch on personal social media platforms.
+            </p>
+          </div>
+
         </div>
 
       </div><!-- end part2 -->
@@ -5426,7 +6359,7 @@ document.getElementById('export-pdf').addEventListener('click', () => {
   // Force animated elements visible before print
   document.body.classList.add('print-mode');
   document.querySelectorAll(
-    '.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s3-type,.s5-engine,.s6-phase,.s7-act,.s9-phase,.npl-overline,.npl-hline,.npl-sub,.npl-block-label,.npl-node,.npl-owner-bar,.npl-card,.npl-pillar,.npl-loc-pill,.npl-closing,.v60-overline,.v60-hline,.v60-sub,.v60-total-card,.v60-delta,.v60-table-label,.v60-row,.v60-insight'
+    '.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s3-type,.s3-places-label,.s3-places-intro,.s3-place,.s3-places-close,.s5-fw-hline,.s5-eng-card,.s5-eng-item,.s5-partner,.s5-arrow,.s5-fw-closing,.s6-phase,.s6-work-label,.s6-work-phase,.s7-act,.s9-phase,.s9-gantt-label,.s9-gantt-head,.s9-gantt-row,.s11-block-label,.s11-why-card,.s11-flow-step,.s11-flow-arrow,.s11-flow-close,.s11-callout,.npl-overline,.npl-hline,.npl-sub,.npl-block-label,.npl-node,.npl-owner-bar,.npl-card,.npl-pillar,.npl-loc-pill,.npl-closing,.v60-overline,.v60-hline,.v60-sub,.v60-total-card,.v60-delta,.v60-table-label,.v60-row,.v60-insight'
   ).forEach(el => {
     el.style.opacity = '1';
     el.style.transform = 'none';
@@ -5436,8 +6369,6 @@ document.getElementById('export-pdf').addEventListener('click', () => {
   document.querySelectorAll('[data-countup][data-target]').forEach(el => {
     el.textContent = el.dataset.target;
   });
-  const s5 = document.querySelector('.s5-amount-num');
-  if (s5) s5.textContent = '44';
   document.querySelectorAll('.s6-bar-fill, .s9-bar-fill').forEach((bar) => {
     bar.style.background = bar.dataset.color || '';
     bar.style.width = bar.dataset.width || '0%';
@@ -5495,8 +6426,13 @@ function pptxForceVisible(root) {
   const restores = [];
   const sel = [
     '.reveal-line', '.reveal-fade', '.reveal-left', '.reveal-right',
-    '.reveal-scale', '.s2-step', '.s3-type', '.s5-engine', '.s5-engine-divider',
-    '.s6-phase', '.s7-act', '.s9-phase', '.s9-reason',
+    '.reveal-scale', '.s2-step', '.s3-type', '.s3-places-label', '.s3-places-intro',
+    '.s3-place', '.s3-places-close', '.s5-fw-hline', '.s5-eng-card',
+    '.s5-eng-item', '.s5-partner', '.s5-arrow', '.s5-fw-closing',
+    '.s6-phase', '.s6-work-label', '.s6-work-phase', '.s7-act', '.s9-phase',
+    '.s9-gantt-label', '.s9-gantt-head', '.s9-gantt-row', '.s9-reason',
+    '.s11-block-label', '.s11-why-card', '.s11-flow-step', '.s11-flow-arrow',
+    '.s11-flow-close', '.s11-callout',
     '.npl-overline', '.npl-hline', '.npl-sub', '.npl-block-label',
     '.npl-node', '.npl-owner-bar', '.npl-card', '.npl-pillar',
     '.npl-loc-pill', '.npl-closing', '.v60-overline', '.v60-hline', '.v60-sub', '.v60-total-card', '.v60-delta', '.v60-table-label', '.v60-row', '.v60-insight'
@@ -5514,12 +6450,6 @@ function pptxForceVisible(root) {
     el.textContent = el.dataset.target;
     restores.push(() => { el.textContent = old; });
   });
-  const s5num = root.querySelector('.s5-amount-num');
-  if (s5num) {
-    const old = s5num.textContent;
-    s5num.textContent = '44';
-    restores.push(() => { s5num.textContent = old; });
-  }
   return () => restores.reverse().forEach((fn) => fn());
 }
 
@@ -5566,41 +6496,22 @@ function pptxApplyMode(scene, mode) {
       }
     });
   }
-  if (mode === 's5-hero') {
-    const engines = scene.querySelector('.s5-engines');
-    const hero = scene.querySelector('.s5-hero-amount');
-    if (engines) {
-      engines.classList.remove('revealed');
-      restores.push(pptxSetInlineStyles(engines, {
-        opacity: '0', visibility: 'hidden', pointerEvents: 'none', display: 'none'
-      }));
-    }
-    if (hero) {
-      restores.push(pptxSetInlineStyles(hero, {
-        opacity: '1', visibility: 'visible', transform: 'none', display: ''
-      }));
-    }
-  }
   if (mode === 's5-engines') {
-    const engines = scene.querySelector('.s5-engines');
-    const hero = scene.querySelector('.s5-hero-amount');
-    if (hero) {
-      restores.push(pptxSetInlineStyles(hero, {
-        opacity: '0', visibility: 'hidden', pointerEvents: 'none', display: 'none'
-      }));
-    }
-    if (engines) {
-      engines.classList.add('revealed');
-      restores.push(() => engines.classList.remove('revealed'));
-      restores.push(pptxSetInlineStyles(engines, {
-        opacity: '1', visibility: 'visible', pointerEvents: 'auto', display: 'flex'
-      }));
-      engines.querySelectorAll('.s5-engine, .s5-engine-divider').forEach((el) => {
+    const sceneEls = [
+      '.s5-fw-hline',
+      '.s5-eng-card',
+      '.s5-eng-item',
+      '.s5-partner',
+      '.s5-arrow',
+      '.s5-fw-closing'
+    ];
+    sceneEls.forEach((sel) => {
+      scene.querySelectorAll(sel).forEach((el) => {
         restores.push(pptxSetInlineStyles(el, {
-          opacity: '1', transform: 'none', visibility: 'visible'
+          opacity: '1', visibility: 'visible', transform: 'none'
         }));
       });
-    }
+    });
   }
   if (mode === 's9-part1') {
     const p1 = scene.querySelector('.s9-part1');
@@ -5726,7 +6637,6 @@ async function exportPPTX() {
     { id: 's2-npl-roles', mode: null, title: 'NPL Strategy' },
     { id: 's3-consumer', mode: null, title: 'Consumer' },
     { id: 's4-campaign', mode: null, title: 'Campaign' },
-    { id: 's5-story', mode: 's5-hero', title: 'Story' },
     { id: 's5-story', mode: 's5-engines', title: 'Strategy Engines' },
     { id: 's6-v60-vs-s2', mode: null, title: 'V60 vs S2' },
     { id: 's7-strategy', mode: 's6-full', title: 'Campaign Timeline' },
@@ -5753,8 +6663,11 @@ async function exportPPTX() {
       const frame = pptxPrepSceneFrame(scene);
       // Kill GSAP inline transforms that can leave content mid-tween
       if (typeof gsap !== 'undefined') {
-        scene.querySelectorAll('.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s2-step,.s3-type,.s5-engine,.s6-phase,.s7-act,.s9-phase,.npl-overline,.npl-hline,.npl-sub,.npl-block-label,.npl-node,.npl-owner-bar,.npl-card,.npl-pillar,.npl-loc-pill,.npl-closing').forEach((el) => {
+        scene.querySelectorAll('.reveal-line,.reveal-fade,.reveal-left,.reveal-right,.reveal-scale,.s2-step,.s3-type,.s5-fw-hline,.s5-eng-card,.s5-eng-item,.s5-partner,.s5-arrow,.s5-fw-closing,.s6-phase,.s6-work-label,.s6-work-phase,.s7-act,.s9-phase,.s9-gantt-label,.s9-gantt-head,.s9-gantt-row,.s11-block-label,.s11-why-card,.s11-flow-step,.s11-flow-arrow,.s11-flow-close,.s11-callout,.npl-overline,.npl-hline,.npl-sub,.npl-block-label,.npl-node,.npl-owner-bar,.npl-card,.npl-pillar,.npl-loc-pill,.npl-closing').forEach((el) => {
           gsap.set(el, { clearProps: 'opacity,transform,visibility' });
+        });
+        scene.querySelectorAll('#s10-jbp .s9-gantt-seg.on .s9-gantt-fill').forEach((el) => {
+          gsap.set(el, { scaleX: 1 });
         });
       }
       // Re-apply visibility after clearing GSAP, then mode overrides
@@ -5930,6 +6843,24 @@ gsap.fromTo('#s3-type1, #s3-type2, #s3-type3',
         stagger: 0.12,
         ease: 'power1.out'
       });
+    },
+    onComplete: () => {
+      const placesTl = gsap.timeline();
+      placesTl
+        .to('#s3-consumer .s3-places-label', {
+          opacity: 1, duration: 0.4, ease: 'power2.out'
+        })
+        .to('#s3-consumer .s3-places-intro', {
+          opacity: 1, duration: 0.4, ease: 'power2.out'
+        }, 0.2)
+        .to('#s3-consumer .s3-place', {
+          scale: 1, opacity: 1,
+          duration: 0.3, stagger: 0.08,
+          ease: 'back.out(1.5)'
+        }, '-=0.05')
+        .to('#s3-consumer .s3-places-close', {
+          opacity: 1, duration: 0.45, ease: 'power2.out'
+        }, '-=0.05');
     }
   }
 );
@@ -5970,112 +6901,46 @@ gsap.fromTo('#s4-campaign .reveal-line',
   }
 );
 
-// ── S5: STRATEGY ──────────────────────
-// ₹44L hero scales in
-gsap.fromTo('.s5-amount-wrap',
-  { scale: 0.85, opacity: 0 },
-  {
-    scale: 1, opacity: 1,
-    duration: 1.0, ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '#s5-story',
-      start: 'top 75%',
-      once: true
-    }
-  }
-);
-gsap.fromTo('.s5-hero-amount .reveal-line',
-  { y: 24, opacity: 0 },
-  {
-    y: 0, opacity: 1,
-    duration: 0.7, stagger: 0.12,
-    ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '#s5-story',
-      start: 'top 70%',
-      once: true
-    }
-  }
-);
-
-// Count up ₹44L
-ScrollTrigger.create({
-  trigger: '#s5-story',
-  start: 'top 70%',
-  once: true,
-  onEnter: () => {
-    const el = document.querySelector(
-      '.s5-amount-num[data-countup]'
-    );
-    if (el) {
-      gsap.fromTo(el,
-        { innerText: 0 },
-        {
-          innerText: 44,
-          duration: 1.6,
-          ease: 'power1.out',
-          snap: { innerText: 1 },
-          onUpdate: function() {
-            el.innerText = Math.round(
-              parseFloat(el.innerText)
-            );
-          }
-        }
-      );
-    }
+// ── S5: TWO ENGINE FRAMEWORK ──────────
+const s5Tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: '#s5-story',
+    start: 'top 70%',
+    once: true
   }
 });
-
-// Set initial state for engines
-gsap.set('.s5-engine-left',  { x: -50, opacity: 0 });
-gsap.set('.s5-engine-right', { x:  50, opacity: 0 });
-gsap.set('.s5-engine-divider', { opacity: 0 });
-
-// Engines reveal: hero fades out,
-// engines slide in from sides
-ScrollTrigger.create({
-  trigger: '#s5-story',
-  start: 'top top',
-  end: 'bottom bottom',
-  onUpdate: (self) => {
-    if (self.progress > 0.40) {
-      // Fade out hero amount
-      gsap.to('.s5-hero-amount', {
-        opacity: 0, scale: 0.92,
-        duration: 0.5,
-        ease: 'power2.in',
-        overwrite: 'auto'
-      });
-      // Show engines
-      document.querySelector('.s5-engines')
-        .classList.add('revealed');
-      gsap.to('.s5-engine-left', {
-        x: 0, opacity: 1,
-        duration: 0.7, ease: 'power2.out',
-        overwrite: 'auto'
-      });
-      gsap.to('.s5-engine-right', {
-        x: 0, opacity: 1,
-        duration: 0.7, ease: 'power2.out',
-        overwrite: 'auto'
-      });
-      gsap.to('.s5-engine-divider', {
-        opacity: 1,
-        duration: 0.6,
-        overwrite: 'auto'
-      });
-    } else {
-      // Restore hero amount
-      gsap.to('.s5-hero-amount', {
-        opacity: 1, scale: 1,
-        duration: 0.4,
-        overwrite: 'auto'
-      });
-      document.querySelector('.s5-engines')
-        .classList.remove('revealed');
-    }
-  }
-});
+s5Tl
+  .to('#s5-story .s5-fw-hline', {
+    opacity: 1, y: 0,
+    duration: 0.55, stagger: 0.12,
+    ease: 'power2.out'
+  })
+  .to('#s5-story .s5-eng-left', {
+    opacity: 1, x: 0,
+    duration: 0.7, ease: 'power2.out'
+  }, '-=0.15')
+  .to('#s5-story .s5-eng-right', {
+    opacity: 1, x: 0,
+    duration: 0.7, ease: 'power2.out'
+  }, '<')
+  .to('#s5-story .s5-eng-item', {
+    opacity: 1, y: 0,
+    duration: 0.35, stagger: 0.1,
+    ease: 'power2.out'
+  }, '-=0.35')
+  .to('#s5-story .s5-partner', {
+    opacity: 1, y: 0,
+    duration: 0.3, stagger: 0.06,
+    ease: 'power2.out'
+  }, '-=0.25')
+  .to('#s5-story .s5-arrow', {
+    opacity: 1,
+    duration: 0.4, ease: 'power2.out'
+  }, '-=0.1')
+  .to('#s5-story .s5-fw-closing', {
+    opacity: 1,
+    duration: 0.55, ease: 'power2.out'
+  }, '-=0.05');
 
 // ─── S6–S10 GSAP ANIMATIONS ───────────
 
@@ -6123,23 +6988,23 @@ v60Tl
     ease: 'power2.out'
   }, '-=0.15');
 
-gsap.fromTo('#s7-strategy .reveal-line',
+gsap.fromTo('#s7-strategy .s6-pin .reveal-line',
   { y: 28, opacity: 0 },
   {
     y: 0, opacity: 1,
     duration: 0.7, stagger: 0.10,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#s7-strategy',
+      trigger: '#s7-strategy .s6-pin',
       start: 'top 80%',
       once: true
     }
   }
 );
 
-// River fill animates as S6 phases reveal
+// River fill animates as campaign phases reveal
 ScrollTrigger.create({
-  trigger: '#s7-strategy',
+  trigger: '#s7-strategy .s6-pin',
   start: 'top top',
   end: 'bottom bottom',
   onUpdate: (self) => {
@@ -6165,6 +7030,33 @@ ScrollTrigger.create({
     }
   }
 });
+
+gsap.fromTo('#s7-strategy .s6-work-label',
+  { opacity: 0, y: 12 },
+  {
+    opacity: 1, y: 0,
+    duration: 0.45, ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '#s7-strategy .s6-worklist-wrap',
+      start: 'top 80%',
+      once: true
+    }
+  }
+);
+
+gsap.fromTo('#s7-strategy .s6-work-phase',
+  { opacity: 0, y: 18 },
+  {
+    opacity: 1, y: 0,
+    duration: 0.45, stagger: 0.1,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '#s7-strategy .s6-worklist-wrap',
+      start: 'top 75%',
+      once: true
+    }
+  }
+);
 
 // ── S7: KOL SYSTEM ────────────────────
 gsap.fromTo('#s8-timeline .reveal-line:not(.s7-act)',
@@ -6290,6 +7182,60 @@ gsap.fromTo('#s10-jbp .reveal-line',
   }
 );
 
+gsap.fromTo('#s10-jbp .s9-gantt-label',
+  { opacity: 0, y: 10 },
+  {
+    opacity: 1, y: 0,
+    duration: 0.4, ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '#s10-jbp .s9-gantt-wrap',
+      start: 'top 80%',
+      once: true
+    }
+  }
+);
+
+gsap.fromTo('#s10-jbp .s9-gantt-head',
+  { opacity: 0, y: 8 },
+  {
+    opacity: 1, y: 0,
+    duration: 0.35, ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '#s10-jbp .s9-gantt-wrap',
+      start: 'top 80%',
+      once: true
+    }
+  }
+);
+
+gsap.to('#s10-jbp .s9-gantt-row', {
+  opacity: 1, y: 0,
+  duration: 0.4, stagger: 0.08,
+  ease: 'power2.out',
+  scrollTrigger: {
+    trigger: '#s10-jbp .s9-gantt-wrap',
+    start: 'top 78%',
+    once: true
+  }
+});
+
+gsap.utils.toArray('#s10-jbp .s9-gantt-row').forEach((row, i) => {
+  const fills = row.querySelectorAll('.s9-gantt-seg.on .s9-gantt-fill');
+  if (!fills.length) return;
+  gsap.to(fills, {
+    scaleX: 1,
+    duration: 0.3,
+    stagger: 0.06,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '#s10-jbp .s9-gantt-wrap',
+      start: 'top 78%',
+      once: true
+    },
+    delay: 0.35 + (i * 0.08)
+  });
+});
+
 // ── S10: STORE LAUNCH ────────────────
 gsap.fromTo('#s11-store .s9-reason, #s11-store .eyebrow, #s11-store .display-large, #s11-store .s9-condition',
   { y: 24, opacity: 0 },
@@ -6304,6 +7250,42 @@ gsap.fromTo('#s11-store .s9-reason, #s11-store .eyebrow, #s11-store .display-lar
     }
   }
 );
+
+const s11EnhanceTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: '#s11-store .s11-enhance',
+    start: 'top 78%',
+    once: true
+  }
+});
+s11EnhanceTl
+  .to('#s11-store .s11-why-block .s11-block-label', {
+    opacity: 1, duration: 0.4, ease: 'power2.out'
+  })
+  .to('#s11-store .s11-why-card', {
+    opacity: 1, y: 0,
+    duration: 0.45, stagger: 0.1,
+    ease: 'power2.out'
+  }, '-=0.1')
+  .to('#s11-store .s11-flow-block .s11-block-label', {
+    opacity: 1, duration: 0.4, ease: 'power2.out'
+  }, '-=0.05')
+  .to('#s11-store .s11-flow-step', {
+    opacity: 1, x: 0, y: 0,
+    duration: 0.45, stagger: 0.2,
+    ease: 'power2.out'
+  }, '-=0.1')
+  .to('#s11-store .s11-flow-arrow', {
+    opacity: 1,
+    duration: 0.3, stagger: 0.12,
+    ease: 'power2.out'
+  }, '-=0.35')
+  .to('#s11-store .s11-flow-close', {
+    opacity: 1, duration: 0.45, ease: 'power2.out'
+  }, '-=0.05')
+  .to('#s11-store .s11-callout', {
+    opacity: 1, duration: 0.5, ease: 'power2.out'
+  }, '-=0.05');
 
 // ── S10: THE CLOSE ────────────────────
 gsap.fromTo('#s12-close .reveal-line',
