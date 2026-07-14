@@ -2873,14 +2873,20 @@
     object-position: center top;
     filter: brightness(0.10) saturate(0.50);
   }
+  #s11-close {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+  }
   .s10-phone {
     position: absolute;
-    right: 0;
+    left: 0;
+    right: auto;
     top: 50%;
     transform: translateY(-50%);
-    width: 42%;
+    width: 45%;
     height: 100%;
-    opacity: 0.35;
+    opacity: 0.55;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2888,8 +2894,9 @@
   }
   .s10-phone img {
     width: auto;
-    height: 90%;
-    max-height: 90vh;
+    height: auto;
+    max-height: 80vh;
+    max-width: 90%;
     object-fit: contain;
     will-change: transform;
   }
@@ -2897,7 +2904,7 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      90deg,
+      270deg,
       rgba(10,10,15,0.97) 0%,
       rgba(10,10,15,0.80) 45%,
       rgba(10,10,15,0.10) 100%
@@ -2905,17 +2912,15 @@
     z-index: 1;
   }
   .s10-friends-echo { display: none; }
+  .s10-friends-label { display: none !important; }
   .s10-content {
     position: relative;
     z-index: 3;
-    padding-left: 8%;
-    width: 60%;
-  }
-  .s10-friends-label {
-    display: flex;
-    align-items: baseline;
-    gap: 0;
-    margin-bottom: 4px;
+    margin-left: auto;
+    padding-left: 0;
+    padding-right: 8%;
+    width: 55%;
+    box-sizing: border-box;
   }
   .s10-hash {
     font-family: var(--ff-display);
@@ -2936,8 +2941,8 @@
   }
   .s10-sep { color: var(--border); }
   @media (max-width: 768px) {
-    .s10-phone { width: 100%; opacity: 0.15; }
-    .s10-content { width: 94%; padding-left: 6%; }
+    .s10-phone { width: 100%; opacity: 0.15; left: 0; }
+    .s10-content { width: 94%; padding: 0 6%; margin-left: 0; }
     .s10-friends-bg { display: none; }
   }
   @media (max-width: 1440px) {
@@ -3198,6 +3203,23 @@
       rgba(10,10,15,0.95)
     );
   }
+  .kt-card-phase {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+  }
+  .kt-card-pct-photo {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    z-index: 2;
+    font-family: var(--ff-display);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.65);
+  }
   .kt-card-placeholder {
     display: flex;
     align-items: center;
@@ -3276,13 +3298,7 @@
     height: 100%;
     border-radius: 2px;
   }
-  .kt-card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-    flex-shrink: 0;
-  }
+  .kt-card-footer { display: none; }
   .kt-card-pct {
     font-family: var(--ff-display);
     font-size: 20px;
@@ -5085,12 +5101,6 @@
   <section class="scene" id="s10-store" data-label="Store Launch">
     <span class="slide-num">10 / 11</span>
     <div class="s10-store-wrap">
-      <p class="eyebrow s10-store-eyebrow">Influencer Store Launch · Strategic Case</p>
-      <h2 class="s10-store-headline">
-        Why store launches<br>
-        <span class="peach">earn their budget.</span>
-      </h2>
-
       <div class="s11-flow-block">
         <p class="s11-block-label">From Awareness To Purchase</p>
         <div class="s11-flow">
@@ -5155,25 +5165,8 @@
 
     <div class="s10-content">
 
-      <!-- FRIENDS dot treatment returns -->
-      <div class="s10-friends-label reveal-fade">
-        <span class="s4-friends-dot">F</span>
-        <span class="s4-friends-dot-sep">·</span>
-        <span class="s4-friends-dot">R</span>
-        <span class="s4-friends-dot-sep">·</span>
-        <span class="s4-friends-dot">I</span>
-        <span class="s4-friends-dot-sep">·</span>
-        <span class="s4-friends-dot">E</span>
-        <span class="s4-friends-dot-sep">·</span>
-        <span class="s4-friends-dot">N</span>
-        <span class="s4-friends-dot-sep">·</span>
-        <span class="s4-friends-dot">D</span>
-        <span class="s4-friends-dot-sep">·</span>
-        <span class="s4-friends-dot">S</span>
-      </div>
-
       <h2 class="display-hero reveal-line"
-          style="margin-top:20px; margin-bottom:4px">
+          style="margin-top:0; margin-bottom:4px">
         Friends.
       </h2>
       <h2 class="display-hero reveal-line peach"
@@ -5313,7 +5306,7 @@
     <!-- Stat bar -->
     <div class="kt-stats">
       <div class="kt-stat-card">
-        <span class="kt-stat-val"
+        <span class="kt-stat-val" id="kt-stat-kols"
               data-countup data-target="14">14</span>
         <span class="kt-stat-label">
           KOLs Selected
@@ -5325,8 +5318,8 @@
         <span class="kt-stat-label">₹ Budget (L)</span>
       </div>
       <div class="kt-stat-card">
-        <span class="kt-stat-val lavender"
-              data-countup data-target="85">85</span>
+        <span class="kt-stat-val lavender" id="kt-stat-fit"
+              data-countup data-target="100">100</span>
         <span class="kt-stat-label">
           % Top Fit Score
         </span>
@@ -6544,7 +6537,7 @@ const KOL_DATA = [
   },
   {
     id: 5, name: "VJ Kalyani", handle: "@vj_kalyani", followers: "242K",
-    tier: "Celebrity", phase: "pre-buzz", img: "img/vj_kalyani.jpg",
+    tier: "Celebrity", phase: "launch", img: "img/vj_kalyani.jpg",
     cost: "₹50K", deliverable: "Collab Reel", city: "Chennai",
     engagement: { likes: 10661, comments: 42, shares: 513, views: 155800, er: 7.20 },
     parameters: [
@@ -6569,7 +6562,7 @@ const KOL_DATA = [
   },
   {
     id: 6, name: "Chandni Ayani", handle: "@bloggerchandni", followers: "111K",
-    tier: "Influencer", phase: "sustenance", img: "img/chandni.jpg",
+    tier: "Influencer", phase: "pre-buzz", img: "img/chandni.jpg",
     cost: "₹65K", deliverable: "Collab Reel", city: "Chennai",
     engagement: { likes: 21307, comments: 68, shares: 403, views: 463000, er: 4.70 },
     parameters: [
@@ -6594,7 +6587,7 @@ const KOL_DATA = [
   },
   {
     id: 7, name: "Nakshatra Murthy", handle: "@nakshatra.murthy", followers: "368K",
-    tier: "Influencer", phase: "launch", img: "img/nakshatra.jpg",
+    tier: "Influencer", phase: "pre-buzz", img: "img/nakshatra.jpg",
     cost: "₹70K", deliverable: "Collab Reel", city: "Chennai",
     engagement: { likes: 24859, comments: 66, shares: 3825, views: 624600, er: 4.60 },
     parameters: [
@@ -6619,7 +6612,7 @@ const KOL_DATA = [
   },
   {
     id: 8, name: "Dharshini S", handle: "@dharshurisha", followers: "202K",
-    tier: "Influencer", phase: "pre-buzz", img: "img/dharshini.jpg",
+    tier: "Influencer", phase: "launch", img: "img/dharshini.jpg",
     cost: "₹25–30K", deliverable: "Collab Reel", city: "Chennai",
     engagement: { likes: 9442, comments: 141, shares: 655, views: 178500, er: 5.74 },
     parameters: [
@@ -6644,7 +6637,7 @@ const KOL_DATA = [
   },
   {
     id: 9, name: "Priyadarshini", handle: "@highonstyl", followers: "125K",
-    tier: "Influencer", phase: "sustenance", img: "img/priyadarshini.jpg",
+    tier: "Influencer", phase: "launch", img: "img/priyadarshini.jpg",
     cost: "₹55K", deliverable: "Collab Reel", city: "Chennai",
     engagement: { likes: 813, comments: 40, shares: 1149, views: 53800, er: 3.72 },
     parameters: [
@@ -6719,7 +6712,7 @@ const KOL_DATA = [
   },
   {
     id: 12, name: "Meera", handle: "@_meera_an_", followers: "19.1K",
-    tier: "Model", phase: "pre-buzz", img: "img/meera_an.jpg",
+    tier: "Model", phase: "sustenance", img: "img/meera_an.jpg",
     cost: "₹35K", deliverable: "Reel Collab", city: "Coimbatore",
     engagement: { likes: 990, comments: 19, shares: 223, views: 31162, er: 3.95 },
     parameters: [
@@ -6795,6 +6788,13 @@ const KOL_DATA = [
   }
 ];
 
+const PHASE_FROM_PRIORITY = { P1: "pre-buzz", P2: "launch", P3: "sustenance" };
+const PHASE_LABEL_FROM_PRIORITY = { P1: "Pre-Buzz", P2: "Launch", P3: "Sustenance" };
+
+function kolPhaseKey(k) {
+  return PHASE_FROM_PRIORITY[k.priority] || k.phase || "sustenance";
+}
+
 function scoreColor(s) {
   if (s >= 85) return "var(--peach)";
   if (s >= 70) return "var(--lavender)";
@@ -6812,6 +6812,23 @@ function phaseLabel(phase) {
   if (phase === "launch") return "Launch";
   if (phase === "sustenance") return "Sustenance";
   return phase;
+}
+
+function phaseLabelFromKol(k) {
+  return PHASE_LABEL_FROM_PRIORITY[k.priority] || phaseLabel(kolPhaseKey(k));
+}
+
+function updateKolStats() {
+  const topScore = Math.max(...KOL_DATA.map(k => k.matchPct || 0));
+  const totalKols = KOL_DATA.length;
+  const setStat = (id, val) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.dataset.target = String(val);
+    el.textContent = String(val);
+  };
+  setStat("kt-stat-kols", totalKols);
+  setStat("kt-stat-fit", topScore);
 }
 
 function formatMetric(n) {
@@ -6844,12 +6861,13 @@ function renderCards(filter = "all") {
   const filtered = (filter === "all"
     ? [...KOL_DATA]
     : KOL_DATA.filter(k =>
-        k.phase === filter ||
-        k.tier.toLowerCase() === filter
+        kolPhaseKey(k) === filter ||
+        (k.tier || "").toLowerCase() === filter
       ))
     .sort((a, b) => (b.matchPct || 0) - (a.matchPct || 0));
 
   grid.innerHTML = filtered.map(k => {
+    const phaseKey = kolPhaseKey(k);
     const photoHtml = k.img
       ? `<img src="${k.img}" alt="${k.name}" loading="lazy"
            onerror="this.onerror=null;this.style.display='none';var p=this.parentElement;p.classList.add('kt-card-placeholder');if(!p.dataset.fb){p.dataset.fb='1';p.insertAdjacentText('afterbegin','?');}">`
@@ -6860,6 +6878,8 @@ function renderCards(filter = "all") {
         <div class="kt-card-photo ${placeholderClass}">
           ${photoHtml}
           <div class="kt-card-photo-grad"></div>
+          <span class="kt-phase-badge kt-card-phase ${phaseBadgeClass(phaseKey)}">${phaseLabelFromKol(k)}</span>
+          <span class="kt-card-pct kt-card-pct-photo" style="color:${scoreColor(k.matchPct)}">${k.matchPct}%</span>
         </div>
         <div class="kt-card-body">
           <div class="kt-card-name">${k.name}</div>
@@ -6881,10 +6901,6 @@ function renderCards(filter = "all") {
           <div class="kt-card-score-bar">
             <div class="kt-card-score-fill"
                  style="width:${k.matchPct}%;background:${scoreColor(k.matchPct)}"></div>
-          </div>
-          <div class="kt-card-footer">
-            <span class="kt-card-pct" style="color:${scoreColor(k.matchPct)}">${k.matchPct}%</span>
-            <span class="kt-phase-badge ${phaseBadgeClass(k.phase)}">${phaseLabel(k.phase)}</span>
           </div>
         </div>
       </div>`;
@@ -6931,7 +6947,7 @@ function openModal(id) {
 
   detailsEl.innerHTML = `
     <div class="kt-modal-badges">
-      <span class="kt-modal-badge kt-phase-badge ${phaseBadgeClass(k.phase)}">${phaseLabel(k.phase)}</span>
+      <span class="kt-modal-badge kt-phase-badge ${phaseBadgeClass(kolPhaseKey(k))}">${phaseLabelFromKol(k)}</span>
       <span class="kt-modal-badge" style="background:rgba(240,235,248,0.06);color:var(--text);font-weight:700">${k.tier}</span>
       <span class="kt-priority-badge">${k.priority}</span>
     </div>
@@ -6988,7 +7004,7 @@ function openModal(id) {
       </div>
       <div class="kt-modal-comm-item">
         <div class="kt-modal-comm-label">Phase</div>
-        <div class="kt-modal-comm-val">${phaseLabel(k.phase)}</div>
+        <div class="kt-modal-comm-val">${phaseLabelFromKol(k)}</div>
       </div>
       <div class="kt-modal-comm-item">
         <div class="kt-modal-comm-label">City</div>
@@ -7041,6 +7057,7 @@ window.enterKolMode = function(tab) {
   }, 300);
 };
 
+updateKolStats();
 renderCards('all');
 
 
