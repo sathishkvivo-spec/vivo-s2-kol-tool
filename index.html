@@ -4002,7 +4002,7 @@
   .kt-modal-details {
     grid-column: 2;
     grid-row: 1;
-    overflow: hidden;
+    overflow-x: hidden;
     overflow-y: auto !important;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -4010,13 +4010,11 @@
     max-height: 100vh;
     padding: 16px 22px 28px 24px;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+    display: block;
     min-height: 0;
   }
   .kt-modal-details::-webkit-scrollbar { display: none; }
-  .kt-modal-badges {  .kt-modal-badges {
+  .kt-modal-badges {
     display: flex;
     gap: 8px;
     margin-bottom: 14px;
@@ -7755,16 +7753,16 @@ function openModal(id) {
 
     ${k.note ? `<div style="border-left:3px solid #F59E0B;padding:8px 12px;background:rgba(245,158,11,0.08);border-radius:0 6px 6px 0;font-size:0.8rem;color:#F0EBF8;margin-bottom:12px">${k.note}</div>` : ""}
 
-    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;margin-top:8px;padding-bottom:16px">
-      <div style="font-size:0.65rem;letter-spacing:0.1em;color:#6B6480;margin-bottom:8px">COMMERCIAL DETAILS</div>
-      <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
-        <div>
-          <div style="font-size:0.7rem;color:#6B6480">COST / REEL</div>
-          <div style="color:#F0EBF8;font-weight:600;font-size:0.9rem">${k.cost}</div>
+    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:14px;margin-top:4px;margin-bottom:8px">
+      <div style="font-size:0.7rem;letter-spacing:0.1em;color:#F1916D;font-weight:600;margin-bottom:10px">COMMERCIAL DETAILS</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch">
+        <div style="background:#0F0F18;border:1px solid rgba(241,145,109,0.2);border-radius:8px;padding:12px 14px">
+          <div style="font-size:0.65rem;letter-spacing:0.08em;color:#6B6480;margin-bottom:6px">COST / REEL</div>
+          <div style="color:#F0EBF8;font-weight:700;font-size:1rem;letter-spacing:-0.01em">${k.cost}</div>
         </div>
-        <div>
-          <div style="font-size:0.7rem;color:#6B6480">DELIVERABLE</div>
-          <div style="color:#F0EBF8;font-weight:600;font-size:0.9rem">${k.deliverable}</div>
+        <div style="background:#0F0F18;border:1px solid rgba(241,145,109,0.2);border-radius:8px;padding:12px 14px">
+          <div style="font-size:0.65rem;letter-spacing:0.08em;color:#6B6480;margin-bottom:6px">DELIVERABLE</div>
+          <div style="color:#F0EBF8;font-weight:700;font-size:1rem;letter-spacing:-0.01em">${k.deliverable}</div>
         </div>
       </div>
     </div>`;
