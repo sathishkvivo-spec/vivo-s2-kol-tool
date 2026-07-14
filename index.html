@@ -5859,9 +5859,9 @@ function revealSceneContent(root) {
     '.s10-content .display-hero','.s10-hash','.s10-footer'
   ].join(',');
   root.querySelectorAll(sel).forEach((el) => {
-    el.style.opacity = '1';
-    el.style.visibility = 'visible';
-    el.style.transform = 'none';
+    el.style.setProperty('opacity', '1', 'important');
+    el.style.setProperty('visibility', 'visible', 'important');
+    el.style.setProperty('transform', 'none', 'important');
   });
   // Fill campaign bars if present
   root.querySelectorAll('.s6-bar-fill').forEach((bar) => {
@@ -7658,6 +7658,14 @@ gsap.to('.s8-cta', {
       ].join(','), { opacity: 1, x: 0, y: 0, scale: 1 });
     }
     if (typeof revealAllScenes === 'function') revealAllScenes();
+    // Pin visibility with !important so later GSAP tweens cannot re-hide
+    document.querySelectorAll(
+      '#main-experience .reveal-line, #main-experience .reveal-fade, #main-experience .reveal-left, #main-experience .reveal-right, #main-experience .reveal-scale, #main-experience .s5-fw-hline, #main-experience .s5-eng-card, #main-experience .s5-eng-item, #main-experience .s5-partner, #main-experience .v60-overline, #main-experience .v60-hline, #main-experience .v60-sub, #main-experience .v60-total-card, #main-experience .v60-delta, #main-experience .v60-table-label, #main-experience .v60-row, #main-experience .s6-phase, #main-experience .npl-hline, #main-experience .npl-card, #main-experience .s11-flow-step, #main-experience .s11-why-card, #main-experience .s9-trade, #main-experience .s9-gantt-row, #main-experience .s7-act, #main-experience .s1-block'
+    ).forEach((el) => {
+      el.style.setProperty('opacity', '1', 'important');
+      el.style.setProperty('visibility', 'visible', 'important');
+      el.style.setProperty('transform', 'none', 'important');
+    });
     if (typeof ScrollTrigger !== 'undefined') {
       ScrollTrigger.getAll().forEach((st) => {
         try { st.progress(1); } catch (err) { /* ignore */ }
@@ -7667,6 +7675,7 @@ gsap.to('.s8-cta', {
   force();
   setTimeout(force, 200);
   setTimeout(force, 800);
+  setTimeout(force, 1500);
 })();
 
 </script>
