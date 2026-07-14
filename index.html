@@ -3273,12 +3273,13 @@
     position: absolute;
     inset: 0;
     background: var(--peach);
-    transform: scaleX(1);
+    transform: scaleX(0);
     transform-origin: left center;
     border-radius: 4px;
   }
   .s9-gantt-seg.on .s9-gantt-fill {
     opacity: 1;
+    transform: scaleX(1);
   }
   .s9-gantt-seg.on.super .s9-gantt-fill {
     background: #FF9E78;
@@ -7887,6 +7888,7 @@ window.__forceDeckVisible = function forceDeckVisible() {
     try { gsap.set(sel, { opacity: 1, x: 0, y: 0, scale: 1 }); } catch (e) {}
     try {
       gsap.set('#main-experience .s9-gantt-seg.on .s9-gantt-fill', { scaleX: 1, opacity: 1 });
+      gsap.set('#main-experience .s9-gantt-seg:not(.on) .s9-gantt-fill', { scaleX: 0 });
     } catch (e) {}
   }
   document.querySelectorAll(sel).forEach((el) => {
@@ -7901,6 +7903,9 @@ window.__forceDeckVisible = function forceDeckVisible() {
     el.style.setProperty('transform', 'scaleX(1)', 'important');
     el.style.setProperty('opacity', '1', 'important');
     el.style.setProperty('visibility', 'visible', 'important');
+  });
+  document.querySelectorAll('#main-experience .s9-gantt-seg:not(.on) .s9-gantt-fill').forEach((el) => {
+    el.style.setProperty('transform', 'scaleX(0)', 'important');
   });
   // Keep close phone pinned and partially faded
   document.querySelectorAll('#main-experience .s10-phone').forEach((el) => {
