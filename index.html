@@ -2604,7 +2604,7 @@
     color: var(--peach);
   }
   .s9-trades .s9-trade {
-    opacity: 0;
+    opacity: 1;
   }
   .s9-part2 {
     position: relative;
@@ -3188,7 +3188,7 @@
     gap: 6px 6px;
     align-items: center;
     opacity: 1;
-    transform: translateY(12px);
+    transform: none;
   }
   .s9-gantt-corner {
     min-height: 1px;
@@ -3273,7 +3273,7 @@
     position: absolute;
     inset: 0;
     background: var(--peach);
-    transform: scaleX(0);
+    transform: scaleX(1);
     transform-origin: left center;
     border-radius: 4px;
   }
@@ -3333,28 +3333,32 @@
     height: 100vh !important;
     max-height: 100vh !important;
     overflow: hidden !important;
+    position: relative;
   }
   .s10-phone {
     position: absolute;
     left: 0;
+    top: 0;
+    bottom: 0;
     right: auto;
-    top: 50%;
-    transform: translateY(-50%);
     width: 45%;
-    height: 100%;
+    height: auto;
+    transform: none !important;
     opacity: 0.55 !important;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2;
+    pointer-events: none;
   }
   .s10-phone img {
     width: auto;
     height: auto;
-    max-height: 80vh;
-    max-width: 90%;
+    max-height: 78vh;
+    max-width: 88%;
     object-fit: contain;
-    will-change: transform;
+    transform: none !important;
+    will-change: auto;
   }
   .s10-overlay {
     position: absolute;
@@ -3744,7 +3748,7 @@
     flex-wrap: nowrap;
     gap: 16px;
     flex: 1;
-    min-height: 0;
+    min-height: 280px;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
@@ -6158,6 +6162,10 @@ function enterKolMode(tab = 'kol-params') {
   window.scrollTo(0, 0);
   currentKolTab = tab;
   updateKolTabs();
+  if (tab === 'kol-match' && typeof renderCards === 'function') {
+    const activeFilter = document.querySelector('.kt-filter.active');
+    renderCards((activeFilter && activeFilter.dataset.filter) || 'all');
+  }
 }
 
 function exitKolMode() {
@@ -6174,6 +6182,12 @@ function exitKolMode() {
   document.body.style.overflow = '';
   window.scrollTo(0, document.getElementById('s7-kol').offsetTop);
   updateSlideNav();
+  setTimeout(() => {
+    if (typeof window.__forceDeckVisible === 'function') window.__forceDeckVisible();
+  }, 50);
+  setTimeout(() => {
+    if (typeof window.__forceDeckVisible === 'function') window.__forceDeckVisible();
+  }, 300);
 }
 
 function switchKolTab(tab) {
@@ -6184,6 +6198,10 @@ function switchKolTab(tab) {
   document.getElementById(tab).classList.add('active');
   window.scrollTo(0, 0);
   updateKolTabs();
+  if (tab === 'kol-match' && typeof renderCards === 'function') {
+    const activeFilter = document.querySelector('.kt-filter.active');
+    renderCards((activeFilter && activeFilter.dataset.filter) || 'all');
+  }
 }
 
 function updateKolTabs() {
@@ -7156,26 +7174,7 @@ gsap.fromTo('#s11-close .reveal-fade',
     }
   }
 );
-gsap.from('.s10-phone', {
-  x: 40, opacity: 0,
-  duration: 1.2, ease: 'power2.out',
-  scrollTrigger: {
-    trigger: '#s11-close',
-    start: 'top 80%',
-    once: true
-  }
-});
-// Subtle float on closing phone
-gsap.to('.s10-phone img', {
-  y: -10, duration: 4,
-  ease: 'power1.inOut',
-  repeat: -1, yoyo: true,
-  scrollTrigger: {
-    trigger: '#s11-close',
-    start: 'top 80%',
-    once: true
-  }
-});
+/* Phone stays CSS-centered — no GSAP transform (prevents mid-deck jump) */
 
 // ─── KOL TOOL DATA + UI ───────────────
 
@@ -7883,18 +7882,40 @@ gsap.to('.s8-cta', {
 
 
 window.__forceDeckVisible = function forceDeckVisible() {
-  const sel = '#main-experience .reveal-line, #main-experience .reveal-fade, #main-experience .reveal-left, #main-experience .reveal-right, #main-experience .reveal-scale, #main-experience .s1-block, #main-experience .s1-right, #main-experience .s5-fw-hline, #main-experience .s5-eng-card, #main-experience .s5-eng-item, #main-experience .s5-partner, #main-experience .s5-eng-left, #main-experience .s5-eng-right, #main-experience .v60-overline, #main-experience .v60-hline, #main-experience .v60-sub, #main-experience .v60-total-card, #main-experience .v60-delta, #main-experience .v60-table-label, #main-experience .v60-row, #main-experience .s6-phase, #main-experience .s6-activity, #main-experience .s6-ho-stat, #main-experience .npl-overline, #main-experience .npl-hline, #main-experience .npl-sub, #main-experience .npl-card, #main-experience .npl-node, #main-experience .npl-pillar, #main-experience .s11-flow-step, #main-experience .s11-why-card, #main-experience .s11-callout, #main-experience .s11-flow-close, #main-experience .s9-trade, #main-experience .s9-gantt-row, #main-experience .s9-event-stop, #main-experience .s7-act, #main-experience .s10-phone, #main-experience .s10-content, #main-experience .display-hero, #main-experience .s10-hash, #main-experience .s10-footer';
+  const sel = '#main-experience .reveal-line, #main-experience .reveal-fade, #main-experience .reveal-left, #main-experience .reveal-right, #main-experience .reveal-scale, #main-experience .s1-block, #main-experience .s1-right, #main-experience .s5-fw-hline, #main-experience .s5-eng-card, #main-experience .s5-eng-item, #main-experience .s5-partner, #main-experience .s5-eng-left, #main-experience .s5-eng-right, #main-experience .v60-overline, #main-experience .v60-hline, #main-experience .v60-sub, #main-experience .v60-total-card, #main-experience .v60-delta, #main-experience .v60-table-label, #main-experience .v60-row, #main-experience .s6-phase, #main-experience .s6-activity, #main-experience .s6-ho-stat, #main-experience .npl-overline, #main-experience .npl-hline, #main-experience .npl-sub, #main-experience .npl-card, #main-experience .npl-node, #main-experience .npl-pillar, #main-experience .s11-flow-step, #main-experience .s11-why-card, #main-experience .s11-callout, #main-experience .s11-flow-close, #main-experience .s9-trade, #main-experience .s9-gantt-row, #main-experience .s9-gantt-label, #main-experience .s9-gantt-head, #main-experience .s9-event-stop, #main-experience .s7-act, #main-experience .s10-content, #main-experience .display-hero, #main-experience .s10-hash, #main-experience .s10-footer, #main-experience .ef-stop, #main-experience .ef-card';
   if (typeof gsap !== 'undefined') {
-    try { gsap.set(sel, { opacity: 1, x: 0, y: 0, scale: 1, clearProps: '' }); } catch (e) {}
+    try { gsap.set(sel, { opacity: 1, x: 0, y: 0, scale: 1 }); } catch (e) {}
+    try {
+      gsap.set('#main-experience .s9-gantt-seg.on .s9-gantt-fill', { scaleX: 1, opacity: 1 });
+    } catch (e) {}
   }
   document.querySelectorAll(sel).forEach((el) => {
     el.style.setProperty('opacity', '1', 'important');
     el.style.setProperty('visibility', 'visible', 'important');
+    // Do not wipe transform on phone — it is layout-critical
+    if (!el.classList.contains('s10-phone') && !el.closest('.s10-phone')) {
+      el.style.setProperty('transform', 'none', 'important');
+    }
+  });
+  document.querySelectorAll('#main-experience .s9-gantt-seg.on .s9-gantt-fill').forEach((el) => {
+    el.style.setProperty('transform', 'scaleX(1)', 'important');
+    el.style.setProperty('opacity', '1', 'important');
+    el.style.setProperty('visibility', 'visible', 'important');
+  });
+  // Keep close phone pinned and partially faded
+  document.querySelectorAll('#main-experience .s10-phone').forEach((el) => {
+    el.style.setProperty('opacity', '0.55', 'important');
+    el.style.setProperty('visibility', 'visible', 'important');
     el.style.setProperty('transform', 'none', 'important');
   });
-  // Never leave engines/timeline wrappers invisible
+  document.querySelectorAll('#main-experience .s10-phone img').forEach((el) => {
+    el.style.setProperty('transform', 'none', 'important');
+    el.style.setProperty('opacity', '1', 'important');
+    el.style.setProperty('visibility', 'visible', 'important');
+  });
   ['#s5-strategy', '#s5-strategy .s5-sticky', '#s5-strategy .s5-framework', '#s5-strategy .s5-engines-row',
-   '#s6-timeline', '#s6-timeline .s6-pin', '#s6-timeline .s6-sticky', '#s6-timeline .s6-content'].forEach((s) => {
+   '#s6-timeline', '#s6-timeline .s6-pin', '#s6-timeline .s6-sticky', '#s6-timeline .s6-content',
+   '#s8-jbp', '#s8-jbp .s9-sticky', '#s8-jbp .s9-gantt-wrap'].forEach((s) => {
     document.querySelectorAll(s).forEach((el) => {
       el.style.setProperty('opacity', '1', 'important');
       el.style.setProperty('visibility', 'visible', 'important');
@@ -7902,26 +7923,18 @@ window.__forceDeckVisible = function forceDeckVisible() {
   });
 };
 
-// ── FINALIZE: snap all deck content to final visible state (no blank slides) ──
+// ── FINALIZE: snap deck content to visible (load / nav only — not every scroll) ──
 (function finalizeDeckVisibility() {
   const force = () => {
     if (typeof window.__forceDeckVisible === 'function') window.__forceDeckVisible();
     if (typeof revealAllScenes === 'function') revealAllScenes();
-    if (typeof ScrollTrigger !== 'undefined') {
-      ScrollTrigger.getAll().forEach((st) => {
-        try { st.progress(1); } catch (err) { /* ignore */ }
-      });
-    }
   };
   force();
   setTimeout(force, 100);
   setTimeout(force, 400);
   setTimeout(force, 1000);
   window.addEventListener('load', force);
-  window.addEventListener('scroll', () => {
-    clearTimeout(window.__visT);
-    window.__visT = setTimeout(force, 80);
-  }, { passive: true });
+  // Avoid thrashing on every scroll — that caused intermittent blank content
 })();
 
 </script>
